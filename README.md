@@ -1,2 +1,2 @@
 # RapidoServices
-Projet de session INM5001_groupe NEOCODE
+Travail de session INM5001 UQAM
