@@ -14,7 +14,11 @@ public class Profile {
     String adresseCourriel;
     ArrayList<String> habiletes;
 
-    public Profile() {
-
+    public Profile(String nom, String prenom, String numeroTelephone, String adresseCourriel, ArrayList<String> habiletes) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.numeroTelephone =numeroTelephone;
+        this.adresseCourriel = adresseCourriel;
+        this.habiletes = habiletes;
     }
 }

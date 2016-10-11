@@ -10,6 +10,7 @@ public class Identifiant {
     String motDePasse;
 
     public Identifiant() {
-
+        this.utilisateur = utilisateur;
+        this.motDePasse = motDePasse;
     }
 }

@@ -19,7 +19,23 @@ public class Utilisateur {
     //ArrayList<Evaluation> lisetEvaluationServicesGlobal;
     //Geolocalisation geolocalisation;
 
-    public Utilisateur() {
+    /*
+    public Utilisateur(int disponibilite, Identifiant identifiant, Profile profile, ArrayList<Service> listeServices, ArrayList<String> listeCompetences, ArrayList<Evaluation> listeEvaluations, ArrayList<Evaluation> lisetEvaluationServicesGlobal, Geolocalisation geolocalisation) {
+        this.disponibilite = disponibilite;
+        this.identifiant = identifiant;
+        this.profile = profile;
+        this.listeServices = listeServices;
+        this.listeCompetences = listeCompetences;
+        this.listeEvaluations = listeEvaluations;
+        this.lisetEvaluationServicesGlobal = lisetEvaluationServicesGlobal;
+        this.geolocalisation = geolocalisation;
+    }
+    */
 
+    public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<Service> listeServices, ArrayList<String> listeCompetences) {
+        this.identifiant = identifiant;
+        this.profile = profile;
+        this.listeServices = listeServices;
+        this.listeCompetences = listeCompetences;
     }
 }
