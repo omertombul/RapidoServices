@@ -6,11 +6,11 @@ package inm5001.rapidoservices.utilisateur;
 
 public class Identifiant {
 
-    String utilisateur;
+    String nomUtilisateur;
     String motDePasse;
 
-    public Identifiant() {
-        this.utilisateur = utilisateur;
+    public Identifiant(String nomUtilisateur, String motDePasse) {
+        this.nomUtilisateur = nomUtilisateur;
         this.motDePasse = motDePasse;
     }
 }
