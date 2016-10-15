@@ -19,20 +19,27 @@ public class Identifiant {
     }
 //premier niveau d'abstraction
     private void TraiterNomUtilisateur(String nomUtilisateur) throws MyException {
+        ValiderNomUtilisateurSansEspace(nomUtilisateur);
         ValiderNomUtilisateurMoinsHuitCaracteres(nomUtilisateur);
         ValiderNomUtilisateurEstUnique(nomUtilisateur);
+        AffecterValeurNomUtilisateur(nomUtilisateur);
     }
 
     private void TraiterMotDePasse(String motDePasse) {
         this.motDePasse = motDePasse;
     }
 //deuxième niveau d'abstraction
+    private void ValiderNomUtilisateurSansEspace(String nomUtilisateur) throws MyException {
+        if (nomUtilisateur.indexOf(' ') >= 0) {
+            MyException e = new MyException(MESSAGE_NOMUTILISATEUR_PAS_ESPACE);
+            throw e;
+        }
+    }
+
     private void ValiderNomUtilisateurMoinsHuitCaracteres(String nomUtilisateur) throws MyException {
         if (nomUtilisateur.length() >= 8 && nomUtilisateur.length() <= 3) {
             MyException e = new MyException(MESSAGE_NOMUTILISATEUR_MAX_HUIT_MIN_TROIS_CARACTERES);
             throw e;
-        } else {
-            this.nomUtilisateur = nomUtilisateur;
         }
     }
 
@@ -42,5 +49,8 @@ public class Identifiant {
             throw e;
         }
     }
-//troisième niveau d'abstraction
+
+    private void AffecterValeurNomUtilisateur(String nomUtilisateur) {
+        this.nomUtilisateur = nomUtilisateur;
+    }
 }

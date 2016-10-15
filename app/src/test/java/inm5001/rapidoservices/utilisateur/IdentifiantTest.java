@@ -32,17 +32,22 @@ public class IdentifiantTest {
     }
 
     @Test
-    public void Identifiant1() throws Exception {
+    public void IdentifiantPasNull() throws Exception {
         identifiant = new Identifiant(nomUtilisateur, motDePasse);
         assertNotNull(identifiant);
     }
 
     @Test
-    public void Identifiant2() throws Exception {
+    public void IdentifiantNomUtilisateur() throws Exception {
         identifiant = new Identifiant(nomUtilisateur, motDePasse);
         String nomUtilisateur = identifiant.nomUtilisateur;
-        String motDePasse = identifiant.motDePasse;
         assertEquals(nomUtilisateur, "blabka19");
+    }
+
+    @Test
+    public void IdentifiantMotDePasse() throws Exception {
+        identifiant = new Identifiant(nomUtilisateur, motDePasse);
+        String motDePasse = identifiant.motDePasse;
         assertEquals(motDePasse, "Allo123!");
     }
 
@@ -84,6 +89,15 @@ public class IdentifiantTest {
             identifiant = new Identifiant("12", motDePasse);
         } catch (MyException e) {
             assertEquals(e.getMessage(), MESSAGE_NOMUTILISATEUR_MAX_HUIT_MIN_TROIS_CARACTERES);
+        }
+    }
+
+    @Test
+    public void IdentifiantNomUtilisateurAvecEspace() throws MyException {
+        try {
+            identifiant = new Identifiant("12 3", motDePasse);
+        } catch (MyException e) {
+            assertEquals(e.getMessage(), MESSAGE_NOMUTILISATEUR_PAS_ESPACE);
         }
     }
 
