@@ -9,7 +9,6 @@ import static inm5001.rapidoservices.utilisateur.ConstanteIdentifiant.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class IdentifiantTest {
@@ -21,7 +20,7 @@ public class IdentifiantTest {
     @Before
     public void setUp() {
         nomUtilisateur = "blabka19";
-        motDePasse = "Allo123";
+        motDePasse = "Allo123!";
         identifiant = null;
     }
 
@@ -44,15 +43,47 @@ public class IdentifiantTest {
         String nomUtilisateur = identifiant.nomUtilisateur;
         String motDePasse = identifiant.motDePasse;
         assertEquals(nomUtilisateur, "blabka19");
-        assertEquals(motDePasse, "Allo123");
+        assertEquals(motDePasse, "Allo123!");
     }
 
     @Test
-    public void Identifiant3() {
+    public void IdentifiantNomUtilisateurPasUnique() {
         try {
-            identifiant = new Identifiant("existe", motDePasse);
+            identifiant = new Identifiant("ilExiste", motDePasse);
         } catch (MyException e) {
             assertEquals(e.getMessage(), MESSAGE_NOMUTILISATEUR_PAS_UNIQUE);
+        }
+    }
+
+    @Test
+    public void IdentifiantNomUtilisateurHuitCaracteres() throws MyException {
+        identifiant = new Identifiant("12345678", motDePasse);
+        String nomUtilisateur = identifiant.nomUtilisateur;
+        assertEquals(nomUtilisateur, "12345678");
+    }
+
+    @Test
+    public void IdentifiantNomUtilisateurPlusQueHuitCaracteres() {
+        try {
+            identifiant = new Identifiant("123456789", motDePasse);
+        } catch (MyException e) {
+            assertEquals(e.getMessage(), MESSAGE_NOMUTILISATEUR_MAX_HUIT_MIN_TROIS_CARACTERES);
+        }
+    }
+
+    @Test
+    public void IdentifiantNomUtilisateurTroisCaracteres() throws MyException {
+        identifiant = new Identifiant("123", motDePasse);
+        String nomUtilisateur = identifiant.nomUtilisateur;
+        assertEquals(nomUtilisateur, "123");
+    }
+
+    @Test
+    public void IdentifiantNomUtilisateurMoinsDeTroisCaracteres() {
+        try {
+            identifiant = new Identifiant("12", motDePasse);
+        } catch (MyException e) {
+            assertEquals(e.getMessage(), MESSAGE_NOMUTILISATEUR_MAX_HUIT_MIN_TROIS_CARACTERES);
         }
     }
 
