@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.service.Service;
 
 import static org.junit.Assert.assertEquals;
@@ -38,7 +39,7 @@ public class UtilisateurTest {
     private String habilete;
 
     @Before
-    public void setUp() {
+    public void setUp() throws MyException {
         listeServices = new ArrayList<>();
         //listeServices.add(xxxx);
         //listeServices.add(xxxx);
