@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import inm5001.rapidoservices.MyException;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -22,7 +24,7 @@ public class ProfileTest {
     private Profile profile;
 
     @Before
-    public void setUp() {
+    public void setUp() throws MyException {
         nom = "Francis";
         prenom = "Bernier";
         numeroTelephone = "(514) 597-2143";

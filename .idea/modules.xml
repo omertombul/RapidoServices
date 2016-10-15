@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RapidoServices.iml" filepath="$PROJECT_DIR$/RapidoServices.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bdidentifiantjar/bdidentifiantjar.iml" filepath="$PROJECT_DIR$/bdidentifiantjar/bdidentifiantjar.iml" />
     </modules>
   </component>
 </project>

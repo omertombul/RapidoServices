@@ -9,15 +9,13 @@ import inm5001.rapidoservices.service.Service;
  */
 
 public class Utilisateur {
-
-    //int disponibilite;
-    Identifiant identifiant;
-    Profile profile;
-    ArrayList<Service> listeServices;
-    ArrayList<String> listeCompetences;
-    //ArrayList<Evaluation> listeEvaluations;
-    //ArrayList<Evaluation> lisetEvaluationServicesGlobal;
-    //Geolocalisation geolocalisation;
+    public Identifiant identifiant;
+    public Profile profile;
+    public ArrayList<Service> listeServices;
+    public ArrayList<String> listeCompetences;
+    //public ArrayList<Evaluation> listeEvaluations;
+    //public ArrayList<Evaluation> lisetEvaluationServicesGlobal;
+    //public Geolocalisation geolocalisation;
 
     /*
     public Utilisateur(int disponibilite, Identifiant identifiant, Profile profile, ArrayList<Service> listeServices, ArrayList<String> listeCompetences, ArrayList<Evaluation> listeEvaluations, ArrayList<Evaluation> lisetEvaluationServicesGlobal, Geolocalisation geolocalisation) {

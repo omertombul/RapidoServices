@@ -8,11 +8,11 @@ import java.util.ArrayList;
 
 public class Profile {
 
-    String nom;
-    String prenom;
-    String numeroTelephone;
-    String adresseCourriel;
-    ArrayList<String> habiletes;
+    public String nom;
+    public String prenom;
+    public String numeroTelephone;
+    public String adresseCourriel;
+    public ArrayList<String> habiletes;
 
     public Profile(String nom, String prenom, String numeroTelephone, String adresseCourriel, ArrayList<String> habiletes) {
         this.nom = nom;
