@@ -16,12 +16,14 @@ public class IdentifiantTest {
     private String nomUtilisateur;
     private String motDePasse;
     private Identifiant identifiant;
+    private Boolean estValider;
 
     @Before
     public void setUp() {
         nomUtilisateur = "blabka19";
         motDePasse = "Allo123!";
         identifiant = null;
+        estValider = false;
     }
 
     @After
@@ -29,6 +31,7 @@ public class IdentifiantTest {
         nomUtilisateur = null;
         motDePasse = null;
         identifiant = null;
+        estValider = null;
     }
 
     @Test
@@ -56,8 +59,9 @@ public class IdentifiantTest {
         try {
             identifiant = new Identifiant("ilExiste", motDePasse);
         } catch (MyException e) {
-            assertEquals(e.getMessage(), MESSAGE_NOMUTILISATEUR_PAS_UNIQUE);
+            estValider = e.getMessage().equals(MESSAGE_NOMUTILISATEUR_PAS_UNIQUE);
         }
+        assertTrue(estValider);
     }
 
     @Test
@@ -72,8 +76,9 @@ public class IdentifiantTest {
         try {
             identifiant = new Identifiant("123456789", motDePasse);
         } catch (MyException e) {
-            assertEquals(e.getMessage(), MESSAGE_NOMUTILISATEUR_MAX_HUIT_MIN_TROIS_CARACTERES);
+            estValider =  e.getMessage().equals(MESSAGE_NOMUTILISATEUR_MAX_HUIT_MIN_TROIS_CARACTERES);
         }
+        assertTrue(estValider);
     }
 
     @Test
@@ -88,8 +93,9 @@ public class IdentifiantTest {
         try {
             identifiant = new Identifiant("12", motDePasse);
         } catch (MyException e) {
-            assertEquals(e.getMessage(), MESSAGE_NOMUTILISATEUR_MAX_HUIT_MIN_TROIS_CARACTERES);
+            estValider = e.getMessage().equals(MESSAGE_NOMUTILISATEUR_MAX_HUIT_MIN_TROIS_CARACTERES);
         }
+        assertTrue(estValider);
     }
 
     @Test
@@ -97,8 +103,9 @@ public class IdentifiantTest {
         try {
             identifiant = new Identifiant("12 3", motDePasse);
         } catch (MyException e) {
-            assertEquals(e.getMessage(), MESSAGE_NOMUTILISATEUR_PAS_ESPACE);
+            estValider = e.getMessage().equals(MESSAGE_NOMUTILISATEUR_PAS_ESPACE);
         }
+        assertTrue(estValider);
     }
 
     @Test

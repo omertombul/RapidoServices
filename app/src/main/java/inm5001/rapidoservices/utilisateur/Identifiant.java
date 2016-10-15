@@ -20,7 +20,7 @@ public class Identifiant {
 //premier niveau d'abstraction
     private void TraiterNomUtilisateur(String nomUtilisateur) throws MyException {
         ValiderNomUtilisateurSansEspace(nomUtilisateur);
-        ValiderNomUtilisateurMoinsHuitCaracteres(nomUtilisateur);
+        ValiderNomUtilisateurEntreHuitEtTroisCaracteres(nomUtilisateur);
         ValiderNomUtilisateurEstUnique(nomUtilisateur);
         AffecterValeurNomUtilisateur(nomUtilisateur);
     }
@@ -36,8 +36,8 @@ public class Identifiant {
         }
     }
 
-    private void ValiderNomUtilisateurMoinsHuitCaracteres(String nomUtilisateur) throws MyException {
-        if (nomUtilisateur.length() >= 8 && nomUtilisateur.length() <= 3) {
+    private void ValiderNomUtilisateurEntreHuitEtTroisCaracteres(String nomUtilisateur) throws MyException {
+        if (nomUtilisateur.length() > 8 || nomUtilisateur.length() < 3) {
             MyException e = new MyException(MESSAGE_NOMUTILISATEUR_MAX_HUIT_MIN_TROIS_CARACTERES);
             throw e;
         }
