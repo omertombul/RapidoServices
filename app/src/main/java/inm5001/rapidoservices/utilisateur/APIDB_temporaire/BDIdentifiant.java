@@ -13,7 +13,7 @@ import inm5001.rapidoservices.utilisateur.Utilisateur;
 
 public class BDIdentifiant {
     public static String GetUtilisateur(String nomUtilisateur) {
-        if (nomUtilisateur == "existe") {
+        if (nomUtilisateur == "ilExiste") {
             return "nomUtilisateurExiste";
         } else {
             return null;
