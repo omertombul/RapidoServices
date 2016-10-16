@@ -57,7 +57,7 @@ public class UtilisateurTest {
         habiletes.add("Électricien");
         habilete = null;
         nomUtilisateur = "Francis";
-        motDePasse = "Allo123";
+        motDePasse = "Allo!234";
         identifiant = new Identifiant(nomUtilisateur, motDePasse);
         profile = new Profile(nom, prenom, numeroTelephone, adresseCourriel, habiletes);
         utilisateur = null;
@@ -106,7 +106,7 @@ public class UtilisateurTest {
         String nomUtilisateur = utilisateur.identifiant.nomUtilisateur;
         String motDePasse = utilisateur.identifiant.motDePasse;
         assertEquals(nomUtilisateur, "Francis");
-        assertEquals(motDePasse, "Allo123");
+        assertEquals(motDePasse, "Allo!234");
         //partie Profile
         String nom = utilisateur.profile.nom;
         String prenom = utilisateur.profile.prenom;

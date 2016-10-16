@@ -25,8 +25,12 @@ public class Identifiant {
         AffecterValeurNomUtilisateur(nomUtilisateur);
     }
 
-    private void TraiterMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
+    private void TraiterMotDePasse(String motDePasse) throws MyException {
+        ValiderMotDePasseMinHuitCaractere(motDePasse);
+        ValiderMotDePasseContientMajuscule(motDePasse);
+        ValiderMotDePasseContientMinuscule(motDePasse);
+        ValiderMotDePasseContientCaractereSpecial(motDePasse);
+        AffecterValeurMotDePasse(motDePasse);
     }
 //deuxième niveau d'abstraction
     private void ValiderNomUtilisateurSansEspace(String nomUtilisateur) throws MyException {
@@ -52,5 +56,37 @@ public class Identifiant {
 
     private void AffecterValeurNomUtilisateur(String nomUtilisateur) {
         this.nomUtilisateur = nomUtilisateur;
+    }
+
+    private void ValiderMotDePasseMinHuitCaractere(String motDePasse) throws MyException {
+        if (motDePasse.length() < 8) {
+            MyException e = new MyException(MESSAGE_MOTDEPASSE_HUIT_CARACTERES);
+            throw e;
+        }
+    }
+
+    private void ValiderMotDePasseContientMajuscule(String motDepasse) throws MyException {
+        if (motDepasse.equals(motDepasse.toLowerCase())) {
+            MyException e = new MyException(MESSAGE_MOTDEPASSE_MAJUSCULE);
+            throw e;
+        }
+    }
+
+    private void ValiderMotDePasseContientMinuscule(String motDepasse) throws MyException {
+        if (motDepasse.equals(motDepasse.toUpperCase())) {
+            MyException e = new MyException(MESSAGE_MOTDEPASSE_MINUSCULE);
+            throw e;
+        }
+    }
+
+    private void ValiderMotDePasseContientCaractereSpecial(String motDepasse) throws MyException {
+        if (motDepasse.matches("[A-Za-z0-9 ]*")) {
+            MyException e = new MyException(MESSAGE_MOTDEPASSE_CARACTERE_SPECIAL);
+            throw e;
+        }
+    }
+
+    private void AffecterValeurMotDePasse(String motDePasse) {
+        this.motDePasse = motDePasse;
     }
 }

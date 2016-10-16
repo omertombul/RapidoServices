@@ -109,6 +109,46 @@ public class IdentifiantTest {
     }
 
     @Test
+    public void ValiderMotDePasseMinHuitCaractere() throws MyException {
+        try {
+            identifiant = new Identifiant(nomUtilisateur, "Allo!23");
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_MOTDEPASSE_HUIT_CARACTERES);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void ValiderMotDePasseContientMajuscule() throws MyException {
+        try {
+            identifiant = new Identifiant(nomUtilisateur, "allo!234");
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_MOTDEPASSE_MAJUSCULE);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void ValiderMotDePasseContientMinuscule() throws MyException {
+        try {
+            identifiant = new Identifiant(nomUtilisateur, "ALLO!234");
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_MOTDEPASSE_MINUSCULE);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void ValiderMotDePasseContientCaractereSpecial() throws MyException {
+        try {
+            identifiant = new Identifiant(nomUtilisateur, "Allo1234");
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_MOTDEPASSE_CARACTERE_SPECIAL);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
     public void fauxPositif() throws Exception {
         assertTrue(false);
     }

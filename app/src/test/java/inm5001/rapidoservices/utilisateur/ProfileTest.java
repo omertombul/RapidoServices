@@ -33,7 +33,7 @@ public class ProfileTest {
         habiletes.add("Plombier");
         habiletes.add("Électricien");
         habilete = null;
-        identifiant = new Identifiant("Francis", "Allo123");
+        identifiant = new Identifiant("Francis", "Allo!234");
         profile = null;
     }
 
