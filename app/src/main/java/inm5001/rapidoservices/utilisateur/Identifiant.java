@@ -1,5 +1,7 @@
 package inm5001.rapidoservices.utilisateur;
 
+import java.util.regex.Pattern;
+
 import inm5001.rapidoservices.MyException;
 
 import static inm5001.rapidoservices.utilisateur.ConstanteIdentifiant.*;
@@ -30,7 +32,7 @@ public class Identifiant {
         ValiderMotDePasseContientMajuscule(motDePasse);
         ValiderMotDePasseContientMinuscule(motDePasse);
         ValiderMotDePasseContientCaractereSpecial(motDePasse);
-        AffecterValeurMotDePasse(motDePasse);
+        SetMotDePasse(motDePasse);
     }
 //deuxième niveau d'abstraction
     private void ValiderNomUtilisateurSansEspace(String nomUtilisateur) throws MyException {
@@ -85,8 +87,8 @@ public class Identifiant {
             throw e;
         }
     }
-
-    private void AffecterValeurMotDePasse(String motDePasse) {
+//méthodes public
+    public void SetMotDePasse(String motDePasse) {
         this.motDePasse = motDePasse;
     }
 }

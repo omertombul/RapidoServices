@@ -35,8 +35,6 @@ public class UtilisateurTest {
     private String prenom;
     private String numeroTelephone;
     private String adresseCourriel;
-    private ArrayList<String> habiletes;
-    private String habilete;
 
     @Before
     public void setUp() throws MyException {
@@ -50,16 +48,12 @@ public class UtilisateurTest {
         competence = null;
         nom = "Francis";
         prenom = "Bernier";
-        numeroTelephone = "(514) 597-2143";
+        numeroTelephone = "5145972143";
         adresseCourriel = "francis@hotmail.com";
-        habiletes = new ArrayList<>();
-        habiletes.add("Plombier");
-        habiletes.add("Électricien");
-        habilete = null;
         nomUtilisateur = "Francis";
         motDePasse = "Allo!234";
         identifiant = new Identifiant(nomUtilisateur, motDePasse);
-        profile = new Profile(nom, prenom, numeroTelephone, adresseCourriel, habiletes);
+        profile = new Profile(nom, prenom, numeroTelephone, adresseCourriel);
         utilisateur = null;
     }
 
@@ -75,8 +69,6 @@ public class UtilisateurTest {
         prenom = null;
         numeroTelephone = null;
         adresseCourriel = null;
-        habiletes = null;
-        habilete = null;
         utilisateur = null;
         motDePasse = null;
     }
@@ -112,12 +104,10 @@ public class UtilisateurTest {
         String prenom = utilisateur.profile.prenom;
         String numeroTelephone = utilisateur.profile.numeroTelephone;
         String adresseCourriel = utilisateur.profile.adresseCourriel;
-        String habilete = utilisateur.profile.habiletes.get(1);
         assertEquals(nom, "Francis");
         assertEquals(prenom, "Bernier");
-        assertEquals(numeroTelephone, "(514) 597-2143");
+        assertEquals(numeroTelephone, "5145972143");
         assertEquals(adresseCourriel, "francis@hotmail.com");
-        assertEquals(habilete, "Électricien");
         //partie Utilisateur
         //Service service = utilisateur.listeServices.get(1);
         String competence = utilisateur.listeCompetences.get(1);
