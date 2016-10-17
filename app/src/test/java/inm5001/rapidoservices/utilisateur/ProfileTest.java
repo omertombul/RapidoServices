@@ -76,6 +76,13 @@ public class ProfileTest {
     }
 //NOM
     @Test
+    public void TraiterNomNull() throws MyException {
+        profile = new Profile(null, prenom, numeroTelephone, adresseCourriel);
+        String nom = profile.nom;
+        assertEquals(nom, "");
+    }
+
+    @Test
     public void ValiderNomSansChiffre() {
         try {
             profile = new Profile("Franc1s", prenom, numeroTelephone, adresseCourriel);
@@ -115,6 +122,13 @@ public class ProfileTest {
         assertFalse(estValider);
     }
 //PRENOM
+    @Test
+    public void TraiterPrenomNull() throws Exception {
+        profile = new Profile(nom, null, numeroTelephone, adresseCourriel);
+        String prenom = profile.prenom;
+        assertEquals(prenom, "");
+    }
+
     @Test
     public void ValiderPreomSansChiffre() {
         try {
@@ -156,6 +170,13 @@ public class ProfileTest {
     }
 //NUMÉRO DE TÉLÉPHONE
     @Test
+    public void TraiterNumeroTelephoneNull() throws Exception {
+        profile = new Profile(nom, prenom, null, adresseCourriel);
+        String numeroTelephone = profile.numeroTelephone;
+        assertEquals(numeroTelephone, "");
+    }
+
+    @Test
     public void ValiderNumeroTelephoneSeulementChiffre1() {
         try {
             profile = new Profile(nom, prenom, "514 5972143", adresseCourriel);
@@ -196,11 +217,21 @@ public class ProfileTest {
     }
 //ADRESSE COURRIEL
     @Test
+    public void ValiderAdresseCourrielPasNull() {
+        try {
+            profile = new Profile(nom, prenom, numeroTelephone, null);
+        } catch (MyException e) {
+            estValider =  e.getMessage().equals(MESSAGE_ADRESSECOURRIEL_NULL);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
     public void ValiderAdresseCourrielArobase() {
         try {
             profile = new Profile(nom, prenom, numeroTelephone, "francishotmail.com");
         } catch (MyException e) {
-            estValider = e.getMessage().equals(MESSAGE_ADRESSE_COURRIEL_AROBASE);
+            estValider = e.getMessage().equals(MESSAGE_ADRESSECOURRIEL_AROBASE);
         }
         assertTrue(estValider);
     }

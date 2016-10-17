@@ -4,6 +4,7 @@ import java.util.regex.Pattern;
 
 import inm5001.rapidoservices.MyException;
 
+import static inm5001.rapidoservices.utilisateur.ConstanteIdentifiant.MESSAGE_NOMUTILISATEUR_NULL;
 import static inm5001.rapidoservices.utilisateur.ConstanteProfile.*;
 
 /**
@@ -12,9 +13,9 @@ import static inm5001.rapidoservices.utilisateur.ConstanteProfile.*;
 
 public class Profile {
 
-    public String nom;
-    public String prenom;
-    public String numeroTelephone;
+    public String nom = "";
+    public String prenom = "";
+    public String numeroTelephone = "";
     public String adresseCourriel;
 
     public Profile(String nom, String prenom, String numeroTelephone, String adresseCourriel) throws MyException {
@@ -25,24 +26,31 @@ public class Profile {
     }
 //premier niveau d'abstraction
     private void TraiterNom(String nom) throws MyException {
-        ValiderNomSansChiffre(nom);
-        ValiderNomSansCaratereSpecial(nom);
-        SetNom(nom);
+        if (nom != null) {
+            ValiderNomSansChiffre(nom);
+            ValiderNomSansCaratereSpecial(nom);
+            SetNom(nom);
+        }
     }
 
     private void TraiterPrenom(String prenom) throws MyException {
-        ValiderPrenomSansChiffre(prenom);
-        ValiderPrenomSansCaratereSpecial(prenom);
-        SetPrenom(prenom);
+        if (prenom != null) {
+            ValiderPrenomSansChiffre(prenom);
+            ValiderPrenomSansCaratereSpecial(prenom);
+            SetPrenom(prenom);
+        }
     }
 
     private void TraiterNumeroTelephone(String numeroTelephone) throws MyException {
-        ValiderNumeroTelephoneSeulementChiffre(numeroTelephone);
-        ValiderNumeroTelephoneDixChiffre(numeroTelephone);
-        SetNumeroTelephone(numeroTelephone);
+        if (numeroTelephone != null) {
+            ValiderNumeroTelephoneSeulementChiffre(numeroTelephone);
+            ValiderNumeroTelephoneDixChiffre(numeroTelephone);
+            SetNumeroTelephone(numeroTelephone);
+        }
     }
 
     private void TraiterAdresseCourriel(String adresseCourriel) throws MyException {
+        ValiderAdresseCourrielPasNull(adresseCourriel);
         ValiderAdresseCourrielArobase(adresseCourriel);
         SetAdresseCourriel(adresseCourriel);
     }
@@ -89,9 +97,16 @@ public class Profile {
         }
     }
 
+    private void ValiderAdresseCourrielPasNull(String adresseCourriel) throws MyException {
+        if (adresseCourriel == null) {
+            MyException e = new MyException(MESSAGE_ADRESSECOURRIEL_NULL);
+            throw e;
+        }
+    }
+
     private void ValiderAdresseCourrielArobase(String adresseCourriel) throws MyException {
         if (!Pattern.compile("[@]+").matcher(adresseCourriel).find()) {
-            MyException e = new MyException(MESSAGE_ADRESSE_COURRIEL_AROBASE);
+            MyException e = new MyException(MESSAGE_ADRESSECOURRIEL_AROBASE);
             throw e;
         }
     }

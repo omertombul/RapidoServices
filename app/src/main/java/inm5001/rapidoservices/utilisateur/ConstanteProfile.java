@@ -19,5 +19,6 @@ public interface ConstanteProfile {
     String MESSAGE_NUMEROTELEPHONE_SEULEMENT_CHIFFRE = MESSAGE_NUMEROTELEPHONE + "ne doit être constitué que de chiffres" + MESSAGE_AUTRE_CHOIX;
     String MESSAGE_NUMEROTELEPHONE_DIX_CHIFFRE = MESSAGE_NUMEROTELEPHONE + "doit être constitué de 10 chiffres" + MESSAGE_AUTRE_CHOIX;
 
-    String MESSAGE_ADRESSE_COURRIEL_AROBASE = "Ceci n'est pas une adresse de courriel valide" + MESSAGE_AUTRE_CHOIX;
+    String MESSAGE_ADRESSECOURRIEL_NULL = "L'adresse courriel est obligatoire.";
+    String MESSAGE_ADRESSECOURRIEL_AROBASE = "Ceci n'est pas une adresse de courriel valide" + MESSAGE_AUTRE_CHOIX;
 }
