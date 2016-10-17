@@ -4,13 +4,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 import inm5001.rapidoservices.MyException;
 
+import static inm5001.rapidoservices.utilisateur.ConstanteProfile.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public class ProfileTest {
 
@@ -18,23 +18,17 @@ public class ProfileTest {
     private String prenom;
     private String numeroTelephone;
     private String adresseCourriel;
-    private ArrayList<String> habiletes;
-    private String habilete = null;
-    private Identifiant identifiant;
     private Profile profile;
+    private Boolean estValider;
 
     @Before
     public void setUp() throws MyException {
         nom = "Francis";
         prenom = "Bernier";
-        numeroTelephone = "(514) 597-2143";
+        numeroTelephone = "5145972143";
         adresseCourriel = "francis@hotmail.com";
-        habiletes = new ArrayList<>();
-        habiletes.add("Plombier");
-        habiletes.add("Électricien");
-        habilete = null;
-        identifiant = new Identifiant("Francis", "Allo!234");
         profile = null;
+        estValider = false;
     }
 
     @After
@@ -43,31 +37,172 @@ public class ProfileTest {
         prenom = null;
         numeroTelephone = null;
         adresseCourriel = null;
-        habiletes = null;
-        habilete = null;
-        identifiant = null;
         profile = null;
+        estValider = null;
     }
 
     @Test
-    public void Profile1() throws Exception {
-        profile = new Profile(nom, prenom, numeroTelephone, adresseCourriel, habiletes);
+    public void ProfilePasNull() throws Exception {
+        profile = new Profile(nom, prenom, numeroTelephone, adresseCourriel);
         assertNotNull(profile);
     }
 
     @Test
-    public void Profile2() throws Exception {
-        profile = new Profile(nom, prenom, numeroTelephone, adresseCourriel, habiletes);
+    public void ProfileNom() throws Exception {
+        profile = new Profile(nom, prenom, numeroTelephone, adresseCourriel);
         String nom = profile.nom;
-        String prenom = profile.prenom;
-        String numeroTelephone = profile.numeroTelephone;
-        String adresseCourriel = profile.adresseCourriel;
-        String habilete = profile.habiletes.get(1);
         assertEquals(nom, "Francis");
+    }
+
+    @Test
+    public void ProfilePreNom() throws Exception {
+        profile = new Profile(nom, prenom, numeroTelephone, adresseCourriel);
+        String prenom = profile.prenom;
         assertEquals(prenom, "Bernier");
-        assertEquals(numeroTelephone, "(514) 597-2143");
+    }
+
+    @Test
+    public void ProfileNumeroTelephone() throws Exception {
+        profile = new Profile(nom, prenom, numeroTelephone, adresseCourriel);
+        String numeroTelephone = profile.numeroTelephone;
+        assertEquals(numeroTelephone, "5145972143");
+    }
+
+    @Test
+    public void ProfileAdresseCourriel() throws Exception {
+        profile = new Profile(nom, prenom, numeroTelephone, adresseCourriel);
+        String adresseCourriel = profile.adresseCourriel;
         assertEquals(adresseCourriel, "francis@hotmail.com");
-        assertEquals(habilete, "Électricien");
+    }
+//NOM
+    @Test
+    public void ValiderNomSansChiffre() {
+        try {
+            profile = new Profile("Franc1s", prenom, numeroTelephone, adresseCourriel);
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_NOM_SANS_CHIFFRE);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void ValiderNomSansCaratereSpecial1() {
+        try {
+            profile = new Profile("Franc!s", prenom, numeroTelephone, adresseCourriel);
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_NOM_CARACTERE_SPECIAL);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void ValiderNomSansCaratereSpecial2() {
+        try {
+            profile = new Profile("Francis B", prenom, numeroTelephone, adresseCourriel);
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_NOM_CARACTERE_SPECIAL);
+        }
+        assertFalse(estValider);
+    }
+
+    @Test
+    public void ValiderNomSansCaratereSpecia3() {
+        try {
+            profile = new Profile("Francis-B", prenom, numeroTelephone, adresseCourriel);
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_NOM_CARACTERE_SPECIAL);
+        }
+        assertFalse(estValider);
+    }
+//PRENOM
+    @Test
+    public void ValiderPreomSansChiffre() {
+        try {
+            profile = new Profile(nom, "Bern1er", numeroTelephone, adresseCourriel);
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_PRENOM_SANS_CHIFFRE);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void ValiderPrenomSansCaratereSpecial1() {
+        try {
+            profile = new Profile(nom, "Bern!er", numeroTelephone, adresseCourriel);
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_PRENOM_CARACTERE_SPECIAL);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void ValiderPrenomSansCaratereSpecial2() {
+        try {
+            profile = new Profile(nom, "F Bernier", numeroTelephone, adresseCourriel);
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_PRENOM_CARACTERE_SPECIAL);
+        }
+        assertFalse(estValider);
+    }
+
+    @Test
+    public void ValiderPrenomSansCaratereSpecia3() {
+        try {
+            profile = new Profile(nom, "B-Francis", numeroTelephone, adresseCourriel);
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_PRENOM_CARACTERE_SPECIAL);
+        }
+        assertFalse(estValider);
+    }
+//NUMÉRO DE TÉLÉPHONE
+    @Test
+    public void ValiderNumeroTelephoneSeulementChiffre1() {
+        try {
+            profile = new Profile(nom, prenom, "514 5972143", adresseCourriel);
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_NUMEROTELEPHONE_SEULEMENT_CHIFFRE);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void ValiderNumeroTelephoneSeulementChiffre2() {
+        try {
+            profile = new Profile(nom, prenom, "514-5972143", adresseCourriel);
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_NUMEROTELEPHONE_SEULEMENT_CHIFFRE);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void ValiderNumeroTelephoneSeulementChiffre3() {
+        try {
+            profile = new Profile(nom, prenom, "5i45972143", adresseCourriel);
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_NUMEROTELEPHONE_SEULEMENT_CHIFFRE);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void ValiderNumeroTelephoneDixChiffre() {
+        try {
+            profile = new Profile(nom, prenom, "514597214", adresseCourriel);
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_NUMEROTELEPHONE_DIX_CHIFFRE);
+        }
+        assertTrue(estValider);
+    }
+//ADRESSE COURRIEL
+    @Test
+    public void ValiderAdresseCourrielArobase() {
+        try {
+            profile = new Profile(nom, prenom, numeroTelephone, "francishotmail.com");
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_ADRESSE_COURRIEL_AROBASE);
+        }
+        assertTrue(estValider);
     }
 
     @Test
