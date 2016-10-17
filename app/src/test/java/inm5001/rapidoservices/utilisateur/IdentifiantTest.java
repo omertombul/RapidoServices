@@ -63,6 +63,16 @@ public class IdentifiantTest {
         }
         assertTrue(estValider);
     }
+//NOM UTILISATEUR
+    @Test
+    public void ValiderNomUtilisateurPasNull() {
+        try {
+            identifiant = new Identifiant(null, motDePasse);
+        } catch (MyException e) {
+            estValider =  e.getMessage().equals(MESSAGE_NOMUTILISATEUR_NULL);
+        }
+        assertTrue(estValider);
+    }
 
     @Test
     public void IdentifiantNomUtilisateurHuitCaracteres() throws MyException {
@@ -104,6 +114,16 @@ public class IdentifiantTest {
             identifiant = new Identifiant("12 3", motDePasse);
         } catch (MyException e) {
             estValider = e.getMessage().equals(MESSAGE_NOMUTILISATEUR_PAS_ESPACE);
+        }
+        assertTrue(estValider);
+    }
+//MOT DE PASSE
+    @Test
+    public void ValiderMotDePassePasNull() {
+        try {
+            identifiant = new Identifiant(nomUtilisateur, null);
+        } catch (MyException e) {
+            estValider =  e.getMessage().equals(MESSAGE_MOTDEPASSE_NULL);
         }
         assertTrue(estValider);
     }

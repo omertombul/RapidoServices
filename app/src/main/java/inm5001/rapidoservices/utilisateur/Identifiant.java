@@ -21,6 +21,7 @@ public class Identifiant {
     }
 //premier niveau d'abstraction
     private void TraiterNomUtilisateur(String nomUtilisateur) throws MyException {
+        ValiderNomUtilisateurPasNull(nomUtilisateur);
         ValiderNomUtilisateurSansEspace(nomUtilisateur);
         ValiderNomUtilisateurEntreHuitEtTroisCaracteres(nomUtilisateur);
         ValiderNomUtilisateurEstUnique(nomUtilisateur);
@@ -28,6 +29,7 @@ public class Identifiant {
     }
 
     private void TraiterMotDePasse(String motDePasse) throws MyException {
+        ValiderMotDePassePasNull(motDePasse);
         ValiderMotDePasseMinHuitCaractere(motDePasse);
         ValiderMotDePasseContientMajuscule(motDePasse);
         ValiderMotDePasseContientMinuscule(motDePasse);
@@ -35,6 +37,13 @@ public class Identifiant {
         SetMotDePasse(motDePasse);
     }
 //deuxième niveau d'abstraction
+    private void ValiderNomUtilisateurPasNull(String nomUtilisateur) throws MyException {
+        if (nomUtilisateur == null) {
+            MyException e = new MyException(MESSAGE_NOMUTILISATEUR_NULL);
+            throw e;
+        }
+    }
+
     private void ValiderNomUtilisateurSansEspace(String nomUtilisateur) throws MyException {
         if (nomUtilisateur.indexOf(' ') >= 0) {
             MyException e = new MyException(MESSAGE_NOMUTILISATEUR_PAS_ESPACE);
@@ -58,6 +67,13 @@ public class Identifiant {
 
     private void AffecterValeurNomUtilisateur(String nomUtilisateur) {
         this.nomUtilisateur = nomUtilisateur;
+    }
+
+    private void ValiderMotDePassePasNull(String motDePasse) throws MyException {
+        if (motDePasse == null) {
+            MyException e = new MyException(MESSAGE_MOTDEPASSE_NULL);
+            throw e;
+        }
     }
 
     private void ValiderMotDePasseMinHuitCaractere(String motDePasse) throws MyException {
