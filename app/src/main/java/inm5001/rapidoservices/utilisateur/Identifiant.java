@@ -103,8 +103,9 @@ public class Identifiant {
             throw e;
         }
     }
-//méthodes public
-    public void SetMotDePasse(String motDePasse) {
+
+    private void SetMotDePasse(String motDePasse) {
         this.motDePasse = motDePasse;
     }
+//MÉTHODES PUBLIC
 }

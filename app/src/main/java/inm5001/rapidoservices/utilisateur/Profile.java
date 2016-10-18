@@ -71,6 +71,10 @@ public class Profile {
         }
     }
 
+    private void SetNom(String nom) {
+        this.nom = nom;
+    }
+
     private void ValiderPrenomSansChiffre(String prenom) throws MyException {
         if (Pattern.compile("[0-9]+").matcher(prenom).find()) {
             MyException e = new MyException(MESSAGE_PRENOM_SANS_CHIFFRE);
@@ -83,6 +87,10 @@ public class Profile {
             MyException e = new MyException(MESSAGE_PRENOM_CARACTERE_SPECIAL);
             throw e;
         }
+    }
+
+    private void SetPrenom(String prenom) {
+        this.prenom = prenom;
     }
 
     private void ValiderNumeroTelephoneSeulementChiffre(String numeroTelephone) throws MyException {
@@ -99,6 +107,10 @@ public class Profile {
         }
     }
 
+    private void SetNumeroTelephone(String numeroTelephone) {
+        this.numeroTelephone = numeroTelephone;
+    }
+
     private void ValiderAdresseCourrielPasNull(String adresseCourriel) throws MyException {
         if (adresseCourriel == null) {
             MyException e = new MyException(MESSAGE_ADRESSECOURRIEL_NULL);
@@ -112,24 +124,13 @@ public class Profile {
             throw e;
         }
     }
+
+    private void SetAdresseCourriel(String adresseCourriel) {
+        this.adresseCourriel = adresseCourriel;
+    }
 //MÉTHODES GLOBAL
     private String ConvertirEnMajuscule(String uneChaine) {
         return uneChaine.toUpperCase();
     }
 //MÉTHODES PUBLIC
-    private void SetNom(String nom) {
-        this.nom = nom;
-    }
-
-    private void SetPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    private void SetNumeroTelephone(String numeroTelephone) {
-        this.numeroTelephone = numeroTelephone;
-    }
-
-    private void SetAdresseCourriel(String adresseCourriel) {
-        this.adresseCourriel = adresseCourriel;
-    }
 }
