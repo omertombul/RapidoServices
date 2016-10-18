@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.service.Service;
 
-import static inm5001.rapidoservices.utilisateur.ConstanteIdentifiant.MESSAGE_NOMUTILISATEUR_PAS_UNIQUE;
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_IDENTIFIANT_NULL;
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_PROFILE_NULL;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class UtilisateurTest {
@@ -44,10 +44,8 @@ public class UtilisateurTest {
     @Before
     public void setUp() throws MyException {
         listeServices = new ArrayList<>();
-        service = new Service("service1@gmail.com");
-        listeServices.add(service);
-        service = new Service("service2@gmail.com");
-        listeServices.add(service);
+        listeServices.add(new Service("service1@gmail.com"));
+        listeServices.add(new Service("service2@gmail.com"));
         service = null;
         listeCompetences = new ArrayList<>();
         listeCompetences.add("Plombier");
@@ -119,14 +117,14 @@ public class UtilisateurTest {
     @Test
     public void UtilisateurIdentifiantNomUtilisateur() throws Exception {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
-        String nomUtilisateur = utilisateur.identifiant.nomUtilisateur;
+        nomUtilisateur = utilisateur.identifiant.nomUtilisateur;
         assertEquals(nomUtilisateur, "Francis");
     }
 
     @Test
     public void UtilisateurIdentifiaMotDePasse() throws Exception {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
-        String motDePasse = utilisateur.identifiant.motDePasse;
+        motDePasse = utilisateur.identifiant.motDePasse;
         assertEquals(motDePasse, "Allo!234");
     }
 //PROFILE
@@ -143,33 +141,50 @@ public class UtilisateurTest {
     @Test
     public void UtilisateurProfileNom() throws Exception {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
-        String nom = utilisateur.profile.nom;
+        nom = utilisateur.profile.nom;
         assertEquals(nom, "FRANCIS");
     }
 
     @Test
     public void UtilisateurProfileNumeroTelephone() throws Exception {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
-        String numeroTelephone = utilisateur.profile.numeroTelephone;
+        numeroTelephone = utilisateur.profile.numeroTelephone;
         assertEquals(numeroTelephone, "5145972143");
     }
 
     @Test
     public void UtilisateurProfileAdresseCourriel() throws Exception {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
-        String adresseCourriel = utilisateur.profile.adresseCourriel;
+        adresseCourriel = utilisateur.profile.adresseCourriel;
         assertEquals(adresseCourriel, "francis@hotmail.com");
     }
-//UTILISATEUR
-    /*
+//LISTESERVICES
     @Test
-    public void UtilisateurProfileAdresseCourriel() throws Exception {
+    public void TraiterListeServices() throws Exception {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
-        String competence = utilisateur.listeCompetences.get(1);
-        assertEquals(competence, "Électricien");
-        //assertEquals(service, xxxx);
+        service = utilisateur.listeServices.get(1);
+        assertEquals(service.adresseCourriel, "service2@gmail.com");
     }
-    */
+
+    @Test
+    public void TraiterListeServicesNull() throws Exception {
+        utilisateur = new Utilisateur(identifiant, profile, null, listeCompetences);
+        assertTrue((utilisateur.listeServices).isEmpty());
+    }
+//LISTECOMPETENCES
+    @Test
+    public void TraiterListeCompetences() throws Exception {
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
+        competence = utilisateur.listeCompetences.get(1);
+        assertEquals(competence, "Électricien");
+    }
+
+    @Test
+    public void TraiterListeCompetencesNull() throws Exception {
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, null);
+        assertTrue((utilisateur.listeCompetences).isEmpty());
+    }
+
     @Test
     public void fauxPositif() throws Exception {
         assertTrue(false);

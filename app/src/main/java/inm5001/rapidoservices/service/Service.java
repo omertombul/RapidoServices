@@ -5,7 +5,7 @@ package inm5001.rapidoservices.service;
  */
 
 public class Service {
-    String adresseCourriel;
+    public String adresseCourriel;
 
     public Service(String adresseCourriel) {
         this.adresseCourriel = adresseCourriel;
