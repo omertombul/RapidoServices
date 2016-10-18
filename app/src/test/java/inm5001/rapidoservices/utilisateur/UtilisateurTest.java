@@ -15,22 +15,23 @@ import static org.junit.Assert.assertTrue;
 
 public class UtilisateurTest {
 
-    //attributs Utilisateur
     private Utilisateur utilisateur;
-    //private int disponibilite;
+//attributs Utilisateur
     private Identifiant identifiant;
     private Profile profile;
     private ArrayList<Service> listeServices;
     private Service service;
     private ArrayList<String> listeCompetences;
     private String competence;
+    //private boolean disponible;
     //private ArrayList<Evaluation> listeEvaluations;
     //private ArrayList<Evaluation> lisetEvaluationServicesGlobal;
+    //private Evaluation evaluation;
     //private Geolocalisation geolocalisation;
-    //attributs Identifiant
+//attributs Identifiant
     private String nomUtilisateur;
     private String motDePasse;
-    //attributs Profile
+//attributs Profile
     private String nom;
     private String prenom;
     private String numeroTelephone;
@@ -46,12 +47,12 @@ public class UtilisateurTest {
         listeCompetences.add("Plombier");
         listeCompetences.add("Électricien");
         competence = null;
+        nomUtilisateur = "Francis";
+        motDePasse = "Allo!234";
         nom = "Francis";
         prenom = "Bernier";
         numeroTelephone = "5145972143";
         adresseCourriel = "francis@hotmail.com";
-        nomUtilisateur = "Francis";
-        motDePasse = "Allo!234";
         identifiant = new Identifiant(nomUtilisateur, motDePasse);
         profile = new Profile(nom, prenom, numeroTelephone, adresseCourriel);
         utilisateur = null;
@@ -74,47 +75,67 @@ public class UtilisateurTest {
     }
 
     @Test
-    public void Utilisateur1() throws Exception {
+    public void UtilisateurPasNull() throws Exception {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
         assertNotNull(utilisateur);
     }
 
     @Test
-    public void Utilisateur2() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
-        assertNotNull(utilisateur.profile);
-    }
-
-    @Test
-    public void Utilisateur3() throws Exception {
+    public void UtilisateurIdentifiantPasNull() throws Exception {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
         assertNotNull(utilisateur.identifiant);
     }
 
     @Test
-    public void UtilisateurX() throws Exception {
+    public void UtilisateurProfilePasNull() throws Exception {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
-        //partie Identifiant
+        assertNotNull(utilisateur.profile);
+    }
+//IDENTIFIANT
+    @Test
+    public void UtilisateurIdentifiantNomUtilisateur() throws Exception {
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
         String nomUtilisateur = utilisateur.identifiant.nomUtilisateur;
-        String motDePasse = utilisateur.identifiant.motDePasse;
         assertEquals(nomUtilisateur, "Francis");
+    }
+
+    @Test
+    public void UtilisateurIdentifiaMotDePasse() throws Exception {
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
+        String motDePasse = utilisateur.identifiant.motDePasse;
         assertEquals(motDePasse, "Allo!234");
-        //partie Profile
+    }
+//PROFILE
+    @Test
+    public void UtilisateurProfileNom() throws Exception {
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
         String nom = utilisateur.profile.nom;
-        String prenom = utilisateur.profile.prenom;
+        assertEquals(nom, "FRANCIS");
+    }
+
+    @Test
+    public void UtilisateurProfileNumeroTelephone() throws Exception {
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
         String numeroTelephone = utilisateur.profile.numeroTelephone;
-        String adresseCourriel = utilisateur.profile.adresseCourriel;
-        assertEquals(nom, "Francis");
-        assertEquals(prenom, "Bernier");
         assertEquals(numeroTelephone, "5145972143");
+    }
+
+    @Test
+    public void UtilisateurProfileAdresseCourriel() throws Exception {
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
+        String adresseCourriel = utilisateur.profile.adresseCourriel;
         assertEquals(adresseCourriel, "francis@hotmail.com");
-        //partie Utilisateur
-        //Service service = utilisateur.listeServices.get(1);
+    }
+//UTILISATEUR
+    /*
+    @Test
+    public void UtilisateurProfileAdresseCourriel() throws Exception {
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
         String competence = utilisateur.listeCompetences.get(1);
         assertEquals(competence, "Électricien");
         //assertEquals(service, xxxx);
     }
-
+    */
     @Test
     public void fauxPositif() throws Exception {
         assertTrue(false);
