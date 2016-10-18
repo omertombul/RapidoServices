@@ -29,6 +29,7 @@ public class Profile {
         if (nom != null) {
             ValiderNomSansChiffre(nom);
             ValiderNomSansCaratereSpecial(nom);
+            nom = ConvertirEnMajuscule(nom);
             SetNom(nom);
         }
     }
@@ -37,6 +38,7 @@ public class Profile {
         if (prenom != null) {
             ValiderPrenomSansChiffre(prenom);
             ValiderPrenomSansCaratereSpecial(prenom);
+            prenom = ConvertirEnMajuscule(prenom);
             SetPrenom(prenom);
         }
     }
@@ -110,7 +112,11 @@ public class Profile {
             throw e;
         }
     }
-//méthodes public
+//MÉTHODES GLOBAL
+    private String ConvertirEnMajuscule(String uneChaine) {
+        return uneChaine.toUpperCase();
+    }
+//MÉTHODES PUBLIC
     private void SetNom(String nom) {
         this.nom = nom;
     }

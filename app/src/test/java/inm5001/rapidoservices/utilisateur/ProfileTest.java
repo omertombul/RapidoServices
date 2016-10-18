@@ -51,14 +51,14 @@ public class ProfileTest {
     public void ProfileNom() throws Exception {
         profile = new Profile(nom, prenom, numeroTelephone, adresseCourriel);
         String nom = profile.nom;
-        assertEquals(nom, "Francis");
+        assertEquals(nom, "FRANCIS");
     }
 
     @Test
     public void ProfilePreNom() throws Exception {
         profile = new Profile(nom, prenom, numeroTelephone, adresseCourriel);
         String prenom = profile.prenom;
-        assertEquals(prenom, "Bernier");
+        assertEquals(prenom, "BERNIER");
     }
 
     @Test
