@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.service.Service;
 
+import static inm5001.rapidoservices.utilisateur.ConstanteIdentifiant.MESSAGE_NOMUTILISATEUR_PAS_UNIQUE;
+import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_IDENTIFIANT_NULL;
+import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_PROFILE_NULL;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -36,13 +39,16 @@ public class UtilisateurTest {
     private String prenom;
     private String numeroTelephone;
     private String adresseCourriel;
+    private Boolean estValider;
 
     @Before
     public void setUp() throws MyException {
         listeServices = new ArrayList<>();
-        //listeServices.add(xxxx);
-        //listeServices.add(xxxx);
-        //service = null;
+        service = new Service("service1@gmail.com");
+        listeServices.add(service);
+        service = new Service("service2@gmail.com");
+        listeServices.add(service);
+        service = null;
         listeCompetences = new ArrayList<>();
         listeCompetences.add("Plombier");
         listeCompetences.add("Électricien");
@@ -56,6 +62,7 @@ public class UtilisateurTest {
         identifiant = new Identifiant(nomUtilisateur, motDePasse);
         profile = new Profile(nom, prenom, numeroTelephone, adresseCourriel);
         utilisateur = null;
+        estValider = false;
     }
 
     @After
@@ -63,7 +70,7 @@ public class UtilisateurTest {
         identifiant = null;
         profile = null;
         listeServices = null;
-        listeCompetences = null;
+        service = null;
         listeCompetences = null;
         competence = null;
         nom = null;
@@ -72,6 +79,7 @@ public class UtilisateurTest {
         adresseCourriel = null;
         utilisateur = null;
         motDePasse = null;
+        estValider = null;
     }
 
     @Test
@@ -91,7 +99,23 @@ public class UtilisateurTest {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
         assertNotNull(utilisateur.profile);
     }
+
+    @Test
+    public void UtilisateurListeServicesPasNull() throws Exception {
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
+        assertNotNull(utilisateur.listeServices);
+    }
 //IDENTIFIANT
+    @Test
+    public void ValiderIdentifiantPasNull() throws Exception {
+        try {
+            utilisateur = new Utilisateur(null, profile, listeServices, listeCompetences);
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_IDENTIFIANT_NULL);
+        }
+        assertTrue(estValider);
+    }
+
     @Test
     public void UtilisateurIdentifiantNomUtilisateur() throws Exception {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
@@ -106,6 +130,16 @@ public class UtilisateurTest {
         assertEquals(motDePasse, "Allo!234");
     }
 //PROFILE
+@Test
+    public void ValiderProfilePasNull() throws Exception {
+        try {
+            utilisateur = new Utilisateur(identifiant, null, listeServices, listeCompetences);
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_PROFILE_NULL);
+        }
+        assertTrue(estValider);
+    }
+
     @Test
     public void UtilisateurProfileNom() throws Exception {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
