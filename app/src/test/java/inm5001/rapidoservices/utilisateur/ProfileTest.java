@@ -1,12 +1,11 @@
 package inm5001.rapidoservices.utilisateur;
 
+import inm5001.rapidoservices.MyException;
+import static inm5001.rapidoservices.utilisateur.ConstanteProfile.*;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import inm5001.rapidoservices.MyException;
-
-import static inm5001.rapidoservices.utilisateur.ConstanteProfile.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -227,11 +226,51 @@ public class ProfileTest {
     }
 
     @Test
-    public void ValiderAdresseCourrielArobase() {
+    public void ValiderAdresseCourrielFormatValide1() {
+        try {
+            profile = new Profile(nom, prenom, numeroTelephone, "@hotmail.com");
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_ADRESSECOURRIEL_FORMAT_VALIDE);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void ValiderAdresseCourrielFormatValide2() {
+        try {
+            profile = new Profile(nom, prenom, numeroTelephone, "francis@.com");
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_ADRESSECOURRIEL_FORMAT_VALIDE);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void ValiderAdresseCourrielFormatValide3() {
         try {
             profile = new Profile(nom, prenom, numeroTelephone, "francishotmail.com");
         } catch (MyException e) {
-            estValider = e.getMessage().equals(MESSAGE_ADRESSECOURRIEL_AROBASE);
+            estValider = e.getMessage().equals(MESSAGE_ADRESSECOURRIEL_FORMAT_VALIDE);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void ValiderAdresseCourrielFormatValide4() {
+        try {
+            profile = new Profile(nom, prenom, numeroTelephone, "francis@hotmailcom");
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_ADRESSECOURRIEL_FORMAT_VALIDE);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void ValiderAdresseCourrielFormatValide5() {
+        try {
+            profile = new Profile(nom, prenom, numeroTelephone, "francis@hotmail.");
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_ADRESSECOURRIEL_FORMAT_VALIDE);
         }
         assertTrue(estValider);
     }

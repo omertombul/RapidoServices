@@ -1,5 +1,6 @@
 package inm5001.rapidoservices.utilisateur;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import inm5001.rapidoservices.MyException;
@@ -53,7 +54,7 @@ public class Profile {
 
     private void TraiterAdresseCourriel(String adresseCourriel) throws MyException {
         ValiderAdresseCourrielPasNull(adresseCourriel);
-        ValiderAdresseCourrielArobase(adresseCourriel);
+        ValiderAdresseCourrielFormatValide(adresseCourriel);
         SetAdresseCourriel(adresseCourriel);
     }
 //deuxième niveau d'abstraction
@@ -118,9 +119,12 @@ public class Profile {
         }
     }
 
-    private void ValiderAdresseCourrielArobase(String adresseCourriel) throws MyException {
-        if (!Pattern.compile("[@]+").matcher(adresseCourriel).find()) {
-            MyException e = new MyException(MESSAGE_ADRESSECOURRIEL_AROBASE);
+    private void ValiderAdresseCourrielFormatValide(String adresseCourriel) throws MyException {
+        Pattern pattern = Pattern.compile(patternCourriel);
+        Matcher matcher = pattern.matcher(adresseCourriel);
+
+        if (!matcher.matches()) {
+            MyException e = new MyException(MESSAGE_ADRESSECOURRIEL_FORMAT_VALIDE);
             throw e;
         }
     }
