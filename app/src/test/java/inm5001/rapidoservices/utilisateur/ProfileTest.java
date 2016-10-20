@@ -276,6 +276,26 @@ public class ProfileTest {
     }
 
     @Test
+    public void ValiderAdresseCourrielFormatValide6() {
+        try {
+            profile = new Profile(nom, prenom, numeroTelephone, "francis.bernier@hotmail.");
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_ADRESSECOURRIEL_FORMAT_VALIDE);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void ValiderAdresseCourrielFormatValide7() {
+        try {
+            profile = new Profile(nom, prenom, numeroTelephone, "francis1@hotmail.com");
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_ADRESSECOURRIEL_FORMAT_VALIDE);
+        }
+        assertFalse(estValider);
+    }
+
+    @Test
     public void fauxPositif() throws Exception {
         assertTrue(false);
     }
