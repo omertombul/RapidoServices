@@ -31,7 +31,7 @@ public class Profile {
             ValiderNomSansChiffre(nom);
             ValiderNomSansCaratereSpecial(nom);
             nom = ConvertirEnMajuscule(nom);
-            SetNom(nom);
+            AffecterValeurNom(nom);
         }
     }
 
@@ -40,7 +40,7 @@ public class Profile {
             ValiderPrenomSansChiffre(prenom);
             ValiderPrenomSansCaratereSpecial(prenom);
             prenom = ConvertirEnMajuscule(prenom);
-            SetPrenom(prenom);
+            AffecterValeurPrenom(prenom);
         }
     }
 
@@ -48,14 +48,14 @@ public class Profile {
         if (numeroTelephone != null) {
             ValiderNumeroTelephoneSeulementChiffre(numeroTelephone);
             ValiderNumeroTelephoneDixChiffre(numeroTelephone);
-            SetNumeroTelephone(numeroTelephone);
+            AffecterValeurNumeroTelephone(numeroTelephone);
         }
     }
 
     private void TraiterAdresseCourriel(String adresseCourriel) throws MyException {
         ValiderAdresseCourrielPasNull(adresseCourriel);
         ValiderAdresseCourrielFormatValide(adresseCourriel);
-        SetAdresseCourriel(adresseCourriel);
+        AffecterValeurAdresseCourriel(adresseCourriel);
     }
 //deuxième niveau d'abstraction
     private void ValiderNomSansChiffre(String nom) throws MyException {
@@ -72,7 +72,7 @@ public class Profile {
         }
     }
 
-    private void SetNom(String nom) {
+    private void AffecterValeurNom(String nom) {
         this.nom = nom;
     }
 
@@ -90,7 +90,7 @@ public class Profile {
         }
     }
 
-    private void SetPrenom(String prenom) {
+    private void AffecterValeurPrenom(String prenom) {
         this.prenom = prenom;
     }
 
@@ -108,7 +108,7 @@ public class Profile {
         }
     }
 
-    private void SetNumeroTelephone(String numeroTelephone) {
+    private void AffecterValeurNumeroTelephone(String numeroTelephone) {
         this.numeroTelephone = numeroTelephone;
     }
 
@@ -129,7 +129,7 @@ public class Profile {
         }
     }
 
-    private void SetAdresseCourriel(String adresseCourriel) {
+    private void AffecterValeurAdresseCourriel(String adresseCourriel) {
         this.adresseCourriel = adresseCourriel;
     }
 //MÉTHODES GLOBAL

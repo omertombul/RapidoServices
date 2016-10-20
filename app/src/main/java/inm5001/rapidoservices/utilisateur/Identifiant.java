@@ -34,7 +34,7 @@ public class Identifiant {
         ValiderMotDePasseContientMajuscule(motDePasse);
         ValiderMotDePasseContientMinuscule(motDePasse);
         ValiderMotDePasseContientCaractereSpecial(motDePasse);
-        SetMotDePasse(motDePasse);
+        AffecterValeurMotDePasse(motDePasse);
     }
 //deuxième niveau d'abstraction
     private void ValiderNomUtilisateurPasNull(String nomUtilisateur) throws MyException {
@@ -104,7 +104,7 @@ public class Identifiant {
         }
     }
 
-    private void SetMotDePasse(String motDePasse) {
+    private void AffecterValeurMotDePasse(String motDePasse) {
         this.motDePasse = motDePasse;
     }
 //MÉTHODES PUBLIC

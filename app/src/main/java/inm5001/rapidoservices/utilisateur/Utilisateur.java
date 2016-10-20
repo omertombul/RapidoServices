@@ -43,23 +43,23 @@ public class Utilisateur {
 //premier niveau d'abstraction
     private void TraiterIdentifiant(Identifiant identifiant) throws MyException {
         ValiderIdentifiantPasNull(identifiant);
-        SetIdentifiant(identifiant);
+        AffecterValeurIdentifiant(identifiant);
     }
 
     private void TraiterProfile(Profile profile) throws MyException {
         ValiderProfilePasNull(profile);
-        SetProfile(profile);
+        AffecterValeurProfile(profile);
     }
 
     private void TraiterListeServices(ArrayList<Service> listeServices) {
         if (listeServices != null) {
-            SetListeService(listeServices);
+            AffecterValeurListeService(listeServices);
         }
     }
 
     private void TraiterListeCompetences(ArrayList<String> listeCompetences) {
         if (listeCompetences != null) {
-            SetListeCompetences(listeCompetences);
+            AffecterValeurListeCompetences(listeCompetences);
         }
     }
 //deuxième niveau d'abstraction
@@ -70,7 +70,7 @@ public class Utilisateur {
         }
     }
 
-    private void SetIdentifiant(Identifiant identifiant) {
+    private void AffecterValeurIdentifiant(Identifiant identifiant) {
         this.identifiant = identifiant;
     }
 
@@ -81,15 +81,15 @@ public class Utilisateur {
         }
     }
 
-    private void SetProfile(Profile profile) {
+    private void AffecterValeurProfile(Profile profile) {
         this.profile = profile;
     }
 
-    private void SetListeService(ArrayList<Service> listeServices) {
+    private void AffecterValeurListeService(ArrayList<Service> listeServices) {
         this.listeServices = listeServices;
     }
 
-    private void SetListeCompetences(ArrayList<String> listeCompetences) {
+    private void AffecterValeurListeCompetences(ArrayList<String> listeCompetences) {
         this.listeCompetences = listeCompetences;
     }
 //MÉTHODES PUBLIC
