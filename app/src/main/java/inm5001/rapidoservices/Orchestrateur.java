@@ -62,7 +62,7 @@ public class Orchestrateur {
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
         utilisateur = recupererUtilisateur(nomUtilisateur);
         utilisateur.identifiant.validationMotDePasse(motDePasse);
-        remplacerMotDePasse(nomUtilisateur, motDePasseNouveau);
+        remplacerMotDePasse(nomUtilisateur, motDePasse);
     }
 
     public void ajouterOffreDeService(String nomUtilisateur, Plomberie service) throws MyException {
@@ -93,15 +93,10 @@ public class Orchestrateur {
         remplacerProfile(nomUtilisateur, profile);
     }
 
-    public void remplacerNomProfile(String nomUtilisateur, String adresseCourriel) throws MyException {
+    public void remplacerAdresseCourrielProfile(String nomUtilisateur, String adresseCourriel) throws MyException {
         profile = recupererUtilisateur(nomUtilisateur).profile;
         profile = new Profile (profile.nom, profile.prenom, profile.numeroTelephone, adresseCourriel);
         remplacerProfile(nomUtilisateur, profile);
-    }
-
-    public void changerMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
-        identifiant = recupererUtilisateur(nomUtilisateur).identifiant;
-        remplacerProfile(identifiant.nomUtilisateur, motDePasse);
     }
     */
 }
