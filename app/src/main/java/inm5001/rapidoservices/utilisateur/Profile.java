@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 
 import inm5001.rapidoservices.MyException;
 
-import static inm5001.rapidoservices.utilisateur.ConstanteIdentifiant.MESSAGE_NOMUTILISATEUR_NULL;
 import static inm5001.rapidoservices.utilisateur.ConstanteProfile.*;
 
 /**
@@ -20,77 +19,77 @@ public class Profile {
     public String adresseCourriel;
 
     public Profile(String nom, String prenom, String numeroTelephone, String adresseCourriel) throws MyException {
-        TraiterNom(nom);
-        TraiterPrenom(prenom);
-        TraiterNumeroTelephone(numeroTelephone);
-        TraiterAdresseCourriel(adresseCourriel);
+        traiterNom(nom);
+        traiterPrenom(prenom);
+        traiterNumeroTelephone(numeroTelephone);
+        traiterAdresseCourriel(adresseCourriel);
     }
 //premier niveau d'abstraction
-    private void TraiterNom(String nom) throws MyException {
+    private void traiterNom(String nom) throws MyException {
         if (nom != null) {
-            ValiderNomSansChiffre(nom);
-            ValiderNomSansCaratereSpecial(nom);
-            nom = ConvertirEnMajuscule(nom);
-            AffecterValeurNom(nom);
+            validerNomSansChiffre(nom);
+            validerNomSansCaratereSpecial(nom);
+            nom = convertirEnMajuscule(nom);
+            affecterValeurNom(nom);
         }
     }
 
-    private void TraiterPrenom(String prenom) throws MyException {
+    private void traiterPrenom(String prenom) throws MyException {
         if (prenom != null) {
-            ValiderPrenomSansChiffre(prenom);
-            ValiderPrenomSansCaratereSpecial(prenom);
-            prenom = ConvertirEnMajuscule(prenom);
-            AffecterValeurPrenom(prenom);
+            validerPrenomSansChiffre(prenom);
+            validerPrenomSansCaratereSpecial(prenom);
+            prenom = convertirEnMajuscule(prenom);
+            affecterValeurPrenom(prenom);
         }
     }
 
-    private void TraiterNumeroTelephone(String numeroTelephone) throws MyException {
+    private void traiterNumeroTelephone(String numeroTelephone) throws MyException {
         if (numeroTelephone != null) {
             ValiderNumeroTelephoneSeulementChiffre(numeroTelephone);
-            ValiderNumeroTelephoneDixChiffre(numeroTelephone);
-            AffecterValeurNumeroTelephone(numeroTelephone);
+            validerNumeroTelephoneDixChiffre(numeroTelephone);
+            affecterValeurNumeroTelephone(numeroTelephone);
         }
     }
 
-    private void TraiterAdresseCourriel(String adresseCourriel) throws MyException {
-        ValiderAdresseCourrielPasNull(adresseCourriel);
-        ValiderAdresseCourrielFormatValide(adresseCourriel);
-        AffecterValeurAdresseCourriel(adresseCourriel);
+    private void traiterAdresseCourriel(String adresseCourriel) throws MyException {
+        validerAdresseCourrielPasNull(adresseCourriel);
+        validerAdresseCourrielFormatValide(adresseCourriel);
+        affecterValeurAdresseCourriel(adresseCourriel);
     }
 //deuxième niveau d'abstraction
-    private void ValiderNomSansChiffre(String nom) throws MyException {
+    private void validerNomSansChiffre(String nom) throws MyException {
         if (Pattern.compile("[0-9]+").matcher(nom).find()) {
             MyException e = new MyException(MESSAGE_NOM_SANS_CHIFFRE);
             throw e;
         }
     }
 
-    private void ValiderNomSansCaratereSpecial(String nom) throws MyException {
+    private void validerNomSansCaratereSpecial(String nom) throws MyException {
         if (!nom.matches("[A-Za-z0-9 -]*")) {
             MyException e = new MyException(MESSAGE_NOM_CARACTERE_SPECIAL);
             throw e;
         }
     }
 
-    private void AffecterValeurNom(String nom) {
+    private void affecterValeurNom(String nom) {
         this.nom = nom;
     }
 
-    private void ValiderPrenomSansChiffre(String prenom) throws MyException {
+    private void validerPrenomSansChiffre(String prenom) throws MyException {
         if (Pattern.compile("[0-9]+").matcher(prenom).find()) {
             MyException e = new MyException(MESSAGE_PRENOM_SANS_CHIFFRE);
             throw e;
         }
     }
 
-    private void ValiderPrenomSansCaratereSpecial(String prenom) throws MyException {
+    private void validerPrenomSansCaratereSpecial(String prenom) throws MyException {
         if (!prenom.matches("[A-Za-z0-9 -]*")) {
             MyException e = new MyException(MESSAGE_PRENOM_CARACTERE_SPECIAL);
             throw e;
         }
     }
 
-    private void AffecterValeurPrenom(String prenom) {
+    private void affecterValeurPrenom(String prenom) {
         this.prenom = prenom;
     }
 
@@ -101,25 +100,25 @@ public class Profile {
         }
     }
 
-    private void ValiderNumeroTelephoneDixChiffre(String numeroTelephone) throws MyException {
+    private void validerNumeroTelephoneDixChiffre(String numeroTelephone) throws MyException {
         if (numeroTelephone.length() != 10) {
             MyException e = new MyException(MESSAGE_NUMEROTELEPHONE_DIX_CHIFFRE);
             throw e;
         }
     }
 
-    private void AffecterValeurNumeroTelephone(String numeroTelephone) {
+    private void affecterValeurNumeroTelephone(String numeroTelephone) {
         this.numeroTelephone = numeroTelephone;
     }
 
-    private void ValiderAdresseCourrielPasNull(String adresseCourriel) throws MyException {
+    private void validerAdresseCourrielPasNull(String adresseCourriel) throws MyException {
         if (adresseCourriel == null) {
             MyException e = new MyException(MESSAGE_ADRESSECOURRIEL_NULL);
             throw e;
         }
     }
 
-    private void ValiderAdresseCourrielFormatValide(String adresseCourriel) throws MyException {
+    private void validerAdresseCourrielFormatValide(String adresseCourriel) throws MyException {
         Pattern pattern = Pattern.compile(patternCourriel);
         Matcher matcher = pattern.matcher(adresseCourriel);
 
@@ -129,11 +128,11 @@ public class Profile {
         }
     }
 
-    private void AffecterValeurAdresseCourriel(String adresseCourriel) {
+    private void affecterValeurAdresseCourriel(String adresseCourriel) {
         this.adresseCourriel = adresseCourriel;
     }
 //MÉTHODES GLOBAL
-    private String ConvertirEnMajuscule(String uneChaine) {
+    private String convertirEnMajuscule(String uneChaine) {
         return uneChaine.toUpperCase();
     }
 //MÉTHODES PUBLIC

@@ -35,61 +35,61 @@ public class Utilisateur {
     */
 
     public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
-        TraiterIdentifiant(identifiant);
-        TraiterProfile(profile);
-        TraiterListeServices(listeServices);
-        TraiterListeCompetences(listeCompetences);
+        t(identifiant);
+        traiterProfile(profile);
+        traiterListeServices(listeServices);
+        traiterListeCompetences(listeCompetences);
     }
 //premier niveau d'abstraction
-    private void TraiterIdentifiant(Identifiant identifiant) throws MyException {
-        ValiderIdentifiantPasNull(identifiant);
-        AffecterValeurIdentifiant(identifiant);
+    private void t(Identifiant identifiant) throws MyException {
+        validerIdentifiantPasNull(identifiant);
+        affecterValeurIdentifiant(identifiant);
     }
 
-    private void TraiterProfile(Profile profile) throws MyException {
-        ValiderProfilePasNull(profile);
-        AffecterValeurProfile(profile);
+    private void traiterProfile(Profile profile) throws MyException {
+        validerProfilePasNull(profile);
+        affecterValeurProfile(profile);
     }
 
-    private void TraiterListeServices(ArrayList<AbstraiteServices> listeServices) {
+    private void traiterListeServices(ArrayList<AbstraiteServices> listeServices) {
         if (listeServices != null) {
-            AffecterValeurListeService(listeServices);
+            affecterValeurListeService(listeServices);
         }
     }
 
-    private void TraiterListeCompetences(ArrayList<String> listeCompetences) {
+    private void traiterListeCompetences(ArrayList<String> listeCompetences) {
         if (listeCompetences != null) {
-            AffecterValeurListeCompetences(listeCompetences);
+            affecterValeurListeCompetences(listeCompetences);
         }
     }
 //deuxième niveau d'abstraction
-    private void ValiderIdentifiantPasNull(Identifiant identifiant) throws MyException {
+    private void validerIdentifiantPasNull(Identifiant identifiant) throws MyException {
         if (identifiant == null) {
             MyException e = new MyException(MESSAGE_IDENTIFIANT_NULL);
             throw e;
         }
     }
 
-    private void AffecterValeurIdentifiant(Identifiant identifiant) {
+    private void affecterValeurIdentifiant(Identifiant identifiant) {
         this.identifiant = identifiant;
     }
 
-    private void ValiderProfilePasNull(Profile profile) throws MyException {
+    private void validerProfilePasNull(Profile profile) throws MyException {
         if (profile == null) {
             MyException e = new MyException(MESSAGE_PROFILE_NULL);
             throw e;
         }
     }
 
-    private void AffecterValeurProfile(Profile profile) {
+    private void affecterValeurProfile(Profile profile) {
         this.profile = profile;
     }
 
-    private void AffecterValeurListeService(ArrayList<AbstraiteServices> listeServices) {
+    private void affecterValeurListeService(ArrayList<AbstraiteServices> listeServices) {
         this.listeServices = listeServices;
     }
 
-    private void AffecterValeurListeCompetences(ArrayList<String> listeCompetences) {
+    private void affecterValeurListeCompetences(ArrayList<String> listeCompetences) {
         this.listeCompetences = listeCompetences;
     }
 //MÉTHODES PUBLIC

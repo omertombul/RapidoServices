@@ -2,7 +2,6 @@ package inm5001.rapidoservices;
 
 import java.util.ArrayList;
 
-import inm5001.rapidoservices.service.Plomberie;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.utilisateur.Identifiant;
