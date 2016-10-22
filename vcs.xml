@@ -6,6 +6,10 @@
           <option name="url" value="https://github.com/FrancisBernier/RapidoServices.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/turkguy/ServicesRapide.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="F:\Frank\UQAM\INM5001_grp10_A16\TP" />
