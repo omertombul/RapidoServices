@@ -6,8 +6,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import inm5001.rapidoservices.serviceOld.AbstraiteServices;
-import inm5001.rapidoservices.serviceOld.Plomberie;
+import inm5001.rapidoservices.service.AbstraiteServices;
+import inm5001.rapidoservices.service.TypeServices;
 import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
@@ -54,9 +54,9 @@ public class OrchestrateurTest {
     @Before
     public void setUp() throws MyException {
         listeServices = new ArrayList<>();
-        listeServices.add(new Plomberie(tauxHorraire, prixFixe, disponible, ville, cote,
+        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponible, ville, cote,
                 numeroTelephoneService, "service1@gmail.com", description));
-        listeServices.add(new Plomberie(tauxHorraire, prixFixe, disponible, ville, cote,
+        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponible, ville, cote,
                 numeroTelephoneService, "service2@gmail.com", description));
         service = null;
         listeCompetences = new ArrayList<>();
