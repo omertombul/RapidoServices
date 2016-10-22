@@ -7,13 +7,13 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.service.Service;
+import inm5001.rapidoservices.service.AbstraiteServices;
+import inm5001.rapidoservices.service.Plomberie;
 
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_IDENTIFIANT_NULL;
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_PROFILE_NULL;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class UtilisateurTest {
@@ -22,8 +22,8 @@ public class UtilisateurTest {
 //attributs Utilisateur
     private Identifiant identifiant;
     private Profile profile;
-    private ArrayList<Service> listeServices;
-    private Service service;
+    private ArrayList<AbstraiteServices> listeServices;
+    private AbstraiteServices service;
     private ArrayList<String> listeCompetences;
     private String competence;
     //private boolean disponible;
@@ -37,15 +37,28 @@ public class UtilisateurTest {
 //attributs Profile
     private String nom;
     private String prenom;
-    private String numeroTelephone;
-    private String adresseCourriel;
+    private String numeroTelephoneProfile;
+    private String adresseCourrielProfile;
     private Boolean estValider;
+//attributs AbstraiteServices
+    boolean disponible;
+    String ville;
+    byte cote;
+    String numeroTelephoneService;
+    String adresseCourrielService;
+    String description;
+//attribut Plomberie
+    String nomSservice;
+    float tauxHorraire;
+    float prixFixe;
 
     @Before
     public void setUp() throws MyException {
         listeServices = new ArrayList<>();
-        listeServices.add(new Service("service1@gmail.com"));
-        listeServices.add(new Service("service2@gmail.com"));
+        listeServices.add(new Plomberie(tauxHorraire, prixFixe, disponible, ville, cote,
+                numeroTelephoneService, "service1@gmail.com", description));
+        listeServices.add(new Plomberie(tauxHorraire, prixFixe, disponible, ville, cote,
+                numeroTelephoneService, "service2@gmail.com", description));
         service = null;
         listeCompetences = new ArrayList<>();
         listeCompetences.add("Plombier");
@@ -55,12 +68,20 @@ public class UtilisateurTest {
         motDePasse = "Allo!234";
         nom = "Francis";
         prenom = "Bernier";
-        numeroTelephone = "5145972143";
-        adresseCourriel = "francis@hotmail.com";
+        numeroTelephoneProfile = "5145972143";
+        adresseCourrielProfile = "francis@hotmail.com";
         identifiant = new Identifiant(nomUtilisateur, motDePasse);
-        profile = new Profile(nom, prenom, numeroTelephone, adresseCourriel);
+        profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
         utilisateur = null;
         estValider = false;
+        disponible = false;
+        ville = "Montreal";
+        cote = 2;
+        numeroTelephoneService ="514-444-4444";
+        adresseCourrielService = "plomberie@plomberi.com";
+        description = "Repare les tuyeaux";
+        tauxHorraire = 14.50f;
+        prixFixe = 50.00f;
     }
 
     @After
@@ -73,11 +94,19 @@ public class UtilisateurTest {
         competence = null;
         nom = null;
         prenom = null;
-        numeroTelephone = null;
-        adresseCourriel = null;
+        numeroTelephoneProfile = null;
+        adresseCourrielProfile = null;
         utilisateur = null;
         motDePasse = null;
         estValider = null;
+        disponible = false;
+        ville = null;
+        cote = 0;
+        numeroTelephoneService = null;
+        adresseCourrielService = null;
+        description = null;
+        tauxHorraire = 0;
+        prixFixe = 0;
     }
 
     @Test
@@ -148,22 +177,22 @@ public class UtilisateurTest {
     @Test
     public void UtilisateurProfileNumeroTelephone() throws Exception {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
-        numeroTelephone = utilisateur.profile.numeroTelephone;
-        assertEquals(numeroTelephone, "5145972143");
+        numeroTelephoneProfile = utilisateur.profile.numeroTelephone;
+        assertEquals(numeroTelephoneProfile, "5145972143");
     }
 
     @Test
     public void UtilisateurProfileAdresseCourriel() throws Exception {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
-        adresseCourriel = utilisateur.profile.adresseCourriel;
-        assertEquals(adresseCourriel, "francis@hotmail.com");
+        adresseCourrielProfile = utilisateur.profile.adresseCourriel;
+        assertEquals(adresseCourrielProfile, "francis@hotmail.com");
     }
 //LISTESERVICES
     @Test
     public void TraiterListeServices() throws Exception {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
         service = utilisateur.listeServices.get(1);
-        assertEquals(service.adresseCourriel, "service2@gmail.com");
+        assertEquals(service.getCourriel(), "service2@gmail.com");
     }
 
     @Test

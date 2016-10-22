@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import inm5001.rapidoservices.MyException;
+
 import static inm5001.rapidoservices.utilisateur.ConstanteIdentifiant.*;
 
 import static org.junit.Assert.assertEquals;
@@ -162,6 +163,25 @@ public class IdentifiantTest {
     public void ValiderMotDePasseContientCaractereSpecial() throws MyException {
         try {
             identifiant = new Identifiant(nomUtilisateur, "Allo1234");
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_MOTDEPASSE_CARACTERE_SPECIAL);
+        }
+        assertTrue(estValider);
+    }
+//MÉTHODES PUBLIC
+
+    @Test
+    public void validationMotDePasse() throws MyException {
+        identifiant = new Identifiant(nomUtilisateur, motDePasse);
+        motDePasse = identifiant.validationMotDePasse("Allo456!");
+        assertEquals(motDePasse, "Allo456!");
+    }
+
+    @Test
+    public void validationMotDePasseValiderUneDesErreur() throws MyException {
+        identifiant = new Identifiant(nomUtilisateur, motDePasse);
+        try {
+            identifiant.validationMotDePasse("Allo4567");
         } catch (MyException e) {
             estValider = e.getMessage().equals(MESSAGE_MOTDEPASSE_CARACTERE_SPECIAL);
         }

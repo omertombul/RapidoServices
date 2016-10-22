@@ -3,7 +3,7 @@ package inm5001.rapidoservices.utilisateur;
 import java.util.ArrayList;
 
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.service.Service;
+import inm5001.rapidoservices.service.AbstraiteServices;
 
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.*;
 
@@ -14,8 +14,8 @@ import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.*;
 public class Utilisateur {
     public Identifiant identifiant;
     public Profile profile;
-    public ArrayList<Service> listeServices = new ArrayList<Service>();
-    public ArrayList<String> listeCompetences = new ArrayList<String>();
+    public ArrayList<AbstraiteServices> listeServices = new ArrayList<>();
+    public ArrayList<String> listeCompetences = new ArrayList<>();
     //public boolean disponible;
     //public ArrayList<Evaluation> listeEvaluations;
     //public ArrayList<Evaluation> lisetEvaluationServicesGlobal;
@@ -34,7 +34,7 @@ public class Utilisateur {
     }
     */
 
-    public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<Service> listeServices, ArrayList<String> listeCompetences) throws MyException {
+    public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
         TraiterIdentifiant(identifiant);
         TraiterProfile(profile);
         TraiterListeServices(listeServices);
@@ -51,7 +51,7 @@ public class Utilisateur {
         AffecterValeurProfile(profile);
     }
 
-    private void TraiterListeServices(ArrayList<Service> listeServices) {
+    private void TraiterListeServices(ArrayList<AbstraiteServices> listeServices) {
         if (listeServices != null) {
             AffecterValeurListeService(listeServices);
         }
@@ -85,7 +85,7 @@ public class Utilisateur {
         this.profile = profile;
     }
 
-    private void AffecterValeurListeService(ArrayList<Service> listeServices) {
+    private void AffecterValeurListeService(ArrayList<AbstraiteServices> listeServices) {
         this.listeServices = listeServices;
     }
 
