@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import inm5001.rapidoservices.service.Plomberie;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -48,23 +47,20 @@ public class AbstraiteServicesTest {
 
     @Test
     public void UtilisateurPasNull() throws Exception {
-        AbstraiteServices plombier = new Plomberie(tauxHorraire, prixFixe, disponible,
-                                                        ville, cote, noTelephone, courriel, description );
+        AbstraiteServices plombier = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote, noTelephone, courriel, description );
         assertNotNull(plombier);
     }
 
     @Test
     public void getNomSservice() throws Exception {
-        Plomberie service = new Plomberie(tauxHorraire, prixFixe, disponible,
-                                        ville, cote, noTelephone, courriel, description);
+        TypeServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote, noTelephone, courriel, description);
         nomSservice = service.getNomSservice();
         assertEquals(nomSservice, "Plomberie");
     }
 
     @Test
     public void getDescription() throws Exception {
-        Plomberie service = new Plomberie(tauxHorraire, prixFixe, disponible,
-                ville, cote, noTelephone, courriel, description);
+        TypeServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote, noTelephone, courriel, description);
         description = service.getDescription();
         assertEquals(description, "Repare les tuyeaux");
     }

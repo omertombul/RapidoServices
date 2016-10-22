@@ -6,6 +6,8 @@ import inm5001.rapidoservices.utilisateur.Utilisateur;
 import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.service.AbstraiteServices;
+import inm5001.rapidoservices.service.TypeServices;
+import inm5001.rapidoservices.baseDonnees.BdApi;
 
 /**
  * Created by Francis Bernier on 2016-10-21.
@@ -45,58 +47,60 @@ public class Orchestrateur {
     String description;
     float tauxHorraire;
     float prixFixe;
-/*
+//attributs BdApi
+    private static BdApi bd = new BdApi();
+    /*
     public static Utilisateur creerUtilisateur(String nom, String prenom, String numeroTelephoneProfile, String adresseCourrielProfile,
                                                  String nomUtilisateur, String motDePasse, Identifiant identifiant, Profile profile,
                                                  ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
         profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
         identifiant = new Identifiant(nomUtilisateur, motDePasse);
-        enregistrerNouvelUtilisateur(new Utilisateur(identifiant, profile, listeServices, listeCompetences));
+        bd.addUser(new Utilisateur(identifiant, profile, listeServices, listeCompetences));
         return null;
     }
 
     public void supprimerCompte(String nomUtilisateur) throws MyException {
-        supprimerUtilisateur(nomUtilisateur);
+        bd.eraseUser(nomUtilisateur);
     }
 
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
-        utilisateur = recupererUtilisateur(nomUtilisateur);
+        utilisateur = bd.getUser(nomUtilisateur);
         utilisateur.identifiant.validationMotDePasse(motDePasse);
-        remplacerMotDePasse(nomUtilisateur, motDePasse);
+        bd.setPassword(nomUtilisateur, motDePasse);
     }
 
-    public void ajouterOffreDeService(String nomUtilisateur, Plomberie service) throws MyException {
-        ajouterServiceUtilisateur(nomUtilisateur, service);
-        ajouterCompetenceUtilisateur(nomUtilisateur, service.getNomSservice());
+    public void ajouterOffreDeService(String nomUtilisateur, TypeServices service) throws MyException {
+        bd.addService(nomUtilisateur, service);
+        bd.addCompetence(nomUtilisateur, service.getNomSservice());
     }
 
-    public void retirerOffreDeService(String nomUtilisateur, Plomberie service) throws MyException {
-        retirerServiceUtilisateur(nomUtilisateur, service);
-        retirerCompetenceUtilisateur(nomUtilisateur, service.getNomSservice());
+    public void retirerOffreDeService(String nomUtilisateur, TypeServices service) throws MyException {
+        bd.removeService(nomUtilisateur, service);
+        bd.removeCompetence(nomUtilisateur, service.getNomSservice());
     }
 
     public void remplacerNomProfile(String nomUtilisateur, String nom) throws MyException throws MyException {
-        profile = recupererUtilisateur(nomUtilisateur).profile;
+        profile = bd.getUser(nomUtilisateur).profile;
         profile = new Profile (nom, profile.prenom, profile.numeroTelephone, profile.adresseCourriel);
-        remplacerProfile(nomUtilisateur, profile);
+        bd.replaceProfile(nomUtilisateur, profile);
     }
 
     public void remplacerPrenomProfile(String nomUtilisateur, String prenom) throws MyException throws MyException {
-        profile = recupererUtilisateur(nomUtilisateur).profile;
+        profile = bd.getUser(nomUtilisateur).profile;
         profile = new Profile (profile.nom, prenom, profile.numeroTelephone, profile.adresseCourriel);
-        remplacerProfile(nomUtilisateur, profile);
+        bd.replaceProfile(nomUtilisateur, profile);
     }
 
     public void remplacerNumeroTelephoneProfile(String nomUtilisateur, String numeroTelephone) throws MyException {
-        profile = recupererUtilisateur(nomUtilisateur).profile;
+        profile = bd.getUser(nomUtilisateur).profile;
         profile = new Profile (profile.nom, profile.prenom, numeroTelephone, profile.adresseCourriel);
-        remplacerProfile(nomUtilisateur, profile);
+        bd.replaceProfile(nomUtilisateur, profile);
     }
 
     public void remplacerAdresseCourrielProfile(String nomUtilisateur, String adresseCourriel) throws MyException {
-        profile = recupererUtilisateur(nomUtilisateur).profile;
+        profile = bd.getUser(nomUtilisateur).profile;
         profile = new Profile (profile.nom, profile.prenom, profile.numeroTelephone, adresseCourriel);
-        remplacerProfile(nomUtilisateur, profile);
+        replaceProfile(nomUtilisateur, profile);
     }
     */
 }

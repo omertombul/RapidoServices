@@ -6,9 +6,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.service.AbstraiteServices;
-import inm5001.rapidoservices.service.Plomberie;
+import inm5001.rapidoservices.serviceOld.AbstraiteServices;
+import inm5001.rapidoservices.serviceOld.Plomberie;
 import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.utilisateur.Utilisateur;

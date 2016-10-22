@@ -3,7 +3,7 @@ package inm5001.rapidoservices.utilisateur;
 import java.util.ArrayList;
 
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.service.AbstraiteServices;
+import inm5001.rapidoservices.serviceOld.AbstraiteServices;
 
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.*;
 
@@ -35,13 +35,13 @@ public class Utilisateur {
     */
 
     public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
-        t(identifiant);
+        traiterIdentifiant(identifiant);
         traiterProfile(profile);
         traiterListeServices(listeServices);
         traiterListeCompetences(listeCompetences);
     }
 //premier niveau d'abstraction
-    private void t(Identifiant identifiant) throws MyException {
+    private void traiterIdentifiant(Identifiant identifiant) throws MyException {
         validerIdentifiantPasNull(identifiant);
         affecterValeurIdentifiant(identifiant);
     }

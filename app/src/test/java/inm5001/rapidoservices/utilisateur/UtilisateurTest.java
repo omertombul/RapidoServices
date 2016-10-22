@@ -7,8 +7,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.service.AbstraiteServices;
-import inm5001.rapidoservices.service.Plomberie;
+import inm5001.rapidoservices.serviceOld.AbstraiteServices;
+import inm5001.rapidoservices.serviceOld.Plomberie;
 
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_IDENTIFIANT_NULL;
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_PROFILE_NULL;
