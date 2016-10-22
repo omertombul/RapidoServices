@@ -3,7 +3,7 @@ package inm5001.rapidoservices.utilisateur;
 import java.util.ArrayList;
 
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.serviceOld.AbstraiteServices;
+import inm5001.rapidoservices.service.AbstraiteServices;
 
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.*;
 
