@@ -1,25 +1,36 @@
 package inm5001.rapidoservices.service;
 
-/**
- * Created by Francis Bernier on 2016-10-10.
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 
 public abstract class AbstraiteServices {
-    private boolean disponible;
-    private String ville;
-    private byte cote;
-    private String noTelephone;
-    private String courriel;
-    private String description;
+	private String nomSservice;
+ 	private boolean disponible;
+ 	private String ville;
+ 	private byte cote;
+ 	private String noTelephone;
+ 	private String courriel;
+ 	private String description;
 
-    public AbstraiteServices( boolean disponible, String ville, byte cote, String noTelephone,
-                              String courriel, String description ) {
+    public AbstraiteServices( String nomSservice, boolean disponible, String ville, byte cote, String noTelephone, String courriel, String description ) {
+        this.nomSservice = nomSservice;
         this.disponible = disponible;
         this.ville = ville;
         this.cote = cote;
         this.noTelephone = noTelephone;
         this.courriel = courriel;
         this.description = description;
+    }
+
+    public String getNomSservice() {
+        return nomSservice;
+    }
+
+    public void setNomSservice( String nomSservice ) {
+        this.nomSservice = nomSservice;
     }
 
     public boolean isDisponible() {
