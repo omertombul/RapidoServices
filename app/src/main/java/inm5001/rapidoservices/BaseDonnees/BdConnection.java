@@ -14,8 +14,6 @@ public class BdConnection {
     String SQL = null;
     ResultSet rs = null;
 
-
-
     /**
      * constructeur
      */
