@@ -7,7 +7,7 @@ import inm5001.rapidoservices.utilisateur.Utilisateur;
 /**
  * Created by Admin on 2016-10-22.
  */
-
+//aa
 public class BdApi {
     public BdApi() {
         System.out.println("Start: Constructeur Api");
@@ -19,6 +19,7 @@ public class BdApi {
         BdConnection DB = new BdConnection(SQL);
         DB.insertToDB();
         DB.closeConnection();
+        int s;
     }
 
     public void getUser(Utilisateur U) {
