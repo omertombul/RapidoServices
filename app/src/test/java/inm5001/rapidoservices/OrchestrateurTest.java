@@ -15,6 +15,7 @@ import inm5001.rapidoservices.utilisateur.Utilisateur;
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_PROFILE_NULL;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class OrchestrateurTest {
@@ -87,7 +88,7 @@ public class OrchestrateurTest {
     }
 
     @After
-    public void tearDown() {
+    public void tearDown() throws MyException {
         orchestrateur = null;
         identifiant = null;
         profile = null;
@@ -110,10 +111,11 @@ public class OrchestrateurTest {
         description = null;
         tauxHorraire = 0;
         prixFixe = 0;
+        orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
     @Test
-    public void creerUtilisateur() {
+    public void creerUtilisateur() throws MyException {
         try {
             orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                                             motDePasse, identifiant, profile, listeServices, listeCompetences);
@@ -136,6 +138,20 @@ public class OrchestrateurTest {
         }
         assertTrue(estValider);
         assertEquals(utilisateur.identifiant.nomUtilisateur, "Francis");
+    }
+
+    @Test
+    public void supprimerCompte() throws MyException{
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, identifiant, profile, listeServices, listeCompetences);
+        try {
+            orchestrateur.supprimerCompte(nomUtilisateur);
+        } catch (Exception e) {
+            //System.out.println("OMER :" + e.getClass().getSimpleName());
+            estValider = false;
+        }
+        assertTrue(estValider);
+        assertNull(orchestrateur.recupererUtilisateur(nomUtilisateur));
     }
 
     @Test
