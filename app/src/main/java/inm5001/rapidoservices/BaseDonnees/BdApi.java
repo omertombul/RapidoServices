@@ -24,7 +24,7 @@ public class BdApi {
         DB.closeConnection();
     }
 
-    public void getUser(String nomUtilisateur) {
+    public Utilisateur getUser(String nomUtilisateur) {
         Utilisateur U = null;
         System.out.println("Debut construction String SQL: get User");
         String SQL = SQLgetUser(nomUtilisateur);
@@ -48,6 +48,7 @@ public class BdApi {
 
         updateUtilisateurWithRScompetencesData(U, RScompetences);
         DB.closeConnection();
+        return U;
     }
 
     //*************************************************************************
