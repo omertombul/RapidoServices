@@ -58,7 +58,6 @@ public class BdApi {
         BdConnection DB = new BdConnection(SQL);
         DB.deleteInDataBase();
         DB.closeConnection();
-
     }
 
     public void addServiceUser(String nomUtilisateur, TypeServices S){
@@ -68,7 +67,12 @@ public class BdApi {
         DB.closeConnection();
     }
 
-    //public void deleteService
+    public void deleteService(String nomUtilisateur, String nomService){
+        String SQL = SQLdeleteService(nomUtilisateur, nomService);
+        BdConnection DB = new BdConnection(SQL);
+        DB.deleteInDataBase();
+        DB.closeConnection();
+    }
 
     //*************************************************************************
     // level 2 abstraction
@@ -134,7 +138,7 @@ public class BdApi {
         String SQL_DEBUT = "INSERT INTO servicesDUsager VALUES('";
         String SQL_SEPARATEUR = "' ,'";
         String SQL_FIN = "');";
-        String SQL_DEBUT_COMPETENCE = "INSERT INTO competences VALUES('";
+        String SQL_DEBUT_COMPETENCE = " INSERT INTO competences VALUES('";
 System.out.println("nom du service utilisateur: " + S.getNomSservice());
         SQL = SQL_DEBUT;
         SQL += nomUtilisateur + SQL_SEPARATEUR;
@@ -157,15 +161,13 @@ System.out.println("nom du service utilisateur: " + S.getNomSservice());
         return SQL;
     }
 
-
-
-    private Utilisateur updateUtilisateurWithRS(
-            Utilisateur U, ResultSet RSutilisateur, ResultSet RSservices,
-            ResultSet RScompetences) {
-        updateUtilisateurWithRSutilisateurData(U, RSutilisateur);
-        //updateUtilisateurWithRSservicesData(U, RSservices);
-        //updateUtilisateurWithRScompetencesData(U, RScompetences);
-        return U;
+    private String SQLdeleteService(String nomUtilisateur, String nomService) {
+        String SQL_DEBUT = "DELETE FROM servicesDUsager WHERE idUsager = '";
+        String SQL_AND = "' AND nomService = '";
+        String SQL_FIN = "';";
+        String SQL = SQL_DEBUT + nomUtilisateur + SQL_AND + nomService + SQL_FIN;
+        System.out.println("Delete **SERVICE** SQL is: " + SQL);
+        return SQL;
     }
 
     //*************************************************************************
