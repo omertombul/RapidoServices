@@ -152,7 +152,13 @@ public class OrchestrateurTest {
             estValider = false;
         }
         assertTrue(estValider);
-        assertNull(orchestrateur.recupererUtilisateur(nomUtilisateur));
+        estValider = false;
+        try {
+            orchestrateur.recupererUtilisateur(nomUtilisateur);
+        } catch (Exception e) {
+            estValider = true;
+        }
+        assertTrue(estValider);
     }
 
     @Test
