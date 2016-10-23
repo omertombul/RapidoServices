@@ -60,14 +60,12 @@ public class OrchestrateurTest {
     public void setUp() throws MyException {
         orchestrateur = new Orchestrateur();
         listeServices = new ArrayList<>();
+        /*
         listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponible, ville, cote,
                 numeroTelephoneService, "service1@gmail.com", description));
         listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponible, ville, cote,
                 numeroTelephoneService, "service2@gmail.com", description));
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                numeroTelephoneService, adresseCourrielService, description );
-        service2 = new TypeServices(tauxHorraire, prixFixe, "Électricien", disponible, ville, cote,
-                numeroTelephoneService, adresseCourrielService, description );
+        */
         listeCompetences = new ArrayList<>();
         listeCompetences.add("Plombier");
         listeCompetences.add("Électricien");
@@ -90,6 +88,10 @@ public class OrchestrateurTest {
         description = "Repare les tuyeaux";
         tauxHorraire = 14.50f;
         prixFixe = 50.00f;
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
+                numeroTelephoneService, adresseCourrielService, description );
+        service2 = new TypeServices(tauxHorraire, prixFixe, "Électricien", disponible, ville, cote,
+                numeroTelephoneService, adresseCourrielService, description );
     }
 
     @After
