@@ -125,7 +125,9 @@ public class OrchestrateurTest {
     }
 
     @Test
-    public void recupererUtilisateur() {
+    public void recupererUtilisateur() throws MyException{
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                                        motDePasse, identifiant, profile, listeServices, listeCompetences);
         try {
             utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
         } catch (Exception e) {
@@ -133,7 +135,7 @@ public class OrchestrateurTest {
             estValider = false;
         }
         assertTrue(estValider);
-        assertNotNull(utilisateur);
+        assertEquals(utilisateur.identifiant.nomUtilisateur, "Francis");
     }
 
     @Test
