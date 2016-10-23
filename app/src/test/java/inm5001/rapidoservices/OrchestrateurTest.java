@@ -88,7 +88,7 @@ public class OrchestrateurTest {
     }
 
     @After
-    public void tearDown() {
+    public void tearDown() throws MyException {
         orchestrateur = null;
         identifiant = null;
         profile = null;
@@ -111,10 +111,11 @@ public class OrchestrateurTest {
         description = null;
         tauxHorraire = 0;
         prixFixe = 0;
+        orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
     @Test
-    public void creerUtilisateur() {
+    public void creerUtilisateur() throws MyException {
         try {
             orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                                             motDePasse, identifiant, profile, listeServices, listeCompetences);
