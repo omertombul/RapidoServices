@@ -81,7 +81,7 @@ public class OrchestrateurTest {
         profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
         utilisateur = null;
         estValider = true;
-        nomService = "Plombier";
+        nomSservice = "Plombier";
         disponible = false;
         ville = "Montreal";
         cote = 2;
@@ -202,7 +202,8 @@ public class OrchestrateurTest {
     }
 
     @Test
-    public void ajouterOffreDeServiceDeuxMemeService() throws MyException {
+    public void
+    DeuxMemeService() throws MyException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                 motDePasse, identifiant, profile, listeServices, listeCompetences);
         try {
