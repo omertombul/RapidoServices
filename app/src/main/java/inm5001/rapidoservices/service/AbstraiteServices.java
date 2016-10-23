@@ -8,14 +8,14 @@ package inm5001.rapidoservices.service;
 
 public abstract class AbstraiteServices {
 	private String nomSservice;
- 	private boolean disponible;
+ 	private byte disponible;
  	private String ville;
  	private byte cote;
  	private String noTelephone;
  	private String courriel;
  	private String description;
 
-    public AbstraiteServices( String nomSservice, boolean disponible, String ville, byte cote, String noTelephone, String courriel, String description ) {
+    public AbstraiteServices( String nomSservice, byte disponible, String ville, byte cote, String noTelephone, String courriel, String description ) {
         this.nomSservice = nomSservice;
         this.disponible = disponible;
         this.ville = ville;
@@ -33,11 +33,11 @@ public abstract class AbstraiteServices {
         this.nomSservice = nomSservice;
     }
 
-    public boolean isDisponible() {
+    public byte isDisponible() {
         return disponible;
     }
 
-    public void setDisponible( boolean disponible ) {
+    public void setDisponible( byte disponible ) {
         this.disponible = disponible;
     }
 

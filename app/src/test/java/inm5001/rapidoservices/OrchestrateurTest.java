@@ -47,7 +47,7 @@ public class OrchestrateurTest {
     //attributs AbstraiteServices
     private String nomSservice;
     private String nomService;
-    private boolean disponible;
+    private byte disponible;
     private String ville;
     private byte cote;
     private String numeroTelephoneService;
@@ -82,7 +82,7 @@ public class OrchestrateurTest {
         utilisateur = null;
         estValider = true;
         nomSservice = "Plombier";
-        disponible = false;
+        disponible = 0;
         ville = "Montreal";
         cote = 2;
         numeroTelephoneService ="514-444-4444";
@@ -111,7 +111,7 @@ public class OrchestrateurTest {
         utilisateur = null;
         motDePasse = null;
         estValider = null;
-        disponible = false;
+        disponible = 0;
         ville = null;
         cote = 0;
         numeroTelephoneService = null;

@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 public class AbstraiteServicesTest {
 
         String nomSservice;
-        boolean disponible;
+        byte disponible;
         String ville;
         byte cote;
         String noTelephone;
@@ -23,7 +23,7 @@ public class AbstraiteServicesTest {
         @Before
         public void setUp() {
             nomSservice = "Plomberie";
-            disponible = false;
+            disponible = 0;
             ville = "Montreal";
             cote = 2;
             noTelephone ="514-444-4444";
@@ -36,7 +36,7 @@ public class AbstraiteServicesTest {
         @After
         public void tearDown() {
             nomSservice = null;
-            disponible = false;
+            disponible = 0;
             ville = null;
             cote = 0;
             noTelephone = null;
