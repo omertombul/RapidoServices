@@ -87,9 +87,9 @@ public class BdConnection {
     public void deleteInDataBase() {
         try {
             System.out.println("SQL string is: " + SQL);
-            stmt.executeQuery(SQL);
+            stmt.executeUpdate(SQL);
         } catch (SQLException ex) {
-            System.out.println(ex + "    Error Getting Data: rs");
+            System.out.println(ex + "    Error Deleting From DATAbase");
         }
     }
 
