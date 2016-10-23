@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.utilisateur.Profile;
+import inm5001.rapidoservices.service.AbstraiteServices;
+import inm5001.rapidoservices.service.TypeServices;
+import java.util.ArrayList;
 
 /**
  * Created by Admin on 2016-10-22.
@@ -25,29 +28,29 @@ public class BdApi {
     }
 
     public Utilisateur getUser(String nomUtilisateur) {
-        Utilisateur U = null;
+        Utilisateur U = new Utilisateur();//null;
         System.out.println("Debut construction String SQL: get User");
+
+
         String SQL = SQLgetUser(nomUtilisateur);
         BdConnection DB = new BdConnection(SQL);
-        ResultSet RSutilisateur = DB.readFromDataBase();
-
-        updateUtilisateurWithRSutilisateurData(U, RSutilisateur);
+        ResultSet RSutilisateur = DB.readOrDeleteInDataBase();
+        U = updateUtilisateurWithRSutilisateurData(U, RSutilisateur);
         DB.closeConnection();
 
         SQL = SQLgetServices(U);
         DB = new BdConnection(SQL);
-        ResultSet RSservices = DB.readFromDataBase();
-        updateUtilisateurWithRSservicesData(U, RSservices);
+        ResultSet RSservices = DB.readOrDeleteInDataBase();
+        U = updateUtilisateurWithRSservicesData(U, RSservices);
         DB.closeConnection();
 
         SQL = SQLgetCompetences(U);
         DB = new BdConnection(SQL);
-        ResultSet RScompetences = DB.readFromDataBase();
-        updateUtilisateurWithRScompetencesData(U, RScompetences);
+        ResultSet RScompetences = DB.readOrDeleteInDataBase();
+        U = updateUtilisateurWithRScompetencesData(U, RScompetences);
         DB.closeConnection();
 
-        updateUtilisateurWithRScompetencesData(U, RScompetences);
-        DB.closeConnection();
+
         return U;
     }
 
@@ -75,19 +78,31 @@ public class BdApi {
 
     private String SQLgetUser(String nomUtilisateur) {
         String SQL;
-        String SQL_DEBUT = "SELECT * FROM utilisateur WHERE idUsager = ";
-        String SQL_FIN = ";";
+        String SQL_DEBUT = "SELECT * FROM utilisateur WHERE idUsager = '";
+        String SQL_FIN = "';";
         SQL = SQL_DEBUT + nomUtilisateur + SQL_FIN;
         System.out.println("    String SQL getUser: " + SQL);
         return SQL;
     }
 
     private String SQLgetServices(Utilisateur U) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("id utilisateur est: " + U.identifiant.nomUtilisateur);
+        String SQL;
+        String SQL_DEBUT = "SELECT * FROM servicesDUsager WHERE idUsager = '";
+        String SQL_FIN = "';";
+        //SQL = SQL_DEBUT + "Francis" + SQL_FIN; //U.identifiant.nomUtilisateur + SQL_FIN;
+        SQL = SQL_DEBUT + U.identifiant.nomUtilisateur + SQL_FIN;
+        System.out.println("    String SQL getServiceUtilisateur: " + SQL);
+        return SQL;
     }
 
     private String SQLgetCompetences(Utilisateur U) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String SQL;
+        String SQL_DEBUT = "SELECT * FROM competences WHERE idUsager = '";
+        String SQL_FIN = "';";
+        SQL = SQL_DEBUT + U.identifiant.nomUtilisateur + SQL_FIN;
+        System.out.println("    String SQL getCompetencesUtilisateur: " + SQL);
+        return SQL;
     }
 
     private Utilisateur updateUtilisateurWithRS(
@@ -101,32 +116,56 @@ public class BdApi {
 
     //*************************************************************************
     // level 3 abstraction
-    private void updateUtilisateurWithRSutilisateurData(
+    private Utilisateur updateUtilisateurWithRSutilisateurData(
             Utilisateur U, ResultSet RSutilisateur) {
+
         try {
             RSutilisateur.beforeFirst();
             while (RSutilisateur.next()) {
-                Identifiant I = new Identifiant(RSutilisateur.getString("nom"),
+                Identifiant I = new Identifiant(RSutilisateur.getString("idUsager"),
                         RSutilisateur.getString("motDePasse"));
                 Profile P = new Profile(RSutilisateur.getString("nom"),
                         RSutilisateur.getString("prenom"), RSutilisateur.getString("noTelephone"),
                         RSutilisateur.getString("courriel"));
-                U = new Utilisateur(I,P,null,null);
+                ArrayList<AbstraiteServices> listServices = new ArrayList<>();
+                ArrayList<String> listeCompetences = new ArrayList<>();
+                U = new Utilisateur(I,P,listServices,listeCompetences);
             }
         } catch (Exception ex) {
             System.out.println(ex + "Error updating User with RSutilisateur");
         }
+        return U;
     }
 
-    private void updateUtilisateurWithRSservicesData(
+    private Utilisateur updateUtilisateurWithRSservicesData(
             Utilisateur U, ResultSet RSservices) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        // TODO implement this function: need to know how service ArrayList workds
+        try {
+            RSservices.beforeFirst();
+            while (RSservices.next()) {
+                AbstraiteServices S = new TypeServices(RSservices.getFloat("prixHorraire"),
+                        RSservices.getFloat("prixFixe"), RSservices.getString("nomService"),
+                        RSservices.getBoolean("disponibilite"), RSservices.getString("ville"),
+                        RSservices.getByte ("cote"), RSservices.getString("noTelephone"),
+                        RSservices.getString("courriel"), RSservices.getString("description"));
+                U.listeServices.add(S);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex + "Error Adding servicesList to user");
+        }
+        return U;
     }
 
-    private void updateUtilisateurWithRScompetencesData(
+    private Utilisateur updateUtilisateurWithRScompetencesData(
             Utilisateur U, ResultSet RScompetences) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        // TODO implement this function: need to know how competence ArrayList workds
+        try {
+            RScompetences.beforeFirst();
+            while (RScompetences.next()) {
+                String competence = RScompetences.getString("nomService");
+                U.listeCompetences.add(competence);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex + "Error Adding competencesList to user");
+        }
+        return U;
     }
 }
