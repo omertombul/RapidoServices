@@ -197,13 +197,15 @@ public class OrchestrateurTest {
             estValider = false;
         }
         assertTrue(estValider);
+        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(0), "Plombier");
         assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(1), "Électricien");
+        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeCompetences.get(0), "Plombier");
+        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeCompetences.get(1), "Électricien");
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
     @Test
-    public void
-    DeuxMemeService() throws MyException {
+    public void ajouterOffreDeServiceDeuxMemeService() throws MyException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                 motDePasse, identifiant, profile, listeServices, listeCompetences);
         try {
