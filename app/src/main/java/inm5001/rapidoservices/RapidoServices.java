@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import inm5001.rapidoservices.utilisateur.*;
 import inm5001.rapidoservices.service.*;
 import inm5001.rapidoservices.baseDonnees.*;
-import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.APIDB_temporaire.BDIdentifiant;
 
 public class RapidoServices {
     public static Profile profile;
