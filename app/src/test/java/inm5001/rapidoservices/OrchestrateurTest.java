@@ -25,7 +25,7 @@ public class OrchestrateurTest {
     private Identifiant identifiant;
     private Profile profile;
     private ArrayList<AbstraiteServices> listeServices;
-    private AbstraiteServices service;
+    private TypeServices service;
     private ArrayList<String> listeCompetences;
     private String competence;
     //private boolean disponible;
@@ -43,16 +43,16 @@ public class OrchestrateurTest {
     private String adresseCourrielProfile;
     private Boolean estValider;
     //attributs AbstraiteServices
-    boolean disponible;
-    String ville;
-    byte cote;
-    String numeroTelephoneService;
-    String adresseCourrielService;
-    String description;
+    private String nomSservice;
+    private boolean disponible;
+    private String ville;
+    private byte cote;
+    private String numeroTelephoneService;
+    private String adresseCourrielService;
+    private String description;
     //attribut Plomberie
-    String nomSservice;
-    float tauxHorraire;
-    float prixFixe;
+    private float tauxHorraire;
+    private float prixFixe;
 
     @Before
     public void setUp() throws MyException {
@@ -62,7 +62,8 @@ public class OrchestrateurTest {
                 numeroTelephoneService, "service1@gmail.com", description));
         listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponible, ville, cote,
                 numeroTelephoneService, "service2@gmail.com", description));
-        service = null;
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
+                                                        numeroTelephoneService, adresseCourrielService, description );
         listeCompetences = new ArrayList<>();
         listeCompetences.add("Plombier");
         listeCompetences.add("Électricien");
@@ -157,6 +158,19 @@ public class OrchestrateurTest {
             orchestrateur.recupererUtilisateur(nomUtilisateur);
         } catch (Exception e) {
             estValider = true;
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void ajouterOffreDeService() throws MyException {
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, identifiant, profile, listeServices, listeCompetences);
+        try {
+            orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
+        } catch (Exception e) {
+            //System.out.println("OMER :" + e.getClass().getSimpleName());
+            estValider = false;
         }
         assertTrue(estValider);
     }

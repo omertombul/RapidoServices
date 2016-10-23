@@ -2,6 +2,7 @@ package inm5001.rapidoservices;
 
 import java.util.ArrayList;
 
+import inm5001.rapidoservices.service.TypeServices;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.utilisateur.Identifiant;
@@ -65,19 +66,19 @@ public class Orchestrateur {
     public void supprimerCompte(String nomUtilisateur) throws MyException {
         bd.deleteUser(nomUtilisateur);
     }
-/*
+    /*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
         utilisateur = bd.getUser(nomUtilisateur);
         utilisateur.identifiant.validationMotDePasse(motDePasse);
         bd.setPassword(nomUtilisateur, motDePasse);
     }
-
-    public void ajouterOffreDeService(String nomUtilisateur, TypeServices service) throws MyException {
+    */
+    public void ajouterOffreDeService(String nomUtilisateur, AbstraiteServices service) throws MyException {
         bd.addService(nomUtilisateur, service);
         bd.addCompetence(nomUtilisateur, service.getNomSservice());
     }
-
-    public void retirerOffreDeService(String nomUtilisateur, TypeServices service) throws MyException {
+    /*
+    public void retirerOffreDeService(String nomUtilisateur, AbstraiteServices service) throws MyException {
         bd.removeService(nomUtilisateur, service);
         bd.removeCompetence(nomUtilisateur, service.getNomSservice());
     }
