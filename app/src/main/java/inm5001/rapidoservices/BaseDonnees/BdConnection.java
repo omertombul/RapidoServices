@@ -1,4 +1,4 @@
-package inm5001.rapidoservices.baseDonnees;
+package inm5001.rapidoservices.BaseDonnees;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DbConnection {
+public class BdConnection {
 
     // class Vars
     Connection conn = null;
@@ -17,7 +17,7 @@ public class DbConnection {
     /**
      * constructeur
      */
-    public DbConnection(String SQL) {
+    public BdConnection(String SQL) {
         this.SQL = SQL;
         Connection conn = makeConnection();
         Statement stmt = makeStatement();
