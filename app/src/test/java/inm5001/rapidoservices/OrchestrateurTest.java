@@ -125,6 +125,18 @@ public class OrchestrateurTest {
     }
 
     @Test
+    public void recupererUtilisateur() {
+        try {
+            utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
+        } catch (Exception e) {
+            //System.out.println("OMER :" + e.getClass().getSimpleName());
+            estValider = false;
+        }
+        assertTrue(estValider);
+        assertNotNull(utilisateur);
+    }
+
+    @Test
     public void fauxPositif() throws Exception {
         assertTrue(false);
     }

@@ -57,6 +57,10 @@ public class Orchestrateur {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
         bd.addUser(utilisateur);
     }
+
+    public Utilisateur recupererUtilisateur(String nomUtilisateur) throws MyException {
+        return bd.getUser(nomUtilisateur);
+    }
 /*
     public void supprimerCompte(String nomUtilisateur) throws MyException {
         bd.eraseUser(nomUtilisateur);
