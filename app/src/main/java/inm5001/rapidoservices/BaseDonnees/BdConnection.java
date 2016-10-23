@@ -1,4 +1,4 @@
-package inm5001.rapidoservices.baseDonnees;
+package inm5001.rapidoservices.BaseDonnees;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,6 +13,8 @@ public class BdConnection {
     Statement stmt = null;
     String SQL = null;
     ResultSet rs = null;
+
+
 
     /**
      * constructeur

@@ -6,8 +6,7 @@ import inm5001.rapidoservices.utilisateur.Utilisateur;
 import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.service.AbstraiteServices;
-import inm5001.rapidoservices.service.TypeServices;
-import inm5001.rapidoservices.baseDonnees.BdApi;
+import inm5001.rapidoservices.BaseDonnees.BdApi;
 
 /**
  * Created by Francis Bernier on 2016-10-21.
