@@ -143,7 +143,7 @@ public class BdApi {
         SQL += S.getPrixFixe() + SQL_SEPARATEUR;
         SQL += S.getTauxHorraire() + SQL_SEPARATEUR;
         SQL += S.getVille() + SQL_SEPARATEUR;
-        SQL += S.getNoTelephone()
+        SQL += S.getNoTelephone();
         SQL += S.getCourriel() + SQL_SEPARATEUR;
         SQL += S.getCote() + SQL_SEPARATEUR;
         SQL += S.getDescription() + SQL_FIN;
