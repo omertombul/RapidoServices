@@ -111,7 +111,7 @@ public class OrchestrateurTest {
         description = null;
         tauxHorraire = 0;
         prixFixe = 0;
-        //orchestrateur.supprimerCompte(nomUtilisateur);
+        orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
     @Test
