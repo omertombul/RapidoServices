@@ -44,8 +44,7 @@ public class BdConnection {
         }
         // once the driver is registered, make connection
         try {
-            conn
-                    = DriverManager.getConnection(url, usr, psw);
+            conn = DriverManager.getConnection(url, usr, psw);
         } catch (SQLException ex) {
             // handle any errors
             System.out.println("SQLException: " + ex.getMessage());
@@ -67,7 +66,6 @@ public class BdConnection {
 
     public void insertToDB() {
         try {
-            System.out.println("    SQL string is: " + SQL);
             stmt.executeUpdate(SQL);
         } catch (SQLException ex) {
             System.out.println(ex + "    Error Putting new Data into DB");
@@ -76,7 +74,6 @@ public class BdConnection {
 
     public ResultSet readFromDataBase() {
         try {
-            System.out.println("SQL string is: " + SQL);
             rs = stmt.executeQuery(SQL);
         } catch (SQLException ex) {
             System.out.println(ex + "    Error Getting Data: rs");
@@ -86,7 +83,6 @@ public class BdConnection {
 
     public void deleteInDataBase() {
         try {
-            System.out.println("SQL string is: " + SQL);
             stmt.executeUpdate(SQL);
         } catch (SQLException ex) {
             System.out.println(ex + "    Error Deleting From DATAbase");

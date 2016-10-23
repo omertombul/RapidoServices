@@ -20,7 +20,6 @@ public class BdApi {
     }
 
     public void addUser(Utilisateur U) {
-        System.out.println("Debut addUser()");
         String SQL = SQLaddUser(U);
         BdConnection DB = new BdConnection(SQL);
         DB.insertToDB();
@@ -58,6 +57,14 @@ public class BdApi {
         String SQL = SQLdeleteUser(nomUtilisateur);
         BdConnection DB = new BdConnection(SQL);
         DB.deleteInDataBase();
+        DB.closeConnection();
+
+    }
+
+    public void addServiceUser(String nomUtilisateur, TypeServices S){
+        String SQL = SQLaddServiceUser(nomUtilisateur, S);
+        BdConnection DB = new BdConnection(SQL);
+        DB.insertToDB();
         DB.closeConnection();
 
     }
@@ -118,6 +125,30 @@ public class BdApi {
         String SQL_FIN = "';";
         String SQL = SQL_DEBUT + nomUtilisateur + SQL_FIN;
         //System.out.println("Delete SQL is: " + SQL);
+        return SQL;
+    }
+
+    private String SQLaddServiceUser(String nomUtilisateur, TypeServices S) {
+        String SQL;
+        String SQL_DEBUT = "INSERT INTO servicesDUsager VALUES('";
+        String SQL_SEPARATEUR = "' ,'";
+        String SQL_FIN = "');";
+
+        SQL = SQL_DEBUT;
+        SQL += nomUtilisateur + SQL_SEPARATEUR;
+        SQL += S.getNomSservice() + SQL_SEPARATEUR;
+        SQL += "'0'" + SQL_SEPARATEUR;              // duree
+        SQL += S.isDisponible() + SQL_SEPARATEUR;
+        SQL += "'false'" + SQL_SEPARATEUR;          // reservation
+        SQL += S.getPrixFixe() + SQL_SEPARATEUR;
+        SQL += S.getTauxHorraire() + SQL_SEPARATEUR;
+        SQL += S.getVille() + SQL_SEPARATEUR;
+        SQL += S.getNoTelephone()
+        SQL += S.getCourriel() + SQL_SEPARATEUR;
+        SQL += S.getCote() + SQL_SEPARATEUR;
+        SQL += S.getDescription() + SQL_FIN;
+
+        System.out.println("    String SQL addService Usager: " + SQL);
         return SQL;
     }
 
