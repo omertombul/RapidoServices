@@ -215,6 +215,9 @@ public class OrchestrateurTest {
         } catch (Exception e) {
             //System.out.println("OMER :" + e.getClass().getSimpleName());
             estValider = true;
+        } finally {
+            orchestrateur.retirerOffreDeService(nomUtilisateur, service);
+            orchestrateur.supprimerCompte(nomUtilisateur);
         }
         assertTrue(estValider);
         orchestrateur.supprimerCompte(nomUtilisateur);
