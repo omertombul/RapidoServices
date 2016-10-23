@@ -5,18 +5,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-
+import java.sql.SQLException;
 import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.service.TypeServices;
 import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 
+import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_PROFILE_NULL;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class OrchestrateurTest {
+    Orchestrateur orchestrateur;
     private Utilisateur utilisateur;
     //attributs Utilisateur
     private Identifiant identifiant;
@@ -53,6 +55,7 @@ public class OrchestrateurTest {
 
     @Before
     public void setUp() throws MyException {
+        orchestrateur = new Orchestrateur();
         listeServices = new ArrayList<>();
         listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponible, ville, cote,
                 numeroTelephoneService, "service1@gmail.com", description));
@@ -72,7 +75,7 @@ public class OrchestrateurTest {
         identifiant = new Identifiant(nomUtilisateur, motDePasse);
         profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
         utilisateur = null;
-        estValider = false;
+        estValider = true;
         disponible = false;
         ville = "Montreal";
         cote = 2;
@@ -85,6 +88,7 @@ public class OrchestrateurTest {
 
     @After
     public void tearDown() {
+        orchestrateur = null;
         identifiant = null;
         profile = null;
         listeServices = null;
@@ -107,14 +111,19 @@ public class OrchestrateurTest {
         tauxHorraire = 0;
         prixFixe = 0;
     }
-/*
-    @Test
-    public void ajouterUtilisateur() throws MyException {
-        utilisateur = Orchestrateur.ajouterUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
-                                                        motDePasse, identifiant, profile, listeServices, listeCompetences);
 
+    @Test
+    public void creerUtilisateur() {
+        try {
+            orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                                            motDePasse, identifiant, profile, listeServices, listeCompetences);
+            } catch (Exception e) {
+                //System.out.println("OMER :" + e.getClass().getSimpleName());
+                estValider = false;
+            }
+        assertTrue(estValider);
     }
-*/
+
     @Test
     public void fauxPositif() throws Exception {
         assertTrue(false);

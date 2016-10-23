@@ -33,7 +33,6 @@ public class Utilisateur {
         this.geolocalisation = geolocalisation;
     }
     */
-
     public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
         traiterIdentifiant(identifiant);
         traiterProfile(profile);
