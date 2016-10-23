@@ -70,11 +70,11 @@ public class Orchestrateur {
     public void ajouterOffreDeService(String nomUtilisateur, TypeServices service) throws MyException {
         bd.addServiceUser(nomUtilisateur, service);
     }
-    /*
+
     public void retirerOffreDeService(String nomUtilisateur, AbstraiteServices service) throws MyException {
         bd.removeService(nomUtilisateur, service);
     }
-
+    /*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
         utilisateur = bd.getUser(nomUtilisateur);
         utilisateur.identifiant.validationMotDePasse(motDePasse);

@@ -111,6 +111,7 @@ public class OrchestrateurTest {
         utilisateur = null;
         motDePasse = null;
         estValider = null;
+        nomSservice = null;
         disponible = 0;
         ville = null;
         cote = 0;
@@ -216,7 +217,25 @@ public class OrchestrateurTest {
             estValider = true;
         }
         assertTrue(estValider);
-        //orchestrateur.supprimerCompte(nomUtilisateur);
+        orchestrateur.supprimerCompte(nomUtilisateur);
+    }
+
+    public void retirerOffreDeService() throws MyException {
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, identifiant, profile, listeServices, listeCompetences);
+        try {
+            orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
+        } catch (Exception e) {
+            //System.out.println("OMER :" + e.getClass().getSimpleName());
+            estValider = false;
+        } try {
+            orchestrateur.retirerOffreDeService(nomUtilisateur, service);
+        } catch (Exception e) {
+            estValider = false;
+        }
+        assertTrue(estValider);
+        assertNull(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(0));
+        orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
     @Test
