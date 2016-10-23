@@ -41,7 +41,7 @@ public class UtilisateurTest {
     private String adresseCourrielProfile;
     private Boolean estValider;
 //attributs AbstraiteServices
-    boolean disponible;
+    byte disponible;
     String ville;
     byte cote;
     String numeroTelephoneService;
@@ -74,7 +74,7 @@ public class UtilisateurTest {
         profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
         utilisateur = null;
         estValider = false;
-        disponible = false;
+        disponible = 0;
         ville = "Montreal";
         cote = 2;
         numeroTelephoneService ="514-444-4444";
@@ -99,7 +99,7 @@ public class UtilisateurTest {
         utilisateur = null;
         motDePasse = null;
         estValider = null;
-        disponible = false;
+        disponible = 0;
         ville = null;
         cote = 0;
         numeroTelephoneService = null;

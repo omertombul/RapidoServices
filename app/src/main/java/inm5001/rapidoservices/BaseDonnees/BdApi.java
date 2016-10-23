@@ -135,23 +135,23 @@ public class BdApi {
         String SQL_SEPARATEUR = "' ,'";
         String SQL_FIN = "');";
         String SQL_DEBUT_COMPETENCE = "INSERT INTO competences VALUES('";
-
+System.out.println("nom du service utilisateur: " + S.getNomSservice());
         SQL = SQL_DEBUT;
         SQL += nomUtilisateur + SQL_SEPARATEUR;
         SQL += S.getNomSservice() + SQL_SEPARATEUR;
-        SQL += "'0'" + SQL_SEPARATEUR;              // duree
+        SQL += "0" + SQL_SEPARATEUR;              // duree
         SQL += S.isDisponible() + SQL_SEPARATEUR;
-        SQL += "'false'" + SQL_SEPARATEUR;          // reservation
+        SQL += "0" + SQL_SEPARATEUR;          // reservation
         SQL += S.getPrixFixe() + SQL_SEPARATEUR;
         SQL += S.getTauxHorraire() + SQL_SEPARATEUR;
         SQL += S.getVille() + SQL_SEPARATEUR;
-        SQL += S.getNoTelephone();
+        SQL += S.getNoTelephone() + SQL_SEPARATEUR;
         SQL += S.getCourriel() + SQL_SEPARATEUR;
         SQL += S.getCote() + SQL_SEPARATEUR;
         SQL += S.getDescription() + SQL_FIN;
-        SQL += SQL_DEBUT_COMPETENCE;
-        SQL += nomUtilisateur + SQL_SEPARATEUR;
-        SQL += S.getNomSservice() + SQL_FIN;
+        //SQL += SQL_DEBUT_COMPETENCE;
+        //SQL += nomUtilisateur + SQL_SEPARATEUR;
+        //SQL += S.getNomSservice() + SQL_FIN;
 
         System.out.println("    String SQL addService Usager: " + SQL);
         return SQL;
@@ -198,7 +198,7 @@ public class BdApi {
             while (RSservices.next()) {
                 AbstraiteServices S = new TypeServices(RSservices.getFloat("prixHorraire"),
                         RSservices.getFloat("prixFixe"), RSservices.getString("nomService"),
-                        RSservices.getBoolean("disponibilite"), RSservices.getString("ville"),
+                        RSservices.getByte("disponibilite"), RSservices.getString("ville"),
                         RSservices.getByte ("cote"), RSservices.getString("noTelephone"),
                         RSservices.getString("courriel"), RSservices.getString("description"));
                 U.listeServices.add(S);
