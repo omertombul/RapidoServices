@@ -111,7 +111,6 @@ public class OrchestrateurTest {
         description = null;
         tauxHorraire = 0;
         prixFixe = 0;
-        orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
     @Test
@@ -124,6 +123,7 @@ public class OrchestrateurTest {
                 estValider = false;
             }
         assertTrue(estValider);
+        orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
     @Test
@@ -138,6 +138,7 @@ public class OrchestrateurTest {
         }
         assertTrue(estValider);
         assertEquals(utilisateur.identifiant.nomUtilisateur, "Francis");
+        orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
     @Test
