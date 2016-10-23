@@ -29,20 +29,20 @@ public class BdApi {
         System.out.println("Debut construction String SQL: get User");
         String SQL = SQLgetUser(nomUtilisateur);
         BdConnection DB = new BdConnection(SQL);
-        ResultSet RSutilisateur = DB.readFromDataBase();
+        ResultSet RSutilisateur = DB.readOrDeleteInDataBase();
 
         updateUtilisateurWithRSutilisateurData(U, RSutilisateur);
         DB.closeConnection();
 
         SQL = SQLgetServices(U);
         DB = new BdConnection(SQL);
-        ResultSet RSservices = DB.readFromDataBase();
+        ResultSet RSservices = DB.readOrDeleteInDataBase();
         updateUtilisateurWithRSservicesData(U, RSservices);
         DB.closeConnection();
 
         SQL = SQLgetCompetences(U);
         DB = new BdConnection(SQL);
-        ResultSet RScompetences = DB.readFromDataBase();
+        ResultSet RScompetences = DB.readOrDeleteInDataBase();
         updateUtilisateurWithRScompetencesData(U, RScompetences);
         DB.closeConnection();
 
@@ -75,8 +75,8 @@ public class BdApi {
 
     private String SQLgetUser(String nomUtilisateur) {
         String SQL;
-        String SQL_DEBUT = "SELECT * FROM utilisateur WHERE idUsager = ";
-        String SQL_FIN = ";";
+        String SQL_DEBUT = "SELECT * FROM utilisateur WHERE idUsager = '";
+        String SQL_FIN = "';";
         SQL = SQL_DEBUT + nomUtilisateur + SQL_FIN;
         System.out.println("    String SQL getUser: " + SQL);
         return SQL;

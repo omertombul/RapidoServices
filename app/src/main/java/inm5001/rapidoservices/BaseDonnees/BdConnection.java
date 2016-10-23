@@ -76,7 +76,7 @@ public class BdConnection {
         System.out.println("End Insert data into DB");
     }
 
-    public ResultSet readFromDataBase() {
+    public ResultSet readOrDeleteInDataBase() {
         System.out.println("Start get RS");
         try {
             System.out.println("SQL string is: " + SQL);
