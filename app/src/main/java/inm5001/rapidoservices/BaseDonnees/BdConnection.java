@@ -66,26 +66,31 @@ public class BdConnection {
     }
 
     public void insertToDB() {
-        System.out.println("Start Insert data into DB");
         try {
             System.out.println("    SQL string is: " + SQL);
             stmt.executeUpdate(SQL);
         } catch (SQLException ex) {
             System.out.println(ex + "    Error Putting new Data into DB");
         }
-        System.out.println("End Insert data into DB");
     }
 
-    public ResultSet readOrDeleteInDataBase() {
-        System.out.println("Start get RS");
+    public ResultSet readFromDataBase() {
         try {
             System.out.println("SQL string is: " + SQL);
             rs = stmt.executeQuery(SQL);
         } catch (SQLException ex) {
             System.out.println(ex + "    Error Getting Data: rs");
         }
-        System.out.println("End get RS");
         return rs;
+    }
+
+    public void deleteInDataBase() {
+        try {
+            System.out.println("SQL string is: " + SQL);
+            stmt.executeQuery(SQL);
+        } catch (SQLException ex) {
+            System.out.println(ex + "    Error Getting Data: rs");
+        }
     }
 
     public void closeConnection() {

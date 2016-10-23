@@ -34,24 +34,32 @@ public class BdApi {
 
         String SQL = SQLgetUser(nomUtilisateur);
         BdConnection DB = new BdConnection(SQL);
-        ResultSet RSutilisateur = DB.readOrDeleteInDataBase();
+        ResultSet RSutilisateur = DB.readFromDataBase();
         U = updateUtilisateurWithRSutilisateurData(U, RSutilisateur);
         DB.closeConnection();
 
         SQL = SQLgetServices(U);
         DB = new BdConnection(SQL);
-        ResultSet RSservices = DB.readOrDeleteInDataBase();
+        ResultSet RSservices = DB.readFromDataBase();
         U = updateUtilisateurWithRSservicesData(U, RSservices);
         DB.closeConnection();
 
         SQL = SQLgetCompetences(U);
         DB = new BdConnection(SQL);
-        ResultSet RScompetences = DB.readOrDeleteInDataBase();
+        ResultSet RScompetences = DB.readFromDataBase();
         U = updateUtilisateurWithRScompetencesData(U, RScompetences);
         DB.closeConnection();
 
 
         return U;
+    }
+
+    public void deleteUser(String nomUtilisateur){
+        String SQL = SQLdeleteUser(nomUtilisateur);
+        BdConnection DB = new BdConnection(SQL);
+        DB.deleteInDataBase();
+        DB.closeConnection();
+
     }
 
     //*************************************************************************
@@ -102,6 +110,13 @@ public class BdApi {
         String SQL_FIN = "';";
         SQL = SQL_DEBUT + U.identifiant.nomUtilisateur + SQL_FIN;
         System.out.println("    String SQL getCompetencesUtilisateur: " + SQL);
+        return SQL;
+    }
+
+    private String SQLdeleteUser(String nomUtilisateur) {
+        String SQL_DEBUT = "DELETE FROM utilisateur WHERE idUsager = '";
+        String SQL_FIN = "';";
+        String SQL = SQL_DEBUT + nomUtilisateur + SQL_FIN;
         return SQL;
     }
 
