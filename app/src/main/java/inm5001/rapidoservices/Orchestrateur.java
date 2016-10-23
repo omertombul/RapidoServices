@@ -72,7 +72,7 @@ public class Orchestrateur {
     }
 
     public void retirerOffreDeService(String nomUtilisateur, AbstraiteServices service) throws MyException {
-        bd.removeService(nomUtilisateur, service);
+        bd.deleteService(nomUtilisateur, service.getNomSservice());
     }
     /*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
