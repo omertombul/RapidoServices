@@ -1,4 +1,4 @@
-package inm5001.rapidoservices.BaseDonnees;
+package inm5001.rapidoservices.baseDonnees;
 
 import java.sql.ResultSet;
 
@@ -11,7 +11,7 @@ import inm5001.rapidoservices.utilisateur.Utilisateur;
 public class BdApi {
 
     public BdApi() {
-        System.out.println("Start: Constructeur Api");
+        //System.out.println("Start: Constructeur Api");
     }
 
     public void addUser(Utilisateur U) {

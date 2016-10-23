@@ -53,14 +53,14 @@ public class AbstraiteServicesTest {
 
     @Test
     public void getNomSservice() throws Exception {
-        TypeServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote, noTelephone, courriel, description);
+        AbstraiteServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote, noTelephone, courriel, description);
         nomSservice = service.getNomSservice();
         assertEquals(nomSservice, "Plomberie");
     }
 
     @Test
     public void getDescription() throws Exception {
-        TypeServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote, noTelephone, courriel, description);
+        AbstraiteServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote, noTelephone, courriel, description);
         description = service.getDescription();
         assertEquals(description, "Repare les tuyeaux");
     }
