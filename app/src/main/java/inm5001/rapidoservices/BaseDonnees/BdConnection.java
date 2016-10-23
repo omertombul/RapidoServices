@@ -80,7 +80,7 @@ public class BdConnection {
         System.out.println("Start get RS");
         try {
             System.out.println("SQL string is: " + SQL);
-            stmt.executeQuery(SQL);
+            rs = stmt.executeQuery(SQL);
         } catch (SQLException ex) {
             System.out.println(ex + "    Error Getting Data: rs");
         }
