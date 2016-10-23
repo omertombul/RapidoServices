@@ -14,6 +14,7 @@ import inm5001.rapidoservices.utilisateur.Utilisateur;
 
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_PROFILE_NULL;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -26,6 +27,7 @@ public class OrchestrateurTest {
     private Profile profile;
     private ArrayList<AbstraiteServices> listeServices;
     private TypeServices service;
+    private TypeServices service2;
     private ArrayList<String> listeCompetences;
     private String competence;
     //private boolean disponible;
@@ -63,7 +65,9 @@ public class OrchestrateurTest {
         listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponible, ville, cote,
                 numeroTelephoneService, "service2@gmail.com", description));
         service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                                                        numeroTelephoneService, adresseCourrielService, description );
+                numeroTelephoneService, adresseCourrielService, description );
+        service2 = new TypeServices(tauxHorraire, prixFixe, "Électricien", disponible, ville, cote,
+                numeroTelephoneService, adresseCourrielService, description );
         listeCompetences = new ArrayList<>();
         listeCompetences.add("Plombier");
         listeCompetences.add("Électricien");
@@ -95,6 +99,7 @@ public class OrchestrateurTest {
         profile = null;
         listeServices = null;
         service = null;
+        service2 = null;
         listeCompetences = null;
         competence = null;
         nom = null;
@@ -173,6 +178,38 @@ public class OrchestrateurTest {
             estValider = false;
         }
         assertTrue(estValider);
+        orchestrateur.supprimerCompte(nomUtilisateur);
+    }
+
+    @Test
+    public void ajouterOffreDeServiceDeuxServices() throws MyException {
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, identifiant, profile, listeServices, listeCompetences);
+        try {
+            orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
+            orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
+        } catch (Exception e) {
+            //System.out.println("OMER :" + e.getClass().getSimpleName());
+            estValider = false;
+        }
+        assertTrue(estValider);
+        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(1), "Électricien");
+        orchestrateur.supprimerCompte(nomUtilisateur);
+    }
+
+    @Test
+    public void ajouterOffreDeServiceDeuxMemeService() throws MyException {
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, identifiant, profile, listeServices, listeCompetences);
+        try {
+            orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
+            orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
+        } catch (Exception e) {
+            //System.out.println("OMER :" + e.getClass().getSimpleName());
+            estValider = false;
+        }
+        assertFalse(estValider);
+        orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
     @Test

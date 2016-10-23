@@ -66,19 +66,19 @@ public class Orchestrateur {
     public void supprimerCompte(String nomUtilisateur) throws MyException {
         bd.deleteUser(nomUtilisateur);
     }
-    /*
-    public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
-        utilisateur = bd.getUser(nomUtilisateur);
-        utilisateur.identifiant.validationMotDePasse(motDePasse);
-        bd.setPassword(nomUtilisateur, motDePasse);
-    }
-    */
+
     public void ajouterOffreDeService(String nomUtilisateur, TypeServices service) throws MyException {
         bd.addServiceUser(nomUtilisateur, service);
     }
     /*
     public void retirerOffreDeService(String nomUtilisateur, AbstraiteServices service) throws MyException {
         bd.removeService(nomUtilisateur, service);
+    }
+
+    public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
+        utilisateur = bd.getUser(nomUtilisateur);
+        utilisateur.identifiant.validationMotDePasse(motDePasse);
+        bd.setPassword(nomUtilisateur, motDePasse);
     }
 
     public void remplacerNomProfile(String nomUtilisateur, String nom) throws MyException throws MyException {
