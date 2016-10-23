@@ -73,14 +73,12 @@ public class Orchestrateur {
         bd.setPassword(nomUtilisateur, motDePasse);
     }
     */
-    public void ajouterOffreDeService(String nomUtilisateur, AbstraiteServices service) throws MyException {
-        bd.addService(nomUtilisateur, service);
-        bd.addCompetence(nomUtilisateur, service.getNomSservice());
+    public void ajouterOffreDeService(String nomUtilisateur, TypeServices service) throws MyException {
+        bd.addServiceUser(nomUtilisateur, service);
     }
     /*
     public void retirerOffreDeService(String nomUtilisateur, AbstraiteServices service) throws MyException {
         bd.removeService(nomUtilisateur, service);
-        bd.removeCompetence(nomUtilisateur, service.getNomSservice());
     }
 
     public void remplacerNomProfile(String nomUtilisateur, String nom) throws MyException throws MyException {
