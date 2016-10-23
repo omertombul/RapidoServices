@@ -1,4 +1,4 @@
-package inm5001.rapidoservices.baseDonnees;
+package inm5001.rapidoservices.BaseDonnees;
 
 import java.sql.ResultSet;
 
@@ -9,6 +9,7 @@ import inm5001.rapidoservices.utilisateur.Utilisateur;
  */
 //aa
 public class BdApi {
+
     public BdApi() {
         System.out.println("Start: Constructeur Api");
     }
@@ -19,7 +20,6 @@ public class BdApi {
         BdConnection DB = new BdConnection(SQL);
         DB.insertToDB();
         DB.closeConnection();
-        int s;
     }
 
     public void getUser(Utilisateur U) {
@@ -27,9 +27,22 @@ public class BdApi {
         String SQL = SQLgetUser(U);
         BdConnection DB = new BdConnection(SQL);
         ResultSet RSutilisateur = DB.readFromDataBase();
+        updateUtilisateurWithRSutilisateurData(U, RSutilisateur);
+        DB.closeConnection();
+
+        SQL = SQLgetServices(U);
+        DB = new BdConnection(SQL);
         ResultSet RSservices = DB.readFromDataBase();
+        updateUtilisateurWithRSservicesData(U, RSservices);
+        DB.closeConnection();
+
+        SQL = SQLgetCompetences(U);
+        DB = new BdConnection(SQL);
         ResultSet RScompetences = DB.readFromDataBase();
-        updateUtilisateurWithRS(U, RSutilisateur, RSservices, RScompetences);
+        updateUtilisateurWithRScompetencesData(U, RScompetences);
+        DB.closeConnection();
+
+        updateUtilisateurWithRScompetencesData(U, RScompetences);
         DB.closeConnection();
     }
 
@@ -49,7 +62,8 @@ public class BdApi {
         SQL += U.profile.adresseCourriel + SQL_SEPARATEUR;
         SQL += "1" + SQL_SEPARATEUR;  // dispo
         SQL += "1" + SQL_SEPARATEUR;  // eval
-        SQL += "1" + SQL_FIN;         // geo coordonnees
+        SQL += "1" + SQL_SEPARATEUR;         // geo coordonnees
+        SQL += U.profile.numeroTelephone + SQL_FIN;
         System.out.println("    String SQL addUser: " + SQL);
         return SQL;
     }
@@ -63,12 +77,20 @@ public class BdApi {
         return SQL;
     }
 
+    private String SQLgetServices(Utilisateur U) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private String SQLgetCompetences(Utilisateur U) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private Utilisateur updateUtilisateurWithRS(
             Utilisateur U, ResultSet RSutilisateur, ResultSet RSservices,
-            ResultSet RScompetences){
+            ResultSet RScompetences) {
         updateUtilisateurWithRSutilisateurData(U, RSutilisateur);
-        updateUtilisateurWithRSservicesData(U, RSservices);
-        updateUtilisateurWithRScompetencesData(U, RScompetences);
+        //updateUtilisateurWithRSservicesData(U, RSservices);
+        //updateUtilisateurWithRScompetencesData(U, RScompetences);
         return U;
     }
 
@@ -82,10 +104,11 @@ public class BdApi {
                 U.identifiant.motDePasse = RSutilisateur.getString("motDePasse");
                 U.profile.nom = RSutilisateur.getString("nom");
                 U.profile.prenom = RSutilisateur.getString("prenom");
+                U.profile.numeroTelephone = RSutilisateur.getString("noTelephone");
                 U.profile.adresseCourriel = RSutilisateur.getString("courriel");
             }
         } catch (Exception ex) {
-            System.out.println(ex + "Error updateing User with RSutilisateur");
+            System.out.println(ex + "Error updating User with RSutilisateur");
         }
         return U;
     }
