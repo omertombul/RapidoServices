@@ -61,11 +61,11 @@ public class Orchestrateur {
     public Utilisateur recupererUtilisateur(String nomUtilisateur) throws MyException {
         return bd.getUser(nomUtilisateur);
     }
-/*
-    public void supprimerCompte(String nomUtilisateur) throws MyException {
-        bd.eraseUser(nomUtilisateur);
-    }
 
+    public void supprimerCompte(String nomUtilisateur) throws MyException {
+        bd.deleteUser(nomUtilisateur);
+    }
+/*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
         utilisateur = bd.getUser(nomUtilisateur);
         utilisateur.identifiant.validationMotDePasse(motDePasse);
