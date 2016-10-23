@@ -117,6 +117,7 @@ public class BdApi {
         String SQL_DEBUT = "DELETE FROM utilisateur WHERE idUsager = '";
         String SQL_FIN = "';";
         String SQL = SQL_DEBUT + nomUtilisateur + SQL_FIN;
+        //System.out.println("Delete SQL is: " + SQL);
         return SQL;
     }
 
