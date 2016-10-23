@@ -1,4 +1,4 @@
-package inm5001.rapidoservices.baseDonnees;
+package inm5001.rapidoservices.BaseDonnees;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class BdConnection {
+public class DbConnection {
 
     // class Vars
     Connection conn = null;
@@ -17,7 +17,7 @@ public class BdConnection {
     /**
      * constructeur
      */
-    public BdConnection(String SQL) {
+    public DbConnection(String SQL) {
         this.SQL = SQL;
         Connection conn = makeConnection();
         Statement stmt = makeStatement();
@@ -25,12 +25,12 @@ public class BdConnection {
 
     private Connection makeConnection() {
 
-            /*
-            // connect to Omer MySQL
-            String url = "jdbc:mysql://localhost:8889/services";
-            String usr = "root";
-            String psw = "root";
-             */
+        /*
+        // connect to Omer MySQL
+        String url = "jdbc:mysql://localhost:8889/services";
+        String usr = "root";
+        String psw = "root";
+         */
         // connect to UQAM MySQL
         String url = "jdbc:mysql://127.0.0.1/bd_ak791165?:3306";
         String usr = "ak791165";
