@@ -46,6 +46,7 @@ public class OrchestrateurTest {
     private Boolean estValider;
     //attributs AbstraiteServices
     private String nomSservice;
+    private String nomService;
     private boolean disponible;
     private String ville;
     private byte cote;
@@ -80,6 +81,7 @@ public class OrchestrateurTest {
         profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
         utilisateur = null;
         estValider = true;
+        nomService = "Plombier";
         disponible = false;
         ville = "Montreal";
         cote = 2;
@@ -90,7 +92,7 @@ public class OrchestrateurTest {
         prixFixe = 50.00f;
         service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
                 numeroTelephoneService, adresseCourrielService, description );
-        service2 = new TypeServices(tauxHorraire, prixFixe, "Électricien", disponible, ville, cote,
+        service2 = new TypeServices(tauxHorraire, prixFixe, "Electricien", disponible, ville, cote,
                 numeroTelephoneService, adresseCourrielService, description );
     }
 
@@ -100,8 +102,6 @@ public class OrchestrateurTest {
         identifiant = null;
         profile = null;
         listeServices = null;
-        service = null;
-        service2 = null;
         listeCompetences = null;
         competence = null;
         nom = null;
@@ -119,6 +119,8 @@ public class OrchestrateurTest {
         description = null;
         tauxHorraire = 0;
         prixFixe = 0;
+        service = null;
+        service2 = null;
     }
 
     @Test
