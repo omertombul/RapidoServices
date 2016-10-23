@@ -66,8 +66,9 @@ public class BdApi {
         BdConnection DB = new BdConnection(SQL);
         DB.insertToDB();
         DB.closeConnection();
-
     }
+
+    //public void deleteService
 
     //*************************************************************************
     // level 2 abstraction
@@ -133,6 +134,7 @@ public class BdApi {
         String SQL_DEBUT = "INSERT INTO servicesDUsager VALUES('";
         String SQL_SEPARATEUR = "' ,'";
         String SQL_FIN = "');";
+        String SQL_DEBUT_COMPETENCE = "INSERT INTO competences VALUES('";
 
         SQL = SQL_DEBUT;
         SQL += nomUtilisateur + SQL_SEPARATEUR;
@@ -147,10 +149,15 @@ public class BdApi {
         SQL += S.getCourriel() + SQL_SEPARATEUR;
         SQL += S.getCote() + SQL_SEPARATEUR;
         SQL += S.getDescription() + SQL_FIN;
+        SQL += SQL_DEBUT_COMPETENCE;
+        SQL += nomUtilisateur + SQL_SEPARATEUR;
+        SQL += S.getNomSservice() + SQL_FIN;
 
         System.out.println("    String SQL addService Usager: " + SQL);
         return SQL;
     }
+
+
 
     private Utilisateur updateUtilisateurWithRS(
             Utilisateur U, ResultSet RSutilisateur, ResultSet RSservices,
