@@ -3,6 +3,8 @@ package inm5001.rapidoservices.baseDonnees;
 import java.sql.ResultSet;
 
 import inm5001.rapidoservices.utilisateur.Utilisateur;
+import inm5001.rapidoservices.utilisateur.Identifiant;
+import inm5001.rapidoservices.utilisateur.Profile;
 
 /**
  * Created by Admin on 2016-10-22.
@@ -22,11 +24,13 @@ public class BdApi {
         DB.closeConnection();
     }
 
-    public void getUser(Utilisateur U) {
+    public void getUser(String nomUtilisateur) {
+        Utilisateur U = null;
         System.out.println("Debut construction String SQL: get User");
-        String SQL = SQLgetUser(U);
+        String SQL = SQLgetUser(nomUtilisateur);
         BdConnection DB = new BdConnection(SQL);
         ResultSet RSutilisateur = DB.readFromDataBase();
+
         updateUtilisateurWithRSutilisateurData(U, RSutilisateur);
         DB.closeConnection();
 
@@ -68,11 +72,11 @@ public class BdApi {
         return SQL;
     }
 
-    private String SQLgetUser(Utilisateur U) {
+    private String SQLgetUser(String nomUtilisateur) {
         String SQL;
         String SQL_DEBUT = "SELECT * FROM utilisateur WHERE idUsager = ";
         String SQL_FIN = ";";
-        SQL = SQL_DEBUT + U.identifiant.nomUtilisateur + SQL_FIN;
+        SQL = SQL_DEBUT + nomUtilisateur + SQL_FIN;
         System.out.println("    String SQL getUser: " + SQL);
         return SQL;
     }
@@ -96,21 +100,21 @@ public class BdApi {
 
     //*************************************************************************
     // level 3 abstraction
-    private Utilisateur updateUtilisateurWithRSutilisateurData(
+    private void updateUtilisateurWithRSutilisateurData(
             Utilisateur U, ResultSet RSutilisateur) {
         try {
             RSutilisateur.beforeFirst();
             while (RSutilisateur.next()) {
-                U.identifiant.motDePasse = RSutilisateur.getString("motDePasse");
-                U.profile.nom = RSutilisateur.getString("nom");
-                U.profile.prenom = RSutilisateur.getString("prenom");
-                U.profile.numeroTelephone = RSutilisateur.getString("noTelephone");
-                U.profile.adresseCourriel = RSutilisateur.getString("courriel");
+                Identifiant I = new Identifiant(RSutilisateur.getString("nom"),
+                        RSutilisateur.getString("motDePasse"));
+                Profile P = new Profile(RSutilisateur.getString("nom"),
+                        RSutilisateur.getString("prenom"), RSutilisateur.getString("noTelephone"),
+                        RSutilisateur.getString("courriel"));
+                U = new Utilisateur(I,P,null,null);
             }
         } catch (Exception ex) {
             System.out.println(ex + "Error updating User with RSutilisateur");
         }
-        return U;
     }
 
     private void updateUtilisateurWithRSservicesData(
