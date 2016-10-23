@@ -36,7 +36,7 @@ public class RapidoServices {
              
              id = new Identifiant("usager12", "Passwo_r" );
              //plomberie = new TypeServices(tauxHorraire, prixFixe, null, true, null, cote, null, null, null );
-             //user = new Utilisateur(id, profile, listeServices, listeCompetences);
+             user = new Utilisateur(id, profile, listeServices, listeCompetences);
              System.out.println("\nConnection BD from test class");
              System.out.println("Test user: " + user.identifiant.nomUtilisateur +  " " + user.profile.nom + "\n");
              

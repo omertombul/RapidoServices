@@ -49,7 +49,7 @@ public class Orchestrateur {
     float prixFixe;
 //attributs BdApi
     private static BdApi bd = new BdApi();
-    /*
+
     public static Utilisateur creerUtilisateur(String nom, String prenom, String numeroTelephoneProfile, String adresseCourrielProfile,
                                                  String nomUtilisateur, String motDePasse, Identifiant identifiant, Profile profile,
                                                  ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
@@ -58,7 +58,7 @@ public class Orchestrateur {
         bd.addUser(new Utilisateur(identifiant, profile, listeServices, listeCompetences));
         return null;
     }
-
+/*
     public void supprimerCompte(String nomUtilisateur) throws MyException {
         bd.eraseUser(nomUtilisateur);
     }
