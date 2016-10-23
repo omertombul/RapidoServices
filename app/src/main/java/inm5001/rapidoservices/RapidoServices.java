@@ -22,6 +22,7 @@ public class RapidoServices {
     private static ArrayList<String> listeCompetences;
     public static AbstraiteServices plomberie;
     public static BdApi bdConnect;
+    public int a;
     
     
     
