@@ -22,6 +22,7 @@ public class AbstraiteServicesTest {
 
         @Before
         public void setUp() {
+            nomSservice = "Plomberie";
             disponible = false;
             ville = "Montreal";
             cote = 2;
