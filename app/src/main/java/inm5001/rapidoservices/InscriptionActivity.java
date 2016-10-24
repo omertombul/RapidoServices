@@ -20,7 +20,10 @@ package inm5001.rapidoservices;
 //import Orchestrateur.java;
 public class InscriptionActivity extends Activity {
     Button sEnregistrer = null;
-
+    String key_prenom = "prenom";
+    String key_nom = "nom";
+    String key_userName = "username";
+    String key_email = "email";
     EditText nom  = null;
     EditText prenom =  null;
     EditText noTelephonProfile =null;
@@ -77,7 +80,13 @@ public class InscriptionActivity extends Activity {
                     user = new Utilisateur(identifiant,profile,listeServices,listeCompetences);
                     orchestrateur = new Orchestrateur();
                     //orchestrateur.creerUtilisateur(user);
+
                     Intent troisiemeActivite = new Intent(InscriptionActivity.this, ProfilActivity.class);
+                    System.out.println(nomUtilisteur.getText().toString());
+                    troisiemeActivite.putExtra(key_userName,nomUtilisteur.getText().toString());
+                    troisiemeActivite.putExtra(key_email,adresseCourrielProfil.getText().toString());
+                    troisiemeActivite.putExtra(key_nom, nom.getText().toString());
+                    troisiemeActivite.putExtra(key_prenom, prenom.getText().toString());
                     startActivity(troisiemeActivite);
 
                 }catch(MyException e){
