@@ -24,17 +24,17 @@ public class BdConnection {
     }
 
     private Connection makeConnection() {
-
+/*
         // connect to Omer MySQL
         String url = "jdbc:mysql://localhost:8889/service";
         String usr = "root";
         String psw = "root";
-
+*/
         // connect to UQAM MySQL
-        /*String url = "jdbc:mysql://127.0.0.1/bd_ak791165?:3306";
+        String url = "jdbc:mysql://127.0.0.1/bd_ak791165?:3306";
         String usr = "ak791165";
         String psw = "uWoavCsH";
-*/
+
         // register MySQL Connector/J with the DriverManager
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
