@@ -57,10 +57,10 @@ public class InscriptionActivity extends Activity {
          motDePasse = (EditText)findViewById(R.id.password);
         dlgAlert  = new AlertDialog.Builder(this);
         dlgAlert.setMessage("Erreur dans un des champs");
-        dlgAlert.setTitle("App Title");
+       // dlgAlert.setTitle("App Title");
         dlgAlert.setPositiveButton("OK", null);
         dlgAlert.setCancelable(true);
-        dlgAlert.create().show();
+       // dlgAlert.create().show();
 
         sEnregistrer.setOnClickListener(new View.OnClickListener() {
 
@@ -75,26 +75,29 @@ public class InscriptionActivity extends Activity {
                     identifiant = new Identifiant(nomUtilisteur.getText().toString(), motDePasse.getText().toString());
                     profile = new Profile(nom.getText().toString(), prenom.getText().toString(), noTelephonProfile.getText().toString(), adresseCourrielProfil.getText().toString());
                     user = new Utilisateur(identifiant,profile,listeServices,listeCompetences);
+                    Intent troisiemeActivite = new Intent(InscriptionActivity.this, ProfilActivity.class);
+                    startActivity(troisiemeActivite);
 
                 }catch(MyException e){
                   //  adb.setTitle("Alert Error");
                    // adb.setMessage(e.getMessage());
                    // adb.show();
-
+                    dlgAlert.setTitle(e.getMessage());
+                    dlgAlert.create().show();
                     System.out.println(e);
                 }
                 //Orchestrateur or = new Orchestrateur();
                 //or.creerUtilisateur();
                 System.out.println("Apres le try");
 
-                Intent troisiemeActivite = new Intent(InscriptionActivity.this, ProfilActivity.class);
+               // Intent troisiemeActivite = new Intent(InscriptionActivity.this, ProfilActivity.class);
 
                 // On rajoute un extra
                 //secondeActivite.putExtra(AGE, 31);
 
                 // Puis on lance l'intent !
                 //
-                startActivity(troisiemeActivite);
+                //startActivity(troisiemeActivite);
             }
         });
     }
