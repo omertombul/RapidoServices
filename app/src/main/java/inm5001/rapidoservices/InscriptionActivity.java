@@ -27,6 +27,7 @@ public class InscriptionActivity extends Activity {
                 //secondeActivite.putExtra(AGE, 31);
 
                 // Puis on lance l'intent !
+                //
                 startActivity(troisiemeActivite);
             }
         });
