@@ -51,16 +51,18 @@ public class Orchestrateur {
     private static BdApi bd = new BdApi();
 
     public void creerUtilisateur(Utilisateur utilisateur) throws MyException {
-
+        // profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
+        //identifiant = new Identifiant(nomUtilisateur, motDePasse);
+        //utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
         bd.addUser(utilisateur);
     }
 
     public void creerUtilisateur(String nom, String prenom, String numeroTelephoneProfile, String adresseCourrielProfile,
                                                  String nomUtilisateur, String motDePasse, Identifiant identifiant, Profile profile,
                                                  ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
-       profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
-         identifiant = new Identifiant(nomUtilisateur, motDePasse);
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
+       // profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
+        //identifiant = new Identifiant(nomUtilisateur, motDePasse);
+        //utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
         bd.addUser(utilisateur);
     }
 
