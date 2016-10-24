@@ -21,18 +21,19 @@ package inm5001.rapidoservices;
 public class InscriptionActivity extends Activity {
     Button sEnregistrer = null;
 
-    String nom;
-    String prenom;
-    String noTelephonProfile;
-    String adresseCourrielProfil;
-    String nomUtilisteur;
-    String motDePasse;
+    EditText nom  = null;
+    EditText prenom =  null;
+    EditText noTelephonProfile =null;
+    EditText adresseCourrielProfil = null;
+    EditText nomUtilisteur = null;
+    EditText motDePasse = null;
     Utilisateur user;
     Identifiant identifiant;
     Profile profile;
     ArrayList<AbstraiteServices> listeServices;
     ArrayList<String> listeCompetences;
-    AlertDialog adb = new AlertDialog.Builder(this).create();
+
+   // AlertDialog adb = new AlertDialog.Builder(this).create();
 
 
 
@@ -47,30 +48,36 @@ public class InscriptionActivity extends Activity {
         setContentView(R.layout.activity_inscription);
 
         sEnregistrer = (Button)findViewById(R.id.inscrire);
+        nom  = (EditText)findViewById(R.id.nom);
+        prenom =  (EditText)findViewById(R.id.prenoms);
+        noTelephonProfile = (EditText)findViewById(R.id.noTelephone);
+         adresseCourrielProfil = (EditText)findViewById(R.id.email);
+        nomUtilisteur = (EditText)findViewById(R.id.username);
+         motDePasse = (EditText)findViewById(R.id.password);
 
         sEnregistrer.setOnClickListener(new View.OnClickListener() {
+
+
+
             @Override
             public void onClick(View v) {
                 // Le premier paramètre est le nom de l'activité actuelle
                 // Le second est le nom de l'activité de destination
 
                 try {
-                    nom = findViewById(R.id.nom).toString();
-                    prenom = findViewById(R.id.prenoms).toString();
-                    noTelephonProfile = findViewById(R.id.noTelephone).toString();
-                    adresseCourrielProfil = findViewById(R.id.email).toString();
-                    nomUtilisteur = findViewById(R.id.username).toString();
-                    motDePasse = findViewById(R.id.password).toString();
-                    identifiant = new Identifiant(nomUtilisteur, motDePasse);
-                    profile = new Profile(nom, prenom, noTelephonProfile, adresseCourrielProfil);
+                    identifiant = new Identifiant(nomUtilisteur.getText().toString(), motDePasse.getText().toString());
+                    profile = new Profile(nom.getText().toString(), prenom.getText().toString(), noTelephonProfile.getText().toString(), adresseCourrielProfil.getText().toString());
                     user = new Utilisateur(identifiant,profile,listeServices,listeCompetences);
+
                 }catch(MyException e){
-                    adb.setTitle("Alert Error");
-                    adb.setMessage(e.getMessage());
-                    adb.show();
+                  //  adb.setTitle("Alert Error");
+                   // adb.setMessage(e.getMessage());
+                   // adb.show();
+                    System.out.println(e);
                 }
                 //Orchestrateur or = new Orchestrateur();
                 //or.creerUtilisateur();
+                System.out.println("Apres le try");
 
                 Intent troisiemeActivite = new Intent(InscriptionActivity.this, ProfilActivity.class);
 
