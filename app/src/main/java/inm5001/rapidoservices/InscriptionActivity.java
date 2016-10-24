@@ -33,6 +33,7 @@ public class InscriptionActivity extends Activity {
     ArrayList<AbstraiteServices> listeServices;
     ArrayList<String> listeCompetences;
     AlertDialog.Builder dlgAlert  ;
+    Orchestrateur orchestrateur;
 
    // AlertDialog adb = new AlertDialog.Builder(this).create();
 
@@ -52,15 +53,14 @@ public class InscriptionActivity extends Activity {
         nom  = (EditText)findViewById(R.id.nom);
         prenom =  (EditText)findViewById(R.id.prenoms);
         noTelephonProfile = (EditText)findViewById(R.id.noTelephone);
-         adresseCourrielProfil = (EditText)findViewById(R.id.email);
+        adresseCourrielProfil = (EditText)findViewById(R.id.email);
         nomUtilisteur = (EditText)findViewById(R.id.username);
-         motDePasse = (EditText)findViewById(R.id.password);
+        motDePasse = (EditText)findViewById(R.id.password);
         dlgAlert  = new AlertDialog.Builder(this);
         dlgAlert.setMessage("Erreur dans un des champs");
-       // dlgAlert.setTitle("App Title");
         dlgAlert.setPositiveButton("OK", null);
         dlgAlert.setCancelable(true);
-       // dlgAlert.create().show();
+
 
         sEnregistrer.setOnClickListener(new View.OnClickListener() {
 
@@ -75,6 +75,8 @@ public class InscriptionActivity extends Activity {
                     identifiant = new Identifiant(nomUtilisteur.getText().toString(), motDePasse.getText().toString());
                     profile = new Profile(nom.getText().toString(), prenom.getText().toString(), noTelephonProfile.getText().toString(), adresseCourrielProfil.getText().toString());
                     user = new Utilisateur(identifiant,profile,listeServices,listeCompetences);
+                    orchestrateur = new Orchestrateur();
+                    //orchestrateur.creerUtilisateur(user);
                     Intent troisiemeActivite = new Intent(InscriptionActivity.this, ProfilActivity.class);
                     startActivity(troisiemeActivite);
 
@@ -87,7 +89,7 @@ public class InscriptionActivity extends Activity {
 
                 System.out.println("Apres le try");
 
-             
+
             }
         });
     }
