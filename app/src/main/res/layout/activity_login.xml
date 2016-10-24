@@ -75,15 +75,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/sInscrire"
-        android:layout_marginTop="29dp"
-        android:layout_below="@+id/seConnecter"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignBaseline="@+id/seConnecter"
+        android:layout_alignBottom="@+id/seConnecter"
+        android:layout_alignEnd="@+id/editText2"
+        android:layout_marginEnd="17dp" />
 
-    <Button
-        android:text="Mot de passe oublié?"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button3"
-        android:layout_above="@+id/sInscrire"
-        android:layout_alignParentEnd="true" />
 </RelativeLayout>
