@@ -7,10 +7,15 @@ package inm5001.rapidoservices;
         import android.view.View;
         import android.widget.Button;
         import android.widget.EditText;
-
+        import java.sql.Connection;
+        import java.sql.DriverManager;
+        import java.sql.ResultSet;
+        import java.sql.SQLException;
+        import java.sql.Statement;
 
         import java.util.ArrayList;
 
+        import inm5001.rapidoservices.BaseDonnees.BdApi;
         import inm5001.rapidoservices.service.AbstraiteServices;
         import inm5001.rapidoservices.service.TypeServices;
         import inm5001.rapidoservices.utilisateur.Identifiant;
@@ -80,15 +85,16 @@ public class InscriptionActivity extends Activity {
                     user = new Utilisateur(identifiant,profile,listeServices,listeCompetences);
                     orchestrateur = new Orchestrateur();
                     System.out.println(user.identifiant.nomUtilisateur);
-                    orchestrateur.creerUtilisateur(user);
-
+                    //orchestrateur.creerUtilisateur(user);
+                    BdApi bd = new BdApi();
+                    bd.addUser(user);
                     Intent troisiemeActivite = new Intent(InscriptionActivity.this, ProfilActivity.class);
                     System.out.println(nomUtilisteur.getText().toString());
                     troisiemeActivite.putExtra(key_userName,nomUtilisteur.getText().toString());
                     troisiemeActivite.putExtra(key_email,adresseCourrielProfil.getText().toString());
                     troisiemeActivite.putExtra(key_nom, nom.getText().toString());
                     troisiemeActivite.putExtra(key_prenom, prenom.getText().toString());
-                    startActivity(troisiemeActivite);
+                    //startActivity(troisiemeActivite);
 
                 }catch(MyException e){
 
