@@ -79,25 +79,15 @@ public class InscriptionActivity extends Activity {
                     startActivity(troisiemeActivite);
 
                 }catch(MyException e){
-                  //  adb.setTitle("Alert Error");
-                   // adb.setMessage(e.getMessage());
-                   // adb.show();
+
                     dlgAlert.setTitle(e.getMessage());
                     dlgAlert.create().show();
                     System.out.println(e);
                 }
-                //Orchestrateur or = new Orchestrateur();
-                //or.creerUtilisateur();
+
                 System.out.println("Apres le try");
 
-               // Intent troisiemeActivite = new Intent(InscriptionActivity.this, ProfilActivity.class);
-
-                // On rajoute un extra
-                //secondeActivite.putExtra(AGE, 31);
-
-                // Puis on lance l'intent !
-                //
-                //startActivity(troisiemeActivite);
+             
             }
         });
     }
