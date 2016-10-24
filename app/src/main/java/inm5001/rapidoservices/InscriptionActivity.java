@@ -32,6 +32,7 @@ public class InscriptionActivity extends Activity {
     Profile profile;
     ArrayList<AbstraiteServices> listeServices;
     ArrayList<String> listeCompetences;
+    AlertDialog.Builder dlgAlert  ;
 
    // AlertDialog adb = new AlertDialog.Builder(this).create();
 
@@ -54,6 +55,12 @@ public class InscriptionActivity extends Activity {
          adresseCourrielProfil = (EditText)findViewById(R.id.email);
         nomUtilisteur = (EditText)findViewById(R.id.username);
          motDePasse = (EditText)findViewById(R.id.password);
+        dlgAlert  = new AlertDialog.Builder(this);
+        dlgAlert.setMessage("Erreur dans un des champs");
+        dlgAlert.setTitle("App Title");
+        dlgAlert.setPositiveButton("OK", null);
+        dlgAlert.setCancelable(true);
+        dlgAlert.create().show();
 
         sEnregistrer.setOnClickListener(new View.OnClickListener() {
 
@@ -73,6 +80,7 @@ public class InscriptionActivity extends Activity {
                   //  adb.setTitle("Alert Error");
                    // adb.setMessage(e.getMessage());
                    // adb.show();
+
                     System.out.println(e);
                 }
                 //Orchestrateur or = new Orchestrateur();
