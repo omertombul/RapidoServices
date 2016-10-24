@@ -79,7 +79,8 @@ public class InscriptionActivity extends Activity {
                     profile = new Profile(nom.getText().toString(), prenom.getText().toString(), noTelephonProfile.getText().toString(), adresseCourrielProfil.getText().toString());
                     user = new Utilisateur(identifiant,profile,listeServices,listeCompetences);
                     orchestrateur = new Orchestrateur();
-                    //orchestrateur.creerUtilisateur(user);
+                    System.out.println(user.identifiant.nomUtilisateur);
+                    orchestrateur.creerUtilisateur(user);
 
                     Intent troisiemeActivite = new Intent(InscriptionActivity.this, ProfilActivity.class);
                     System.out.println(nomUtilisteur.getText().toString());

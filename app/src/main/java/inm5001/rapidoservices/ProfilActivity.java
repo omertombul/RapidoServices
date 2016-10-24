@@ -27,7 +27,7 @@ public class ProfilActivity extends Activity {
 
 
         nom = (TextView)findViewById(R.id.nomProfil);
-        prenom = (TextView)findViewById(R.id.nomProfil);
+        prenom = (TextView)findViewById(R.id.prenomProfil);
         nom.setText(nom_Inscrip);
         prenom.setText(prenom_Inscrip);
     }
