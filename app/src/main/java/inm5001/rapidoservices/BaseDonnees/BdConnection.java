@@ -26,7 +26,7 @@ public class BdConnection {
     private Connection makeConnection() {
 
         // connect to Omer MySQL
-        String url = "jdbc:mysql://localhost:8889/services";
+        String url = "jdbc:mysql://localhost:8889/service";
         String usr = "root";
         String psw = "root";
 
