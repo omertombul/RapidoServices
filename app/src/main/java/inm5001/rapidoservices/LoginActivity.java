@@ -2,10 +2,13 @@ package inm5001.rapidoservices;
 
         import android.app.Activity;
         import android.os.Bundle;
+        import android.os.StrictMode;
         import android.view.View;
         import android.content.Intent;
         import android.widget.Button;
         import android.widget.EditText;
+
+        import inm5001.rapidoservices.utilisateur.Utilisateur;
 
 /**
  * Created by joy-reybabagbeto on 16-10-24.
@@ -16,6 +19,10 @@ public class LoginActivity extends Activity {
     Button sInscrire = null;
     EditText username = null;
     EditText password = null;
+    Orchestrateur o;
+    Utilisateur u;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +33,10 @@ public class LoginActivity extends Activity {
         sInscrire = (Button)findViewById(R.id.sInscrire);
         username = (EditText)findViewById(R.id.editText);
         password = (EditText)findViewById(R.id.editText2);
+        o = new Orchestrateur();
+        u = new Utilisateur();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         // On attribue un listener adapté aux vues qui en ont besoin
         //envoyer.setOnClickListener(envoyerListener);
@@ -37,10 +48,12 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v){
                 try {
-                    username.getText().toString();
-                    password.getText().toString();
+                   u = o.recupererUtilisateur(username.getText().toString(),password.getText().toString());
+
+                    System.out.println(" Nom : " + u.profile.nom);
+                   // password.getText().toString();
                 }catch (Exception e) {
-                        System.out.print("aaaaaaaaaaa");
+                        System.out.print(e + "aaaaaaaaaaa");
                     }
                 }
 
