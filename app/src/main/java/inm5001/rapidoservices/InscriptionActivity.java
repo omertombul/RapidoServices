@@ -8,17 +8,8 @@ package inm5001.rapidoservices;
         import android.view.View;
         import android.widget.Button;
         import android.widget.EditText;
-        import java.sql.Connection;
-        import java.sql.DriverManager;
-        import java.sql.ResultSet;
-        import java.sql.SQLException;
-        import java.sql.Statement;
-
         import java.util.ArrayList;
-
-        import inm5001.rapidoservices.BaseDonnees.BdApi;
         import inm5001.rapidoservices.service.AbstraiteServices;
-        import inm5001.rapidoservices.service.TypeServices;
         import inm5001.rapidoservices.utilisateur.Identifiant;
         import inm5001.rapidoservices.utilisateur.Profile;
         import inm5001.rapidoservices.utilisateur.Utilisateur;
