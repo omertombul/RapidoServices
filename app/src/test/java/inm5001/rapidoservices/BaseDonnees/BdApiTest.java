@@ -1,4 +1,4 @@
-package inm5001.rapidoservices.BaseDonnees;
+package inm5001.rapidoservices.baseDonnees;
 
 import org.junit.After;
 import org.junit.Before;
