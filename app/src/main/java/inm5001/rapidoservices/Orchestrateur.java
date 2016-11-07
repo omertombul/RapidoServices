@@ -66,7 +66,7 @@ public class Orchestrateur {
         bd.addUser(utilisateur);
     }
 
-    public Utilisateur recupererUtilisateur(String nomUtilisateur) throws MyException {
+    public Utilisateur recupererUtilisateur(String nomUtilisateur,String pwd) throws MyException {
         return bd.getUser(nomUtilisateur);
     }
 
