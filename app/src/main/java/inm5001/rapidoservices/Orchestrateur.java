@@ -1,7 +1,6 @@
 package inm5001.rapidoservices;
 
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 import inm5001.rapidoservices.service.TypeServices;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
@@ -9,8 +8,6 @@ import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.baseDonnees.BdApi;
-
-import static inm5001.rapidoservices.utilisateur.ConstanteProfile.MESSAGE_NOM_SANS_CHIFFRE;
 
 /**
  * Created by Francis Bernier on 2016-10-21.
@@ -69,14 +66,8 @@ public class Orchestrateur {
         bd.addUser(utilisateur);
     }
 
-    public Utilisateur recupererUtilisateur(String nomUtilisateur, String motDePasse) throws MyException {
-        try {
-            Utilisateur utilisateur = bd.getUser(nomUtilisateur);
-        } catch (Exception e) {
-            MyException e2 = new MyException("L'utilisateur n'existe pas ou vous avez fait une erreur, veillez recommencer.");
-            throw e2;
-        }
-        return utilisateur;
+    public Utilisateur recupererUtilisateur(String nomUtilisateur) throws MyException {
+        return bd.getUser(nomUtilisateur);
     }
 
     public void supprimerCompte(String nomUtilisateur) throws MyException {

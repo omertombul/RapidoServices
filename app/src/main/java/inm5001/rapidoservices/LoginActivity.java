@@ -33,6 +33,22 @@ public class LoginActivity extends Activity {
         //username.addTextChangedListener(textWatcher);
         //password.addTextChangedListener(textWatcher);
 
+        seConnecter.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                try {
+                    username.getText().toString();
+                    password.getText().toString();
+                }catch (Exception e) {
+                        System.out.print("aaaaaaaaaaa");
+                    }
+                }
+
+
+
+
+
+        });
         // Solution avec des onKey
         //taille.setOnKeyListener(modificationListener);
         //poids.setOnKeyListener(modificationListener);

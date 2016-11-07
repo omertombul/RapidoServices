@@ -8,17 +8,8 @@ package inm5001.rapidoservices;
         import android.view.View;
         import android.widget.Button;
         import android.widget.EditText;
-        import java.sql.Connection;
-        import java.sql.DriverManager;
-        import java.sql.ResultSet;
-        import java.sql.SQLException;
-        import java.sql.Statement;
-
         import java.util.ArrayList;
-
-        import inm5001.rapidoservices.baseDonnees.BdApi;
         import inm5001.rapidoservices.service.AbstraiteServices;
-        import inm5001.rapidoservices.service.TypeServices;
         import inm5001.rapidoservices.utilisateur.Identifiant;
         import inm5001.rapidoservices.utilisateur.Profile;
         import inm5001.rapidoservices.utilisateur.Utilisateur;
@@ -44,12 +35,6 @@ public class InscriptionActivity extends Activity {
     AlertDialog.Builder dlgAlert  ;
     Orchestrateur orchestrateur;
 
-    Connection conn = null;
-    Statement stmt = null;
-    String SQL = null;
-    ResultSet rs = null;
-
-
 
 
     @Override
@@ -57,6 +42,7 @@ public class InscriptionActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription);
 
+        //Les champs a remplir
         sEnregistrer = (Button)findViewById(R.id.inscrire);
         nom  = (EditText)findViewById(R.id.nom);
         prenom =  (EditText)findViewById(R.id.prenoms);
@@ -64,10 +50,14 @@ public class InscriptionActivity extends Activity {
         adresseCourrielProfil = (EditText)findViewById(R.id.email);
         nomUtilisteur = (EditText)findViewById(R.id.username);
         motDePasse = (EditText)findViewById(R.id.password);
+
+        //Dialog box pour erreur dans les champs
         dlgAlert  = new AlertDialog.Builder(this);
-        dlgAlert.setMessage("Erreur dans un des champs");
+        dlgAlert.setTitle("Erreur dans un des champs!");
         dlgAlert.setPositiveButton("OK", null);
         dlgAlert.setCancelable(true);
+
+        //Permissions de connection
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -82,11 +72,15 @@ public class InscriptionActivity extends Activity {
                 // Le second est le nom de l'activité de destination
 
                 try {
+                    System.out.println("no tel "+ noTelephonProfile.getText().toString());
+
+                    //Creation des Objets pour utilisateurs
                     identifiant = new Identifiant(nomUtilisteur.getText().toString(), motDePasse.getText().toString());
                     profile = new Profile(nom.getText().toString(), prenom.getText().toString(), noTelephonProfile.getText().toString(), adresseCourrielProfil.getText().toString());
                     user = new Utilisateur(identifiant,profile,listeServices,listeCompetences);
+
+                    //appelle de la fonction qui creer l'utilisateur dans la BaseDonnee
                     orchestrateur = new Orchestrateur();
-                    System.out.println(user.identifiant.nomUtilisateur);
                     orchestrateur.creerUtilisateur(user);
 
                     Intent troisiemeActivite = new Intent(InscriptionActivity.this, ProfilActivity.class);
@@ -98,13 +92,12 @@ public class InscriptionActivity extends Activity {
                     startActivity(troisiemeActivite);
 
                 }catch(MyException e){
-
-                    dlgAlert.setTitle(e.getMessage());
+                    dlgAlert.setMessage(e.getMessage());
                     dlgAlert.create().show();
-                   
+
                 }
 
-                System.out.println("Apres le try");
+
 
 
             }
