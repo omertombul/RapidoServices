@@ -1,4 +1,4 @@
-package inm5001.rapidoservices.BaseDonnees;
+package inm5001.rapidoservices.baseDonnees;
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,13 +15,14 @@ import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Admin on 2016-10-22.
  */
 
 public class BdApiTest {
-    private BdApi bd;
+    BdApi bd;
     private Utilisateur utilisateur;
     //attributs Utilisateur
     private Identifiant identifiant;
@@ -122,4 +123,8 @@ public class BdApiTest {
         bd.addUser(utilisateur);
     }
 
+    @Test
+    public void fauxPositif() throws Exception {
+        assertTrue(false);
+    }
 }

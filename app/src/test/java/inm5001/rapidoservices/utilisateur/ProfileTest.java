@@ -174,7 +174,14 @@ public class ProfileTest {
         String numeroTelephone = profile.numeroTelephone;
         assertEquals(numeroTelephone, "");
     }
-
+/*
+    @Test
+    public void TraiterNumeroTelephoneVide() throws Exception {
+        profile = new Profile(nom, prenom, "", adresseCourriel);
+        String numeroTelephone = profile.numeroTelephone;
+        assertEquals(numeroTelephone, "");
+    }
+*/
     @Test
     public void ValiderNumeroTelephoneSeulementChiffre1() {
         try {

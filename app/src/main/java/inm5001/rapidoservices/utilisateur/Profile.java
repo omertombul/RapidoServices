@@ -35,7 +35,7 @@ public class Profile {
     }
 
     private void traiterPrenom(String prenom) throws MyException {
-        if (prenom != null) {
+        if (prenom != null ) {
             validerPrenomSansChiffre(prenom);
             validerPrenomSansCaratereSpecial(prenom);
             prenom = convertirEnMajuscule(prenom);
@@ -44,7 +44,7 @@ public class Profile {
     }
 
     private void traiterNumeroTelephone(String numeroTelephone) throws MyException {
-        if (numeroTelephone != null) {
+        if (numeroTelephone != null /*|| !numeroTelephone.equals("")*/) {
             ValiderNumeroTelephoneSeulementChiffre(numeroTelephone);
             validerNumeroTelephoneDixChiffre(numeroTelephone);
             affecterValeurNumeroTelephone(numeroTelephone);

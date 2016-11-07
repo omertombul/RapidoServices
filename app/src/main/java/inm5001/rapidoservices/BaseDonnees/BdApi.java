@@ -1,4 +1,4 @@
-package inm5001.rapidoservices.BaseDonnees;
+package inm5001.rapidoservices.baseDonnees;
 
 import java.sql.ResultSet;
 
@@ -30,7 +30,6 @@ public class BdApi {
         Utilisateur U = new Utilisateur();//null;
         System.out.println("Debut construction String SQL: get User");
 
-
         String SQL = SQLgetUser(nomUtilisateur);
         BdConnection DB = new BdConnection(SQL);
         ResultSet RSutilisateur = DB.readFromDataBase();
@@ -48,7 +47,6 @@ public class BdApi {
         ResultSet RScompetences = DB.readFromDataBase();
         U = updateUtilisateurWithRScompetencesData(U, RScompetences);
         DB.closeConnection();
-
 
         return U;
     }
@@ -73,7 +71,6 @@ public class BdApi {
         DB.deleteInDataBase();
         DB.closeConnection();
     }
-
     //*************************************************************************
     // level 2 abstraction
     private String SQLaddUser(Utilisateur U) {

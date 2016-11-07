@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import inm5001.rapidoservices.utilisateur.*;
 import inm5001.rapidoservices.service.*;
-import inm5001.rapidoservices.BaseDonnees.*;
+import inm5001.rapidoservices.baseDonnees.*;
 
 public class RapidoServices {
     public static Profile profile;

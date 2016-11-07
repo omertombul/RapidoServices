@@ -142,13 +142,37 @@ public class OrchestrateurTest {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                                         motDePasse, identifiant, profile, listeServices, listeCompetences);
         try {
-            utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
+            utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur, motDePasse);
         } catch (Exception e) {
             //System.out.println("OMER :" + e.getClass().getSimpleName());
             estValider = false;
         }
         assertTrue(estValider);
         assertEquals(utilisateur.identifiant.nomUtilisateur, "Francis");
+        orchestrateur.supprimerCompte(nomUtilisateur);
+    }
+//semble avoir un problème au niveau gestion de l'utilisateur null côté BD
+    @Test
+    public void recupererUtilisateurExistePas() throws MyException{
+        try {
+            utilisateur = orchestrateur.recupererUtilisateur("bidon", motDePasse);
+        } catch (Exception e) {
+            estValider = e.getMessage().equals("L'utilisateur n'existe pas ou vous avez fait une erreur, veillez recommencer.");
+        }
+        assertTrue(estValider);
+        orchestrateur.supprimerCompte(nomUtilisateur);
+    }
+
+    @Test
+    public void recupererUtilisateurMauvaisMotDePasse() throws MyException{
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, identifiant, profile, listeServices, listeCompetences);
+        try {
+            utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur, "bidon");
+        } catch (Exception e) {
+            estValider = e.getMessage().equals("L'utilisateur n'existe pas ou vous avez fait une erreur, veillez recommencer.");
+        }
+        assertTrue(estValider);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
@@ -165,7 +189,7 @@ public class OrchestrateurTest {
         assertTrue(estValider);
         estValider = false;
         try {
-            orchestrateur.recupererUtilisateur(nomUtilisateur);
+            orchestrateur.recupererUtilisateur(nomUtilisateur, motDePasse);
         } catch (Exception e) {
             estValider = true;
         }
@@ -198,11 +222,11 @@ public class OrchestrateurTest {
             estValider = false;
         }
         assertTrue(estValider);
-        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(1).getNomSservice(), "Plombier");
-        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(0).getNomSservice(),  "Electricien");
+        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur, motDePasse).listeServices.get(1).getNomSservice(), "Plombier");
+        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur, motDePasse).listeServices.get(0).getNomSservice(),  "Electricien");
         //assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeCompetences.get(1), "Plombier");
         //assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeCompetences.get(0), "Électricien");
-        //orchestrateur.supprimerCompte(nomUtilisateur);
+        orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
     @Test
@@ -237,7 +261,7 @@ public class OrchestrateurTest {
             estValider = false;
         }
         assertTrue(estValider);
-        assertNull(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(0));
+        assertNull(orchestrateur.recupererUtilisateur(nomUtilisateur, motDePasse).listeServices.get(0));
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 

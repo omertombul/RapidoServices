@@ -16,7 +16,7 @@ package inm5001.rapidoservices;
 
         import java.util.ArrayList;
 
-        import inm5001.rapidoservices.BaseDonnees.BdApi;
+        import inm5001.rapidoservices.baseDonnees.BdApi;
         import inm5001.rapidoservices.service.AbstraiteServices;
         import inm5001.rapidoservices.service.TypeServices;
         import inm5001.rapidoservices.utilisateur.Identifiant;
