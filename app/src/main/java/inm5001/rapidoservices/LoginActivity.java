@@ -32,7 +32,17 @@ public class LoginActivity extends Activity {
         //raz.setOnClickListener(razListener);
         //username.addTextChangedListener(textWatcher);
         //password.addTextChangedListener(textWatcher);
+        seConnecter.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
 
+
+
+            }
+
+
+
+        });
         // Solution avec des onKey
         //taille.setOnKeyListener(modificationListener);
         //poids.setOnKeyListener(modificationListener);

@@ -44,12 +44,6 @@ public class InscriptionActivity extends Activity {
     AlertDialog.Builder dlgAlert  ;
     Orchestrateur orchestrateur;
 
-    Connection conn = null;
-    Statement stmt = null;
-    String SQL = null;
-    ResultSet rs = null;
-
-
 
 
     @Override
@@ -82,11 +76,12 @@ public class InscriptionActivity extends Activity {
                 // Le second est le nom de l'activité de destination
 
                 try {
+                    System.out.println("no tel "+ noTelephonProfile.getText().toString());
                     identifiant = new Identifiant(nomUtilisteur.getText().toString(), motDePasse.getText().toString());
                     profile = new Profile(nom.getText().toString(), prenom.getText().toString(), noTelephonProfile.getText().toString(), adresseCourrielProfil.getText().toString());
                     user = new Utilisateur(identifiant,profile,listeServices,listeCompetences);
                     orchestrateur = new Orchestrateur();
-                    System.out.println(user.identifiant.nomUtilisateur);
+
                     orchestrateur.creerUtilisateur(user);
 
                     Intent troisiemeActivite = new Intent(InscriptionActivity.this, ProfilActivity.class);
@@ -101,10 +96,10 @@ public class InscriptionActivity extends Activity {
 
                     dlgAlert.setTitle(e.getMessage());
                     dlgAlert.create().show();
-                   
+
                 }
 
-                System.out.println("Apres le try");
+
 
 
             }
