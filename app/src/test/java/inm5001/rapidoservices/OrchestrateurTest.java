@@ -175,11 +175,10 @@ public class OrchestrateurTest {
         try {
             utilisateur = orchestrateur.validationLogin(nomUtilisateur, motDePasse);
         } catch (Exception e) {
-            //System.out.println("OMER :" + e.getClass().getSimpleName());
             estValider = false;
         }
         assertTrue(estValider);
-        assertEquals(utilisateur.identifiant.nomUtilisateur, "Francis");
+        assertEquals(utilisateur.identifiant.nomUtilisateur, "FRANCIS");
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 //semble avoir un problème au niveau gestion de l'utilisateur null côté BD

@@ -147,7 +147,7 @@ public class UtilisateurTest {
     public void UtilisateurIdentifiantNomUtilisateur() throws Exception {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
         nomUtilisateur = utilisateur.identifiant.nomUtilisateur;
-        assertEquals(nomUtilisateur, "Francis");
+        assertEquals(nomUtilisateur, "FRANCIS");
     }
 
     @Test

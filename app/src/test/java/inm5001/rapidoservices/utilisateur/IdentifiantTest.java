@@ -45,7 +45,7 @@ public class IdentifiantTest {
     public void IdentifiantNomUtilisateur() throws Exception {
         identifiant = new Identifiant(nomUtilisateur, motDePasse);
         String nomUtilisateur = identifiant.nomUtilisateur;
-        assertEquals(nomUtilisateur, "blabka19");
+        assertEquals(nomUtilisateur, "BLABKA19");
     }
 
     @Test
