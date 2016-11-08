@@ -1,8 +1,10 @@
 package inm5001.rapidoservices;
 
         import android.app.Activity;
+        import android.app.ProgressDialog;
         import android.os.Bundle;
         import android.os.StrictMode;
+        import android.util.Log;
         import android.view.View;
         import android.content.Intent;
         import android.widget.Button;
@@ -21,6 +23,7 @@ public class LoginActivity extends Activity {
     EditText password = null;
     Orchestrateur o;
     Utilisateur u;
+    protected ProgressDialog mProgressDialog;
 
 
     @Override
@@ -38,20 +41,18 @@ public class LoginActivity extends Activity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        // On attribue un listener adapté aux vues qui en ont besoin
-        //envoyer.setOnClickListener(envoyerListener);
-        //raz.setOnClickListener(razListener);
-        //username.addTextChangedListener(textWatcher);
-        //password.addTextChangedListener(textWatcher);
+
 
         seConnecter.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                try {
-                   u = o.recupererUtilisateur(username.getText().toString(),password.getText().toString());
 
-                    System.out.println(" Nom : " + u.profile.nom);
-                   // password.getText().toString();
+                try {
+//                   u = o.recupererUtilisateur(username.getText().toString(),password.getText().toString());
+//
+//                    System.out.println(" Nom : " + u.profile.nom);
+                        connect();
+
                 }catch (Exception e) {
                         System.out.print(e + "aaaaaaaaaaa");
                     }
@@ -62,10 +63,7 @@ public class LoginActivity extends Activity {
 
 
         });
-        // Solution avec des onKey
-        //taille.setOnKeyListener(modificationListener);
-        //poids.setOnKeyListener(modificationListener);
-        //mega.setOnClickListener(checkedListener);
+
         sInscrire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,4 +80,39 @@ public class LoginActivity extends Activity {
         });
     }
 
+    private void connect() {
+        mProgressDialog = ProgressDialog.show(this, "Attendez svp","Tentative de Connection", true);
+        new Thread() {
+            @Override
+            public void run() {
+
+
+                try {
+
+                    u = o.recupererUtilisateur(username.getText().toString(),password.getText().toString());
+                    System.out.println(" Nom : " + u.profile.nom);
+
+                    // code runs in a thread
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mProgressDialog.dismiss();
+                        }
+                    });
+                } catch (final Exception ex) {
+                    Log.i("---","Exception in thread");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mProgressDialog.dismiss();
+                        }
+                    });
+                }
+            }
+        }.start();
+
+    }
+
+
 }
+
