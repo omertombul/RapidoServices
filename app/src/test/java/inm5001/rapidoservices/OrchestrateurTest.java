@@ -13,8 +13,8 @@ import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 
 import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_MOT_DE_PASSE_INVALIDE;
-import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_NOMUTILISATEUR_PAS_UNIQUE;
 import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_UTILISATEUR_N_EXISTE_PAS;
+import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_NOMUTILISATEUR_PAS_UNIQUE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
@@ -184,7 +184,7 @@ public class OrchestrateurTest {
     }
 //semble avoir un problème au niveau gestion de l'utilisateur null côté BD
     @Test
-    public void validationLoginExistePas() throws MyException{
+    public void validationLoginUtilisateurExistePas() throws MyException{
         try {
             utilisateur = orchestrateur.validationLogin("bidon", motDePasse);
         } catch (Exception e) {
