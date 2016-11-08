@@ -94,7 +94,7 @@ public class Orchestrateur {
 
     public void ajouterOffreDeService(String nomUtilisateur, TypeServices service) throws MyException {
         bd.addServiceUser(nomUtilisateur, service);
-        //bd.addCompetenceUser(nomUtilisateur, service);
+        //bd.addCompetenceUser(nomUtilisateur, service.getNomSservice());
     }
 
     public void retirerOffreDeService(String nomUtilisateur, AbstraiteServices service) throws MyException {
