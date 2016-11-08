@@ -23,6 +23,7 @@ public class Identifiant {
         validerNomUtilisateurPasNull(nomUtilisateur);
         validerNomUtilisateurSansEspace(nomUtilisateur);
         validerNomUtilisateurEntreHuitEtTroisCaracteres(nomUtilisateur);
+        nomUtilisateur = convertirEnMajuscule(nomUtilisateur);
         //validerNomUtilisateurEstUnique(nomUtilisateur);
         affecterValeurNomUtilisateur(nomUtilisateur);
     }
@@ -107,6 +108,10 @@ public class Identifiant {
 
     private void affecterValeurMotDePasse(String motDePasse) {
         this.motDePasse = motDePasse;
+    }
+//MÉTHODES GLOBAL
+    private String convertirEnMajuscule(String uneChaine) {
+        return uneChaine.toUpperCase();
     }
 //MÉTHODES PUBLIC
     public String validationMotDePasse(String motDePasse) throws MyException {
