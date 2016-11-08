@@ -78,6 +78,13 @@ public class BdApi {
         DB.insertToDB();
         DB.closeConnection();
     }
+
+    public void updateServiceDisponibilite(String nomUtilisateur, String nomService, String disponibilite){
+        String SQL = SQLchangeServiceDisponibilite(nomUtilisateur, nomService,disponibilite);
+        BdConnection DB = new BdConnection(SQL);
+        DB.insertToDB();
+        DB.closeConnection();
+    }
     //*************************************************************************
     // level 2 abstraction
     private String SQLaddUser(Utilisateur U) {
@@ -175,6 +182,16 @@ System.out.println("nom du service utilisateur: " + S.getNomSservice());
     }
 
     private String SQLSQLchangeUserDisponibilite(String nomUtilisateur,
+                                                 String status) {
+        String SQL_DEBUT = "UPDATE servicesDUsager SET disponibilite = ";
+        String SQL_DEBUT_USR_ID = " where idUsager = '";
+        String SQL_FIN = "';";
+        String SQL = SQL_DEBUT + status + SQL_DEBUT_USR_ID + nomUtilisateur + SQL_FIN;
+        ;System.out.println("UPDATE **disponibilite** SQL is: " + SQL); // shows SQL String
+        return SQL;
+    }
+
+    private String SQLchangeServiceDisponibilite(String nomUtilisateur, String nomService,
                                                  String status) {
         String SQL_DEBUT = "UPDATE servicesDUsager SET disponibilite = ";
         String SQL_DEBUT_USR_ID = " where idUsager = '";
