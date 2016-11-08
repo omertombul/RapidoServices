@@ -26,7 +26,7 @@ public class Profile {
     }
 //premier niveau d'abstraction
     private void traiterNom(String nom) throws MyException {
-        if (nom != null) {
+        if (nom != null && !nom.equals("")) {
             validerNomSansChiffre(nom);
             validerNomSansCaratereSpecial(nom);
             nom = convertirEnMajuscule(nom);
@@ -35,7 +35,7 @@ public class Profile {
     }
 
     private void traiterPrenom(String prenom) throws MyException {
-        if (prenom != null ) {
+        if (prenom != null && !prenom.equals("")) {
             validerPrenomSansChiffre(prenom);
             validerPrenomSansCaratereSpecial(prenom);
             prenom = convertirEnMajuscule(prenom);
@@ -44,7 +44,7 @@ public class Profile {
     }
 
     private void traiterNumeroTelephone(String numeroTelephone) throws MyException {
-        if (numeroTelephone != null /*|| !numeroTelephone.equals("")*/) {
+        if (numeroTelephone != null && !numeroTelephone.equals("")) {
             ValiderNumeroTelephoneSeulementChiffre(numeroTelephone);
             validerNumeroTelephoneDixChiffre(numeroTelephone);
             affecterValeurNumeroTelephone(numeroTelephone);

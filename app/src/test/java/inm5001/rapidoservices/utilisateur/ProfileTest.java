@@ -82,6 +82,13 @@ public class ProfileTest {
     }
 
     @Test
+    public void TraiterNomVide() throws MyException {
+        profile = new Profile("", prenom, numeroTelephone, adresseCourriel);
+        String nom = profile.nom;
+        assertEquals(nom, "");
+    }
+
+    @Test
     public void ValiderNomSansChiffre() {
         try {
             profile = new Profile("Franc1s", prenom, numeroTelephone, adresseCourriel);
@@ -124,6 +131,13 @@ public class ProfileTest {
     @Test
     public void TraiterPrenomNull() throws Exception {
         profile = new Profile(nom, null, numeroTelephone, adresseCourriel);
+        String prenom = profile.prenom;
+        assertEquals(prenom, "");
+    }
+
+    @Test
+    public void TraiterPrenomVide() throws Exception {
+        profile = new Profile(nom, "", numeroTelephone, adresseCourriel);
         String prenom = profile.prenom;
         assertEquals(prenom, "");
     }
@@ -174,14 +188,14 @@ public class ProfileTest {
         String numeroTelephone = profile.numeroTelephone;
         assertEquals(numeroTelephone, "");
     }
-/*
+
     @Test
     public void TraiterNumeroTelephoneVide() throws Exception {
         profile = new Profile(nom, prenom, "", adresseCourriel);
         String numeroTelephone = profile.numeroTelephone;
         assertEquals(numeroTelephone, "");
     }
-*/
+
     @Test
     public void ValiderNumeroTelephoneSeulementChiffre1() {
         try {
