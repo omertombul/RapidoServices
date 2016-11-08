@@ -117,7 +117,7 @@ public class BdApi {
     }
 
     private String SQLgetServices(Utilisateur U) {
-        System.out.println("id utilisateur est: " + U.identifiant.nomUtilisateur);
+        //System.out.println("id utilisateur est: " + U.identifiant.nomUtilisateur);
         String SQL;
         String SQL_DEBUT = "SELECT * FROM servicesDUsager WHERE idUsager = '";
         String SQL_FIN = "';";
@@ -187,7 +187,7 @@ System.out.println("nom du service utilisateur: " + S.getNomSservice());
         String SQL_DEBUT_USR_ID = " where idUsager = '";
         String SQL_FIN = "';";
         String SQL = SQL_DEBUT + status + SQL_DEBUT_USR_ID + nomUtilisateur + SQL_FIN;
-        ;System.out.println("UPDATE **disponibilite** SQL is: " + SQL); // shows SQL String
+        //System.out.println("UPDATE **disponibilite** SQL is: " + SQL); // shows SQL String
         return SQL;
     }
 
@@ -197,7 +197,7 @@ System.out.println("nom du service utilisateur: " + S.getNomSservice());
         String SQL_DEBUT_USR_ID = " where idUsager = '";
         String SQL_FIN = "';";
         String SQL = SQL_DEBUT + status + SQL_DEBUT_USR_ID + nomUtilisateur + SQL_FIN;
-        ;System.out.println("UPDATE **disponibilite** SQL is: " + SQL); // shows SQL String
+        //System.out.println("UPDATE **disponibilite** SQL is: " + SQL); // shows SQL String
         return SQL;
     }
 
