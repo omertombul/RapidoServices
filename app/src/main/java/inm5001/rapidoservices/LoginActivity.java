@@ -89,7 +89,7 @@ public class LoginActivity extends Activity {
 
                 try {
 
-                    u = o.recupererUtilisateur(username.getText().toString(),password.getText().toString());
+                    u = o.validationLogin(username.getText().toString(),password.getText().toString());
                     System.out.println(" Nom : " + u.profile.nom);
 
                     // code runs in a thread

@@ -11,7 +11,6 @@ public interface ConstanteIdentifiant {
     String MESSAGE_NOMUTILISATEUR_NULL = MESSAGE_NOMUTILISATEUR + "est obligatoire.";
     String MESSAGE_NOMUTILISATEUR_PAS_ESPACE = MESSAGE_NOMUTILISATEUR + "ne doit pas contenir d'espace" + MESSAGE_AUTRE_CHOIX;
     String MESSAGE_NOMUTILISATEUR_MAX_HUIT_MIN_TROIS_CARACTERES = MESSAGE_NOMUTILISATEUR + "ne doit pas contenir plus de huit caractères" + MESSAGE_AUTRE_CHOIX;
-    String MESSAGE_NOMUTILISATEUR_PAS_UNIQUE = MESSAGE_NOMUTILISATEUR + "existe déjà" + MESSAGE_AUTRE_CHOIX;
 
     String MESSAGE_MOTDEPASSE = "Le mot de passe doit contenir au minimum ";
     String MESSAGE_MOTDEPASSE_NULL = "Le mot de passe est obligatoire.";

@@ -57,15 +57,23 @@ public class Orchestrateur {
     }
 
     public void creerUtilisateur(String nom, String prenom, String numeroTelephoneProfile, String adresseCourrielProfile,
-                                                 String nomUtilisateur, String motDePasse, Identifiant identifiant, Profile profile,
-                                                 ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
+                                                 String nomUtilisateur, String motDePasse, ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
         profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
         identifiant = new Identifiant(nomUtilisateur, motDePasse);
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
-        bd.addUser(utilisateur);
+        try {
+            bd.addUser(utilisateur);
+        } catch (Exception eBd) {
+            MyException e = new MyException(MESSAGE_NOMUTILISATEUR_PAS_UNIQUE);
+            throw e;
+        }
     }
 
-    public Utilisateur recupererUtilisateur(String nomUtilisateur, String motDePasse) throws MyException {
+    public Utilisateur recupererUtilisateur(String nomUtilisateur) throws MyException {
+        return bd.getUser(nomUtilisateur);
+    }
+
+    public Utilisateur validationLogin(String nomUtilisateur, String motDePasse) throws MyException {
         try {
             utilisateur =  bd.getUser(nomUtilisateur);
         } catch (Exception eBd) {
