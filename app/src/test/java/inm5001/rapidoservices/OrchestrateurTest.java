@@ -5,14 +5,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.sql.SQLException;
+
 import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.service.TypeServices;
 import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 
-import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_PROFILE_NULL;
+import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_MOT_DE_PASSE_INVALIDE;
+import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_UTILISATEUR_N_EXISTE_PAS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -20,7 +21,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class OrchestrateurTest {
-    Orchestrateur orchestrateur;
+    private Orchestrateur orchestrateur;
     private Utilisateur utilisateur;
     //attributs Utilisateur
     private Identifiant identifiant;
@@ -157,22 +158,21 @@ public class OrchestrateurTest {
         try {
             utilisateur = orchestrateur.recupererUtilisateur("bidon", motDePasse);
         } catch (Exception e) {
-            estValider = e.getMessage().equals("L'utilisateur n'existe pas ou vous avez fait une erreur, veillez recommencer.");
+            estValider = !e.getMessage().equals(MESSAGE_UTILISATEUR_N_EXISTE_PAS);
         }
-        assertTrue(estValider);
-        orchestrateur.supprimerCompte(nomUtilisateur);
+        assertFalse(estValider);
     }
 
     @Test
-    public void recupererUtilisateurMauvaisMotDePasse() throws MyException{
+    public void recupererUtilisateurMotDePasseInvalide() throws MyException{
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
-                motDePasse, identifiant, profile, listeServices, listeCompetences);
+                                        motDePasse, identifiant, profile, listeServices, listeCompetences);
         try {
             utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur, "bidon");
         } catch (Exception e) {
-            estValider = e.getMessage().equals("L'utilisateur n'existe pas ou vous avez fait une erreur, veillez recommencer.");
+            estValider = !e.getMessage().equals(MESSAGE_MOT_DE_PASSE_INVALIDE);
         }
-        assertTrue(estValider);
+        assertFalse(estValider);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
@@ -203,10 +203,10 @@ public class OrchestrateurTest {
         try {
             orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
         } catch (Exception e) {
-            //System.out.println("OMER :" + e.getClass().getSimpleName());
             estValider = false;
         }
         assertTrue(estValider);
+        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur, motDePasse).listeServices.get(0).getNomSservice(), "Electricien");
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
@@ -218,12 +218,11 @@ public class OrchestrateurTest {
             orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
             orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
         } catch (Exception e) {
-            //System.out.println("OMER :" + e.getClass().getSimpleName());
             estValider = false;
         }
         assertTrue(estValider);
         assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur, motDePasse).listeServices.get(1).getNomSservice(), "Plombier");
-        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur, motDePasse).listeServices.get(0).getNomSservice(),  "Electricien");
+        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur, motDePasse).listeServices.get(0).getNomSservice(), "Electricien");
         //assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeCompetences.get(1), "Plombier");
         //assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeCompetences.get(0), "Électricien");
         orchestrateur.supprimerCompte(nomUtilisateur);

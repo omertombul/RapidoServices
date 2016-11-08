@@ -9,6 +9,8 @@ import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.baseDonnees.BdApi;
 
+import static inm5001.rapidoservices.ConstanteOrchetrateur.*;
+
 /**
  * Created by Francis Bernier on 2016-10-21.
  */
@@ -38,22 +40,19 @@ public class Orchestrateur {
     private String adresseCourrielProfile;
     private Boolean estValider;
 //attributs AbstraiteServices
-    String nomSservice;
-    boolean disponible;
-    String ville;
-    byte cote;
-    String numeroTelephoneService;
-    String adresseCourrielService;
-    String description;
-    float tauxHorraire;
-    float prixFixe;
+    private String nomSservice;
+    private boolean disponible;
+    private String ville;
+    private byte cote;
+    private String numeroTelephoneService;
+    private String adresseCourrielService;
+    private String description;
+    private float tauxHorraire;
+    private float prixFixe;
 //attributs BdApi
     private static BdApi bd = new BdApi();
 
     public void creerUtilisateur(Utilisateur utilisateur) throws MyException {
-        // profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
-        //identifiant = new Identifiant(nomUtilisateur, motDePasse);
-        //utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
         bd.addUser(utilisateur);
     }
 
@@ -66,8 +65,19 @@ public class Orchestrateur {
         bd.addUser(utilisateur);
     }
 
-    public Utilisateur recupererUtilisateur(String nomUtilisateur,String pwd) throws MyException {
-        return bd.getUser(nomUtilisateur);
+    public Utilisateur recupererUtilisateur(String nomUtilisateur, String motDePasse) throws MyException {
+        try {
+            utilisateur =  bd.getUser(nomUtilisateur);
+        } catch (Exception eBd) {
+            MyException e = new MyException(MESSAGE_UTILISATEUR_N_EXISTE_PAS);
+            throw e;
+        }
+
+        if (!utilisateur.identifiant.motDePasse.equals(motDePasse)) {
+            MyException e = new MyException(MESSAGE_MOT_DE_PASSE_INVALIDE);
+            throw e;
+        }
+        return utilisateur;
     }
 
     public void supprimerCompte(String nomUtilisateur) throws MyException {
