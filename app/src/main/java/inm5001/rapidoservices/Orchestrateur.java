@@ -94,10 +94,12 @@ public class Orchestrateur {
 
     public void ajouterOffreDeService(String nomUtilisateur, TypeServices service) throws MyException {
         bd.addServiceUser(nomUtilisateur, service);
+        //bd.addCompetenceUser(nomUtilisateur, service);
     }
 
     public void retirerOffreDeService(String nomUtilisateur, AbstraiteServices service) throws MyException {
         bd.deleteService(nomUtilisateur, service.getNomSservice());
+        //bd.deleteCompetence(nomUtilisateur, service.getNomSservice());
     }
     /*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
