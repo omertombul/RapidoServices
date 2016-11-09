@@ -7,6 +7,8 @@ import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.service.TypeServices;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +21,7 @@ public class BdApi {
         //System.out.println("Start: Constructeur Api");
     }
 
-    public void addUser(Utilisateur U) {
+    public void addUser(Utilisateur U) throws SQLException {
         String SQL = SQLaddUser(U);
         BdConnection DB = new BdConnection(SQL);
         DB.insertToDB();
@@ -58,7 +60,7 @@ public class BdApi {
         DB.closeConnection();
     }
 
-    public void addServiceUser(String nomUtilisateur, TypeServices S){
+    public void addServiceUser(String nomUtilisateur, TypeServices S) throws SQLException {
         String SQL = SQLaddServiceUser(nomUtilisateur, S);
         BdConnection DB = new BdConnection(SQL);
         DB.insertToDB();
@@ -72,14 +74,14 @@ public class BdApi {
         DB.closeConnection();
     }
 
-    public void updateUserDisponibilite(String nomUtilisateur, String disponibilite){
+    public void updateUserDisponibilite(String nomUtilisateur, String disponibilite) throws SQLException {
         String SQL = SQLSQLchangeUserDisponibilite(nomUtilisateur, disponibilite);
         BdConnection DB = new BdConnection(SQL);
         DB.insertToDB();
         DB.closeConnection();
     }
 
-    public void updateServiceDisponibilite(String nomUtilisateur, String nomService, String disponibilite){
+    public void updateServiceDisponibilite(String nomUtilisateur, String nomService, String disponibilite) throws SQLException {
         String SQL = SQLchangeServiceDisponibilite(nomUtilisateur, nomService,disponibilite);
         BdConnection DB = new BdConnection(SQL);
         DB.insertToDB();
