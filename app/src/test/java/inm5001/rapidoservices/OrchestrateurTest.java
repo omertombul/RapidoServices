@@ -17,6 +17,7 @@ import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_UTILISATEUR_N
 import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_NOMUTILISATEUR_PAS_UNIQUE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -92,9 +93,9 @@ public class OrchestrateurTest {
         tauxHorraire = 14.50f;
         prixFixe = 50.00f;
         service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                numeroTelephoneService, adresseCourrielService, description );
+                numeroTelephoneService, adresseCourrielService, description);
         service2 = new TypeServices(tauxHorraire, prixFixe, "Electricien", disponible, ville, cote,
-                numeroTelephoneService, adresseCourrielService, description );
+                numeroTelephoneService, adresseCourrielService, description);
     }
 
     @After
@@ -137,14 +138,14 @@ public class OrchestrateurTest {
         assertTrue(estValider);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
-/*
+
     @Test
     public void creerUtilisateurExiste() throws MyException {
         estValider = false;
-        orchestrateur.creerUtilisateur("testUn", prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                                         motDePasse, listeServices, listeCompetences);
         try {
-            orchestrateur.creerUtilisateur("testDeux", prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+            orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                     motDePasse, listeServices, listeCompetences);
         } catch (Exception e) {
             estValider = e.getMessage().equals(MESSAGE_NOMUTILISATEUR_PAS_UNIQUE);
@@ -167,7 +168,7 @@ public class OrchestrateurTest {
         orchestrateur.supprimerCompte(nomUtilisateur);
         orchestrateur.supprimerCompte("Francis2");
     }
-*/
+
     @Test
     public void validationLogin() throws MyException{
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
@@ -235,7 +236,8 @@ public class OrchestrateurTest {
             estValider = false;
         }
         assertTrue(estValider);
-        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(0).getNomSservice(), "Electricien");
+        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(0).getNomSservice(), "Plombier");
+        orchestrateur.retirerOffreDeService(nomUtilisateur, service);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
@@ -254,6 +256,8 @@ public class OrchestrateurTest {
         assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(0).getNomSservice(), "Electricien");
         //assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeCompetences.get(1), "Plombier");
         //assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeCompetences.get(0), "Électricien");
+        orchestrateur.retirerOffreDeService(nomUtilisateur, service);
+        orchestrateur.retirerOffreDeService(nomUtilisateur, service2);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
@@ -275,21 +279,28 @@ public class OrchestrateurTest {
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
+    @Test
     public void retirerOffreDeService() throws MyException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                 motDePasse, listeServices, listeCompetences);
         try {
             orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
         } catch (Exception e) {
-            //System.out.println("OMER :" + e.getClass().getSimpleName());
             estValider = false;
         } try {
             orchestrateur.retirerOffreDeService(nomUtilisateur, service);
         } catch (Exception e) {
             estValider = false;
         }
+        if (estValider) {
+            estValider = false;
+            try {
+                orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(0);
+            } catch (Exception e) {
+                estValider = true;
+            }
+        }
         assertTrue(estValider);
-        assertNull(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(0));
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
