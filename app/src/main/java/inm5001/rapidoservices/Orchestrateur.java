@@ -1,13 +1,15 @@
 package inm5001.rapidoservices;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import inm5001.rapidoservices.MyException;
+import inm5001.rapidoservices.baseDonnees.BdApi;
 import inm5001.rapidoservices.service.TypeServices;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.service.AbstraiteServices;
-import inm5001.rapidoservices.baseDonnees.BdApi;
 
 import static inm5001.rapidoservices.ConstanteOrchetrateur.*;
 
@@ -53,7 +55,12 @@ public class Orchestrateur {
     private static BdApi bd = new BdApi();
 
     public void creerUtilisateur(Utilisateur utilisateur) throws MyException {
-        bd.addUser(utilisateur);
+        try {
+            bd.addUser(utilisateur);
+        } catch (Exception ex) {
+            MyException e = new MyException(MESSAGE_NOMUTILISATEUR_PAS_UNIQUE);
+            throw e;
+        }
     }
 
     public void creerUtilisateur(String nom, String prenom, String numeroTelephoneProfile, String adresseCourrielProfile,
@@ -92,14 +99,14 @@ public class Orchestrateur {
         bd.deleteUser(nomUtilisateur);
     }
 
-    public void ajouterOffreDeService(String nomUtilisateur, TypeServices service) throws MyException {
+    public void ajouterOffreDeService(String nomUtilisateur, TypeServices service) throws SQLException {
         bd.addServiceUser(nomUtilisateur, service);
-        //bd.addCompetenceUser(nomUtilisateur, service.getNomSservice());
+        bd.addCompetenceUser(nomUtilisateur, service);
     }
 
-    public void retirerOffreDeService(String nomUtilisateur, AbstraiteServices service) throws MyException {
+    public void retirerOffreDeService(String nomUtilisateur, TypeServices service) throws MyException {
         bd.deleteService(nomUtilisateur, service.getNomSservice());
-        //bd.deleteCompetence(nomUtilisateur, service.getNomSservice());
+        bd.deleteCompetence(nomUtilisateur, service);
     }
     /*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {

@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  */
 
 public class BdApiTest {
-    BdApi bd;
+    private BdApi bd;
     private Utilisateur utilisateur;
     //attributs Utilisateur
     private Identifiant identifiant;
@@ -46,16 +46,16 @@ public class BdApiTest {
     private String adresseCourrielProfile;
     private Boolean estValider;
     //attributs AbstraiteServices
-    byte disponible;
-    String ville;
-    byte cote;
-    String numeroTelephoneService;
-    String adresseCourrielService;
-    String description;
+    private byte disponible;
+    private String ville;
+    private byte cote;
+    private String numeroTelephoneService;
+    private String adresseCourrielService;
+    private String description;
     //attribut Plomberie
-    String nomSservice;
-    float tauxHorraire;
-    float prixFixe;
+    private String nomSservice;
+    private float tauxHorraire;
+    private float prixFixe;
 
     @Before
     public void setUp() throws MyException {
@@ -121,6 +121,7 @@ public class BdApiTest {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
         assertNotNull(utilisateur);
         bd.addUser(utilisateur);
+        bd.deleteUser(nomUtilisateur);
     }
 
     @Test
