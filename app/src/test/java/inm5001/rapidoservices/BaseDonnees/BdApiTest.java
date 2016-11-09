@@ -46,7 +46,7 @@ public class BdApiTest {
     private String adresseCourrielProfile;
     private Boolean estValider;
     //attributs AbstraiteServices
-    private byte disponible;
+    private boolean disponible;
     private String ville;
     private byte cote;
     private String numeroTelephoneService;
@@ -80,7 +80,7 @@ public class BdApiTest {
         profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
         utilisateur = null;
         estValider = false;
-        disponible = 0;
+        disponible = false;
         ville = "Montreal";
         cote = 2;
         numeroTelephoneService ="514-444-4444";
@@ -106,7 +106,7 @@ public class BdApiTest {
         utilisateur = null;
         motDePasse = null;
         estValider = null;
-        disponible = 0;
+        disponible = false;
         ville = null;
         cote = 0;
         numeroTelephoneService = null;

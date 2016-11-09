@@ -26,7 +26,7 @@ public class UtilisateurTest {
     private AbstraiteServices service;
     private ArrayList<String> listeCompetences;
     private String competence;
-    //private boolean disponible;
+   // private boolean disponible;
     //private ArrayList<Evaluation> listeEvaluations;
     //private ArrayList<Evaluation> lisetEvaluationServicesGlobal;
     //private Evaluation evaluation;
@@ -41,7 +41,7 @@ public class UtilisateurTest {
     private String adresseCourrielProfile;
     private Boolean estValider;
 //attributs AbstraiteServices
-    byte disponible;
+    boolean disponible;
     String ville;
     byte cote;
     String numeroTelephoneService;
@@ -74,7 +74,7 @@ public class UtilisateurTest {
         profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
         utilisateur = null;
         estValider = false;
-        disponible = 0;
+        disponible = false;
         ville = "Montreal";
         cote = 2;
         numeroTelephoneService ="514-444-4444";
@@ -99,7 +99,7 @@ public class UtilisateurTest {
         utilisateur = null;
         motDePasse = null;
         estValider = null;
-        disponible = 0;
+        disponible = false;
         ville = null;
         cote = 0;
         numeroTelephoneService = null;

@@ -266,7 +266,7 @@ public class BdApi {
             while (RSservices.next()) {
                 AbstraiteServices S = new TypeServices(RSservices.getFloat("prixHorraire"),
                         RSservices.getFloat("prixFixe"), RSservices.getString("nomService"),
-                        RSservices.getByte("disponibilite"), RSservices.getString("ville"),
+                        RSservices.getBoolean("disponibilite"), RSservices.getString("ville"),
                         RSservices.getByte ("cote"), RSservices.getString("noTelephone"),
                         RSservices.getString("courriel"), RSservices.getString("description"));
                 U.listeServices.add(S);
