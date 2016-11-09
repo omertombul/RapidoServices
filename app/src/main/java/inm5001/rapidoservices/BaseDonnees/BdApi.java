@@ -14,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by Admin on 2016-10-22.
  */
-//aa
+
 public class BdApi {
 
     public BdApi() {
@@ -75,18 +75,34 @@ public class BdApi {
     }
 
     public void updateUserDisponibilite(String nomUtilisateur, String disponibilite) throws SQLException {
-        String SQL = SQLSQLchangeUserDisponibilite(nomUtilisateur, disponibilite);
+        String SQL = SQLchangeUserDisponibilite(nomUtilisateur, disponibilite);
         BdConnection DB = new BdConnection(SQL);
         DB.insertToDB();
         DB.closeConnection();
     }
 
-    public void updateServiceDisponibilite(String nomUtilisateur, String nomService, String disponibilite) throws SQLException {
+    public void updateServiceDisponibilite(String nomUtilisateur, String nomService, String
+            disponibilite) throws SQLException {
         String SQL = SQLchangeServiceDisponibilite(nomUtilisateur, nomService,disponibilite);
         BdConnection DB = new BdConnection(SQL);
         DB.insertToDB();
         DB.closeConnection();
     }
+
+    public void addCompetenceUser(String nomUtilisateur, TypeServices s) throws SQLException {
+        String SQL = SQLaddCompetence(nomUtilisateur, s);
+        BdConnection DB = new BdConnection(SQL);
+        DB.insertToDB();
+        DB.closeConnection();
+    }
+
+    public void deleteCompetence(String nomUtilisateur, TypeServices s){
+        String SQL = SQLdeleteCompetence(nomUtilisateur, s);
+        BdConnection DB = new BdConnection(SQL);
+        DB.deleteInDataBase();
+        DB.closeConnection();
+    }
+
     //*************************************************************************
     // level 2 abstraction
     private String SQLaddUser(Utilisateur U) {
@@ -94,7 +110,6 @@ public class BdApi {
         String SQL_DEBUT = "INSERT INTO utilisateur VALUES('";
         String SQL_SEPARATEUR = "' ,'";
         String SQL_FIN = "');";
-
         SQL = SQL_DEBUT;
         SQL += U.identifiant.nomUtilisateur + SQL_SEPARATEUR;
         SQL += U.identifiant.motDePasse + SQL_SEPARATEUR;
@@ -105,7 +120,7 @@ public class BdApi {
         SQL += "1" + SQL_SEPARATEUR;  // eval
         SQL += "1" + SQL_SEPARATEUR;         // geo coordonnees
         SQL += U.profile.numeroTelephone + SQL_FIN;
-        System.out.println("    String SQL addUser: " + SQL);
+//System.out.println("    String SQL addUser: " + SQL); // shows SQL String
         return SQL;
     }
 
@@ -114,16 +129,15 @@ public class BdApi {
         String SQL_DEBUT = "SELECT * FROM utilisateur WHERE idUsager = '";
         String SQL_FIN = "';";
         SQL = SQL_DEBUT + nomUtilisateur + SQL_FIN;
-        System.out.println("    String SQL getUser: " + SQL);
+//System.out.println("    String SQL getUser: " + SQL); // shows SQL String
         return SQL;
     }
 
     private String SQLgetServices(Utilisateur U) {
-        //System.out.println("id utilisateur est: " + U.identifiant.nomUtilisateur);
         String SQL;
         String SQL_DEBUT = "SELECT * FROM servicesDUsager WHERE idUsager = '";
         String SQL_FIN = "';";
-        //SQL = SQL_DEBUT + "Francis" + SQL_FIN; //U.identifiant.nomUtilisateur + SQL_FIN;
+//SQL = SQL_DEBUT + "Francis" + SQL_FIN; //U.identifiant.nomUtilisateur + SQL_FIN; // shows SQL String
         SQL = SQL_DEBUT + U.identifiant.nomUtilisateur + SQL_FIN;
         System.out.println("    String SQL getServiceUtilisateur: " + SQL);
         return SQL;
@@ -134,7 +148,7 @@ public class BdApi {
         String SQL_DEBUT = "SELECT * FROM competences WHERE idUsager = '";
         String SQL_FIN = "';";
         SQL = SQL_DEBUT + U.identifiant.nomUtilisateur + SQL_FIN;
-        System.out.println("    String SQL getCompetencesUtilisateur: " + SQL);
+//System.out.println("    String SQL getCompetencesUtilisateur: " + SQL); // shows SQL String
         return SQL;
     }
 
@@ -142,7 +156,7 @@ public class BdApi {
         String SQL_DEBUT = "DELETE FROM utilisateur WHERE idUsager = '";
         String SQL_FIN = "';";
         String SQL = SQL_DEBUT + nomUtilisateur + SQL_FIN;
-        //System.out.println("Delete SQL is: " + SQL);
+//System.out.println("Delete SQL is: " + SQL); // shows SQL String
         return SQL;
     }
 
@@ -152,7 +166,6 @@ public class BdApi {
         String SQL_SEPARATEUR = "' ,'";
         String SQL_FIN = "');";
         String SQL_DEBUT_COMPETENCE = " INSERT INTO competences VALUES('";
-System.out.println("nom du service utilisateur: " + S.getNomSservice());
         SQL = SQL_DEBUT;
         SQL += nomUtilisateur + SQL_SEPARATEUR;
         SQL += S.getNomSservice() + SQL_SEPARATEUR;
@@ -166,11 +179,7 @@ System.out.println("nom du service utilisateur: " + S.getNomSservice());
         SQL += S.getCourriel() + SQL_SEPARATEUR;
         SQL += S.getCote() + SQL_SEPARATEUR;
         SQL += S.getDescription() + SQL_FIN;
-        //SQL += SQL_DEBUT_COMPETENCE;
-        //SQL += nomUtilisateur + SQL_SEPARATEUR;
-        //SQL += S.getNomSservice() + SQL_FIN;
-
-        System.out.println("    String SQL addService Usager: " + SQL);
+// System.out.println("    String SQL addService Usager: " + SQL); // shows SQL String
         return SQL;
     }
 
@@ -179,17 +188,17 @@ System.out.println("nom du service utilisateur: " + S.getNomSservice());
         String SQL_AND = "' AND nomService = '";
         String SQL_FIN = "';";
         String SQL = SQL_DEBUT + nomUtilisateur + SQL_AND + nomService + SQL_FIN;
-        System.out.println("Delete **SERVICE** SQL is: " + SQL);
+//System.out.println("Delete **SERVICE** SQL is: " + SQL); // shows SQL String
         return SQL;
     }
 
-    private String SQLSQLchangeUserDisponibilite(String nomUtilisateur,
-                                                 String status) {
+    private String SQLchangeUserDisponibilite(String nomUtilisateur,
+                                              String status) {
         String SQL_DEBUT = "UPDATE servicesDUsager SET disponibilite = ";
         String SQL_DEBUT_USR_ID = " where idUsager = '";
         String SQL_FIN = "';";
         String SQL = SQL_DEBUT + status + SQL_DEBUT_USR_ID + nomUtilisateur + SQL_FIN;
-        //System.out.println("UPDATE **disponibilite** SQL is: " + SQL); // shows SQL String
+//System.out.println("UPDATE **disponibilite** SQL is: " + SQL); // shows SQL String
         return SQL;
     }
 
@@ -199,7 +208,28 @@ System.out.println("nom du service utilisateur: " + S.getNomSservice());
         String SQL_DEBUT_USR_ID = " where idUsager = '";
         String SQL_FIN = "';";
         String SQL = SQL_DEBUT + status + SQL_DEBUT_USR_ID + nomUtilisateur + SQL_FIN;
-        //System.out.println("UPDATE **disponibilite** SQL is: " + SQL); // shows SQL String
+//System.out.println("UPDATE **disponibilite** SQL is: " + SQL); // shows SQL String
+        return SQL;
+    }
+
+    private String SQLaddCompetence(String nomUtilisateur, TypeServices s){
+        String SQL;
+        String SQL_DEBUT = "INSERT INTO competences VALUES('";
+        String SQL_SEPARATEUR = "' ,'";
+        String SQL_FIN = "');";
+        SQL = SQL_DEBUT;
+        SQL += s.getNomSservice() + SQL_SEPARATEUR;
+        SQL += nomUtilisateur + SQL_FIN;
+//System.out.println("add **Competence** SQL is: " + SQL); // shows SQL String
+        return SQL;
+    }
+
+    private String SQLdeleteCompetence(String nomUtilisateur, TypeServices s){
+        String SQL_DEBUT = "DELETE FROM competences WHERE idUsager = '";
+        String SQL_AND = "' AND nomService = '";
+        String SQL_FIN = "';";
+        String SQL = SQL_DEBUT + nomUtilisateur + SQL_AND + s.getNomSservice() + SQL_FIN;
+//System.out.println("Delete **COMPETENCE** SQL is: " + SQL); // shows SQL String
         return SQL;
     }
 
