@@ -192,7 +192,7 @@ public class BdApi {
 
     private String SQLchangeUserDisponibilite(String nomUtilisateur,
                                               String status) {
-        String SQL_DEBUT = "UPDATE servicesDUsager SET disponibilite = ";
+        String SQL_DEBUT = "UPDATE utilisateur SET disponibilite = ";
         String SQL_DEBUT_USR_ID = " where idUsager = '";
         String SQL_FIN = "';";
         String SQL = SQL_DEBUT + status + SQL_DEBUT_USR_ID + nomUtilisateur + SQL_FIN;
@@ -204,8 +204,11 @@ public class BdApi {
                                                  String status) {
         String SQL_DEBUT = "UPDATE servicesDUsager SET disponibilite = ";
         String SQL_DEBUT_USR_ID = " where idUsager = '";
+        String SQL_SEPARATEUR = "' ,'";
+        String SQL_NOM_SERVICE = " and nomService = '";
         String SQL_FIN = "';";
-        String SQL = SQL_DEBUT + status + SQL_DEBUT_USR_ID + nomUtilisateur + SQL_FIN;
+        String SQL = SQL_DEBUT + status + SQL_DEBUT_USR_ID + nomUtilisateur + SQL_SEPARATEUR +
+                SQL_NOM_SERVICE + nomService + SQL_FIN;
 //System.out.println("UPDATE **disponibilite** SQL is: " + SQL); // shows SQL String
         return SQL;
     }
