@@ -17,8 +17,6 @@ import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_UTILISATEUR_N
 import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_NOMUTILISATEUR_PAS_UNIQUE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class OrchestrateurTest {
@@ -32,7 +30,7 @@ public class OrchestrateurTest {
     private TypeServices service2;
     private ArrayList<String> listeCompetences;
     private String competence;
-    //private boolean disponible;
+    //private boolean disponibleGlobale;
     //private ArrayList<Evaluation> listeEvaluations;
     //private ArrayList<Evaluation> lisetEvaluationServicesGlobal;
     //private Evaluation evaluation;
@@ -63,15 +61,7 @@ public class OrchestrateurTest {
     public void setUp() throws MyException {
         orchestrateur = new Orchestrateur();
         listeServices = new ArrayList<>();
-        /*
-        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponible, ville, cote,
-                numeroTelephoneService, "service1@gmail.com", description));
-        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponible, ville, cote,
-                numeroTelephoneService, "service2@gmail.com", description));
-        */
         listeCompetences = new ArrayList<>();
-        //listeCompetences.add("Plombier");
-        //listeCompetences.add("Electricien");
         competence = null;
         nomUtilisateur = "Francis";
         motDePasse = "Allo!234";
@@ -132,7 +122,6 @@ public class OrchestrateurTest {
             orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                                             motDePasse, listeServices, listeCompetences);
             } catch (Exception e) {
-                //System.out.println("OMER :" + e.getClass().getSimpleName());
                 estValider = false;
             }
         assertTrue(estValider);
@@ -182,7 +171,8 @@ public class OrchestrateurTest {
         assertEquals(utilisateur.identifiant.nomUtilisateur, "FRANCIS");
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
-//semble avoir un problème au niveau gestion de l'utilisateur null côté BD
+//semble avoir un problème côté BdApi...l'exception est lancer dans l'étape de gestion de la listeServices
+// et pas quand on vérifie si l'utilisateur existe. le résultat est le même, mais pourrait nous jouer des tour éventuellement
     @Test
     public void validationLoginUtilisateurExistePas() throws MyException{
         try {
@@ -213,10 +203,10 @@ public class OrchestrateurTest {
         try {
             orchestrateur.supprimerCompte(nomUtilisateur);
         } catch (Exception e) {
-            //System.out.println("OMER :" + e.getClass().getSimpleName());
             estValider = false;
         }
         assertTrue(estValider);
+
         estValider = false;
         try {
             orchestrateur.recupererUtilisateur(nomUtilisateur);
@@ -254,8 +244,6 @@ public class OrchestrateurTest {
         assertTrue(estValider);
         assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(1).getNomSservice(), "Plombier");
         assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(0).getNomSservice(), "Electricien");
-        //assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeCompetences.get(1), "Plombier");
-        //assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeCompetences.get(0), "Électricien");
         orchestrateur.retirerOffreDeService(nomUtilisateur, service);
         orchestrateur.retirerOffreDeService(nomUtilisateur, service2);
         orchestrateur.supprimerCompte(nomUtilisateur);
@@ -269,13 +257,28 @@ public class OrchestrateurTest {
             orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
             orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
         } catch (Exception e) {
-            //System.out.println("OMER :" + e.getClass().getSimpleName());
             estValider = true;
-        } finally {
-            orchestrateur.retirerOffreDeService(nomUtilisateur, service);
-            orchestrateur.supprimerCompte(nomUtilisateur);
         }
         assertTrue(estValider);
+        orchestrateur.retirerOffreDeService(nomUtilisateur, service);
+        orchestrateur.supprimerCompte(nomUtilisateur);
+    }
+
+    @Test
+    public void ajouterOffreDeServiceDeuxCompetences() throws MyException {
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, listeServices, listeCompetences);
+        try {
+            orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
+            orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
+        } catch (Exception e) {
+            estValider = false;
+        }
+        assertTrue(estValider);
+        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeCompetences.get(1), "Plombier");
+        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeCompetences.get(0), "Electricien");
+        orchestrateur.retirerOffreDeService(nomUtilisateur, service);
+        orchestrateur.retirerOffreDeService(nomUtilisateur, service2);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
@@ -285,9 +288,6 @@ public class OrchestrateurTest {
                 motDePasse, listeServices, listeCompetences);
         try {
             orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
-        } catch (Exception e) {
-            estValider = false;
-        } try {
             orchestrateur.retirerOffreDeService(nomUtilisateur, service);
         } catch (Exception e) {
             estValider = false;

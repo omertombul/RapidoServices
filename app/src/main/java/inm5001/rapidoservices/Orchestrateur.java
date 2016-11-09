@@ -101,12 +101,12 @@ public class Orchestrateur {
 
     public void ajouterOffreDeService(String nomUtilisateur, TypeServices service) throws SQLException {
         bd.addServiceUser(nomUtilisateur, service);
-        //bd.addCompetenceUser(nomUtilisateur, service.getNomSservice());
+        bd.addCompetenceUser(nomUtilisateur, service);
     }
 
-    public void retirerOffreDeService(String nomUtilisateur, AbstraiteServices service) throws MyException {
+    public void retirerOffreDeService(String nomUtilisateur, TypeServices service) throws MyException {
         bd.deleteService(nomUtilisateur, service.getNomSservice());
-        //bd.deleteCompetence(nomUtilisateur, service.getNomSservice());
+        bd.deleteCompetence(nomUtilisateur, service);
     }
     /*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
