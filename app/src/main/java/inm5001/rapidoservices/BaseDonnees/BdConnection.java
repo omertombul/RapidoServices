@@ -68,11 +68,12 @@ public class BdConnection {
         return stmt;
     }
 
-    public void insertToDB() {
+    public void insertToDB() throws SQLException {
         try {
             stmt.executeUpdate(SQL);
         } catch (SQLException ex) {
             System.out.println(ex + "    Error Putting new Data into DB");
+            throw ex; //ajouter par francis pour capturer l'erreur de tentative d'ajout d'un utilisateur existant
         }
     }
 
