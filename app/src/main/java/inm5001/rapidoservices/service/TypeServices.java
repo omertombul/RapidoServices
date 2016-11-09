@@ -14,7 +14,8 @@ public class TypeServices extends AbstraiteServices{
     private float tauxHorraire;
     private float prixFixe;
 
-    public TypeServices(float tauxHorraire, float prixFixe, String nomSservice, byte disponible, String ville, byte cote, String noTelephone, String courriel, String description ) {
+
+    public TypeServices(float tauxHorraire, float prixFixe, String nomSservice, boolean disponible, String ville, byte cote, String noTelephone, String courriel, String description ) {
         super( nomSservice, disponible, ville, cote, noTelephone, courriel, description );
         this.tauxHorraire = tauxHorraire;
         this.prixFixe = prixFixe;
@@ -35,4 +36,6 @@ public class TypeServices extends AbstraiteServices{
     public void setPrixFixe( float prixFixe ) {
         this.prixFixe = prixFixe;
     }
+
+
 }

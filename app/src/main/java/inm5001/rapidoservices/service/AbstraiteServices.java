@@ -1,21 +1,19 @@
 package inm5001.rapidoservices.service;
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * @author omer
  */
 
 public abstract class AbstraiteServices {
 	private String nomSservice;
- 	private byte disponible;
+ 	private boolean disponible;
  	private String ville;
  	private byte cote;
  	private String noTelephone;
  	private String courriel;
  	private String description;
 
-    public AbstraiteServices( String nomSservice, byte disponible, String ville, byte cote, String noTelephone, String courriel, String description ) {
+    public AbstraiteServices( String nomSservice, boolean disponible, String ville, byte cote, String noTelephone, String courriel, String description ) {
         this.nomSservice = nomSservice;
         this.disponible = disponible;
         this.ville = ville;
@@ -33,11 +31,11 @@ public abstract class AbstraiteServices {
         this.nomSservice = nomSservice;
     }
 
-    public byte isDisponible() {
+    public boolean isDisponible() {
         return disponible;
     }
 
-    public void setDisponible( byte disponible ) {
+    public void setDisponible( boolean disponible ) {
         this.disponible = disponible;
     }
 
