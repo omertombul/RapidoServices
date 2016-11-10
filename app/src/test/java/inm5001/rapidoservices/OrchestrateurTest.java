@@ -13,6 +13,7 @@ import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 
+import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_MODE_TRI_INTROUVABLE;
 import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_MOT_DE_PASSE_INVALIDE;
 import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_UTILISATEUR_N_EXISTE_PAS;
 import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_NOMUTILISATEUR_PAS_UNIQUE;
@@ -452,6 +453,20 @@ public class OrchestrateurTest {
         assertTrue(listePaire.get(0).getService().getNoTelephone() == "noTelephone1");
         assertTrue(listePaire.get(1).getService().getNoTelephone() == "noTelephone2");
         assertTrue(listePaire.get(2).getService().getNoTelephone() == "noTelephone3");
+    }
+
+    @Test
+    public void trierResultatRechercheElse() throws MyException {
+        ArrayList<PaireNomUtilisateurEtTypeService> listePaire = new ArrayList<>();
+        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1" , service);
+        listePaire.add(pair1);
+
+        try {
+            orchestrateur.trierResultatRecherche(listePaire, "bidon");
+        } catch (Exception e) {
+            estValider = !e.getMessage().equals(MESSAGE_MODE_TRI_INTROUVABLE);
+        }
+        assertFalse(estValider);
     }
 
     @Test
