@@ -321,9 +321,29 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteUsager(utilisateur.identifiant.nomUtilisateur, false);
         utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
         assertFalse(utilisateur.disponible);
+
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
+/*
+    @Test
+    public void modifierDisponibiliteService() throws MyException, SQLException {
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, listeServices, listeCompetences);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
+        utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
 
+        orchestrateur.modifierDisponibiliteService(utilisateur.identifiant.nomUtilisateur, utilisateur.listeServices.get(0).getNomSservice(), true);
+        utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
+        assertTrue(utilisateur.listeServices.get(0).isDisponible());
+
+        orchestrateur.modifierDisponibiliteService(utilisateur.identifiant.nomUtilisateur, utilisateur.listeServices.get(0).getNomSservice(), false);
+        utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
+        assertFalse(utilisateur.listeServices.get(0).isDisponible());
+
+        orchestrateur.retirerOffreDeService(nomUtilisateur, service);
+        orchestrateur.supprimerCompte(nomUtilisateur);
+    }
+ */
     @Test
     public void fauxPositif() throws Exception {
         assertTrue(false);
