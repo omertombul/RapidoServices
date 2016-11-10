@@ -306,7 +306,7 @@ public class OrchestrateurTest {
         assertTrue(estValider);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
-/*
+
     @Test
     public void modifierDisponibiliteUsager() throws MyException, SQLException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
@@ -317,9 +317,13 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteUsager(utilisateur.identifiant.nomUtilisateur, true);
         utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
         assertTrue(utilisateur.disponible);
+
+        orchestrateur.modifierDisponibiliteUsager(utilisateur.identifiant.nomUtilisateur, false);
+        utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
+        assertFalse(utilisateur.disponible);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
-*/
+
     @Test
     public void fauxPositif() throws Exception {
         assertTrue(false);
