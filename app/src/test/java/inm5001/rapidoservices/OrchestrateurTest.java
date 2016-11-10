@@ -29,6 +29,7 @@ public class OrchestrateurTest {
     private ArrayList<AbstraiteServices> listeServices;
     private TypeServices service;
     private TypeServices service2;
+    private TypeServices service3;
     private ArrayList<String> listeCompetences;
     private String competence;
     private boolean disponibleUtilisateur;
@@ -47,7 +48,6 @@ public class OrchestrateurTest {
     private Boolean estValider;
     //attributs AbstraiteServices
     private String nomSservice;
-    private String nomService;
     private boolean disponibleService;
     private String ville;
     private byte cote;
@@ -345,9 +345,113 @@ public class OrchestrateurTest {
     }
 
     @Test
-    public void cleanBd() throws MyException, SQLException {
-        orchestrateur.retirerOffreDeService(nomUtilisateur, service);
-        orchestrateur.supprimerCompte(nomUtilisateur);
+    public void trierResultatRechercheTauxHorraire() throws MyException {
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "ville1", cote,
+                "noTelephone1", adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "ville2", cote,
+                "noTelephone2", adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "ville3", cote,
+                "noTelephone3", adresseCourrielService, description);
+        ArrayList<PaireNomUtilisateurEtTypeService> listePaire = new ArrayList<>();
+        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1" , service);
+        PaireNomUtilisateurEtTypeService pair2 = new PaireNomUtilisateurEtTypeService("nomUtilisateur2" , service2);
+        PaireNomUtilisateurEtTypeService pair3 = new PaireNomUtilisateurEtTypeService("nomUtilisateur3" , service3);
+        listePaire.add(pair1);
+        listePaire.add(pair2);
+        listePaire.add(pair3);
+
+        listePaire = orchestrateur.trierResultatRecherche(listePaire, "tauxHorraire");
+        assertTrue(listePaire.get(0).getService().getTauxHorraire() == 1);
+        assertTrue(listePaire.get(1).getService().getTauxHorraire() == 2);
+        assertTrue(listePaire.get(2).getService().getTauxHorraire() == 3);
+    }
+
+    @Test
+    public void trierResultatRecherchePrixFixe() throws MyException {
+        service = new TypeServices(1, 3, "nomService1", disponibleService, "ville1", cote,
+                "noTelephone1", adresseCourrielService, description);
+        service2 = new TypeServices(2, 1, "nomService2", disponibleService, "ville2", cote,
+                "noTelephone2", adresseCourrielService, description);
+        service3 = new TypeServices(3, 2, "nomService3", disponibleService, "ville3", cote,
+                "noTelephone3", adresseCourrielService, description);
+        ArrayList<PaireNomUtilisateurEtTypeService> listePaire = new ArrayList<>();
+        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1" , service);
+        PaireNomUtilisateurEtTypeService pair2 = new PaireNomUtilisateurEtTypeService("nomUtilisateur2" , service2);
+        PaireNomUtilisateurEtTypeService pair3 = new PaireNomUtilisateurEtTypeService("nomUtilisateur3" , service3);
+        listePaire.add(pair1);
+        listePaire.add(pair2);
+        listePaire.add(pair3);
+
+        listePaire = orchestrateur.trierResultatRecherche(listePaire, "prixFixe");
+        assertTrue(listePaire.get(0).getService().getPrixFixe() == 1);
+        assertTrue(listePaire.get(1).getService().getPrixFixe() == 2);
+        assertTrue(listePaire.get(2).getService().getPrixFixe() == 3);
+    }
+
+    @Test
+    public void trierResultatRechercheNomService() throws MyException {
+        service = new TypeServices(1, 1, "nomService3", disponibleService, "ville1", cote,
+                "noTelephone1", adresseCourrielService, description);
+        service2 = new TypeServices(2, 2, "nomService1", disponibleService, "ville2", cote,
+                "noTelephone2", adresseCourrielService, description);
+        service3 = new TypeServices(3, 3, "nomService2", disponibleService, "ville3", cote,
+                "noTelephone3", adresseCourrielService, description);
+        ArrayList<PaireNomUtilisateurEtTypeService> listePaire = new ArrayList<>();
+        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1" , service);
+        PaireNomUtilisateurEtTypeService pair2 = new PaireNomUtilisateurEtTypeService("nomUtilisateur2" , service2);
+        PaireNomUtilisateurEtTypeService pair3 = new PaireNomUtilisateurEtTypeService("nomUtilisateur3" , service3);
+        listePaire.add(pair1);
+        listePaire.add(pair2);
+        listePaire.add(pair3);
+
+        listePaire = orchestrateur.trierResultatRecherche(listePaire, "nomService");
+        assertTrue(listePaire.get(0).getService().getNomSservice() == "nomService1");
+        assertTrue(listePaire.get(1).getService().getNomSservice() == "nomService2");
+        assertTrue(listePaire.get(2).getService().getNomSservice() == "nomService3");
+    }
+
+    @Test
+    public void trierResultatRechercheVille() throws MyException {
+        service = new TypeServices(1, 1, "nomService1", disponibleService, "ville3", cote,
+                "noTelephone1", adresseCourrielService, description);
+        service2 = new TypeServices(2, 2, "nomService2", disponibleService, "ville1", cote,
+                "noTelephone2", adresseCourrielService, description);
+        service3 = new TypeServices(3, 3, "nomService3", disponibleService, "ville2", cote,
+                "noTelephone3", adresseCourrielService, description);
+        ArrayList<PaireNomUtilisateurEtTypeService> listePaire = new ArrayList<>();
+        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1" , service);
+        PaireNomUtilisateurEtTypeService pair2 = new PaireNomUtilisateurEtTypeService("nomUtilisateur2" , service2);
+        PaireNomUtilisateurEtTypeService pair3 = new PaireNomUtilisateurEtTypeService("nomUtilisateur3" , service3);
+        listePaire.add(pair1);
+        listePaire.add(pair2);
+        listePaire.add(pair3);
+
+        listePaire = orchestrateur.trierResultatRecherche(listePaire, "ville");
+        assertTrue(listePaire.get(0).getService().getVille() == "ville1");
+        assertTrue(listePaire.get(1).getService().getVille() == "ville2");
+        assertTrue(listePaire.get(2).getService().getVille() == "ville3");
+    }
+
+    @Test
+    public void trierResultatRechercheNoTelephone() throws MyException {
+        service = new TypeServices(1, 1, "nomService1", disponibleService, "ville1", cote,
+                "noTelephone3", adresseCourrielService, description);
+        service2 = new TypeServices(2, 2, "nomService2", disponibleService, "ville2", cote,
+                "noTelephone1", adresseCourrielService, description);
+        service3 = new TypeServices(3, 3, "nomService3", disponibleService, "ville3", cote,
+                "noTelephone2", adresseCourrielService, description);
+        ArrayList<PaireNomUtilisateurEtTypeService> listePaire = new ArrayList<>();
+        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1" , service);
+        PaireNomUtilisateurEtTypeService pair2 = new PaireNomUtilisateurEtTypeService("nomUtilisateur2" , service2);
+        PaireNomUtilisateurEtTypeService pair3 = new PaireNomUtilisateurEtTypeService("nomUtilisateur3" , service3);
+        listePaire.add(pair1);
+        listePaire.add(pair2);
+        listePaire.add(pair3);
+
+        listePaire = orchestrateur.trierResultatRecherche(listePaire, "noTelephone");
+        assertTrue(listePaire.get(0).getService().getNoTelephone() == "noTelephone1");
+        assertTrue(listePaire.get(1).getService().getNoTelephone() == "noTelephone2");
+        assertTrue(listePaire.get(2).getService().getNoTelephone() == "noTelephone3");
     }
 
     @Test

@@ -12,5 +12,7 @@ public interface ConstanteOrchetrateur {
     String MESSAGE_MOT_DE_PASSE_INVALIDE = "Le mot de passe est invalide" + MESSAGE_RECOMMENCER;
 
     String MESSAGE_NOMUTILISATEUR_PAS_UNIQUE = "Le nom d'utilisateur existe déjà, veillez faire un autre choix.";
+
+    String MESSAGE_MODE_TRI_INTROUVABLE = "Le mode de tri sélectionné est introuvable.";
 }
 

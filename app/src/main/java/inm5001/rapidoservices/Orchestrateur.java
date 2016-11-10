@@ -2,8 +2,8 @@ package inm5001.rapidoservices;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 
-import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.baseDonnees.BdApi;
 import inm5001.rapidoservices.service.TypeServices;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
@@ -123,6 +123,34 @@ public class Orchestrateur {
         } else {
             bd.updateServiceDisponibilite(nomUtilisateur, nomService, "0");
         }
+    }
+/*
+    public ArrayList<TypeServices> rechercheDeServices(float tauxHorraire, float prixFixe, String nomSservice,
+                                                            boolean disponible, String ville, byte cote, String noTelephone,
+                                                            String courriel, String description) throws MyException, SQLException {
+        TypeServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote, noTelephone,
+                                                        courriel, description);
+        ArrayList<TypeServices> listeServices = bd.searchForServices(service);
+        return listeServices;
+    }
+*/
+    public ArrayList<PaireNomUtilisateurEtTypeService> trierResultatRecherche(ArrayList<PaireNomUtilisateurEtTypeService> listeServices, String trierPar) throws MyException {
+        if (trierPar == "tauxHorraire") {
+            Collections.sort(listeServices, new TypeServices.TrierParTauxHorraire());
+        } else if (trierPar == "prixFixe") {
+            Collections.sort(listeServices, new TypeServices.TrierParPrixFixe());
+        } else if (trierPar == "nomService") {
+            Collections.sort(listeServices, new TypeServices.TrierParNomService());
+        } else if (trierPar == "ville") {
+            Collections.sort(listeServices, new TypeServices.TrierParVille());
+        } else if (trierPar == "noTelephone") {
+            Collections.sort(listeServices, new TypeServices.TrierParNoTelephone());
+        } else {
+            MyException e = new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
+            throw e;
+        }
+
+        return listeServices;
     }
     /*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
