@@ -13,6 +13,7 @@ import inm5001.rapidoservices.service.TypeServices;
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_IDENTIFIANT_NULL;
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_PROFILE_NULL;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -26,7 +27,7 @@ public class UtilisateurTest {
     private AbstraiteServices service;
     private ArrayList<String> listeCompetences;
     private String competence;
-   // private boolean disponible;
+    private boolean disponibleUtilisateur;
     //private ArrayList<Evaluation> listeEvaluations;
     //private ArrayList<Evaluation> lisetEvaluationServicesGlobal;
     //private Evaluation evaluation;
@@ -41,23 +42,23 @@ public class UtilisateurTest {
     private String adresseCourrielProfile;
     private Boolean estValider;
 //attributs AbstraiteServices
-    boolean disponible;
-    String ville;
-    byte cote;
-    String numeroTelephoneService;
-    String adresseCourrielService;
-    String description;
+    private boolean disponibleService;
+    private String ville;
+    private byte cote;
+    private String numeroTelephoneService;
+    private String adresseCourrielService;
+    private String description;
 //attribut Plomberie
-    String nomSservice;
-    float tauxHorraire;
-    float prixFixe;
+    private String nomSservice;
+    private float tauxHorraire;
+    private float prixFixe;
 
     @Before
     public void setUp() throws MyException {
         listeServices = new ArrayList<>();
-        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponible, ville, cote,
+        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, cote,
                 numeroTelephoneService, "service1@gmail.com", description));
-        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponible, ville, cote,
+        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, cote,
                 numeroTelephoneService, "service2@gmail.com", description));
         service = null;
         listeCompetences = new ArrayList<>();
@@ -74,7 +75,8 @@ public class UtilisateurTest {
         profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
         utilisateur = null;
         estValider = false;
-        disponible = false;
+        disponibleUtilisateur = false;
+        disponibleService = false;
         ville = "Montreal";
         cote = 2;
         numeroTelephoneService ="514-444-4444";
@@ -99,7 +101,8 @@ public class UtilisateurTest {
         utilisateur = null;
         motDePasse = null;
         estValider = null;
-        disponible = false;
+        disponibleUtilisateur = false;
+        disponibleService = false;
         ville = null;
         cote = 0;
         numeroTelephoneService = null;
@@ -155,6 +158,13 @@ public class UtilisateurTest {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
         motDePasse = utilisateur.identifiant.motDePasse;
         assertEquals(motDePasse, "Allo!234");
+    }
+
+    @Test
+    public void UtilisateurDisponible() throws Exception {
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
+        disponibleUtilisateur = utilisateur.disponible;
+        assertFalse(disponibleUtilisateur);
     }
 //PROFILE
 @Test

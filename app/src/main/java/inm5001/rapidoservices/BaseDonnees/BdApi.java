@@ -106,6 +106,8 @@ public class BdApi {
     //*************************************************************************
     // level 2 abstraction
     private String SQLaddUser(Utilisateur U) {
+        byte diponibilite = (byte) (U.disponible?1:0);
+
         String SQL;
         String SQL_DEBUT = "INSERT INTO utilisateur VALUES('";
         String SQL_SEPARATEUR = "' ,'";
@@ -116,7 +118,7 @@ public class BdApi {
         SQL += U.profile.nom + SQL_SEPARATEUR;
         SQL += U.profile.prenom + SQL_SEPARATEUR;
         SQL += U.profile.adresseCourriel + SQL_SEPARATEUR;
-        SQL += "1" + SQL_SEPARATEUR;  // dispo
+        SQL += diponibilite + SQL_SEPARATEUR;  // dispo
         SQL += "1" + SQL_SEPARATEUR;  // eval
         SQL += "1" + SQL_SEPARATEUR;         // geo coordonnees
         SQL += U.profile.numeroTelephone + SQL_FIN;
@@ -161,6 +163,8 @@ public class BdApi {
     }
 
     private String SQLaddServiceUser(String nomUtilisateur, TypeServices S) {
+        byte diponibilite = (byte) (S.isDisponible()?1:0);
+
         String SQL;
         String SQL_DEBUT = "INSERT INTO servicesDUsager VALUES('";
         String SQL_SEPARATEUR = "' ,'";
@@ -170,7 +174,7 @@ public class BdApi {
         SQL += nomUtilisateur + SQL_SEPARATEUR;
         SQL += S.getNomSservice() + SQL_SEPARATEUR;
         SQL += "0" + SQL_SEPARATEUR;              // duree
-        SQL += S.isDisponible() + SQL_SEPARATEUR;
+        SQL += diponibilite + SQL_SEPARATEUR;
         SQL += "0" + SQL_SEPARATEUR;          // reservation
         SQL += S.getPrixFixe() + SQL_SEPARATEUR;
         SQL += S.getTauxHorraire() + SQL_SEPARATEUR;
@@ -252,6 +256,7 @@ public class BdApi {
                 ArrayList<AbstraiteServices> listServices = new ArrayList<>();
                 ArrayList<String> listeCompetences = new ArrayList<>();
                 U = new Utilisateur(I,P,listServices,listeCompetences);
+                U.disponible = RSutilisateur.getByte("disponibilite") != 0;
             }
         } catch (Exception ex) {
             System.out.println(ex + "Error updating User with RSutilisateur");
@@ -266,7 +271,7 @@ public class BdApi {
             while (RSservices.next()) {
                 AbstraiteServices S = new TypeServices(RSservices.getFloat("prixHorraire"),
                         RSservices.getFloat("prixFixe"), RSservices.getString("nomService"),
-                        RSservices.getBoolean("disponibilite"), RSservices.getString("ville"),
+                        RSservices.getByte("disponibilite") != 0, RSservices.getString("ville"),
                         RSservices.getByte ("cote"), RSservices.getString("noTelephone"),
                         RSservices.getString("courriel"), RSservices.getString("description"));
                 U.listeServices.add(S);

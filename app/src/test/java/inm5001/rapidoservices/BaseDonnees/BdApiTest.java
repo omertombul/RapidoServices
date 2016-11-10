@@ -31,7 +31,7 @@ public class BdApiTest {
     private AbstraiteServices service;
     private ArrayList<String> listeCompetences;
     private String competence;
-    //private boolean disponible;
+    private boolean disponibleUtilisateur;
     //private ArrayList<Evaluation> listeEvaluations;
     //private ArrayList<Evaluation> lisetEvaluationServicesGlobal;
     //private Evaluation evaluation;
@@ -46,7 +46,7 @@ public class BdApiTest {
     private String adresseCourrielProfile;
     private Boolean estValider;
     //attributs AbstraiteServices
-    private boolean disponible;
+    private boolean disponibleService;
     private String ville;
     private byte cote;
     private String numeroTelephoneService;
@@ -61,9 +61,9 @@ public class BdApiTest {
     public void setUp() throws MyException {
         bd = new BdApi();
         listeServices = new ArrayList<>();
-        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponible, ville, cote,
+        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, cote,
                 numeroTelephoneService, "service1@gmail.com", description));
-        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponible, ville, cote,
+        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, cote,
                 numeroTelephoneService, "service2@gmail.com", description));
         service = null;
         listeCompetences = new ArrayList<>();
@@ -80,7 +80,8 @@ public class BdApiTest {
         profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
         utilisateur = null;
         estValider = false;
-        disponible = false;
+        disponibleUtilisateur = false;
+        disponibleService = false;
         ville = "Montreal";
         cote = 2;
         numeroTelephoneService ="514-444-4444";
@@ -106,7 +107,8 @@ public class BdApiTest {
         utilisateur = null;
         motDePasse = null;
         estValider = null;
-        disponible = false;
+        disponibleUtilisateur = false;
+        disponibleService = false;
         ville = null;
         cote = 0;
         numeroTelephoneService = null;

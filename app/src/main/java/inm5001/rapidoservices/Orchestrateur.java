@@ -27,7 +27,7 @@ public class Orchestrateur {
     private AbstraiteServices service;
     private ArrayList<String> listeCompetences;
     private String competence;
-    //private boolean disponible;
+    private String disponibleUtilisateur;
     //private ArrayList<Evaluation> listeEvaluations;
     //private ArrayList<Evaluation> lisetEvaluationServicesGlobal;
     //private Evaluation evaluation;
@@ -43,7 +43,7 @@ public class Orchestrateur {
     private Boolean estValider;
 //attributs AbstraiteServices
     private String nomSservice;
-    private boolean disponible;
+    private String disponibleService;
     private String ville;
     private byte cote;
     private String numeroTelephoneService;
@@ -107,6 +107,22 @@ public class Orchestrateur {
     public void retirerOffreDeService(String nomUtilisateur, TypeServices service) throws MyException {
         bd.deleteService(nomUtilisateur, service.getNomSservice());
         bd.deleteCompetence(nomUtilisateur, service);
+    }
+
+    public void modifierDisponibiliteUsager(String nomUtilisateur, boolean disponible) throws MyException, SQLException {
+        if (disponible) {
+            bd.updateUserDisponibilite(nomUtilisateur, "1");
+        } else {
+            bd.updateUserDisponibilite(nomUtilisateur, "0");
+        }
+    }
+
+    public void modifierDisponibiliteService(String nomUtilisateur, String nomService, boolean disponible) throws MyException, SQLException {
+        if (disponible) {
+            bd.updateServiceDisponibilite(nomUtilisateur, nomService, "1");
+        } else {
+            bd.updateServiceDisponibilite(nomUtilisateur, nomService, "0");
+        }
     }
     /*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {

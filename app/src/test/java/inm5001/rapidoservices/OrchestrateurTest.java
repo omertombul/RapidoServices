@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import inm5001.rapidoservices.service.AbstraiteServices;
@@ -30,7 +31,7 @@ public class OrchestrateurTest {
     private TypeServices service2;
     private ArrayList<String> listeCompetences;
     private String competence;
-    //private boolean disponibleGlobale;
+    private boolean disponibleUtilisateur;
     //private ArrayList<Evaluation> listeEvaluations;
     //private ArrayList<Evaluation> lisetEvaluationServicesGlobal;
     //private Evaluation evaluation;
@@ -47,7 +48,7 @@ public class OrchestrateurTest {
     //attributs AbstraiteServices
     private String nomSservice;
     private String nomService;
-    private boolean disponible;
+    private boolean disponibleService;
     private String ville;
     private byte cote;
     private String numeroTelephoneService;
@@ -74,7 +75,8 @@ public class OrchestrateurTest {
         utilisateur = null;
         estValider = true;
         nomSservice = "Plombier";
-        disponible = false;
+        disponibleUtilisateur = false;
+        disponibleService = false;
         ville = "Montreal";
         cote = 2;
         numeroTelephoneService ="514-444-4444";
@@ -82,9 +84,9 @@ public class OrchestrateurTest {
         description = "Repare les tuyeaux";
         tauxHorraire = 14.50f;
         prixFixe = 50.00f;
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, cote,
                 numeroTelephoneService, adresseCourrielService, description);
-        service2 = new TypeServices(tauxHorraire, prixFixe, "Electricien", disponible, ville, cote,
+        service2 = new TypeServices(tauxHorraire, prixFixe, "Electricien", disponibleService, ville, cote,
                 numeroTelephoneService, adresseCourrielService, description);
     }
 
@@ -104,7 +106,8 @@ public class OrchestrateurTest {
         motDePasse = null;
         estValider = null;
         nomSservice = null;
-        disponible = false;
+        disponibleUtilisateur = false;
+        disponibleService = false;
         ville = null;
         cote = 0;
         numeroTelephoneService = null;
@@ -303,7 +306,20 @@ public class OrchestrateurTest {
         assertTrue(estValider);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
+/*
+    @Test
+    public void modifierDisponibiliteUsager() throws MyException, SQLException {
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, listeServices, listeCompetences);
+        utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
+        assertFalse(utilisateur.disponible);
 
+        orchestrateur.modifierDisponibiliteUsager(utilisateur.identifiant.nomUtilisateur, true);
+        utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
+        assertTrue(utilisateur.disponible);
+        orchestrateur.supprimerCompte(nomUtilisateur);
+    }
+*/
     @Test
     public void fauxPositif() throws Exception {
         assertTrue(false);

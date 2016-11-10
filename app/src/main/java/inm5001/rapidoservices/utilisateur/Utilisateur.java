@@ -16,7 +16,7 @@ public class Utilisateur {
     public Profile profile;
     public ArrayList<AbstraiteServices> listeServices = new ArrayList<>();
     public ArrayList<String> listeCompetences = new ArrayList<>();
-    //public boolean disponible;
+    public boolean disponible = false;
     //public ArrayList<Evaluation> listeEvaluations;
     //public ArrayList<Evaluation> lisetEvaluationServicesGlobal;
     //public Geolocalisation geolocalisation;
