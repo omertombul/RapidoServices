@@ -324,7 +324,7 @@ public class OrchestrateurTest {
 
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
-/*
+
     @Test
     public void modifierDisponibiliteService() throws MyException, SQLException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
@@ -343,7 +343,13 @@ public class OrchestrateurTest {
         orchestrateur.retirerOffreDeService(nomUtilisateur, service);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
- */
+
+    @Test
+    public void cleanBd() throws MyException, SQLException {
+        orchestrateur.retirerOffreDeService(nomUtilisateur, service);
+        orchestrateur.supprimerCompte(nomUtilisateur);
+    }
+
     @Test
     public void fauxPositif() throws Exception {
         assertTrue(false);
