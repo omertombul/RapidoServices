@@ -33,12 +33,40 @@
         android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/prenomProfil" />
+        android:id="@+id/prenomProfil"
+        />
 
     <TextView
-        android:text=""
+        android:text="Courriel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView12" />
+        android:id="@+id/textView11"
+        android:layout_marginTop="19dp"/>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/courrielProfil" />
+
+    <TextView
+        android:text="Téléphone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView14"
+        android:layout_marginTop="19dp"/>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/telProfil" />
+
+    <Button
+        android:text="Ajouter Service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ajouter"
+        android:layout_marginTop="30dp"/>
 
 </LinearLayout>

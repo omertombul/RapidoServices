@@ -58,8 +58,13 @@ public class LoginActivity extends Activity {
 			@Override
 			public void onClick(View v){
 
+				Intent profilactivite = new Intent(LoginActivity.this, ProfilActivity.class);
 
-                    connect();
+				// On rajoute un extra
+				//secondeActivite.putExtra(AGE, 31);
+
+				// Puis on lance l'intent !
+				startActivity(profilactivite);
             }
 
         });
