@@ -434,28 +434,6 @@ public class OrchestrateurTest {
     }
 
     @Test
-    public void trierResultatRechercheNoTelephone() throws MyException {
-        service = new TypeServices(1, 1, "nomService1", disponibleService, "ville1", cote,
-                "noTelephone3", adresseCourrielService, description);
-        service2 = new TypeServices(2, 2, "nomService2", disponibleService, "ville2", cote,
-                "noTelephone1", adresseCourrielService, description);
-        service3 = new TypeServices(3, 3, "nomService3", disponibleService, "ville3", cote,
-                "noTelephone2", adresseCourrielService, description);
-        ArrayList<PaireNomUtilisateurEtTypeService> listePaire = new ArrayList<>();
-        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1" , service);
-        PaireNomUtilisateurEtTypeService pair2 = new PaireNomUtilisateurEtTypeService("nomUtilisateur2" , service2);
-        PaireNomUtilisateurEtTypeService pair3 = new PaireNomUtilisateurEtTypeService("nomUtilisateur3" , service3);
-        listePaire.add(pair1);
-        listePaire.add(pair2);
-        listePaire.add(pair3);
-
-        listePaire = orchestrateur.trierResultatRecherche(listePaire, "noTelephone");
-        assertTrue(listePaire.get(0).getService().getNoTelephone() == "noTelephone1");
-        assertTrue(listePaire.get(1).getService().getNoTelephone() == "noTelephone2");
-        assertTrue(listePaire.get(2).getService().getNoTelephone() == "noTelephone3");
-    }
-
-    @Test
     public void trierResultatRechercheElse() throws MyException {
         ArrayList<PaireNomUtilisateurEtTypeService> listePaire = new ArrayList<>();
         PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1" , service);
