@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">RapidoServices</string>
+    <string name="title_activity_recherche">recherche</string>
+    <string name="prix_fixe">Prix Fixe</string>
+    <string name="recherche">Recherche</string>
+    <string name="taux_horraire">Taux Horraire</string>
 </resources>

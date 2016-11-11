@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="inm5001.rapidoservices.RechercheActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="155dp"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    <TextView
+        android:text="@string/recherche"
+        android:textAlignment="center"
+        android:textSize="50dp"
+        android:textColor="#efff"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="50dp"
+        android:layout_width="247dp"
+        android:layout_height="70dp"
+
+        android:id="@+id/textView" />
+
+    <EditText
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="175dp"
+        android:text="10.0"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/editText_tauxHorraire" />
+
+    <CheckBox
+        android:text="@string/taux_horraire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="180dp"
+        android:id="@+id/checkBox_tauxHorraire"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="top|left"
+        android:textSize="18sp" />
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="235dp"
+        android:text="50"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editText_prixFixe"
+        android:layout_width="141dp"
+        android:fontFamily="sans-serif" />
+
+    <CheckBox
+        android:text="@string/prix_fixe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="235dp"
+        android:id="@+id/checkBox_prixFixe"
+        android:duplicateParentState="false"
+        android:textSize="18sp" />
+
+
+    <include layout="@layout/content_recherche"
+        android:id="@+id/include" />
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="285dp"
+        android:inputType="textPersonName"
+        android:text="Plombier"
+        android:ems="10"
+        android:id="@+id/editText_service" />
+
+    <CheckBox
+        android:text="Service"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="285dp"
+        android:id="@+id/checkBox3"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="center_vertical|left"
+        android:textSize="18sp"
+        android:layout_gravity="bottom|right" />
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="330dp"
+        android:inputType="textPersonName"
+        android:text="Montreal"
+        android:ems="10"
+        android:id="@+id/editText_ville" />
+
+    <CheckBox
+        android:text="Ville"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="335dp"
+        android:id="@+id/checkBox_service"
+        app:layout_anchor="@+id/include"
+        android:textSize="18sp" />
+
+    <Button
+        android:text="Rechercher"
+        android:layout_width="124dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
+        android:textColor="@android:color/black"
+        android:background="@android:color/holo_blue_light"
+        android:layout_marginLeft="50dp"
+        android:id="@+id/button_recherche" />
+
+
+</android.support.design.widget.CoordinatorLayout>
