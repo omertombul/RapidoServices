@@ -143,8 +143,6 @@ public class Orchestrateur {
             Collections.sort(listeServices, new TypeServices.TrierParNomService());
         } else if (trierPar == "ville") {
             Collections.sort(listeServices, new TypeServices.TrierParVille());
-        } else if (trierPar == "noTelephone") {
-            Collections.sort(listeServices, new TypeServices.TrierParNoTelephone());
         } else {
             MyException e = new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
             throw e;

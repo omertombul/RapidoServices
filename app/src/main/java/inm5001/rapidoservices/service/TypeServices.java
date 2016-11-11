@@ -72,14 +72,6 @@ public class TypeServices extends AbstraiteServices implements Comparable<PaireN
         }
     }
 
-    public static class TrierParNoTelephone implements Comparator<PaireNomUtilisateurEtTypeService> {
-
-        @Override
-        public int compare(PaireNomUtilisateurEtTypeService pair1, PaireNomUtilisateurEtTypeService pair2) {
-            return pair1.getService().getNoTelephone().compareTo(pair2.getService().getNoTelephone());
-        }
-    }
-
     //Pas implémenté, mais obligatoire pour le [implements Comparable<TypeServices>]
     @Override
     public int compareTo(PaireNomUtilisateurEtTypeService o) {
