@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".InscriptionActivity"></activity>
         <activity android:name=".ProfilActivity"></activity>
+        <activity android:name=".AjouterServiceActivity"></activity>
         <activity
             android:name=".RechercheActivity"
             android:label="@string/title_activity_recherche"
