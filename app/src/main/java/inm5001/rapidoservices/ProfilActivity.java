@@ -31,10 +31,6 @@ public class ProfilActivity extends Activity {
         ajouter = (Button)findViewById(R.id.ajouter);
         rechercher = (Button)findViewById(R.id.rechercher);
         Intent intent = getIntent();
-        String prenom_Inscrip= intent.getStringExtra("prenom");
-        String nom_Inscrip = intent.getStringExtra("nom");
-        String courriel_Inscrip = intent.getStringExtra("email");
-        String tel_Inscrip = intent.getStringExtra("email");
         final String userName = intent.getStringExtra("userName");
         String pass = intent.getStringExtra("password");
 
@@ -44,22 +40,25 @@ public class ProfilActivity extends Activity {
             @Override
             public void run() {
                 Orchestrateur o = new Orchestrateur();
+                Utilisateur u ;
                 try {
+
                     u = o.recupererUtilisateur(userName);
+                    courriel = (TextView)findViewById(R.id.courrielProfil);
+                    telephone = (TextView)findViewById(R.id.telProfil);
+                    nom = (TextView)findViewById(R.id.nomProfil);
+                    prenom = (TextView)findViewById(R.id.prenomProfil);
+                    nom.setText(u.profile.nom);
+                    prenom.setText(u.profile.prenom);
+                    courriel.setText(u.profile.adresseCourriel);
+                    telephone.setText(u.profile.numeroTelephone);
+
                 }catch(Exception e){
-                    Utilisateur u = new Utilisateur();
+
                     System.out.println(e);
                 }
 
 
-                courriel = (TextView)findViewById(R.id.courrielProfil);
-                telephone = (TextView)findViewById(R.id.telProfil);
-                nom = (TextView)findViewById(R.id.nomProfil);
-                prenom = (TextView)findViewById(R.id.prenomProfil);
-                nom.setText(u.profile.nom);
-                prenom.setText(u.profile.prenom);
-                courriel.setText(u.profile.adresseCourriel);
-                telephone.setText(u.profile.numeroTelephone);
 
             }
         });
