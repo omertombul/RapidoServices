@@ -21,21 +21,7 @@ public class Utilisateur {
     //public ArrayList<Evaluation> lisetEvaluationServicesGlobal;
     //public Geolocalisation geolocalisation;
 
-    /*
-    public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<Service> listeServices, ArrayList<String> listeCompetences, boolean disponible, ArrayList<Evaluation> listeEvaluations, ArrayList<Evaluation> lisetEvaluationServicesGlobal, Geolocalisation geolocalisation) {
-        this.identifiant = identifiant;
-        this.profile = profile;
-        this.listeServices = listeServices;
-        this.listeCompetences = listeCompetences;
-        this.disponible = disponible;
-        this.listeEvaluations = listeEvaluations;
-        this.lisetEvaluationsServicesGlobal = lisetEvaluationServicesGlobal;
-        this.geolocalisation = geolocalisation;
-    }
-    */
-
     public Utilisateur(){
-
     }
 
     public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
