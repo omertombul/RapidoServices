@@ -26,7 +26,7 @@ public class AbstraiteServicesTest {
             disponible = false;
             ville = "Montreal";
             cote = 2;
-            noTelephone ="514-444-4444";
+            noTelephone ="5144444444";
             courriel = "plomberie@plomberi.com";
             description = "Repare les tuyeaux";
             tauxHorraire = 14.50f;
@@ -56,7 +56,7 @@ public class AbstraiteServicesTest {
     public void getNomSservice() throws Exception {
         AbstraiteServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote, noTelephone, courriel, description);
         nomSservice = service.getNomSservice();
-        assertEquals(nomSservice, "Plomberie");
+        assertEquals(nomSservice, "PLOMBERIE");
     }
 
     @Test

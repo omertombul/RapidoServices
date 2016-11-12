@@ -56,14 +56,8 @@ public class UtilisateurTest {
     @Before
     public void setUp() throws MyException {
         listeServices = new ArrayList<>();
-        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, cote,
-                numeroTelephoneService, "service1@gmail.com", description));
-        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, cote,
-                numeroTelephoneService, "service2@gmail.com", description));
         service = null;
         listeCompetences = new ArrayList<>();
-        listeCompetences.add("Plombier");
-        listeCompetences.add("Électricien");
         competence = null;
         nomUtilisateur = "Francis";
         motDePasse = "Allo!234";
@@ -79,11 +73,17 @@ public class UtilisateurTest {
         disponibleService = false;
         ville = "Montreal";
         cote = 2;
-        numeroTelephoneService ="514-444-4444";
+        numeroTelephoneService ="5144444444";
         adresseCourrielService = "plomberie@plomberi.com";
         description = "Repare les tuyeaux";
         tauxHorraire = 14.50f;
         prixFixe = 50.00f;
+        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, cote,
+                numeroTelephoneService, "service1@gmail.com", description));
+        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, cote,
+                numeroTelephoneService, "service2@gmail.com", description));
+        listeCompetences.add("Plombier");
+        listeCompetences.add("Electricien");
     }
 
     @After
@@ -215,7 +215,7 @@ public class UtilisateurTest {
     public void TraiterListeCompetences() throws Exception {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
         competence = utilisateur.listeCompetences.get(1);
-        assertEquals(competence, "Électricien");
+        assertEquals(competence, "Electricien");
     }
 
     @Test
