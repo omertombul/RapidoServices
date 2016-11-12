@@ -58,13 +58,11 @@ public class LoginActivity extends Activity {
 			@Override
 			public void onClick(View v){
 
-				Intent profilactivite = new Intent(LoginActivity.this, ProfilActivity.class);
 
-				// On rajoute un extra
-				//secondeActivite.putExtra(AGE, 31);
 
-				// Puis on lance l'intent !
-				startActivity(profilactivite);
+
+				connect();
+
             }
 
         });
@@ -90,7 +88,6 @@ public class LoginActivity extends Activity {
 	//Methode de connection de l'utilisateur et validation des credentials
 	private void connect() {
 
-		//mProgressDialog = ProgressDialog.show(this, "Attendez svp","Tentative de Connection", true);
 
         new Thread() {
 			@Override
@@ -111,15 +108,12 @@ public class LoginActivity extends Activity {
                             dlgAlert.create().show();
                         }
                     });
+					Intent profilactivite = new Intent(LoginActivity.this, ProfilActivity.class);
+                    profilactivite.putExtra("userName",username.getText().toString());
+                    profilactivite.putExtra("password",password.getText().toString());
+					startActivity(profilactivite);
 
-//					runOnUiThread(new Runnable() {
-//						@Override
-//						public void run() {
-//							mProgressDialog.dismiss();
-//						}
-//
-//					});
-				} catch (final Exception ex) {
+		} catch (final Exception ex) {
 
 					System.out.println(ex.getMessage());
 
@@ -134,12 +128,7 @@ public class LoginActivity extends Activity {
 
 
 
-//                    runOnUiThread(new Runnable() {
-//						@Override
-//						public void run() {
-//							mProgressDialog.dismiss();
-//						}
-//					});
+//
 				}
 			}
 		}.start();

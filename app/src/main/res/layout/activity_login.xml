@@ -59,16 +59,6 @@
         android:layout_alignStart="@+id/editText" />
 
     <Button
-        android:text="S'inscrire"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/sInscrire"
-        android:layout_alignBaseline="@+id/seConnecter"
-        android:layout_alignBottom="@+id/seConnecter"
-        android:layout_alignEnd="@+id/editText2"
-        android:layout_marginEnd="17dp" />
-
-    <Button
         android:text="Se connecter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,5 +68,15 @@
         android:layout_below="@+id/editText2"
         android:layout_alignStart="@+id/textView"
         android:layout_marginStart="11dp" />
+
+    <Button
+        android:text="S'inscrire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sInscrire"
+        android:layout_alignBaseline="@+id/seConnecter"
+        android:layout_alignBottom="@+id/seConnecter"
+        android:layout_alignEnd="@+id/editText2"
+        android:layout_marginEnd="27dp" />
 
 </RelativeLayout>
