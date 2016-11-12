@@ -21,6 +21,7 @@ public class ProfilActivity extends Activity {
     Utilisateur u;
     Orchestrateur o;
     Button ajouter = null;
+    Button rechercher = null;
 
 
     @Override
@@ -28,6 +29,7 @@ public class ProfilActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
         ajouter = (Button)findViewById(R.id.ajouter);
+        rechercher = (Button)findViewById(R.id.rechercher);
         Intent intent = getIntent();
         String prenom_Inscrip= intent.getStringExtra("prenom");
         String nom_Inscrip = intent.getStringExtra("nom");
@@ -78,6 +80,30 @@ public class ProfilActivity extends Activity {
 
 
                     startActivity(ajouterService);
+
+
+
+
+
+
+            }
+        });
+
+        rechercher.setOnClickListener(new View.OnClickListener() {
+
+
+
+            @Override
+            public void onClick(View v) {
+                // Le premier paramètre est le nom de l'activité actuelle
+                // Le second est le nom de l'activité de destination
+
+
+
+                Intent rechercherService = new Intent(ProfilActivity.this, RechercheActivity.class);
+
+
+                startActivity(rechercherService);
 
 
 

@@ -70,4 +70,10 @@
         android:id="@+id/ajouter"
         android:layout_marginTop="30dp"/>
 
+    <Button
+        android:text="Rechercher service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rechercher" />
+
 </LinearLayout>
