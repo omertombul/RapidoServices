@@ -36,7 +36,6 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
     EditText tauxHorraire = null;
     EditText emailService = null;
     EditText noTelService = null;
-    EditText competence = null;
     Orchestrateur o;
     String userName;
     String nomService;
@@ -60,7 +59,7 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
         prix = (EditText)findViewById(R.id.editTextPrix);
         emailService = (EditText)findViewById(R.id.editTextServiceEmail);
         noTelService = (EditText)findViewById(R.id.editTextServiceNoTel);
-        competence = (EditText)findViewById(R.id.editTextCompetence);
+
 
 
         //creation du alert box
@@ -110,7 +109,7 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
 
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
-/////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

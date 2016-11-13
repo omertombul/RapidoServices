@@ -30,6 +30,7 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
     TextView telephone = null;
     Button ajouter = null;
     Button rechercher = null;
+    Utilisateur user;
 
 
     @Override
@@ -45,7 +46,45 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
         final String userName = intent.getStringExtra("userName");
         //String pass = intent.getStringExtra("password");
 
-/////////////////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+        // lance un processus qui recupere l'info de l'utilisateur de la bd
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Orchestrateur o = new Orchestrateur();
+                Utilisateur u;
+                try {
+                    u = o.recupererUtilisateur(userName);
+                    user = u;
+                    System.out.println("**************** nom :" +u.profile.nom);
+                    courriel = (TextView) findViewById(R.id.courrielProfil);
+                    telephone = (TextView) findViewById(R.id.telProfil);
+                    nom = (TextView) findViewById(R.id.nomProfil);
+                    prenom = (TextView) findViewById(R.id.prenomProfil);
+                    nom.setText(u.profile.nom);
+                    prenom.setText(u.profile.prenom);
+                    courriel.setText(u.profile.adresseCourriel);
+                    telephone.setText(u.profile.numeroTelephone);
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            }
+        });
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 //        AbstraiteServices plombier = null;
 //        AbstraiteServices electricien = null;
 //        try {
@@ -67,11 +106,10 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
         spinner.setOnItemSelectedListener(this);
         // Spinner Drop down elements
         List<String> categories = new ArrayList<String>();
-        categories.add("Electricien");
-        categories.add("Plombier");
-//        for(AbstraiteServices s : listServices) {
-//            categories.add(s.getNomSservice());
-//        }
+
+        for(String s : user.listeCompetences) {
+            categories.add(s);
+        }
 
 
 
@@ -83,8 +121,9 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
 
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
-/////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
         // lance un processus qui recupere l'info de l'utilisateur de la bd
         runOnUiThread(new Runnable() {
             @Override
@@ -107,6 +146,7 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
                 }
             }
         });
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
         //listner sur le boutton ajouter

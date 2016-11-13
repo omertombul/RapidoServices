@@ -15,35 +15,6 @@
         android:text="0"
         android:layout_alignStart="@+id/editTextTauxHorraire" />
 
-    <TextView
-        android:text="Description : "
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewDescription"
-        android:layout_marginTop="16dp"
-        android:layout_below="@+id/editTextCompetence"
-        android:layout_alignParentStart="true"
-        android:textSize="16sp" />
-
-    <TextView
-        android:text="Prix :"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewPrix"
-        android:textSize="16sp"
-        android:layout_alignBaseline="@+id/editTextPrix"
-        android:layout_alignBottom="@+id/editTextPrix"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editTextDescription"
-        android:layout_alignTop="@+id/textViewDescription"
-        android:layout_alignParentEnd="true" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,14 +24,6 @@
         android:layout_alignBaseline="@+id/textViewServPhone"
         android:layout_alignBottom="@+id/textViewServPhone"
         android:layout_alignStart="@+id/editTextTauxHorraire" />
-
-    <Button
-        android:text="Ajouter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonAjouter"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -81,16 +44,6 @@
         android:layout_marginTop="13dp"
         android:textSize="16sp"
         android:layout_below="@+id/editTextTauxHorraire"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewServiceEmail"
-        android:textSize="16sp"
-        android:text="E-mail : "
-        android:layout_alignBaseline="@+id/editTextServiceEmail"
-        android:layout_alignBottom="@+id/editTextServiceEmail"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -133,14 +86,31 @@
         android:layout_alignBottom="@+id/textViewTauxHorraire"
         android:layout_alignParentEnd="true" />
 
+    <Button
+        android:text="Ajouter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonAjouter"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Description : "
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewDescription"
+        android:layout_marginTop="26dp"
+        android:textSize="16sp"
+        android:layout_below="@+id/nomService"
+        android:layout_alignParentStart="true" />
+
     <TextView
         android:text="Nom service :"
         android:layout_height="wrap_content"
         android:id="@+id/nomService"
         android:textSize="16sp"
         android:layout_width="match_parent"
-        android:layout_alignBaseline="@+id/editTextNomService"
-        android:layout_alignBottom="@+id/editTextNomService"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -148,26 +118,36 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/editTextCompetence"
-        android:layout_below="@+id/nomService"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="14dp" />
-
-    <TextView
-        android:text="Competence :"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/competence"
-        android:textSize="16sp"
-        android:layout_alignBaseline="@+id/editTextCompetence"
-        android:layout_alignBottom="@+id/editTextCompetence"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/editTextDescription"
+        android:layout_alignBaseline="@+id/textViewDescription"
+        android:layout_alignBottom="@+id/textViewDescription"
+        android:layout_alignParentEnd="true" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerServiceAjout"
-        android:layout_below="@+id/nomService"
+        android:layout_above="@+id/editTextDescription"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Prix :"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewPrix"
+        android:textSize="16sp"
+        android:layout_alignBaseline="@+id/editTextPrix"
+        android:layout_alignBottom="@+id/editTextPrix"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewServiceEmail"
+        android:textSize="16sp"
+        android:text="E-mail : "
+        android:layout_alignBaseline="@+id/editTextServiceEmail"
+        android:layout_alignBottom="@+id/editTextServiceEmail"
         android:layout_alignParentStart="true" />
 
 
