@@ -14,6 +14,11 @@ package inm5001.rapidoservices;
         import inm5001.rapidoservices.utilisateur.Profile;
         import inm5001.rapidoservices.utilisateur.Utilisateur;
 
+/**
+ * @author Omer Tombul
+ */
+
+
 //import Orchestrateur.java;
 public class InscriptionActivity extends Activity {
     Button sEnregistrer = null;
@@ -62,8 +67,7 @@ public class InscriptionActivity extends Activity {
         sEnregistrer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Le premier paramètre est le nom de l'activité actuelle
-                // Le second est le nom de l'activité de destination
+
 
                 try {
                     System.out.println("no tel "+ noTelephonProfile.getText().toString());

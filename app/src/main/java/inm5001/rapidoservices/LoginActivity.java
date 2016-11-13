@@ -16,6 +16,7 @@ package inm5001.rapidoservices;
 
 /**
  * Created by joy-reybabagbeto on 16-10-24.
+ * and Omer Tombul
  */
 
 public class LoginActivity extends Activity {

@@ -1,28 +1,19 @@
 package inm5001.rapidoservices;
-import inm5001.rapidoservices.service.ConstanteAbstraiteServices;
+
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Service;
 import android.content.Intent;
-import android.icu.text.DisplayContext;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
-import android.view.View;
-
 import java.sql.SQLException;
-
-import inm5001.rapidoservices.InscriptionActivity;
-import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.Orchestrateur;
-import inm5001.rapidoservices.ProfilActivity;
-import inm5001.rapidoservices.R;
 import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.service.TypeServices;
 
 /**
  * Created by joy-reybabagbeto on 16-11-10.
+ * and Omer Tombul
  */
 
 public class AjouterServiceActivity extends Activity {

@@ -1,7 +1,7 @@
 package inm5001.rapidoservices.service;
 
-/*
- * @author omer
+/**
+ * @author omer tombul et Francis Bernier
  */
 
 import java.util.regex.Matcher;

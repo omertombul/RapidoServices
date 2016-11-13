@@ -76,10 +76,6 @@
         android:textSize="18sp" />
 
 
-    <include layout="@layout/content_recherche"
-        android:id="@+id/include" />
-
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -96,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="26dp"
         android:layout_marginTop="285dp"
-        android:id="@+id/checkBox3"
+        android:id="@+id/checkBox_Service"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="center_vertical|left"
         android:textSize="18sp"
@@ -132,6 +128,9 @@
         android:background="@android:color/holo_blue_light"
         android:layout_marginLeft="50dp"
         android:id="@+id/button_recherche" />
+
+    <include layout="@layout/content_recherche"
+        android:id="@+id/include" />
 
 
 </android.support.design.widget.CoordinatorLayout>
