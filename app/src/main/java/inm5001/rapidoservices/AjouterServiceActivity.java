@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.view.View;
 
+import java.sql.SQLException;
+
 import inm5001.rapidoservices.InscriptionActivity;
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Orchestrateur;
@@ -34,6 +36,8 @@ public class AjouterServiceActivity extends Activity {
     EditText emailService = null;
     EditText noTelService = null;
     EditText competence = null;
+    Orchestrateur o;
+    String userName;
     AlertDialog.Builder dlgAlert;
 
 
@@ -44,8 +48,8 @@ public class AjouterServiceActivity extends Activity {
 
             //recuperer le username de la page precedente
             Intent intent = getIntent();
-            final String userName = intent.getStringExtra("userName");
-
+            String us = intent.getStringExtra("userName");
+            userName = us;
             //recupere les valeures dans les champs
             ajouter = (Button) findViewById(R.id.buttonAjouter);
             tauxHorraire = (EditText)findViewById(R.id.editTextTauxHorraire);
@@ -63,6 +67,9 @@ public class AjouterServiceActivity extends Activity {
             dlgAlert.setPositiveButton("OK", null);
             dlgAlert.setCancelable(true);
 
+            //creation de l'objet orchestrateur pour ajouter a la bd le service
+            o = new Orchestrateur();
+
 
 
             ajouter.setOnClickListener(new View.OnClickListener(){
@@ -77,7 +84,11 @@ public class AjouterServiceActivity extends Activity {
                                     nomService.getText().toString(),false,ville.getText().toString(),
                                     (byte)1,noTelService.getText().toString(),
                                     emailService.getText().toString(),description.getText().toString());
-                            System.out.println(s.getNomSservice());
+
+                            final AbstraiteServices a = s;
+
+                            //System.out.println("username dans ajouter service "+userName);
+                            connect(a);
 
 
                             }catch(MyException e){
@@ -97,11 +108,48 @@ public class AjouterServiceActivity extends Activity {
 
                 }
             });
-
-
-
-
-
         }
 
+    //Methode de connection de l'utilisateur et validation des credentials
+    private void connect(final AbstraiteServices s) {
+
+
+        new Thread() {
+            @Override
+            public void run() {
+
+
+                try {
+
+                    final String u = userName;
+                    o.ajouterOffreDeService(u, (TypeServices) s);
+                    dlgAlert.setTitle("Ajout de Service");
+                    dlgAlert.setMessage("Le service a ete ajouter !");
+
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            dlgAlert.create().show();
+                        }
+                    });
+
+
+                } catch (final SQLException ex) {
+
+                    System.out.println(ex.getMessage());
+
+                    dlgAlert.setTitle("Erreur!");
+                    dlgAlert.setMessage(ex.getMessage());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            dlgAlert.create().show();
+                        }
+                    });
+                }
+            }
+        }.start();
+
+    }
 }

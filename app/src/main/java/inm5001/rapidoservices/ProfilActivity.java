@@ -60,17 +60,13 @@ public class ProfilActivity extends Activity {
 
 
 
-
-
-
-
-
         //listner sur le boutton ajouter
         ajouter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent ajouterService = new Intent(ProfilActivity.this, AjouterServiceActivity.class);
-                ajouterService.putExtra("useName",userName);
+                System.out.println("Username dans profile Activity " + userName);
+                ajouterService.putExtra("userName",userName);
                 startActivity(ajouterService);
 
 
