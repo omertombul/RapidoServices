@@ -163,7 +163,7 @@ public class BdApi {
     }
 
     private String SQLaddServiceUser(String nomUtilisateur, TypeServices S) {
-        byte diponibilite = (byte) (S.isDisponible()?1:0);
+        byte diponibilite = (byte) (S.getDisponible()?1:0);
 
         String SQL;
         String SQL_DEBUT = "INSERT INTO servicesDUsager VALUES('";

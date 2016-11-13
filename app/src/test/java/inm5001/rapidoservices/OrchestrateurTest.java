@@ -15,6 +15,7 @@ import inm5001.rapidoservices.utilisateur.Utilisateur;
 
 import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_MODE_TRI_INTROUVABLE;
 import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_MOT_DE_PASSE_INVALIDE;
+import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_SERVICE_EXISTANT;
 import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_UTILISATEUR_N_EXISTE_PAS;
 import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_NOMUTILISATEUR_PAS_UNIQUE;
 import static org.junit.Assert.assertEquals;
@@ -261,7 +262,7 @@ public class OrchestrateurTest {
             orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
             orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
         } catch (Exception e) {
-            estValider = true;
+            estValider = e.getMessage().equals(MESSAGE_SERVICE_EXISTANT);
         }
         assertTrue(estValider);
         orchestrateur.retirerOffreDeService(nomUtilisateur, service);
@@ -335,11 +336,11 @@ public class OrchestrateurTest {
 
         orchestrateur.modifierDisponibiliteService(utilisateur.identifiant.nomUtilisateur, utilisateur.listeServices.get(0).getNomSservice(), true);
         utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
-        assertTrue(utilisateur.listeServices.get(0).isDisponible());
+        assertTrue(utilisateur.listeServices.get(0).getDisponible());
 
         orchestrateur.modifierDisponibiliteService(utilisateur.identifiant.nomUtilisateur, utilisateur.listeServices.get(0).getNomSservice(), false);
         utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
-        assertFalse(utilisateur.listeServices.get(0).isDisponible());
+        assertFalse(utilisateur.listeServices.get(0).getDisponible());
 
         orchestrateur.retirerOffreDeService(nomUtilisateur, service);
         orchestrateur.supprimerCompte(nomUtilisateur);
