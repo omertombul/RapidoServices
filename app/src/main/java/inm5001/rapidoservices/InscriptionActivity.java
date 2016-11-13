@@ -22,7 +22,7 @@ package inm5001.rapidoservices;
 //import Orchestrateur.java;
 public class InscriptionActivity extends Activity {
     Button sEnregistrer = null;
-    String key_userName = "username";
+    String key_userName = "userName";
     EditText nom  = null;
     EditText prenom =  null;
     EditText noTelephonProfile =null;

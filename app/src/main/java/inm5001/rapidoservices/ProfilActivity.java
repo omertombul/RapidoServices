@@ -44,6 +44,7 @@ public class ProfilActivity extends Activity {
                 Utilisateur u;
                 try {
                     u = o.recupererUtilisateur(userName);
+                    System.out.println("**************** nom :" +u.profile.nom);
                     courriel = (TextView) findViewById(R.id.courrielProfil);
                     telephone = (TextView) findViewById(R.id.telProfil);
                     nom = (TextView) findViewById(R.id.nomProfil);
