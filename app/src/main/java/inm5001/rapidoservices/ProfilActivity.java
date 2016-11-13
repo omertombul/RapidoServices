@@ -144,6 +144,6 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
     }
 
     public void onNothingSelected(AdapterView<?> arg0) {
-        
+
     }
 }
