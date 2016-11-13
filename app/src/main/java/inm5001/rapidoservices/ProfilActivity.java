@@ -18,8 +18,6 @@ public class ProfilActivity extends Activity {
     TextView prenom = null;
     TextView courriel = null;
     TextView telephone = null;
-    Utilisateur u;
-    Orchestrateur o;
     Button ajouter = null;
     Button rechercher = null;
 
@@ -28,21 +26,23 @@ public class ProfilActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
+
         ajouter = (Button)findViewById(R.id.ajouter);
         rechercher = (Button)findViewById(R.id.rechercher);
+
+        //recuper le userName et password de la page precedente
         Intent intent = getIntent();
         final String userName = intent.getStringExtra("userName");
         String pass = intent.getStringExtra("password");
 
 
-
+        // lance un thread qui recupere l'info de l'utilisateur de la bd
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 Orchestrateur o = new Orchestrateur();
                 Utilisateur u ;
                 try {
-
                     u = o.recupererUtilisateur(userName);
                     courriel = (TextView)findViewById(R.id.courrielProfil);
                     telephone = (TextView)findViewById(R.id.telProfil);
@@ -52,64 +52,43 @@ public class ProfilActivity extends Activity {
                     prenom.setText(u.profile.prenom);
                     courriel.setText(u.profile.adresseCourriel);
                     telephone.setText(u.profile.numeroTelephone);
-
                 }catch(Exception e){
-
                     System.out.println(e);
                 }
-
-
-
             }
         });
 
 
-                ajouter.setOnClickListener(new View.OnClickListener() {
 
 
 
+
+
+
+        //listner sur le boutton ajouter
+        ajouter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Le premier paramètre est le nom de l'activité actuelle
-                // Le second est le nom de l'activité de destination
-
-
-
-                    Intent ajouterService = new Intent(ProfilActivity.this, AjouterServiceActivity.class);
-
-
-                    startActivity(ajouterService);
-
-
-
-
+                Intent ajouterService = new Intent(ProfilActivity.this, AjouterServiceActivity.class);
+                ajouterService.putExtra("useName",userName);
+                startActivity(ajouterService);
 
 
             }
         });
 
+        //listner sur le boutton rechercher
         rechercher.setOnClickListener(new View.OnClickListener() {
-
-
-
             @Override
             public void onClick(View v) {
-                // Le premier paramètre est le nom de l'activité actuelle
-                // Le second est le nom de l'activité de destination
-
-
-
                 Intent rechercherService = new Intent(ProfilActivity.this, RechercheActivity.class);
-
-
                 startActivity(rechercherService);
-
-
-
-
-
-
             }
         });
+
+
+
+
+
     }
 }

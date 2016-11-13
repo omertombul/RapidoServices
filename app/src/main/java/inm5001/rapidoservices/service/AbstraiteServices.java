@@ -84,7 +84,7 @@ public abstract class AbstraiteServices {
     }
 //deuxième niveau d'abstraction
     private void validerNomServicePasNull(String nomSservice) throws MyException {
-        if (nomSservice == null) {
+        if (nomSservice == null || nomSservice.isEmpty()) {
             MyException e = new MyException(MESSAGE_NOMSERVICE_NULL);
             throw e;
         }

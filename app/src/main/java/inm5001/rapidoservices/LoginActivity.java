@@ -125,11 +125,7 @@ public class LoginActivity extends Activity {
                                 dlgAlert.create().show();
                             }
                         });
-
-
-
-//
-				}
+                }
 			}
 		}.start();
 

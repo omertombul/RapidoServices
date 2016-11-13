@@ -17,10 +17,7 @@ package inm5001.rapidoservices;
 //import Orchestrateur.java;
 public class InscriptionActivity extends Activity {
     Button sEnregistrer = null;
-    String key_prenom = "prenom";
-    String key_nom = "nom";
     String key_userName = "username";
-    String key_email = "email";
     EditText nom  = null;
     EditText prenom =  null;
     EditText noTelephonProfile =null;
@@ -61,11 +58,8 @@ public class InscriptionActivity extends Activity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-
+        //listener sur le boutton s'enregistrer
         sEnregistrer.setOnClickListener(new View.OnClickListener() {
-
-
-
             @Override
             public void onClick(View v) {
                 // Le premier paramètre est le nom de l'activité actuelle
@@ -83,24 +77,20 @@ public class InscriptionActivity extends Activity {
                     orchestrateur = new Orchestrateur();
                     orchestrateur.creerUtilisateur(user);
 
-                    Intent troisiemeActivite = new Intent(InscriptionActivity.this, ProfilActivity.class);
-
-                    troisiemeActivite.putExtra(key_userName,nomUtilisteur.getText().toString());
-                    troisiemeActivite.putExtra(key_email,adresseCourrielProfil.getText().toString());
-                    troisiemeActivite.putExtra(key_nom, nom.getText().toString());
-                    troisiemeActivite.putExtra(key_prenom, prenom.getText().toString());
-                    startActivity(troisiemeActivite);
+                    //Creation du intent qui va appeler la page profile
+                    Intent profile = new Intent(InscriptionActivity.this, ProfilActivity.class);
+                    //ajout user name qui sera transferer dans la prochaine page qui est profile
+                    profile.putExtra(key_userName,nomUtilisteur.getText().toString());
+                    //lance la prochaine activite profile
+                    startActivity(profile);
 
                 }catch(MyException e){
                     dlgAlert.setMessage(e.getMessage());
                     dlgAlert.create().show();
 
                 }
-
-
-
-
             }
         });
+
     }
 }

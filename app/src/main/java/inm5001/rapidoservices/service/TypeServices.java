@@ -17,7 +17,8 @@ public class TypeServices extends AbstraiteServices implements Comparable<PaireN
     private float tauxHorraire;
     private float prixFixe;
 
-    public TypeServices(float tauxHorraire, float prixFixe, String nomSservice, boolean disponible, String ville, byte cote, String noTelephone, String courriel, String description) throws MyException {
+    public TypeServices(float tauxHorraire, float prixFixe, String nomSservice, boolean disponible, String ville,
+                        byte cote, String noTelephone, String courriel, String description) throws MyException {
         super( nomSservice, disponible, ville, cote, noTelephone, courriel, description );
         traiterTauxHorraire(tauxHorraire);
         traiterPrixFixe(prixFixe);
