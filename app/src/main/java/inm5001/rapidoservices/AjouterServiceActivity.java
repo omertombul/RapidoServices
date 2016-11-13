@@ -42,73 +42,73 @@ public class AjouterServiceActivity extends Activity {
 
 
 
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_service);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_service);
 
-            //recuperer le username de la page precedente
-            Intent intent = getIntent();
-            String us = intent.getStringExtra("userName");
-            userName = us;
-            //recupere les valeures dans les champs
-            ajouter = (Button) findViewById(R.id.buttonAjouter);
-            tauxHorraire = (EditText)findViewById(R.id.editTextTauxHorraire);
-            nomService = (EditText)findViewById(R.id.editTextNomService);
-            description= (EditText)findViewById(R.id.editTextDescription);
-            ville = (EditText)findViewById(R.id.editTextVille);
-            prix = (EditText)findViewById(R.id.editTextPrix);
-            emailService = (EditText)findViewById(R.id.editTextServiceEmail);
-            noTelService = (EditText)findViewById(R.id.editTextServiceNoTel);
-            competence = (EditText)findViewById(R.id.editTextCompetence);
-
-
-            //creation du alert box
-            dlgAlert  = new AlertDialog.Builder(this);
-            dlgAlert.setPositiveButton("OK", null);
-            dlgAlert.setCancelable(true);
-
-            //creation de l'objet orchestrateur pour ajouter a la bd le service
-            o = new Orchestrateur();
+        //recuperer le username de la page precedente
+        Intent intent = getIntent();
+        String us = intent.getStringExtra("userName");
+        userName = us;
+        //recupere les valeures dans les champs
+        ajouter = (Button) findViewById(R.id.buttonAjouter);
+        tauxHorraire = (EditText)findViewById(R.id.editTextTauxHorraire);
+        nomService = (EditText)findViewById(R.id.editTextNomService);
+        description= (EditText)findViewById(R.id.editTextDescription);
+        ville = (EditText)findViewById(R.id.editTextVille);
+        prix = (EditText)findViewById(R.id.editTextPrix);
+        emailService = (EditText)findViewById(R.id.editTextServiceEmail);
+        noTelService = (EditText)findViewById(R.id.editTextServiceNoTel);
+        competence = (EditText)findViewById(R.id.editTextCompetence);
 
 
+        //creation du alert box
+        dlgAlert  = new AlertDialog.Builder(this);
+        dlgAlert.setPositiveButton("OK", null);
+        dlgAlert.setCancelable(true);
 
-            ajouter.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View v) {
-
-                        try{
-
-                            AbstraiteServices s = new TypeServices(Float.valueOf(tauxHorraire.getText().toString()),
-                                    Float.valueOf(prix.getText().toString()),
-                                    nomService.getText().toString(),false,ville.getText().toString(),
-                                    (byte)1,noTelService.getText().toString(),
-                                    emailService.getText().toString(),description.getText().toString());
-
-                            final AbstraiteServices a = s;
-
-                            //System.out.println("username dans ajouter service "+userName);
-                            connect(a);
+        //creation de l'objet orchestrateur pour ajouter a la bd le service
+        o = new Orchestrateur();
 
 
-                            }catch(MyException e){
-                            System.out.println(e.getMessage());
-                            dlgAlert.setTitle("Erreur!");
 
-                            dlgAlert.setMessage(e.getMessage());
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    dlgAlert.create().show();
-                                }
-                            });
+        ajouter.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                try{
+
+                    AbstraiteServices s = new TypeServices(Float.valueOf(tauxHorraire.getText().toString()),
+                            Float.valueOf(prix.getText().toString()),
+                            nomService.getText().toString(),false,ville.getText().toString(),
+                            (byte)1,noTelService.getText().toString(),
+                            emailService.getText().toString(),description.getText().toString());
+
+                    final AbstraiteServices a = s;
+
+                    //System.out.println("username dans ajouter service "+userName);
+                    connect(a);
+
+
+                }catch(MyException e){
+                    System.out.println(e.getMessage());
+                    dlgAlert.setTitle("Erreur!");
+
+                    dlgAlert.setMessage(e.getMessage());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            dlgAlert.create().show();
                         }
-
-
-
+                    });
                 }
-            });
-        }
+
+
+
+            }
+        });
+    }
 
     //Methode de connection de l'utilisateur et validation des credentials
     private void connect(final AbstraiteServices s) {
@@ -135,7 +135,7 @@ public class AjouterServiceActivity extends Activity {
                     });
 
 
-                } catch (final SQLException ex) {
+                } catch (final MyException ex) {
 
                     System.out.println(ex.getMessage());
 

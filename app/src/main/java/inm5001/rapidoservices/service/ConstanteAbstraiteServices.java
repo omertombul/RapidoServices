@@ -7,10 +7,10 @@ package inm5001.rapidoservices.service;
 public interface ConstanteAbstraiteServices {
     String MESSAGE_AUTRE_CHOIX = ", veillez recommencer.";
 
-    String MESSAGE_NOMSERVICE = "Le nom de service ne doit pas";
+    String MESSAGE_NOMSERVICE = "Le nom de service ne doit pas ";
     String MESSAGE_NOMSERVICE_MAX_QUINZE_CARACTERES = MESSAGE_NOMSERVICE + "pas contenir plus de quinze caractères" + MESSAGE_AUTRE_CHOIX;
     String MESSAGE_NOMSERVICE_NULL = MESSAGE_NOMSERVICE + "être null" + MESSAGE_AUTRE_CHOIX;
-    String MESSAGE_NOMSERVICE_CARACTERE_SPECIAL = MESSAGE_NOMSERVICE + " contenir de caractère spécial" + MESSAGE_AUTRE_CHOIX;
+    String MESSAGE_NOMSERVICE_CARACTERE_SPECIAL = MESSAGE_NOMSERVICE + "contenir de caractère spécial" + MESSAGE_AUTRE_CHOIX;
 
     String MESSAGE_VILLE_MAX_QUARANTE_CARACTERES = "La ville ne doit pas contenir plus de quarante caractères" + MESSAGE_AUTRE_CHOIX;
 

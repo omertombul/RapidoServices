@@ -99,9 +99,15 @@ public class Orchestrateur {
         bd.deleteUser(nomUtilisateur);
     }
 
-    public void ajouterOffreDeService(String nomUtilisateur, TypeServices service) throws SQLException {
-        bd.addServiceUser(nomUtilisateur, service);
-        bd.addCompetenceUser(nomUtilisateur, service);
+    public void ajouterOffreDeService(String nomUtilisateur, TypeServices service) throws MyException {
+        try {
+            bd.addServiceUser(nomUtilisateur, service);
+            bd.addCompetenceUser(nomUtilisateur, service);
+        } catch (Exception ex) {
+            MyException e = new MyException(MESSAGE_SERVICE_EXISTANT);
+            throw e;
+        }
+
     }
 
     public void retirerOffreDeService(String nomUtilisateur, TypeServices service) throws MyException {
@@ -142,13 +148,13 @@ public class Orchestrateur {
     }
 */
     public ArrayList<PaireNomUtilisateurEtTypeService> trierResultatRecherche(ArrayList<PaireNomUtilisateurEtTypeService> listeServices, String trierPar) throws MyException {
-        if (trierPar == "tauxHorraire") {
+        if (trierPar.equals("tauxHorraire")) {
             Collections.sort(listeServices, new TypeServices.TrierParTauxHorraire());
-        } else if (trierPar == "prixFixe") {
+        } else if (trierPar.equals("prixFixe")) {
             Collections.sort(listeServices, new TypeServices.TrierParPrixFixe());
-        } else if (trierPar == "nomService") {
+        } else if (trierPar.equals("nomService")) {
             Collections.sort(listeServices, new TypeServices.TrierParNomService());
-        } else if (trierPar == "ville") {
+        } else if (trierPar.equals("ville")) {
             Collections.sort(listeServices, new TypeServices.TrierParVille());
         } else {
             MyException e = new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
