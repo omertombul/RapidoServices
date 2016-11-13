@@ -1,4 +1,4 @@
-package inm5001.rapidoservices;
+package inm5001.rapidoservices.interfaceGraphique;
 
         import android.app.Activity;
         import android.app.AlertDialog;
@@ -9,6 +9,10 @@ package inm5001.rapidoservices;
         import android.widget.Button;
         import android.widget.EditText;
         import java.util.ArrayList;
+
+        import inm5001.rapidoservices.MyException;
+        import inm5001.rapidoservices.Orchestrateur;
+        import inm5001.rapidoservices.R;
         import inm5001.rapidoservices.service.AbstraiteServices;
         import inm5001.rapidoservices.utilisateur.Identifiant;
         import inm5001.rapidoservices.utilisateur.Profile;

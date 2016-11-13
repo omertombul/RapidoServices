@@ -1,17 +1,17 @@
-package inm5001.rapidoservices;
+package inm5001.rapidoservices.interfaceGraphique;
 
 		import android.app.Activity;
 		import android.app.AlertDialog;
 		import android.app.ProgressDialog;
 		import android.os.Bundle;
-        import android.os.Looper;
-        import android.os.StrictMode;
-		import android.util.Log;
+		import android.os.StrictMode;
 		import android.view.View;
 		import android.content.Intent;
 		import android.widget.Button;
 		import android.widget.EditText;
 
+		import inm5001.rapidoservices.Orchestrateur;
+		import inm5001.rapidoservices.R;
 		import inm5001.rapidoservices.utilisateur.Utilisateur;
 
 /**

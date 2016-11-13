@@ -1,4 +1,4 @@
-package inm5001.rapidoservices;
+package inm5001.rapidoservices.interfaceGraphique;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,6 +16,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import inm5001.rapidoservices.MyException;
+import inm5001.rapidoservices.Orchestrateur;
+import inm5001.rapidoservices.R;
 import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.service.TypeServices;
 

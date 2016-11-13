@@ -1,4 +1,4 @@
-package inm5001.rapidoservices;
+package inm5001.rapidoservices.interfaceGraphique;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.content.Intent;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import android.widget.Spinner;
@@ -15,8 +14,8 @@ import android.widget.Toast;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import inm5001.rapidoservices.service.AbstraiteServices;
-import inm5001.rapidoservices.service.TypeServices;
+import inm5001.rapidoservices.Orchestrateur;
+import inm5001.rapidoservices.R;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 
 /**
