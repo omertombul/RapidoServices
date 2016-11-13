@@ -61,16 +61,16 @@ public class TypeServices extends AbstraiteServices implements Comparable<PaireN
         return tauxHorraire;
     }
 
-    public void setTauxHorraire( float tauxHorraire ) {
-        this.tauxHorraire = tauxHorraire;
+    public void setTauxHorraire( float tauxHorraire ) throws MyException {
+        traiterTauxHorraire(tauxHorraire);
     }
 
     public float getPrixFixe() {
         return prixFixe;
     }
 
-    public void setPrixFixe( float prixFixe ) {
-        this.prixFixe = prixFixe;
+    public void setPrixFixe( float prixFixe ) throws MyException {
+        traiterPrixFixe(prixFixe);
     }
 
     public static class TrierParTauxHorraire implements Comparator<PaireNomUtilisateurEtTypeService> {

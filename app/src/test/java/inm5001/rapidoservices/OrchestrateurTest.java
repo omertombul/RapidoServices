@@ -335,11 +335,11 @@ public class OrchestrateurTest {
 
         orchestrateur.modifierDisponibiliteService(utilisateur.identifiant.nomUtilisateur, utilisateur.listeServices.get(0).getNomSservice(), true);
         utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
-        assertTrue(utilisateur.listeServices.get(0).isDisponible());
+        assertTrue(utilisateur.listeServices.get(0).getDisponible());
 
         orchestrateur.modifierDisponibiliteService(utilisateur.identifiant.nomUtilisateur, utilisateur.listeServices.get(0).getNomSservice(), false);
         utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
-        assertFalse(utilisateur.listeServices.get(0).isDisponible());
+        assertFalse(utilisateur.listeServices.get(0).getDisponible());
 
         orchestrateur.retirerOffreDeService(nomUtilisateur, service);
         orchestrateur.supprimerCompte(nomUtilisateur);

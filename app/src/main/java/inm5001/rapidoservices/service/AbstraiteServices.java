@@ -25,9 +25,9 @@ public abstract class AbstraiteServices {
  	private boolean disponible;
  	private String ville = "";
  	private byte cote;
- 	private String noTelephone;
+ 	private String noTelephone = "";
  	private String courriel = "";
- 	private String description;
+ 	private String description = "";
 
     public AbstraiteServices( String nomSservice, boolean disponible, String ville, byte cote, String noTelephone, String courriel, String description ) throws MyException {
         traiterNomService(nomSservice);
@@ -42,7 +42,7 @@ public abstract class AbstraiteServices {
     private void traiterNomService(String nomSservice) throws MyException {
         validerNomServicePasNull(nomSservice);
         validerNomServiceSansCaratereSpecial(nomSservice);
-        validerNomUtilisateurMaxQuinzeCaracteres(nomSservice);
+        validerNomSserviceMaxQuinzeCaracteres(nomSservice);
         nomSservice = convertirEnMajuscule(nomSservice);
         affecterValeurNomService(nomSservice);
     }
@@ -97,7 +97,7 @@ public abstract class AbstraiteServices {
         }
     }
 
-    private void validerNomUtilisateurMaxQuinzeCaracteres(String nomSservice) throws MyException {
+    private void validerNomSserviceMaxQuinzeCaracteres(String nomSservice) throws MyException {
         if (nomSservice.length() > 15) {
             MyException e = new MyException(MESSAGE_NOMSERVICE_MAX_QUINZE_CARACTERES);
             throw e;
@@ -185,55 +185,55 @@ public abstract class AbstraiteServices {
         return nomSservice;
     }
 
-    public void setNomSservice( String nomSservice ) {
-        this.nomSservice = nomSservice;
+    public void setNomSservice( String nomSservice ) throws MyException {
+        traiterNomService(nomSservice);
     }
 
-    public boolean isDisponible() {
+    public boolean getDisponible() {
         return disponible;
     }
 
-    public void setDisponible( boolean disponible ) {
-        this.disponible = disponible;
+    public void setDisponible( boolean disponible ) throws MyException {
+        traiterDisponible(disponible);
     }
 
     public String getVille() {
         return ville;
     }
 
-    public void setVille( String ville ) {
-        this.ville = ville;
+    public void setVille( String ville ) throws MyException {
+        traiterVille(ville);
     }
 
     public byte getCote() {
         return cote;
     }
 
-    public void setCote( byte cote ) {
-        this.cote = cote;
+    public void setCote( byte cote ) throws MyException {
+        traiterCote(cote);
     }
 
     public String getNoTelephone() {
         return noTelephone;
     }
 
-    public void setNoTelephone( String noTelephone ) {
-        this.noTelephone = noTelephone;
+    public void setNoTelephone( String noTelephone ) throws MyException {
+        traiterNoTelephone(noTelephone);
     }
 
     public String getCourriel() {
         return courriel;
     }
 
-    public void setCourriel( String courriel ) {
-        this.courriel = courriel;
+    public void setCourriel( String courriel ) throws MyException {
+        traiterCourriel(courriel);
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription( String description ) {
-        this.description = description;
+    public void setDescription( String description ) throws MyException {
+        traiterDescription(description);
     }
 }

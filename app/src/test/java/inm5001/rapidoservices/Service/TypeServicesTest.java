@@ -8,6 +8,7 @@ import inm5001.rapidoservices.MyException;
 
 import static inm5001.rapidoservices.service.ConstanteTypeServices.MESSAGE_PRIXFIXE_NEGATIF;
 import static inm5001.rapidoservices.service.ConstanteTypeServices.MESSAGE_TAUXHORRAIRE_NEGATIF;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -92,6 +93,24 @@ public class TypeServicesTest {
             estValider = e.getMessage().equals(MESSAGE_PRIXFIXE_NEGATIF);
         }
         assertTrue(estValider);
+    }
+
+    @Test
+    public void setTauxHorraire() throws MyException {
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, cote,
+                numeroTelephoneService, adresseCourrielService, description);
+        service.setTauxHorraire(11);
+        tauxHorraire = service.getTauxHorraire();
+        assertTrue(tauxHorraire == 11);
+    }
+
+    @Test
+    public void setPrixFixe() throws MyException {
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, cote,
+                numeroTelephoneService, adresseCourrielService, description);
+        service.setPrixFixe(11);
+        prixFixe = service.getPrixFixe();
+        assertTrue(prixFixe == 11);
     }
 
     @Test
