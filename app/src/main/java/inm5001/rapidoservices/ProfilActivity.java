@@ -6,6 +6,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.content.Intent;
+
+import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.List;
+import android.widget.Spinner;
+import android.widget.Toast;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+
+import inm5001.rapidoservices.service.AbstraiteServices;
+import inm5001.rapidoservices.service.TypeServices;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 
 /**
@@ -13,7 +24,7 @@ import inm5001.rapidoservices.utilisateur.Utilisateur;
  * and Omer Tombul
  */
 
-public class ProfilActivity extends Activity {
+public class ProfilActivity extends Activity implements AdapterView.OnItemSelectedListener{
     TextView nom = null;
     TextView prenom = null;
     TextView courriel = null;
@@ -35,8 +46,47 @@ public class ProfilActivity extends Activity {
         final String userName = intent.getStringExtra("userName");
         //String pass = intent.getStringExtra("password");
 
+/////////////////////////////////////////////////////////////////////////////////
+//        AbstraiteServices plombier = null;
+//        AbstraiteServices electricien = null;
+//        try {
+//
+//            plombier = new TypeServices("Pombiere");
+//            electricien = new TypeServices("Electricien");
+//        }catch(MyException e){
+//            System.out.println(e.getMessage());
+//        }
 
-        // lance un thread qui recupere l'info de l'utilisateur de la bd
+//        List<AbstraiteServices> listServices = new ArrayList<>();
+//        listServices.add(plombier);
+//        listServices.add(electricien);
+
+        // Spinner element
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerServiceProfile);
+
+        // Spinner click listener
+        spinner.setOnItemSelectedListener(this);
+        // Spinner Drop down elements
+        List<String> categories = new ArrayList<String>();
+        categories.add("Electricien");
+        categories.add("Plombier");
+//        for(AbstraiteServices s : listServices) {
+//            categories.add(s.getNomSservice());
+//        }
+
+
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spinner.setAdapter(dataAdapter);
+/////////////////////////////////////////////////////////////////////////////////
+
+        // lance un processus qui recupere l'info de l'utilisateur de la bd
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -83,5 +133,17 @@ public class ProfilActivity extends Activity {
         });
 
 
+    }
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // On selecting a spinner item
+        String item = parent.getItemAtPosition(position).toString();
+
+        // Showing selected spinner item
+        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+    }
+
+    public void onNothingSelected(AdapterView<?> arg0) {
+        
     }
 }

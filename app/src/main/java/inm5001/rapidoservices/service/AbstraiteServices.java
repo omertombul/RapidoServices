@@ -38,6 +38,13 @@ public abstract class AbstraiteServices {
         traiterCourriel(courriel);
         traiterDescription(description);
     }
+
+    public AbstraiteServices(String nomService)throws MyException{
+            traiterNomService(nomSservice);
+    }
+
+
+
 //premier niveau d'abstraction
     private void traiterNomService(String nomSservice) throws MyException {
         validerNomServicePasNull(nomSservice);
@@ -180,6 +187,7 @@ public abstract class AbstraiteServices {
     private String convertirEnMajuscule(String uneChaine) {
         return uneChaine.toUpperCase();
     }
+
 //MÉTHODES PUBLIC
     public String getNomSservice() {
         return nomSservice;
