@@ -102,6 +102,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                     public void run() {
                         o = new Orchestrateur();
                         try{
+                            String affichage = "";
                             float tHorraire = Float.valueOf(tauxHorraire.getText().toString());
                             System.out.println("Taux horraire  "+ tHorraire);
 
@@ -113,13 +114,16 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
 
                                 for (PaireNomUtilisateurEtTypeService p : listeDePaire) {
                                     System.out.println("NOM UTILISATEUR RECHERCHE  " + p.getNomUtilisateur());
-                                    affichageRecherche.setText("\n"+"Nom Utilisateur : " + p.getNomUtilisateur()+ "       No. Tel : "
-                                            + p.getService().getNoTelephone());
+                                    System.out.println("Service : " + p.getService().getNomSservice());
+                                    affichage += ("\n"+"Nom Utilisateur : " + p.getNomUtilisateur()+ "     No. Tel : "
+                                            + p.getService().getNoTelephone() + "    Service : " + p.getService().getNomSservice());
+
                                 }
                             }else{
-                                affichageRecherche.setText("Pas de service!");
+                                affichage = "Aucun service correspondant a la recherche ! ";
                                 System.out.println("LISTE VIDE ******");
                             }
+                            affichageRecherche.setText(affichage);
 
 
                         }catch(SQLException e){
