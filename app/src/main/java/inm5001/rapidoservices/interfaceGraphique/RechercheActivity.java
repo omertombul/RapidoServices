@@ -102,9 +102,15 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                     public void run() {
                         o = new Orchestrateur();
                         try{
+                            float tHorraire = Float.valueOf(tauxHorraire.getText().toString());
+                            System.out.println("Taux horraire  "+ tHorraire);
 
-                            listeDePaire = o.rechercheDeServices(0.0f,prix,nomService,ville);
+                            System.out.println("nomService ******************"+ nomService);
+
+                            listeDePaire = o.rechercheDeServices(tHorraire,prix,nomService,ville);
+
                             if(!listeDePaire.isEmpty())
+
                                 for(PaireNomUtilisateurEtTypeService p : listeDePaire){
 
                                     System.out.println("NOM UTILISATEUR RECHERCHE  "+p.getNomUtilisateur());
@@ -136,12 +142,12 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = "";
         switch (parent.getId()) {
-            case R.id.spinnerServiceAjout:
+            case R.id.spinnerRechercheService:
                 // On selecting a spinner item
                 item = parent.getItemAtPosition(position).toString();
                 nomService = item;
                 break;
-            case R.id.spinnerVilleAjoutService:
+            case R.id.spinnerRechercheVille:
                 item = parent.getItemAtPosition(position).toString();
                 ville = item;
                 break;

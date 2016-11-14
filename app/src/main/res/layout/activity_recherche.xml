@@ -36,19 +36,6 @@
         android:layout_alignParentEnd="true"
         android:id="@+id/spinnerRechercheVille" />
 
-    <TextView
-        android:text="Taux Horraire : "
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spinnerRechercheVille"
-        android:layout_alignStart="@+id/textViewVilleRecherche"
-        android:layout_marginTop="10dp"
-        android:id="@+id/textViewPrixRecherche"
-        android:textStyle="normal|bold|italic"
-        android:textAllCaps="true"
-        android:textAlignment="textStart"
-        android:textSize="17sp" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,7 +43,8 @@
         android:ems="10"
         android:id="@+id/editTextPrixRecherche"
         android:layout_below="@+id/spinnerRechercheVille"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:text="0.0" />
 
     <TextView
         android:text="Recherche de Service"
@@ -98,5 +86,18 @@
         android:textAllCaps="true"
         android:layout_below="@+id/buttonRechercherRecherche"
         android:layout_marginTop="24dp" />
+
+    <TextView
+        android:text="Taux Horraire : "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewPrixRecherche"
+        android:textStyle="normal|bold|italic"
+        android:textAllCaps="true"
+        android:textAlignment="textStart"
+        android:textSize="17sp"
+        android:layout_alignBaseline="@+id/editTextPrixRecherche"
+        android:layout_alignBottom="@+id/editTextPrixRecherche"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

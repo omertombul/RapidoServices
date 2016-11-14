@@ -121,9 +121,14 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
             public void onClick(View v) {
 
                 try{
-
-                        AbstraiteServices s = new TypeServices(Float.valueOf(tauxHorraire.getText().toString()),
-                            Float.valueOf(prix),
+                        float tH = 0.0f;
+                        if(tauxHorraire.getText().toString() == null || tauxHorraire.getText().toString().isEmpty()){
+                            tH = 0.0f;
+                        }else{
+                            tH =Float.valueOf(tauxHorraire.getText().toString());
+                        }
+                        AbstraiteServices s = new TypeServices(tH,
+                            0.0f,
                             nomService,false,ville,
                             (byte)1,noTelService.getText().toString(),
                             emailService.getText().toString(),description.getText().toString());
