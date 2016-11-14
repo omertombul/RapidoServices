@@ -92,10 +92,11 @@
 
     <ToggleButton
         android:text="Disponibilite"
-        android:layout_width="match_parent"
+        android:layout_width="148dp"
         android:layout_height="wrap_content"
         android:id="@+id/switchDispoUser"
         tools:text="Disponibilite"
+        android:background="@drawable/btn_toggle"
          />
 
     <Button
@@ -109,7 +110,7 @@
     <Button
         android:text="Rechercher service"
         android:layout_width="129dp"
-        android:layout_marginTop="-53dp"
+        android:layout_marginTop="-54dp"
         android:layout_marginLeft="140dp"
         android:id="@+id/rechercher"
         android:elevation="6dp"
@@ -120,6 +121,7 @@
         android:text="Services offert :"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:id="@+id/textViewSpinnerServiceProfile"
         android:textSize="16sp"
         android:textStyle="normal|bold"

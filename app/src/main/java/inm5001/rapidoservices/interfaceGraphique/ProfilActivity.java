@@ -37,7 +37,7 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
     Button supprimerUsager = null;
     Utilisateur user;
     Orchestrateur orc;
-
+    ToggleButton toggle = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,8 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
         ajouter = (Button) findViewById(R.id.ajouter);
         rechercher = (Button) findViewById(R.id.rechercher);
         supprimerUsager = (Button) findViewById(R.id.buttonDeleteUserProfile);
+        toggle = (ToggleButton) findViewById(R.id.switchDispoUser);
+
 
         //recuper le userName et password de la page precedente
         Intent intent = getIntent();
@@ -77,6 +79,7 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
                     prenom.setText(u.profile.prenom);
                     courriel.setText(u.profile.adresseCourriel);
                     telephone.setText(u.profile.numeroTelephone);
+                    toggle.setChecked(u.disponible);
                 } catch (Exception e) {
                     System.out.println(e);
                 }
@@ -84,7 +87,7 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
         });
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        ToggleButton toggle = (ToggleButton) findViewById(R.id.switchDispoUser);
+
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
