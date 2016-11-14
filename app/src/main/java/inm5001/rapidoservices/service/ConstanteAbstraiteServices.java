@@ -29,7 +29,7 @@ public interface ConstanteAbstraiteServices {
 
     String patternCourriel = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
-    String[] tabVille = new String []{"Montéal", "Québec", "Laval", "Gatineau", "Longueuil", "Sherbrooke", "Saguenay", "Lévis",
+    String[] tabVille = new String []{"", "Montéal", "Québec", "Laval", "Gatineau", "Longueuil", "Sherbrooke", "Saguenay", "Lévis",
             "Trois-Rivières", "Terrebonne", "Saint-Jean-sur-Richelieu", "Brossard", "Repentigny", "Drummondville",
             "Saint-Jérôme", "Granby", "Blainville", "Saint-Hyacinthe", "Dollard-Des Ormeaux", "Rimouski", "Shawinigan",
             "Mirabel", "Châteauguay", "Mascouche", "Victoriaville", "Saint-Eustache", "Rouyn-Noranda", "Boucherville",
@@ -39,7 +39,7 @@ public interface ConstanteAbstraiteServices {
             "Baie-Comeau"};
     List<String> listeVille = (Arrays.asList(tabVille));
 
-    String[] tabNomServices = new String []{"Plombier", "Électricien", "Menuisier"};
+    String[] tabNomServices = new String []{"", "Plombier", "Électricien", "Menuisier"};
     List<String> listeNomService = (Arrays.asList(tabNomServices));
 }
 
