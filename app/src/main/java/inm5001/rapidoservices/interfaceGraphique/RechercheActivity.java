@@ -103,7 +103,12 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                         o = new Orchestrateur();
                         try{
                             String affichage = "";
-                            float tHorraire = Float.valueOf(tauxHorraire.getText().toString());
+                            float tHorraire = 0.0f;
+                            if(tauxHorraire.getText().toString().isEmpty() || tauxHorraire.getText().toString() == null ){
+                                tHorraire = 0.0f;
+                            }else {
+                                tHorraire = Float.valueOf(tauxHorraire.getText().toString());
+                            }
                             System.out.println("Taux horraire  "+ tHorraire);
 
                             System.out.println("nomService ******************"+ nomService);
