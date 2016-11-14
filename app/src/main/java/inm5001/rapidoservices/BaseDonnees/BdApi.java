@@ -261,10 +261,9 @@ public class BdApi {
         String SQL_VILLE = " and ville = '" + s.getVille() + "'";
         String SQL_FIN = ";";
 
-        // criterias: nomService, disponibilite, prixFixe, prixHorraire, ville
-        String SQL_DEBUT = "SELECT * FROM utilisateur natural join servicesDUsager" +
-                "WHERE utilisateur.disponibilite = 1 " +
-                "and servicesDUsager.disponibilite = 1";
+        // criteres de recherche possibles: nomService, disponibilite, prixFixe, prixHorraire, ville
+        String SQL_DEBUT = "SELECT * FROM utilisateur u, servicesDUsager s" +
+                "WHERE u.idUsager = s.idUsager and u.disponibilite = 1 and s.disponibilite = 1";
         if(s.getNomSservice() == "") {
             SQL_NOM_SERVICE = "";
         }
