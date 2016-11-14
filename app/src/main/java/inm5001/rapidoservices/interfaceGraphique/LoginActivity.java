@@ -58,10 +58,8 @@ public class LoginActivity extends Activity {
 		seConnecter.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v){
-
-                connect();
-
-            }
+				connect();
+		    }
 
         });
 
@@ -71,10 +69,6 @@ public class LoginActivity extends Activity {
 				// Le premier paramètre est le nom de l'activité actuelle
 				// Le second est le nom de l'activité de destination
 				Intent secondeActivite = new Intent(LoginActivity.this, InscriptionActivity.class);
-
-				// On rajoute un extra
-				//secondeActivite.putExtra(AGE, 31);
-
 				// Puis on lance l'intent !
 				startActivity(secondeActivite);
 			}
@@ -98,14 +92,14 @@ public class LoginActivity extends Activity {
 					u = o.validationLogin(username.getText().toString(),password.getText().toString());
 					System.out.println(" Nom : " + u.profile.nom);
 
-                    dlgAlert.setTitle("Welcome to RapidoServices");
-                    dlgAlert.setMessage("Connection accepter!");
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            dlgAlert.create().show();
-                        }
-                    });
+//                    dlgAlert.setTitle("Welcome to RapidoServices");
+//                    dlgAlert.setMessage("Connection accepter!");
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            dlgAlert.create().show();
+//                        }
+//                    });
 					Intent profilactivite = new Intent(LoginActivity.this, ProfilActivity.class);
                     profilactivite.putExtra("userName",username.getText().toString());
                     profilactivite.putExtra("password",password.getText().toString());

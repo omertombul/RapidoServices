@@ -1,6 +1,5 @@
 package inm5001.rapidoservices.interfaceGraphique;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,17 +10,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Orchestrateur;
 import inm5001.rapidoservices.PaireNomUtilisateurEtTypeService;
 import inm5001.rapidoservices.R;
 import inm5001.rapidoservices.service.ConstanteAbstraiteServices;
-import inm5001.rapidoservices.utilisateur.Utilisateur;
 
 public class RechercheActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -29,23 +25,26 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
     String ville;
     Button rechercher = null;
     EditText tauxHorraire = null;
+    TextView affichageRecherche = null;
     float prix = 0f;
     Orchestrateur o;
     ArrayList<PaireNomUtilisateurEtTypeService> listeDePaire;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recherche);
 
         rechercher =  (Button) findViewById(R.id.buttonRechercherRecherche);
         tauxHorraire = (EditText)findViewById(R.id.editTextPrixRecherche);
+        affichageRecherche = (TextView) findViewById(R.id.textViewAffichageResultRecherche);
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * menu deroulant Service
+ * Menu deroulant de Service
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -67,7 +66,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- *menu deroulant de ville
+ *Menu deroulant de ville
  */
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -86,12 +85,13 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
+/**
+ * Listener sur les bouttons
+ * */
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-        //listner sur le boutton ajouter
+        //listner sur le boutton rechercher
         rechercher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,12 +109,15 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
 
                             listeDePaire = o.rechercheDeServices(tHorraire,prix,nomService,ville);
 
-                            if(!listeDePaire.isEmpty())
+                            if(!listeDePaire.isEmpty()) {
 
-                                for(PaireNomUtilisateurEtTypeService p : listeDePaire){
-
-                                    System.out.println("NOM UTILISATEUR RECHERCHE  "+p.getNomUtilisateur());
-                                }else{
+                                for (PaireNomUtilisateurEtTypeService p : listeDePaire) {
+                                    System.out.println("NOM UTILISATEUR RECHERCHE  " + p.getNomUtilisateur());
+                                    affichageRecherche.setText("\n"+"Nom Utilisateur : " + p.getNomUtilisateur()+ "       No. Tel : "
+                                            + p.getService().getNoTelephone());
+                                }
+                            }else{
+                                affichageRecherche.setText("Pas de service!");
                                 System.out.println("LISTE VIDE ******");
                             }
 
@@ -138,6 +141,12 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
 
     }
 
+
+/**
+ * Methode override pour le menu deroulant, qui est obligatoire quand
+ * on fait un "implements AdapterView.OnItemSelectedListener"
+ **/
+////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = "";
