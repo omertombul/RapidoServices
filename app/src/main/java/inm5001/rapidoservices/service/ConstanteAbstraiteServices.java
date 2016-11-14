@@ -29,7 +29,7 @@ public interface ConstanteAbstraiteServices {
 
     String patternCourriel = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
-    String[] tabVille = new String []{"", "Montéal", "Québec", "Laval", "Gatineau", "Longueuil", "Sherbrooke", "Saguenay", "Lévis",
+    String[] tabVilleAjout = new String []{"Montéal", "Québec", "Laval", "Gatineau", "Longueuil", "Sherbrooke", "Saguenay", "Lévis",
             "Trois-Rivières", "Terrebonne", "Saint-Jean-sur-Richelieu", "Brossard", "Repentigny", "Drummondville",
             "Saint-Jérôme", "Granby", "Blainville", "Saint-Hyacinthe", "Dollard-Des Ormeaux", "Rimouski", "Shawinigan",
             "Mirabel", "Châteauguay", "Mascouche", "Victoriaville", "Saint-Eustache", "Rouyn-Noranda", "Boucherville",
@@ -37,9 +37,22 @@ public interface ConstanteAbstraiteServices {
             "Pointe-Claire", "Alma", "Sainte-Julie", "Chambly", "Boisbriand", "Saint-Constant", "Saint-Bruno-de-Montarville",
             "Sainte-Thérèse", "Magog", "Thetford Mines", "Sept-Îles", "La Prairie", "Saint-Lambert", "Belœil", "L'Assomption",
             "Baie-Comeau"};
-    List<String> listeVille = (Arrays.asList(tabVille));
+    List<String> listeVilleAjout = (Arrays.asList(tabVilleAjout));
 
-    String[] tabNomServices = new String []{"", "Plombier", "Électricien", "Menuisier"};
-    List<String> listeNomService = (Arrays.asList(tabNomServices));
+    String[] tabNomServicesAjout = new String []{"Plombier", "Électricien", "Menuisier"};
+    List<String> listeNomServiceAjout = (Arrays.asList(tabNomServicesAjout));
+
+    String[] tabVilleRecherche = new String []{"", "Montéal", "Québec", "Laval", "Gatineau", "Longueuil", "Sherbrooke", "Saguenay", "Lévis",
+            "Trois-Rivières", "Terrebonne", "Saint-Jean-sur-Richelieu", "Brossard", "Repentigny", "Drummondville",
+            "Saint-Jérôme", "Granby", "Blainville", "Saint-Hyacinthe", "Dollard-Des Ormeaux", "Rimouski", "Shawinigan",
+            "Mirabel", "Châteauguay", "Mascouche", "Victoriaville", "Saint-Eustache", "Rouyn-Noranda", "Boucherville",
+            "Salaberry-de-Valleyfield", "Vaudreuil-Dorion", "Sorel-Tracy", "Côte-Saint-Luc", "Val-d'Or", "Saint-Georges",
+            "Pointe-Claire", "Alma", "Sainte-Julie", "Chambly", "Boisbriand", "Saint-Constant", "Saint-Bruno-de-Montarville",
+            "Sainte-Thérèse", "Magog", "Thetford Mines", "Sept-Îles", "La Prairie", "Saint-Lambert", "Belœil", "L'Assomption",
+            "Baie-Comeau"};
+    List<String> listeVilleRecherche = (Arrays.asList(tabVilleRecherche));
+
+    String[] tabNomServicesRecherche = new String []{"", "Plombier", "Électricien", "Menuisier"};
+    List<String> listeNomServiceRecherche = (Arrays.asList(tabNomServicesRecherche));
 }
 
