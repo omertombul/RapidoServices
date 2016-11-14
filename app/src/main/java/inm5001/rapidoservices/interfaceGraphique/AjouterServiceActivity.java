@@ -31,7 +31,6 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
 
     Button ajouter = null;
     EditText description = null;
-    EditText ville = null;
     EditText prix = null;
     EditText tauxHorraire = null;
     EditText emailService = null;
@@ -39,6 +38,7 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
     Orchestrateur o;
     String userName;
     String nomService;
+    String ville;
     AlertDialog.Builder dlgAlert;
 
 
@@ -55,7 +55,6 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
         ajouter = (Button) findViewById(R.id.buttonAjouter);
         tauxHorraire = (EditText)findViewById(R.id.editTextTauxHorraire);
         description= (EditText)findViewById(R.id.editTextDescription);
-        ville = (EditText)findViewById(R.id.editTextVille);
         prix = (EditText)findViewById(R.id.editTextPrix);
         emailService = (EditText)findViewById(R.id.editTextServiceEmail);
         noTelService = (EditText)findViewById(R.id.editTextServiceNoTel);
@@ -72,15 +71,7 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
 
 
         /////////////////////////////////////////////////////////////////////////////////
-//        AbstraiteServices plombier = null;
-//        AbstraiteServices electricien = null;
-//        try {
-//
-//            plombier = new TypeServices("Pombiere");
-//            electricien = new TypeServices("Electricien");
-//        }catch(MyException e){
-//            System.out.println(e.getMessage());
-//        }
+
 
 //        List<AbstraiteServices> listServices = new ArrayList<>();
 //        listServices.add(plombier);
@@ -111,6 +102,28 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
         spinner.setAdapter(dataAdapter);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        Spinner spinnerVille = (Spinner) findViewById(R.id.spinnerVilleAjoutService);
+
+        // Spinner click listener
+        spinner.setOnItemSelectedListener(this);
+        // Spinner Drop down elements
+        List<String> categoriesVille = new ArrayList<String>();
+        categories.add("Montreal");
+        categories.add("Laval");
+//        for(AbstraiteServices s : listServices) {
+//            categories.add(s.getNomSservice());
+//        }
+
+
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapterVille = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spinner.setAdapter(dataAdapter);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -123,7 +136,7 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
 
                     AbstraiteServices s = new TypeServices(Float.valueOf(tauxHorraire.getText().toString()),
                             Float.valueOf(prix.getText().toString()),
-                            nomService,false,ville.getText().toString(),
+                            nomService,false,ville,
                             (byte)1,noTelService.getText().toString(),
                             emailService.getText().toString(),description.getText().toString());
 

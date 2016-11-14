@@ -9,77 +9,6 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/editTextPrix"
-        android:layout_below="@+id/editTextDescription"
-        android:layout_alignParentEnd="true"
-        android:text="0"
-        android:layout_alignStart="@+id/editTextTauxHorraire" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberSigned"
-        android:ems="10"
-        android:id="@+id/editTextServiceNoTel"
-        android:layout_alignBaseline="@+id/textViewServPhone"
-        android:layout_alignBottom="@+id/textViewServPhone"
-        android:layout_alignStart="@+id/editTextTauxHorraire" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Montreal"
-        android:ems="10"
-        android:id="@+id/editTextVille"
-        android:layout_alignBaseline="@+id/textViewVille"
-        android:layout_alignBottom="@+id/textViewVille"
-        android:layout_alignStart="@+id/editTextDescription" />
-
-    <TextView
-        android:text=" No.Telephone :"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewServPhone"
-        android:layout_marginTop="13dp"
-        android:textSize="16sp"
-        android:layout_below="@+id/editTextTauxHorraire"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/editTextServiceEmail"
-        android:layout_below="@+id/editTextServiceNoTel"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:text="Ville :"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewVille"
-        android:layout_marginTop="32dp"
-        android:textSize="16sp"
-        android:layout_below="@+id/editTextPrix"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="Taux Horraire :"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewTauxHorraire"
-        android:layout_marginTop="24dp"
-        android:textSize="16sp"
-        android:layout_below="@+id/editTextVille"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
         android:id="@+id/editTextTauxHorraire"
         android:text="0"
         android:layout_alignBaseline="@+id/textViewTauxHorraire"
@@ -95,16 +24,6 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="Description : "
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewDescription"
-        android:layout_marginTop="26dp"
-        android:textSize="16sp"
-        android:layout_below="@+id/nomService"
-        android:layout_alignParentStart="true" />
-
-    <TextView
         android:text="Nom service :"
         android:layout_height="wrap_content"
         android:id="@+id/nomService"
@@ -113,21 +32,60 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
+    <TextView
+        android:text="Ville :"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editTextDescription"
-        android:layout_alignBaseline="@+id/textViewDescription"
-        android:layout_alignBottom="@+id/textViewDescription"
-        android:layout_alignParentEnd="true" />
+        android:id="@+id/textViewVille"
+        android:textSize="16sp"
+        android:layout_below="@+id/editTextServiceEmail"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="40dp" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerServiceAjout"
-        android:layout_above="@+id/editTextDescription"
+        android:layout_below="@+id/nomService"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextPrix"
+        android:text="0"
+        android:layout_below="@+id/spinnerServiceAjout"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Taux Horraire :"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewTauxHorraire"
+        android:textSize="16sp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/editTextServiceEmail"
+        android:layout_alignBaseline="@+id/textViewServiceEmail"
+        android:layout_alignBottom="@+id/textViewServiceEmail"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewServiceEmail"
+        android:textSize="16sp"
+        android:text="E-mail : "
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/editTextPrix"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -141,13 +99,47 @@
         android:layout_alignParentStart="true" />
 
     <TextView
+        android:text="Description : "
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textViewServiceEmail"
+        android:id="@+id/textViewDescription"
         android:textSize="16sp"
-        android:text="E-mail : "
-        android:layout_alignBaseline="@+id/editTextServiceEmail"
-        android:layout_alignBottom="@+id/editTextServiceEmail"
+        android:layout_marginTop="26dp"
+        android:layout_below="@+id/editTextServiceNoTel"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:layout_alignTop="@+id/textViewDescription"
+        android:layout_alignEnd="@+id/spinnerVilleAjoutService"
+        android:id="@+id/editTextDescription" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerVilleAjoutService"
+        android:layout_below="@+id/textViewVille"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/editTextServiceNoTel"
+        android:layout_below="@+id/editTextTauxHorraire"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text=" No.Telephone :"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewServPhone"
+        android:textSize="16sp"
+        android:layout_alignBottom="@+id/editTextServiceNoTel"
         android:layout_alignParentStart="true" />
 
 
