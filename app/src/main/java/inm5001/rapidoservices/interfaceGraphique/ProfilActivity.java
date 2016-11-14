@@ -7,13 +7,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.content.Intent;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ToggleButton;
+import android.widget.CompoundButton;
 
+import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Orchestrateur;
 import inm5001.rapidoservices.R;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
@@ -31,6 +35,7 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
     Button ajouter = null;
     Button rechercher = null;
     Utilisateur user;
+    Orchestrateur orc;
 
 
     @Override
@@ -49,12 +54,14 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
 
 
 
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
         // lance un processus qui recupere l'info de l'utilisateur de la bd
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 Orchestrateur o = new Orchestrateur();
+                orc = o;
                 Utilisateur u;
                 try {
                     u = o.recupererUtilisateur(userName);
@@ -75,29 +82,34 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
         });
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        ToggleButton toggle = (ToggleButton) findViewById(R.id.switchDispoUser);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
+                if (isChecked) {
 
+                    try {
+                        // The toggle is enabled
+                        orc.modifierDisponibiliteUsager(userName, true);
+                    }catch(SQLException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else {
 
-
-
+                    try{
+                        orc.modifierDisponibiliteUsager(userName,false);
+                    }catch(SQLException e){
+                        System.out.println(e.getMessage());
+                    }
+                }
+            }
+        });
 
 
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-//        AbstraiteServices plombier = null;
-//        AbstraiteServices electricien = null;
-//        try {
-//
-//            plombier = new TypeServices("Pombiere");
-//            electricien = new TypeServices("Electricien");
-//        }catch(MyException e){
-//            System.out.println(e.getMessage());
-//        }
-
-//        List<AbstraiteServices> listServices = new ArrayList<>();
-//        listServices.add(plombier);
-//        listServices.add(electricien);
+   //
 
         // Spinner element
         Spinner spinner = (Spinner) findViewById(R.id.spinnerServiceProfile);
@@ -110,9 +122,6 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
         for(String s : user.listeCompetences) {
             categories.add(s);
         }
-
-
-
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
 
@@ -123,29 +132,7 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
         spinner.setAdapter(dataAdapter);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-        // lance un processus qui recupere l'info de l'utilisateur de la bd
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Orchestrateur o = new Orchestrateur();
-                Utilisateur u;
-                try {
-                    u = o.recupererUtilisateur(userName);
-                    System.out.println("**************** nom :" +u.profile.nom);
-                    courriel = (TextView) findViewById(R.id.courrielProfil);
-                    telephone = (TextView) findViewById(R.id.telProfil);
-                    nom = (TextView) findViewById(R.id.nomProfil);
-                    prenom = (TextView) findViewById(R.id.prenomProfil);
-                    nom.setText(u.profile.nom);
-                    prenom.setText(u.profile.prenom);
-                    courriel.setText(u.profile.adresseCourriel);
-                    telephone.setText(u.profile.numeroTelephone);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-            }
-        });
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

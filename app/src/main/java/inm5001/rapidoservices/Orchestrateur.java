@@ -115,7 +115,7 @@ public class Orchestrateur {
         bd.deleteCompetence(nomUtilisateur, service);
     }
 
-    public void modifierDisponibiliteUsager(String nomUtilisateur, boolean disponible) throws MyException, SQLException {
+    public void modifierDisponibiliteUsager(String nomUtilisateur, boolean disponible) throws SQLException {
         if (disponible) {
             bd.updateUserDisponibilite(nomUtilisateur, "1");
         } else {
@@ -123,7 +123,7 @@ public class Orchestrateur {
         }
     }
 
-    public void modifierDisponibiliteService(String nomUtilisateur, String nomService, boolean disponible) throws MyException, SQLException {
+    public void modifierDisponibiliteService(String nomUtilisateur, String nomService, boolean disponible) throws SQLException {
         if (disponible) {
             bd.updateServiceDisponibilite(nomUtilisateur, nomService, "1");
         } else {

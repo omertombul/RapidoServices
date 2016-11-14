@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import java.sql.SQLException;
@@ -20,6 +21,7 @@ import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Orchestrateur;
 import inm5001.rapidoservices.R;
 import inm5001.rapidoservices.service.AbstraiteServices;
+import inm5001.rapidoservices.service.ConstanteAbstraiteServices;
 import inm5001.rapidoservices.service.TypeServices;
 
 /**
@@ -69,31 +71,22 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
         //creation de l'objet orchestrateur pour ajouter a la bd le service
         o = new Orchestrateur();
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /////////////////////////////////////////////////////////////////////////////////
+/**
+ * menu deroulant Service
+ */
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-//        List<AbstraiteServices> listServices = new ArrayList<>();
-//        listServices.add(plombier);
-//        listServices.add(electricien);
 
         // Spinner element
         Spinner spinner = (Spinner) findViewById(R.id.spinnerServiceAjout);
 
         // Spinner click listener
         spinner.setOnItemSelectedListener(this);
-        // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
-        categories.add("Electricien");
-        categories.add("Plombier");
-//        for(AbstraiteServices s : listServices) {
-//            categories.add(s.getNomSservice());
-//        }
-
-
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ConstanteAbstraiteServices.listeNomService);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -102,28 +95,29 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
         spinner.setAdapter(dataAdapter);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ *menu deroulant de ville
+ */
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
         Spinner spinnerVille = (Spinner) findViewById(R.id.spinnerVilleAjoutService);
 
         // Spinner click listener
-        spinner.setOnItemSelectedListener(this);
+        spinnerVille.setOnItemSelectedListener(this);
         // Spinner Drop down elements
         List<String> categoriesVille = new ArrayList<String>();
-        categories.add("Montreal");
-        categories.add("Laval");
-//        for(AbstraiteServices s : listServices) {
-//            categories.add(s.getNomSservice());
-//        }
-
+        categoriesVille.add("Montreal");
+        categoriesVille.add("Laval");
 
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapterVille = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        ArrayAdapter<String> dataAdapterVille = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ConstanteAbstraiteServices.listeVille);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
+        spinnerVille.setAdapter(dataAdapterVille);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -134,7 +128,7 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
 
                 try{
 
-                    AbstraiteServices s = new TypeServices(Float.valueOf(tauxHorraire.getText().toString()),
+                        AbstraiteServices s = new TypeServices(Float.valueOf(tauxHorraire.getText().toString()),
                             Float.valueOf(prix.getText().toString()),
                             nomService,false,ville,
                             (byte)1,noTelService.getText().toString(),
@@ -145,6 +139,9 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
                     //System.out.println("username dans ajouter service "+userName);
                     connect(a);
 
+                    Intent profilActivity = new Intent(AjouterServiceActivity.this,ProfilActivity.class);
+                    profilActivity.putExtra("userName",userName);
+                    startActivity(profilActivity);
 
                 }catch(MyException e){
                     System.out.println(e.getMessage());
@@ -210,10 +207,20 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-        String item = parent.getItemAtPosition(position).toString();
-        nomService = item;
+        String item = "";
+        switch (parent.getId()) {
+            case R.id.spinnerServiceAjout:
+            // On selecting a spinner item
+            item = parent.getItemAtPosition(position).toString();
+            nomService = item;
+                break;
+            case R.id.spinnerVilleAjoutService:
+                item = parent.getItemAtPosition(position).toString();
+                ville = item;
+                break;
+            default:
 
+        }
         // Showing selected spinner item
         Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
     }

@@ -76,16 +76,6 @@
         android:textSize="18sp" />
 
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="190dp"
-        android:layout_marginTop="285dp"
-        android:inputType="textPersonName"
-        android:text="Plombier"
-        android:ems="10"
-        android:id="@+id/editText_service" />
-
     <CheckBox
         android:text="Service"
         android:layout_width="115dp"
@@ -131,6 +121,16 @@
 
     <include layout="@layout/content_recherche"
         android:id="@+id/include" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="285dp"
+        android:inputType="textPersonName"
+        android:text="Plombier"
+        android:ems="10"
+        android:id="@+id/editText_service" />
 
 
 </android.support.design.widget.CoordinatorLayout>

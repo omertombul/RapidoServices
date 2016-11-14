@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
 
     <TextView
+        android:text="Menu Utilisateur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewTitleProfile"
+        android:textStyle="normal|bold|italic"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textAllCaps="true" />
+
+    <TextView
         android:text="Nom :"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2"
+        android:id="@+id/textViewNom"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"
+        android:textStyle="normal|bold"
+        android:textAllCaps="true" />
 
     <TextView
         android:layout_width="match_parent"
@@ -27,7 +41,9 @@
         android:id="@+id/textView4"
         android:layout_below="@+id/editText3"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textStyle="normal|bold"
+        android:textAllCaps="true" />
 
     <TextView
         android:layout_width="match_parent"
@@ -40,7 +56,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView11"
-        android:layout_marginTop="19dp"/>
+        android:layout_marginTop="19dp"
+        android:textStyle="normal|bold"
+        android:textAllCaps="true" />
 
     <TextView
         android:layout_width="match_parent"
@@ -52,7 +70,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView14"
-        android:layout_marginTop="19dp"/>
+        android:layout_marginTop="19dp"
+        android:textStyle="normal|bold"
+        android:textAllCaps="true" />
 
     <TextView
         android:text=""
@@ -65,25 +85,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ajouter"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:elevation="6dp" />
 
     <Button
         android:text="Rechercher service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rechercher" />
+        android:id="@+id/rechercher"
+        android:elevation="6dp" />
 
     <TextView
-        android:text="Vos services :"
+        android:text="Services offert :"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewSpinnerServiceProfile"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textStyle="normal|bold"
+        android:textAllCaps="true" />
 
     <Spinner
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerServiceProfile" />
+
+    <TextView
+        android:text="Disponibilite :"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewDispoUser"
+        android:textAlignment="textStart"
+        android:textAllCaps="true"
+        android:textStyle="normal|bold"
+        android:textSize="17sp" />
+
+    <ToggleButton
+        android:text="Disponibilite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/switchDispoUser"
+        tools:text="Disponibilite"
+         />
 
 </LinearLayout>
