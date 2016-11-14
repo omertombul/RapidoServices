@@ -103,11 +103,6 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
 
         // Spinner click listener
         spinnerVille.setOnItemSelectedListener(this);
-        // Spinner Drop down elements
-        List<String> categoriesVille = new ArrayList<String>();
-        categoriesVille.add("Montreal");
-        categoriesVille.add("Laval");
-
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapterVille = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ConstanteAbstraiteServices.listeVille);

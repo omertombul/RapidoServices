@@ -89,4 +89,14 @@
         android:layout_below="@+id/editTextPrixRecherche"
         android:layout_alignParentStart="true" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/textViewAffichageResultRecherche"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textStyle="normal|italic"
+        android:textAllCaps="true"
+        android:layout_below="@+id/buttonRechercherRecherche"
+        android:layout_marginTop="24dp" />
+
 </RelativeLayout>
