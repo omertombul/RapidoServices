@@ -15,6 +15,8 @@ public class PaireNomUtilisateurEtTypeService {
         this.service = service;
     }
 
+
+
     public String getNomUtilisateur(){ return nomUtilisateur; }
     public TypeServices getService(){ return service; }
     public void setNomUtilisateur(String nomUtilisateur){ this.nomUtilisateur = nomUtilisateur; }
