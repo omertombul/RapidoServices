@@ -1,7 +1,9 @@
 package inm5001.rapidoservices.baseDonnees;
 
+import java.lang.reflect.Type;
 import java.sql.ResultSet;
 
+import inm5001.rapidoservices.PaireNomUtilisateurEtTypeService;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.utilisateur.Profile;
@@ -29,8 +31,7 @@ public class BdApi {
     }
 
     public Utilisateur getUser(String nomUtilisateur) {
-        Utilisateur U = new Utilisateur();//null;
-        System.out.println("Debut construction String SQL: get User");
+        Utilisateur U = new Utilisateur();
 
         String SQL = SQLgetUser(nomUtilisateur);
         BdConnection DB = new BdConnection(SQL);
@@ -101,6 +102,18 @@ public class BdApi {
         BdConnection DB = new BdConnection(SQL);
         DB.deleteInDataBase();
         DB.closeConnection();
+    }
+
+    public ArrayList<PaireNomUtilisateurEtTypeService> servicesSearch(TypeServices s){
+        ArrayList<PaireNomUtilisateurEtTypeService> UserAndServicesArray = new ArrayList<>();
+
+
+        String SQL = SQLservicesSearch(s);
+        BdConnection DB = new BdConnection(SQL);
+        ResultSet RSservices = DB.readFromDataBase();
+        UserAndServicesArray = updateUserAndSerivcesArrayWithRS(RSservices);
+        DB.closeConnection();
+        return UserAndServicesArray;
     }
 
     //*************************************************************************
@@ -240,6 +253,37 @@ public class BdApi {
         return SQL;
     }
 
+    private String SQLservicesSearch(TypeServices s){
+        String SQL;
+        String SQL_NOM_SERVICE = " and nomService = '" + s.getNomSservice() + "'";
+        String SQL_PRIX_FIXE = " and prixFixe <= " + s.getPrixFixe();
+        String SQL_PRIX_HORRAIRE = " and prixHorraire <= " + s.getTauxHorraire();
+        String SQL_VILLE = " and ville = '" + s.getVille() + "'";
+        String SQL_FIN = ";";
+
+        // criterias: nomService, disponibilite, prixFixe, prixHorraire, ville
+        String SQL_DEBUT = "SELECT * FROM utilisateur natural join servicesDUsager" +
+                "WHERE utilisateur.disponibilite = 1 " +
+                "and servicesDUsager.disponibilite = 1";
+        if(s.getNomSservice() == "") {
+            SQL_NOM_SERVICE = "";
+        }
+        if(s.getPrixFixe() == 0) {
+            SQL_PRIX_FIXE = "";
+        }
+        if(s.getTauxHorraire() == 0) {
+            SQL_PRIX_HORRAIRE = "";
+        }
+        if(s.getVille() == "") {
+            SQL_VILLE = "";
+        }
+
+        SQL = SQL_DEBUT + SQL_NOM_SERVICE + SQL_PRIX_FIXE + SQL_PRIX_HORRAIRE +
+                SQL_VILLE + SQL_FIN;
+//System.out.println("    String SQL servicesSearch: " + SQL); // shows SQL String
+        return SQL;
+    }
+
     //*************************************************************************
     // level 3 abstraction
     private Utilisateur updateUtilisateurWithRSutilisateurData(
@@ -294,5 +338,35 @@ public class BdApi {
             System.out.println(ex + "Error Adding competencesList to user");
         }
         return U;
+    }
+
+    private ArrayList<PaireNomUtilisateurEtTypeService> updateUserAndSerivcesArrayWithRS(
+            ResultSet RSservices){
+        ArrayList<PaireNomUtilisateurEtTypeService> userAndServicesArray = new ArrayList<>();
+        // userId and services is in the RSservices
+        float tauxHorraire, prixFixe;
+        String nomService, ville, noTelephone, courriel, description;
+        boolean disponible;
+        byte cote;
+
+// float tauxHorraire, float prixFixe, String nomSservice, boolean disponible, String ville,
+//  byte cote, String noTelephone, String courriel, String description
+// code example
+        try {
+            RSservices.beforeFirst();
+            while (RSservices.next()) {
+                TypeServices S = new TypeServices(RSservices.getFloat("prixHorraire"),
+                        RSservices.getFloat("prixFixe"), RSservices.getString("nomService"),
+                        RSservices.getBoolean("disponibilite"), RSservices.getString("ville"),
+                        RSservices.getByte("cote"), RSservices.getString("noTelephone"),
+                        RSservices.getString("courriel"), RSservices.getString("description"));
+                PaireNomUtilisateurEtTypeService P = new PaireNomUtilisateurEtTypeService(
+                        RSservices.getString("idUsager"), S);
+                userAndServicesArray.add(P);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex + "Error updating serviceSearchArray with RSservices");
+        }
+        return userAndServicesArray;
     }
 }
