@@ -144,7 +144,7 @@
 
     <Button
         android:text="S'enregistrer"
-        android:background="@drawable/red_button"
+        android:background="@drawable/button_inscription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/inscrire"
