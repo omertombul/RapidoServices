@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -348,6 +349,202 @@ public class OrchestrateurTest {
     }
 
     @Test
+    public void rechercheDeServicesPasDeCritere() throws MyException, SQLException {
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, listeServices, listeCompetences);
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", cote,
+                "1234567890", adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", cote,
+                "2234567890", adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
+                "3234567890", adresseCourrielService, description);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service3);
+
+        orchestrateur.modifierDisponibiliteUsager(nomUtilisateur, true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
+
+        ArrayList<PaireNomUtilisateurEtTypeService> listePairs = orchestrateur.rechercheDeServices(0, 0, "", "");
+        assertTrue(listePairs.size() == 3);
+        orchestrateur.supprimerCompte(nomUtilisateur);
+    }
+
+    @Test
+    public void rechercheDeServicesTauxHorraire() throws MyException, SQLException {
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, listeServices, listeCompetences);
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", cote,
+                "1234567890", adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", cote,
+                "2234567890", adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
+                "3234567890", adresseCourrielService, description);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service3);
+
+        orchestrateur.modifierDisponibiliteUsager(nomUtilisateur, true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
+
+        ArrayList<PaireNomUtilisateurEtTypeService> listePairs = orchestrateur.rechercheDeServices(2, 0, "", "");
+        assertTrue(listePairs.get(0).getService().getTauxHorraire() <= 2);
+        assertTrue(listePairs.size() == 2);
+        orchestrateur.supprimerCompte(nomUtilisateur);
+    }
+
+    @Test
+    public void rechercheDeServicesPrixFix() throws MyException, SQLException {
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, listeServices, listeCompetences);
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", cote,
+                "1234567890", adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", cote,
+                "2234567890", adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
+                "3234567890", adresseCourrielService, description);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service3);
+
+        orchestrateur.modifierDisponibiliteUsager(nomUtilisateur, true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
+
+        ArrayList<PaireNomUtilisateurEtTypeService> listePairs = orchestrateur.rechercheDeServices(0, 2, "", "");
+        assertTrue(listePairs.get(0).getService().getPrixFixe() <= 2);
+        assertTrue(listePairs.size() == 2);
+        orchestrateur.supprimerCompte(nomUtilisateur);
+    }
+
+    @Test
+    public void rechercheDeServicesPrixFixServicesNonDisponible() throws MyException, SQLException {
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, listeServices, listeCompetences);
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", cote,
+                "1234567890", adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", cote,
+                "2234567890", adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
+                "3234567890", adresseCourrielService, description);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service3);
+
+        orchestrateur.modifierDisponibiliteUsager(nomUtilisateur, true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), false);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
+
+        ArrayList<PaireNomUtilisateurEtTypeService> listePairs = orchestrateur.rechercheDeServices(0, 2, "", "");
+        assertTrue(listePairs.get(0).getService().getPrixFixe() == 1);
+        assertTrue(listePairs.size() == 1);
+        orchestrateur.supprimerCompte(nomUtilisateur);
+    }
+
+    @Test
+    public void rechercheDeServicesNomServiceEtServiceDisponible() throws MyException, SQLException {
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, listeServices, listeCompetences);
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", cote,
+                "1234567890", adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", cote,
+                "2234567890", adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
+                "3234567890", adresseCourrielService, description);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service3);
+
+        orchestrateur.modifierDisponibiliteUsager(nomUtilisateur, true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
+
+        ArrayList<PaireNomUtilisateurEtTypeService> listePairs = orchestrateur.rechercheDeServices(0, 0, "nomService1", "");
+        assertEquals(listePairs.get(0).getService().getNomSservice(), "nomService1");
+        orchestrateur.supprimerCompte(nomUtilisateur);
+    }
+
+    @Test
+    public void rechercheDeServicesNomServiceEtServiceNonDisponible() throws MyException, SQLException {
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, listeServices, listeCompetences);
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", cote,
+                "1234567890", adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", cote,
+                "2234567890", adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
+                "3234567890", adresseCourrielService, description);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service3);
+
+        orchestrateur.modifierDisponibiliteUsager(nomUtilisateur, true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service.getNomSservice(), false);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
+
+        ArrayList<PaireNomUtilisateurEtTypeService> listePairs = orchestrateur.rechercheDeServices(0, 0, "nomService1", "");
+        assertTrue(listePairs.isEmpty());
+        orchestrateur.supprimerCompte(nomUtilisateur);
+    }
+
+    @Test
+    public void rechercheDeServicesNomServiceEtUsagerNonDisponible() throws MyException, SQLException {
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, listeServices, listeCompetences);
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", cote,
+                "1234567890", adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", cote,
+                "2234567890", adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
+                "3234567890", adresseCourrielService, description);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service3);
+
+        orchestrateur.modifierDisponibiliteUsager(nomUtilisateur, false);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
+
+        ArrayList<PaireNomUtilisateurEtTypeService> listePairs = orchestrateur.rechercheDeServices(0, 0, "nomService1", "");
+        assertTrue(listePairs.isEmpty());
+        orchestrateur.supprimerCompte(nomUtilisateur);
+    }
+
+    @Test
+    public void rechercheDeServicesVille() throws MyException, SQLException {
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, listeServices, listeCompetences);
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", cote,
+                "1234567890", adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", cote,
+                "2234567890", adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
+                "3234567890", adresseCourrielService, description);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service3);
+
+        orchestrateur.modifierDisponibiliteUsager(nomUtilisateur, true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
+
+        ArrayList<PaireNomUtilisateurEtTypeService> listePairs = orchestrateur.rechercheDeServices(0, 0, "", "villeC");
+        assertEquals(listePairs.get(0).getService().getVille(), "villeC");
+        assertTrue(listePairs.size() == 1);
+        orchestrateur.supprimerCompte(nomUtilisateur);
+    }
+
+    @Test
     public void trierResultatRechercheTauxHorraire() throws MyException {
         service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", cote,
                 "1234567890", adresseCourrielService, description);
@@ -447,13 +644,6 @@ public class OrchestrateurTest {
             estValider = !e.getMessage().equals(MESSAGE_MODE_TRI_INTROUVABLE);
         }
         assertFalse(estValider);
-    }
-
-    @Test
-    public void retirer() throws MyException {
-        orchestrateur.retirerOffreDeService("francis", service);
-        orchestrateur.retirerOffreDeService("francis", service2);
-        orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
     @Test
