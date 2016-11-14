@@ -34,6 +34,7 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
     TextView telephone = null;
     Button ajouter = null;
     Button rechercher = null;
+    Button supprimerUsager = null;
     Utilisateur user;
     Orchestrateur orc;
 
@@ -45,6 +46,7 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
 
         ajouter = (Button) findViewById(R.id.ajouter);
         rechercher = (Button) findViewById(R.id.rechercher);
+        supprimerUsager = (Button) findViewById(R.id.buttonDeleteUserProfile);
 
         //recuper le userName et password de la page precedente
         Intent intent = getIntent();
@@ -133,6 +135,9 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+        /**
+        * Listener sur les bouttons
+        * */
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -158,6 +163,18 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
             }
         });
 
+        supprimerUsager.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                try {
+                    orc.supprimerCompte(userName);
+                    Intent loginMenu = new Intent(ProfilActivity.this, LoginActivity.class);
+                    startActivity(loginMenu);
+                }catch(MyException e){
+                    System.out.println(e.getMessage());
+                }
+            }
+        });
 
     }
     @Override

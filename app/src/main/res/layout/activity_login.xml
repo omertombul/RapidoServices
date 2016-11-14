@@ -13,48 +13,12 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:text=""
-        android:ems="10"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3"
-        android:layout_marginLeft="34dp"
-        android:layout_marginStart="34dp"
-        android:id="@+id/editText" />
-
-    <TextView
-        android:text="Username"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:layout_alignBaseline="@+id/editText"
-        android:layout_alignBottom="@+id/editText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="11dp"
-        android:layout_marginStart="11dp" />
-
-    <TextView
-        android:text="Password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:id="@+id/textViewVilleRecherche"
-        android:layout_below="@+id/editText"
-        android:layout_toLeftOf="@+id/editText"
-        android:layout_toStartOf="@+id/editText" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:text=""
         android:ems="10"
         android:id="@+id/editText2"
-        android:layout_alignBaseline="@+id/textViewVilleRecherche"
-        android:layout_alignBottom="@+id/textViewVilleRecherche"
+        android:layout_alignBaseline="@+id/textViewPasswordLogin"
+        android:layout_alignBottom="@+id/textViewPasswordLogin"
         android:layout_alignLeft="@+id/editText"
         android:layout_alignStart="@+id/editText" />
 
@@ -66,8 +30,45 @@
         android:id="@+id/seConnecter"
         android:layout_marginLeft="10dp"
         android:layout_below="@+id/editText2"
-        android:layout_alignStart="@+id/textViewVilleRecherche"
+        android:layout_alignStart="@+id/textViewPasswordLogin"
         android:layout_marginStart="11dp" />
+
+    <TextView
+        android:text="Password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="53dp"
+        android:id="@+id/textViewPasswordLogin"
+        android:layout_below="@+id/editText"
+        android:layout_alignEnd="@+id/textViewUserNameLogin"
+        android:textStyle="normal|bold|italic"
+        android:textAllCaps="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:text=""
+        android:ems="10"
+        android:layout_marginLeft="34dp"
+        android:id="@+id/editText"
+        android:layout_marginTop="93dp"
+        android:layout_marginStart="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/textViewUserNameLogin" />
+
+    <TextView
+        android:text="Username"
+        android:textStyle="bold|italic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewUserNameLogin"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="12dp"
+        android:layout_alignBaseline="@+id/editText"
+        android:layout_alignBottom="@+id/editText"
+        android:layout_alignParentStart="true"
+        android:textAllCaps="true" />
 
     <Button
         android:text="S'inscrire"
@@ -77,6 +78,20 @@
         android:layout_alignBaseline="@+id/seConnecter"
         android:layout_alignBottom="@+id/seConnecter"
         android:layout_alignEnd="@+id/editText2"
-        android:layout_marginEnd="27dp" />
+        android:layout_marginEnd="11dp" />
+
+    <TextView
+        android:text="Connection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:id="@+id/textViewTitleLogin"
+        android:textAllCaps="true"
+        android:textStyle="normal|bold|italic"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

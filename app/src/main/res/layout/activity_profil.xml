@@ -131,4 +131,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/spinnerServiceProfile" />
 
+    <Button
+        android:text="Supprimer Usager"
+        android:layout_width="144dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonDeleteUserProfile" />
+
 </LinearLayout>
