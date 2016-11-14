@@ -38,5 +38,8 @@ public interface ConstanteAbstraiteServices {
             "Sainte-Thérèse", "Magog", "Thetford Mines", "Sept-Îles", "La Prairie", "Saint-Lambert", "Belœil", "L'Assomption",
             "Baie-Comeau"};
     List<String> listeVille = (Arrays.asList(tabVille));
+
+    String[] tabNomServices = new String []{"Plombier", "Électricien", "Menuisier"};
+    List<String> listeNomService = (Arrays.asList(tabNomServices));
 }
 
