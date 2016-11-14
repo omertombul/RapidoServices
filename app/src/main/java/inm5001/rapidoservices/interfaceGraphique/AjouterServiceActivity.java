@@ -33,7 +33,6 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
 
     Button ajouter = null;
     EditText description = null;
-    EditText prix = null;
     EditText tauxHorraire = null;
     EditText emailService = null;
     EditText noTelService = null;
@@ -41,6 +40,7 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
     String userName;
     String nomService;
     String ville;
+    String prix = "0";
     AlertDialog.Builder dlgAlert;
 
 
@@ -57,7 +57,6 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
         ajouter = (Button) findViewById(R.id.buttonAjouter);
         tauxHorraire = (EditText)findViewById(R.id.editTextTauxHorraire);
         description= (EditText)findViewById(R.id.editTextDescription);
-        prix = (EditText)findViewById(R.id.editTextPrix);
         emailService = (EditText)findViewById(R.id.editTextServiceEmail);
         noTelService = (EditText)findViewById(R.id.editTextServiceNoTel);
 
@@ -129,15 +128,15 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
                 try{
 
                         AbstraiteServices s = new TypeServices(Float.valueOf(tauxHorraire.getText().toString()),
-                            Float.valueOf(prix.getText().toString()),
+                            Float.valueOf(prix),
                             nomService,false,ville,
                             (byte)1,noTelService.getText().toString(),
                             emailService.getText().toString(),description.getText().toString());
 
-                    final AbstraiteServices a = s;
+
 
                     //System.out.println("username dans ajouter service "+userName);
-                    connect(a);
+                    connect(s);
 
                     Intent profilActivity = new Intent(AjouterServiceActivity.this,ProfilActivity.class);
                     profilActivity.putExtra("userName",userName);
