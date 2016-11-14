@@ -279,7 +279,7 @@ public class BdApi {
 
         SQL = SQL_DEBUT + SQL_NOM_SERVICE + SQL_PRIX_FIXE + SQL_PRIX_HORRAIRE +
                 SQL_VILLE + SQL_FIN;
-System.out.println("    String SQL servicesSearch: " + SQL); // shows SQL String
+//System.out.println("    String SQL servicesSearch: " + SQL); // shows SQL String
         return SQL;
     }
 
