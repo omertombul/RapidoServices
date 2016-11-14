@@ -53,9 +53,9 @@ public abstract class AbstraiteServices {
 //premier niveau d'abstraction
     private void traiterNomService(String nomSservice) throws MyException {
         validerNomServicePasNull(nomSservice);
-        validerNomServiceSansCaratereSpecial(nomSservice);
+        //validerNomServiceSansCaratereSpecial(nomSservice);
         validerNomSserviceMaxQuinzeCaracteres(nomSservice);
-        nomSservice = convertirEnMajuscule(nomSservice);
+        //nomSservice = convertirEnMajuscule(nomSservice);
         affecterValeurNomService(nomSservice);
     }
 
@@ -101,7 +101,7 @@ public abstract class AbstraiteServices {
             throw e;
         }
     }
-
+//problème avec REGEX car ne suport pas les caractères spéciaux
     private void validerNomServiceSansCaratereSpecial(String nomSservice) throws MyException {
         if (!nomSservice.matches("[A-Za-z0-9 -]*")) {
             MyException e = new MyException(MESSAGE_NOMSERVICE_CARACTERE_SPECIAL);

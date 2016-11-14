@@ -109,7 +109,7 @@ public class TypeServicesTest {
         }
         assertTrue(estValider);
         assertNotNull(service);
-        assertEquals(service.getNomSservice(), "PLOMBIER");
+        assertEquals(service.getNomSservice(), nomSservice);
     }
 
     @Test

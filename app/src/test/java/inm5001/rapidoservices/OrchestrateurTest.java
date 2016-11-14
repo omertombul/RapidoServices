@@ -81,7 +81,7 @@ public class OrchestrateurTest {
         disponibleService = false;
         ville = "Montreal";
         cote = 2;
-        numeroTelephoneService ="5144444444";
+        numeroTelephoneService = "5144444444";
         adresseCourrielService = "plomberie@plomberi.com";
         description = "Repare les tuyeaux";
         tauxHorraire = 14.50f;
@@ -125,10 +125,10 @@ public class OrchestrateurTest {
     public void creerUtilisateur() throws MyException {
         try {
             orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
-                                            motDePasse, listeServices, listeCompetences);
-            } catch (Exception e) {
-                estValider = false;
-            }
+                    motDePasse, listeServices, listeCompetences);
+        } catch (Exception e) {
+            estValider = false;
+        }
         assertTrue(estValider);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
@@ -137,7 +137,7 @@ public class OrchestrateurTest {
     public void creerUtilisateurExiste() throws MyException {
         estValider = false;
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
-                                        motDePasse, listeServices, listeCompetences);
+                motDePasse, listeServices, listeCompetences);
         try {
             orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                     motDePasse, listeServices, listeCompetences);
@@ -164,9 +164,9 @@ public class OrchestrateurTest {
     }
 
     @Test
-    public void validationLogin() throws MyException{
+    public void validationLogin() throws MyException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
-                                        motDePasse, listeServices, listeCompetences);
+                motDePasse, listeServices, listeCompetences);
         try {
             utilisateur = orchestrateur.validationLogin(nomUtilisateur, motDePasse);
         } catch (Exception e) {
@@ -176,10 +176,11 @@ public class OrchestrateurTest {
         assertEquals(utilisateur.identifiant.nomUtilisateur, "FRANCIS");
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
-//semble avoir un problème côté BdApi...l'exception est lancer dans l'étape de gestion de la listeServices
+
+    //semble avoir un problème côté BdApi...l'exception est lancer dans l'étape de gestion de la listeServices
 // et pas quand on vérifie si l'utilisateur existe. le résultat est le même, mais pourrait nous jouer des tour éventuellement
     @Test
-    public void validationLoginUtilisateurExistePas() throws MyException{
+    public void validationLoginUtilisateurExistePas() throws MyException {
         try {
             utilisateur = orchestrateur.validationLogin("bidon", motDePasse);
         } catch (Exception e) {
@@ -189,9 +190,9 @@ public class OrchestrateurTest {
     }
 
     @Test
-    public void validationLoginMotDePasseInvalide() throws MyException{
+    public void validationLoginMotDePasseInvalide() throws MyException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
-                                        motDePasse, listeServices, listeCompetences);
+                motDePasse, listeServices, listeCompetences);
         try {
             utilisateur = orchestrateur.validationLogin(nomUtilisateur, "bidon");
         } catch (Exception e) {
@@ -202,7 +203,7 @@ public class OrchestrateurTest {
     }
 
     @Test
-    public void supprimerCompte() throws MyException{
+    public void supprimerCompte() throws MyException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                 motDePasse, listeServices, listeCompetences);
         try {
@@ -231,7 +232,7 @@ public class OrchestrateurTest {
             estValider = false;
         }
         assertTrue(estValider);
-        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(0).getNomSservice(), "PLOMBIER");
+        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(0).getNomSservice(), nomSservice);
         orchestrateur.retirerOffreDeService(nomUtilisateur, service);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
@@ -247,8 +248,8 @@ public class OrchestrateurTest {
             estValider = false;
         }
         assertTrue(estValider);
-        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(1).getNomSservice(), "PLOMBIER");
-        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(0).getNomSservice(), "ELECTRICIEN");
+        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(1).getNomSservice(), nomSservice);
+        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(0).getNomSservice(), "Electricien");
         orchestrateur.retirerOffreDeService(nomUtilisateur, service);
         orchestrateur.retirerOffreDeService(nomUtilisateur, service2);
         orchestrateur.supprimerCompte(nomUtilisateur);
@@ -280,8 +281,8 @@ public class OrchestrateurTest {
             estValider = false;
         }
         assertTrue(estValider);
-        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeCompetences.get(1), "PLOMBIER");
-        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeCompetences.get(0), "ELECTRICIEN");
+        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeCompetences.get(1), nomSservice);
+        assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeCompetences.get(0), "Electricien");
         orchestrateur.retirerOffreDeService(nomUtilisateur, service);
         orchestrateur.retirerOffreDeService(nomUtilisateur, service2);
         orchestrateur.supprimerCompte(nomUtilisateur);
@@ -355,9 +356,9 @@ public class OrchestrateurTest {
         service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
                 "3234567890", adresseCourrielService, description);
         ArrayList<PaireNomUtilisateurEtTypeService> listePaire = new ArrayList<>();
-        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1" , service);
-        PaireNomUtilisateurEtTypeService pair2 = new PaireNomUtilisateurEtTypeService("nomUtilisateur2" , service2);
-        PaireNomUtilisateurEtTypeService pair3 = new PaireNomUtilisateurEtTypeService("nomUtilisateur3" , service3);
+        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1", service);
+        PaireNomUtilisateurEtTypeService pair2 = new PaireNomUtilisateurEtTypeService("nomUtilisateur2", service2);
+        PaireNomUtilisateurEtTypeService pair3 = new PaireNomUtilisateurEtTypeService("nomUtilisateur3", service3);
         listePaire.add(pair1);
         listePaire.add(pair2);
         listePaire.add(pair3);
@@ -377,9 +378,9 @@ public class OrchestrateurTest {
         service3 = new TypeServices(3, 2, "nomService3", disponibleService, "villeC", cote,
                 "3234567890", adresseCourrielService, description);
         ArrayList<PaireNomUtilisateurEtTypeService> listePaire = new ArrayList<>();
-        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1" , service);
-        PaireNomUtilisateurEtTypeService pair2 = new PaireNomUtilisateurEtTypeService("nomUtilisateur2" , service2);
-        PaireNomUtilisateurEtTypeService pair3 = new PaireNomUtilisateurEtTypeService("nomUtilisateur3" , service3);
+        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1", service);
+        PaireNomUtilisateurEtTypeService pair2 = new PaireNomUtilisateurEtTypeService("nomUtilisateur2", service2);
+        PaireNomUtilisateurEtTypeService pair3 = new PaireNomUtilisateurEtTypeService("nomUtilisateur3", service3);
         listePaire.add(pair1);
         listePaire.add(pair2);
         listePaire.add(pair3);
@@ -399,17 +400,17 @@ public class OrchestrateurTest {
         service3 = new TypeServices(3, 3, "nomService2", disponibleService, "villeC", cote,
                 "3234567890", adresseCourrielService, description);
         ArrayList<PaireNomUtilisateurEtTypeService> listePaire = new ArrayList<>();
-        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1" , service);
-        PaireNomUtilisateurEtTypeService pair2 = new PaireNomUtilisateurEtTypeService("nomUtilisateur2" , service2);
-        PaireNomUtilisateurEtTypeService pair3 = new PaireNomUtilisateurEtTypeService("nomUtilisateur3" , service3);
+        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1", service);
+        PaireNomUtilisateurEtTypeService pair2 = new PaireNomUtilisateurEtTypeService("nomUtilisateur2", service2);
+        PaireNomUtilisateurEtTypeService pair3 = new PaireNomUtilisateurEtTypeService("nomUtilisateur3", service3);
         listePaire.add(pair1);
         listePaire.add(pair2);
         listePaire.add(pair3);
 
         listePaire = orchestrateur.trierResultatRecherche(listePaire, "nomService");
-        assertEquals(listePaire.get(0).getService().getNomSservice(), "NOMSERVICE1");
-        assertEquals(listePaire.get(1).getService().getNomSservice(), "NOMSERVICE2");
-        assertEquals(listePaire.get(2).getService().getNomSservice(), "NOMSERVICE3");
+        assertEquals(listePaire.get(0).getService().getNomSservice(), "nomService1");
+        assertEquals(listePaire.get(1).getService().getNomSservice(), "nomService2");
+        assertEquals(listePaire.get(2).getService().getNomSservice(), "nomService3");
     }
 
     @Test
@@ -421,9 +422,9 @@ public class OrchestrateurTest {
         service3 = new TypeServices(3, 3, "nomService3", disponibleService, "villeB", cote,
                 "3234567890", adresseCourrielService, description);
         ArrayList<PaireNomUtilisateurEtTypeService> listePaire = new ArrayList<>();
-        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1" , service);
-        PaireNomUtilisateurEtTypeService pair2 = new PaireNomUtilisateurEtTypeService("nomUtilisateur2" , service2);
-        PaireNomUtilisateurEtTypeService pair3 = new PaireNomUtilisateurEtTypeService("nomUtilisateur3" , service3);
+        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1", service);
+        PaireNomUtilisateurEtTypeService pair2 = new PaireNomUtilisateurEtTypeService("nomUtilisateur2", service2);
+        PaireNomUtilisateurEtTypeService pair3 = new PaireNomUtilisateurEtTypeService("nomUtilisateur3", service3);
         listePaire.add(pair1);
         listePaire.add(pair2);
         listePaire.add(pair3);
@@ -437,7 +438,7 @@ public class OrchestrateurTest {
     @Test
     public void trierResultatRechercheElse() throws MyException {
         ArrayList<PaireNomUtilisateurEtTypeService> listePaire = new ArrayList<>();
-        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1" , service);
+        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1", service);
         listePaire.add(pair1);
 
         try {
@@ -448,12 +449,12 @@ public class OrchestrateurTest {
         assertFalse(estValider);
     }
 
-@Test
-public void retirer() throws MyException {
-    orchestrateur.retirerOffreDeService("francis", service);
-    orchestrateur.retirerOffreDeService("francis", service2);
-    orchestrateur.supprimerCompte(nomUtilisateur);
-}
+    @Test
+    public void retirer() throws MyException {
+        orchestrateur.retirerOffreDeService("francis", service);
+        orchestrateur.retirerOffreDeService("francis", service2);
+        orchestrateur.supprimerCompte(nomUtilisateur);
+    }
 
     @Test
     public void fauxPositif() throws Exception {
