@@ -262,7 +262,7 @@ public class BdApi {
         String SQL_FIN = ";";
 
         // criteres de recherche possibles: nomService, disponibilite, prixFixe, prixHorraire, ville
-        String SQL_DEBUT = "SELECT * FROM utilisateur u, servicesDUsager s" +
+        String SQL_DEBUT = "SELECT * FROM utilisateur u, servicesDUsager s " +
                 "WHERE u.idUsager = s.idUsager and u.disponibilite = 1 and s.disponibilite = 1";
         if(s.getNomSservice() == "") {
             SQL_NOM_SERVICE = "";
@@ -279,7 +279,7 @@ public class BdApi {
 
         SQL = SQL_DEBUT + SQL_NOM_SERVICE + SQL_PRIX_FIXE + SQL_PRIX_HORRAIRE +
                 SQL_VILLE + SQL_FIN;
-//System.out.println("    String SQL servicesSearch: " + SQL); // shows SQL String
+System.out.println("    String SQL servicesSearch: " + SQL); // shows SQL String
         return SQL;
     }
 
