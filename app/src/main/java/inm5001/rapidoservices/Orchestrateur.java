@@ -131,19 +131,9 @@ public class Orchestrateur {
         }
     }
 /*
-    public ArrayList<PaireNomUtilisateurEtTypeService> rechercheDeServicesv1(float tauxHorraire, float prixFixe, String nomSservice,
-                                                            boolean disponible, String ville, byte cote, String noTelephone,
-                                                            String courriel, String description) throws MyException, SQLException {
-        TypeServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote, noTelephone,
-                                                        courriel, description);
-        ArrayList<PaireNomUtilisateurEtTypeService> listePaires = bd.searchForServices(service);
-        return listePaires;
-    }
-*/
-/*
-    public ArrayList<PaireNomUtilisateurEtTypeService> rechercheDeServicesv2(float tauxHorraire, float prixFixe, String nomSservice, String ville) throws MyException, SQLException {
-        TypeServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, true, ville, (byte) 0, "", "", "");
-        ArrayList<PaireNomUtilisateurEtTypeService> listePaires = bd.searchForServices(service);
+    public ArrayList<PaireNomUtilisateurEtTypeService> rechercheDeServices(float tauxHorraire, float prixFixe, String nomSservice, String ville) throws MyException, SQLException {
+        TypeServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, ville);
+        ArrayList<PaireNomUtilisateurEtTypeService> listePaires = bd.Servicessearch(service);
         return listePaires;
     }
 */

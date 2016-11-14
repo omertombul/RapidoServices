@@ -1,5 +1,9 @@
 package inm5001.rapidoservices.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by Francis Bernier on 2016-10-14.
  */
@@ -24,5 +28,15 @@ public interface ConstanteAbstraiteServices {
     String MESSAGE_DESCRIPTION_MAX_DEUXCENTCINQUANTESIX_CARACTERES = "La description ne doit pas contenir plus de deux cent cinquante-six caractères" + MESSAGE_AUTRE_CHOIX;
 
     String patternCourriel = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+    String[] tabVille = new String []{"Montéal", "Québec", "Laval", "Gatineau", "Longueuil", "Sherbrooke", "Saguenay", "Lévis",
+            "Trois-Rivières", "Terrebonne", "Saint-Jean-sur-Richelieu", "Brossard", "Repentigny", "Drummondville",
+            "Saint-Jérôme", "Granby", "Blainville", "Saint-Hyacinthe", "Dollard-Des Ormeaux", "Rimouski", "Shawinigan",
+            "Mirabel", "Châteauguay", "Mascouche", "Victoriaville", "Saint-Eustache", "Rouyn-Noranda", "Boucherville",
+            "Salaberry-de-Valleyfield", "Vaudreuil-Dorion", "Sorel-Tracy", "Côte-Saint-Luc", "Val-d'Or", "Saint-Georges",
+            "Pointe-Claire", "Alma", "Sainte-Julie", "Chambly", "Boisbriand", "Saint-Constant", "Saint-Bruno-de-Montarville",
+            "Sainte-Thérèse", "Magog", "Thetford Mines", "Sept-Îles", "La Prairie", "Saint-Lambert", "Belœil", "L'Assomption",
+            "Baie-Comeau"};
+    List<String> listeVille = (Arrays.asList(tabVille));
 }
 

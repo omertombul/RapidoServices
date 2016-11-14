@@ -24,8 +24,14 @@ public class TypeServices extends AbstraiteServices implements Comparable<PaireN
         traiterPrixFixe(prixFixe);
     }
 
-    public TypeServices(String nomService)throws MyException{
-        super(nomService);
+    public TypeServices(float tauxHorraire, float prixFixe, String nomSservice, String ville) throws MyException {
+        super( nomSservice, ville );
+        traiterTauxHorraire(tauxHorraire);
+        traiterPrixFixe(prixFixe);
+    }
+
+    public TypeServices(String nomSservice)throws MyException{
+        super(nomSservice);
     }
 
 //premier niveau d'abstraction

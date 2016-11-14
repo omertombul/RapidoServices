@@ -61,7 +61,7 @@ public class TypeServicesTest {
     }
 
     @Test
-    public void TypeServices() throws MyException {
+    public void TypeServicesConstructeur1() throws MyException {
         estValider = true;
         try {
             service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, cote,
@@ -71,6 +71,45 @@ public class TypeServicesTest {
         }
         assertTrue(estValider);
         assertNotNull(service);
+    }
+
+    @Test
+    public void TypeServicesConstructeur2() throws MyException {
+        estValider = true;
+        try {
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, ville);
+        } catch (MyException e) {
+            estValider = false;
+        }
+        assertTrue(estValider);
+        assertNotNull(service);
+        assertTrue(service.getTauxHorraire() == tauxHorraire);
+    }
+
+    @Test
+    public void TypeServicesConstructeur2TauxHorraireNull() throws MyException {
+        estValider = true;
+        try {
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, ville);
+        } catch (MyException e) {
+            estValider = false;
+        }
+        assertTrue(estValider);
+        assertNotNull(service);
+        assertTrue(service.getTauxHorraire() == tauxHorraire);
+    }
+
+    @Test
+    public void TypeServicesConstructeur3() throws MyException {
+        estValider = true;
+        try {
+            service = new TypeServices(nomSservice);
+        } catch (MyException e) {
+            estValider = false;
+        }
+        assertTrue(estValider);
+        assertNotNull(service);
+        assertEquals(service.getNomSservice(), "PLOMBIER");
     }
 
     @Test

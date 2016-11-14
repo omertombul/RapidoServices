@@ -39,7 +39,12 @@ public abstract class AbstraiteServices {
         traiterDescription(description);
     }
 
-    public AbstraiteServices(String nomService)throws MyException{
+    public AbstraiteServices( String nomSservice, String ville ) throws MyException {
+        traiterNomService(nomSservice);
+        traiterVille(ville);
+    }
+
+    public AbstraiteServices(String nomSservice)throws MyException{
             traiterNomService(nomSservice);
     }
 
