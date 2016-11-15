@@ -137,21 +137,21 @@ public class Orchestrateur {
         return listePaires;
     }
 
-    public ArrayList<Recherche> trierResultatRecherche(ArrayList<Recherche> listeServices, String trierPar) throws MyException {
+    public ArrayList<Recherche> trierResultatRecherche(ArrayList<Recherche> ListeResultatsRecherche, String trierPar) throws MyException {
         if (trierPar.equals("tauxHorraire")) {
-            Collections.sort(listeServices, new TypeServices.TrierParTauxHorraire());
+            Collections.sort(ListeResultatsRecherche, new TypeServices.TrierParTauxHorraire());
         } else if (trierPar.equals("prixFixe")) {
-            Collections.sort(listeServices, new TypeServices.TrierParPrixFixe());
+            Collections.sort(ListeResultatsRecherche, new TypeServices.TrierParPrixFixe());
         } else if (trierPar.equals("nomService")) {
-            Collections.sort(listeServices, new TypeServices.TrierParNomService());
+            Collections.sort(ListeResultatsRecherche, new TypeServices.TrierParNomService());
         } else if (trierPar.equals("ville")) {
-            Collections.sort(listeServices, new TypeServices.TrierParVille());
+            Collections.sort(ListeResultatsRecherche, new TypeServices.TrierParVille());
         } else {
             MyException e = new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
             throw e;
         }
 
-        return listeServices;
+        return ListeResultatsRecherche;
     }
     /*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {

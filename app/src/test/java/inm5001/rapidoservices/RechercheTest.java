@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
  * Created by Admin on 2016-11-13.
  */
 
-public class PaireNomutilisateurEtTypeServiceTest {
+public class RechercheTest {
 
     //attributs Identifiant
     private String nomUtilisateur;
