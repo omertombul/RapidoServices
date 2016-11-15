@@ -36,8 +36,8 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recherche);
 
-        rechercher =  (Button) findViewById(R.id.buttonRechercherRecherche);
-        tauxHorraire = (EditText)findViewById(R.id.editTextPrixRecherche);
+        rechercher = (Button) findViewById(R.id.buttonRechercherRecherche);
+        tauxHorraire = (EditText) findViewById(R.id.editTextPrixRecherche);
         affichageRecherche = (TextView) findViewById(R.id.textViewAffichageResultRecherche);
 
 
@@ -47,8 +47,6 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
  * Menu deroulant de Service
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-
         // Spinner element
         Spinner spinner = (Spinner) findViewById(R.id.spinnerRechercheService);
 
@@ -69,7 +67,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
  *Menu deroulant de ville
  */
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        // Spinner element
         Spinner spinnerVille = (Spinner) findViewById(R.id.spinnerRechercheVille);
 
         // Spinner click listener
@@ -82,7 +80,6 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
 
         // attaching data adapter to spinner
         spinnerVille.setAdapter(dataAdapterVille);
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
@@ -101,39 +98,33 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                     @Override
                     public void run() {
                         o = new Orchestrateur();
-                        try{
+                        try {
                             String affichage = "";
                             float tHorraire = 0.0f;
-                            if(tauxHorraire.getText().toString().isEmpty() || tauxHorraire.getText().toString() == null ){
+
+                            if (tauxHorraire.getText().toString().isEmpty() || tauxHorraire.getText().toString() == null) {
                                 tHorraire = 0.0f;
-                            }else {
+                            } else {
                                 tHorraire = Float.valueOf(tauxHorraire.getText().toString());
                             }
-                            System.out.println("Taux horraire  "+ tHorraire);
 
-                            System.out.println("nomService ******************"+ nomService);
-
-                            listeDePaire = o.rechercheDeServices(tHorraire,prix,nomService,ville);
-
-                            if(!listeDePaire.isEmpty()) {
+                            listeDePaire = o.rechercheDeServices(tHorraire, prix, nomService, ville);
+                            if (!listeDePaire.isEmpty()) {
 
                                 for (PaireNomUtilisateurEtTypeService p : listeDePaire) {
                                     System.out.println("NOM UTILISATEUR RECHERCHE  " + p.getNomUtilisateur());
                                     System.out.println("Service : " + p.getService().getNomSservice());
-                                    affichage += ("\n"+"Nom Utilisateur : " + p.getNomUtilisateur()+ "     No. Tel : "
+                                    affichage += ("\n" + "Nom Utilisateur : " + p.getNomUtilisateur() + "     No. Tel : "
                                             + p.getService().getNoTelephone() + "    Service : " + p.getService().getNomSservice());
-
                                 }
-                            }else{
+                            } else {
                                 affichage = "Aucun service correspondant a la recherche ! ";
                                 System.out.println("LISTE VIDE ******");
                             }
                             affichageRecherche.setText(affichage);
-
-
-                        }catch(SQLException e){
+                        } catch (SQLException e) {
                             System.out.println(e.getMessage());
-                        }catch(MyException e){
+                        } catch (MyException e) {
                             System.out.println(e.getMessage());
                         }
                     }
@@ -141,14 +132,9 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
 
             }
         });
-
+    }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-    }
 
 
 /**
@@ -170,11 +156,12 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                 ville = item;
                 break;
         }
-
         // Showing selected spinner item
         Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
     }
-
+/**
+ * rajouter automatiquement par un "implements AdapterView.OnItemSelectedListener"
+ **/
     public void onNothingSelected(AdapterView<?> arg0) {
 
     }
