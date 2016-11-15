@@ -4,13 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
-import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.service.TypeServices;
-import inm5001.rapidoservices.utilisateur.Identifiant;
-import inm5001.rapidoservices.utilisateur.Profile;
-import inm5001.rapidoservices.utilisateur.Utilisateur;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -73,7 +67,7 @@ public class PaireNomutilisateurEtTypeServiceTest {
     public void PaireNomUtilisateurEtTypeServicePasNull() throws MyException {
         service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, cote,
                 numeroTelephoneService, adresseCourrielService, description);
-        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService(nomUtilisateur , service);
+        Recherche pair1 = new Recherche(nomUtilisateur , service);
 
         assertNotNull(pair1);
     }
@@ -82,7 +76,7 @@ public class PaireNomutilisateurEtTypeServiceTest {
     public void PaireNomUtilisateurEtTypeServiceNomUtilisateur() throws MyException {
         service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, cote,
                 numeroTelephoneService, adresseCourrielService, description);
-        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService(nomUtilisateur , service);
+        Recherche pair1 = new Recherche(nomUtilisateur , service);
 
         assertEquals(pair1.getNomUtilisateur(), nomUtilisateur);
     }
@@ -91,7 +85,7 @@ public class PaireNomutilisateurEtTypeServiceTest {
     public void PaireNomUtilisateurEtTypeServiceServicePasNull() throws MyException {
         service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, cote,
                 numeroTelephoneService, adresseCourrielService, description);
-        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService(nomUtilisateur , service);
+        Recherche pair1 = new Recherche(nomUtilisateur , service);
 
         assertNotNull(pair1.getService());
     }
@@ -100,7 +94,7 @@ public class PaireNomutilisateurEtTypeServiceTest {
     public void PaireNomUtilisateurEtTypeServiceServiceValiderParametres() throws MyException {
         service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, cote,
                 numeroTelephoneService, adresseCourrielService, description);
-        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService(nomUtilisateur , service);
+        Recherche pair1 = new Recherche(nomUtilisateur , service);
 
         assertTrue(pair1.getService().getTauxHorraire() == tauxHorraire);
         assertEquals(pair1.getService().getNomSservice(), "PLOMBIER");

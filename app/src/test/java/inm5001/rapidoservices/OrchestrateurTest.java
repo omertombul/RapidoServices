@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -178,7 +177,7 @@ public class OrchestrateurTest {
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
-    //semble avoir un problème côté BdApi...l'exception est lancer dans l'étape de gestion de la listeServices
+//semble avoir un problème côté BdApi...l'exception est lancer dans l'étape de gestion de la listeServices
 // et pas quand on vérifie si l'utilisateur existe. le résultat est le même, mais pourrait nous jouer des tour éventuellement
     @Test
     public void validationLoginUtilisateurExistePas() throws MyException {
@@ -367,7 +366,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<PaireNomUtilisateurEtTypeService> listePairs = orchestrateur.rechercheDeServices(0, 0, "", "");
+        ArrayList<Recherche> listePairs = orchestrateur.rechercheDeServices(0, 0, "", "");
         assertTrue(listePairs.size() == 3);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
@@ -391,7 +390,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<PaireNomUtilisateurEtTypeService> listePairs = orchestrateur.rechercheDeServices(2, 0, "", "");
+        ArrayList<Recherche> listePairs = orchestrateur.rechercheDeServices(2, 0, "", "");
         assertTrue(listePairs.get(0).getService().getTauxHorraire() <= 2);
         assertTrue(listePairs.size() == 2);
         orchestrateur.supprimerCompte(nomUtilisateur);
@@ -416,7 +415,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<PaireNomUtilisateurEtTypeService> listePairs = orchestrateur.rechercheDeServices(0, 2, "", "");
+        ArrayList<Recherche> listePairs = orchestrateur.rechercheDeServices(0, 2, "", "");
         assertTrue(listePairs.get(0).getService().getPrixFixe() <= 2);
         assertTrue(listePairs.size() == 2);
         orchestrateur.supprimerCompte(nomUtilisateur);
@@ -441,7 +440,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), false);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<PaireNomUtilisateurEtTypeService> listePairs = orchestrateur.rechercheDeServices(0, 2, "", "");
+        ArrayList<Recherche> listePairs = orchestrateur.rechercheDeServices(0, 2, "", "");
         assertTrue(listePairs.get(0).getService().getPrixFixe() == 1);
         assertTrue(listePairs.size() == 1);
         orchestrateur.supprimerCompte(nomUtilisateur);
@@ -466,7 +465,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<PaireNomUtilisateurEtTypeService> listePairs = orchestrateur.rechercheDeServices(0, 0, "nomService1", "");
+        ArrayList<Recherche> listePairs = orchestrateur.rechercheDeServices(0, 0, "nomService1", "");
         assertEquals(listePairs.get(0).getService().getNomSservice(), "nomService1");
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
@@ -490,7 +489,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<PaireNomUtilisateurEtTypeService> listePairs = orchestrateur.rechercheDeServices(0, 0, "nomService1", "");
+        ArrayList<Recherche> listePairs = orchestrateur.rechercheDeServices(0, 0, "nomService1", "");
         assertTrue(listePairs.isEmpty());
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
@@ -514,7 +513,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<PaireNomUtilisateurEtTypeService> listePairs = orchestrateur.rechercheDeServices(0, 0, "nomService1", "");
+        ArrayList<Recherche> listePairs = orchestrateur.rechercheDeServices(0, 0, "nomService1", "");
         assertTrue(listePairs.isEmpty());
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
@@ -538,7 +537,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<PaireNomUtilisateurEtTypeService> listePairs = orchestrateur.rechercheDeServices(0, 0, "", "villeC");
+        ArrayList<Recherche> listePairs = orchestrateur.rechercheDeServices(0, 0, "", "villeC");
         assertEquals(listePairs.get(0).getService().getVille(), "villeC");
         assertTrue(listePairs.size() == 1);
         orchestrateur.supprimerCompte(nomUtilisateur);
@@ -552,10 +551,10 @@ public class OrchestrateurTest {
                 "2234567890", adresseCourrielService, description);
         service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
                 "3234567890", adresseCourrielService, description);
-        ArrayList<PaireNomUtilisateurEtTypeService> listePaire = new ArrayList<>();
-        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1", service);
-        PaireNomUtilisateurEtTypeService pair2 = new PaireNomUtilisateurEtTypeService("nomUtilisateur2", service2);
-        PaireNomUtilisateurEtTypeService pair3 = new PaireNomUtilisateurEtTypeService("nomUtilisateur3", service3);
+        ArrayList<Recherche> listePaire = new ArrayList<>();
+        Recherche pair1 = new Recherche("nomUtilisateur1", service);
+        Recherche pair2 = new Recherche("nomUtilisateur2", service2);
+        Recherche pair3 = new Recherche("nomUtilisateur3", service3);
         listePaire.add(pair1);
         listePaire.add(pair2);
         listePaire.add(pair3);
@@ -574,10 +573,10 @@ public class OrchestrateurTest {
                 "2234567890", adresseCourrielService, description);
         service3 = new TypeServices(3, 2, "nomService3", disponibleService, "villeC", cote,
                 "3234567890", adresseCourrielService, description);
-        ArrayList<PaireNomUtilisateurEtTypeService> listePaire = new ArrayList<>();
-        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1", service);
-        PaireNomUtilisateurEtTypeService pair2 = new PaireNomUtilisateurEtTypeService("nomUtilisateur2", service2);
-        PaireNomUtilisateurEtTypeService pair3 = new PaireNomUtilisateurEtTypeService("nomUtilisateur3", service3);
+        ArrayList<Recherche> listePaire = new ArrayList<>();
+        Recherche pair1 = new Recherche("nomUtilisateur1", service);
+        Recherche pair2 = new Recherche("nomUtilisateur2", service2);
+        Recherche pair3 = new Recherche("nomUtilisateur3", service3);
         listePaire.add(pair1);
         listePaire.add(pair2);
         listePaire.add(pair3);
@@ -596,10 +595,10 @@ public class OrchestrateurTest {
                 "2234567890", adresseCourrielService, description);
         service3 = new TypeServices(3, 3, "nomService2", disponibleService, "villeC", cote,
                 "3234567890", adresseCourrielService, description);
-        ArrayList<PaireNomUtilisateurEtTypeService> listePaire = new ArrayList<>();
-        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1", service);
-        PaireNomUtilisateurEtTypeService pair2 = new PaireNomUtilisateurEtTypeService("nomUtilisateur2", service2);
-        PaireNomUtilisateurEtTypeService pair3 = new PaireNomUtilisateurEtTypeService("nomUtilisateur3", service3);
+        ArrayList<Recherche> listePaire = new ArrayList<>();
+        Recherche pair1 = new Recherche("nomUtilisateur1", service);
+        Recherche pair2 = new Recherche("nomUtilisateur2", service2);
+        Recherche pair3 = new Recherche("nomUtilisateur3", service3);
         listePaire.add(pair1);
         listePaire.add(pair2);
         listePaire.add(pair3);
@@ -618,10 +617,10 @@ public class OrchestrateurTest {
                 "2234567890", adresseCourrielService, description);
         service3 = new TypeServices(3, 3, "nomService3", disponibleService, "villeB", cote,
                 "3234567890", adresseCourrielService, description);
-        ArrayList<PaireNomUtilisateurEtTypeService> listePaire = new ArrayList<>();
-        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1", service);
-        PaireNomUtilisateurEtTypeService pair2 = new PaireNomUtilisateurEtTypeService("nomUtilisateur2", service2);
-        PaireNomUtilisateurEtTypeService pair3 = new PaireNomUtilisateurEtTypeService("nomUtilisateur3", service3);
+        ArrayList<Recherche> listePaire = new ArrayList<>();
+        Recherche pair1 = new Recherche("nomUtilisateur1", service);
+        Recherche pair2 = new Recherche("nomUtilisateur2", service2);
+        Recherche pair3 = new Recherche("nomUtilisateur3", service3);
         listePaire.add(pair1);
         listePaire.add(pair2);
         listePaire.add(pair3);
@@ -634,8 +633,8 @@ public class OrchestrateurTest {
 
     @Test
     public void trierResultatRechercheElse() throws MyException {
-        ArrayList<PaireNomUtilisateurEtTypeService> listePaire = new ArrayList<>();
-        PaireNomUtilisateurEtTypeService pair1 = new PaireNomUtilisateurEtTypeService("nomUtilisateur1", service);
+        ArrayList<Recherche> listePaire = new ArrayList<>();
+        Recherche pair1 = new Recherche("nomUtilisateur1", service);
         listePaire.add(pair1);
 
         try {

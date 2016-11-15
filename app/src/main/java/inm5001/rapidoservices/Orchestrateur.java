@@ -131,13 +131,13 @@ public class Orchestrateur {
         }
     }
 
-    public ArrayList<PaireNomUtilisateurEtTypeService> rechercheDeServices(float tauxHorraire, float prixFixe, String nomSservice, String ville) throws MyException, SQLException {
+    public ArrayList<Recherche> rechercheDeServices(float tauxHorraire, float prixFixe, String nomSservice, String ville) throws MyException, SQLException {
         TypeServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, ville);
-        ArrayList<PaireNomUtilisateurEtTypeService> listePaires = bd.servicesSearch(service);
+        ArrayList<Recherche> listePaires = bd.servicesSearch(service);
         return listePaires;
     }
 
-    public ArrayList<PaireNomUtilisateurEtTypeService> trierResultatRecherche(ArrayList<PaireNomUtilisateurEtTypeService> listeServices, String trierPar) throws MyException {
+    public ArrayList<Recherche> trierResultatRecherche(ArrayList<Recherche> listeServices, String trierPar) throws MyException {
         if (trierPar.equals("tauxHorraire")) {
             Collections.sort(listeServices, new TypeServices.TrierParTauxHorraire());
         } else if (trierPar.equals("prixFixe")) {
