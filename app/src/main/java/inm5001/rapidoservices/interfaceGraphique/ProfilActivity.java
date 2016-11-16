@@ -116,6 +116,15 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
 ////////////////////////////////////////////////////////////////////////////////////////////////////
    //
 
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+        /**
         // Spinner element
         Spinner spinner = (Spinner) findViewById(R.id.spinnerServiceProfile);
 
@@ -135,6 +144,8 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
 
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
+
+         */
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
