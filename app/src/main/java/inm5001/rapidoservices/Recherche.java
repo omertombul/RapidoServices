@@ -6,16 +6,14 @@ import inm5001.rapidoservices.service.TypeServices;
  * Created by Francis Bernier on 2016-11-10.
  */
 
-public class PaireNomUtilisateurEtTypeService {
+public class Recherche {
     private String nomUtilisateur;
     private TypeServices service;
 
-    public PaireNomUtilisateurEtTypeService(String nomUtilisateur, TypeServices service){
+    public Recherche(String nomUtilisateur, TypeServices service){
         this.nomUtilisateur = nomUtilisateur;
         this.service = service;
     }
-
-
 
     public String getNomUtilisateur(){ return nomUtilisateur; }
     public TypeServices getService(){ return service; }

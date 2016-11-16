@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Orchestrateur;
-import inm5001.rapidoservices.PaireNomUtilisateurEtTypeService;
+import inm5001.rapidoservices.Recherche;
 import inm5001.rapidoservices.R;
 import inm5001.rapidoservices.service.ConstanteAbstraiteServices;
 
@@ -28,7 +28,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
     TextView affichageRecherche = null;
     float prix = 0f;
     Orchestrateur o;
-    ArrayList<PaireNomUtilisateurEtTypeService> listeDePaire;
+    ArrayList<Recherche> listeDePaire;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +111,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                             listeDePaire = o.rechercheDeServices(tHorraire, prix, nomService, ville);
                             if (!listeDePaire.isEmpty()) {
 
-                                for (PaireNomUtilisateurEtTypeService p : listeDePaire) {
+                                for (Recherche p : listeDePaire) {
                                     System.out.println("NOM UTILISATEUR RECHERCHE  " + p.getNomUtilisateur());
                                     System.out.println("Service : " + p.getService().getNomSservice());
                                     affichage += ("\n" + "Nom Utilisateur : " + p.getNomUtilisateur() + "     No. Tel : "

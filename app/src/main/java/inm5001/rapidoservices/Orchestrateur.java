@@ -131,27 +131,27 @@ public class Orchestrateur {
         }
     }
 
-    public ArrayList<PaireNomUtilisateurEtTypeService> rechercheDeServices(float tauxHorraire, float prixFixe, String nomSservice, String ville) throws MyException, SQLException {
+    public ArrayList<Recherche> rechercheDeServices(float tauxHorraire, float prixFixe, String nomSservice, String ville) throws MyException, SQLException {
         TypeServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, ville);
-        ArrayList<PaireNomUtilisateurEtTypeService> listePaires = bd.servicesSearch(service);
+        ArrayList<Recherche> listePaires = bd.servicesSearch(service);
         return listePaires;
     }
 
-    public ArrayList<PaireNomUtilisateurEtTypeService> trierResultatRecherche(ArrayList<PaireNomUtilisateurEtTypeService> listeServices, String trierPar) throws MyException {
+    public ArrayList<Recherche> trierResultatRecherche(ArrayList<Recherche> ListeResultatsRecherche, String trierPar) throws MyException {
         if (trierPar.equals("tauxHorraire")) {
-            Collections.sort(listeServices, new TypeServices.TrierParTauxHorraire());
+            Collections.sort(ListeResultatsRecherche, new TypeServices.TrierParTauxHorraire());
         } else if (trierPar.equals("prixFixe")) {
-            Collections.sort(listeServices, new TypeServices.TrierParPrixFixe());
+            Collections.sort(ListeResultatsRecherche, new TypeServices.TrierParPrixFixe());
         } else if (trierPar.equals("nomService")) {
-            Collections.sort(listeServices, new TypeServices.TrierParNomService());
+            Collections.sort(ListeResultatsRecherche, new TypeServices.TrierParNomService());
         } else if (trierPar.equals("ville")) {
-            Collections.sort(listeServices, new TypeServices.TrierParVille());
+            Collections.sort(ListeResultatsRecherche, new TypeServices.TrierParVille());
         } else {
             MyException e = new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
             throw e;
         }
 
-        return listeServices;
+        return ListeResultatsRecherche;
     }
     /*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {

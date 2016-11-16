@@ -3,7 +3,7 @@ package inm5001.rapidoservices.service;
 import java.util.Comparator;
 
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.PaireNomUtilisateurEtTypeService;
+import inm5001.rapidoservices.Recherche;
 
 import static inm5001.rapidoservices.service.ConstanteTypeServices.MESSAGE_TAUXHORRAIRE_NEGATIF;
 import static inm5001.rapidoservices.service.ConstanteTypeServices.MESSAGE_PRIXFIXE_NEGATIF;
@@ -12,7 +12,7 @@ import static inm5001.rapidoservices.service.ConstanteTypeServices.MESSAGE_PRIXF
  * @author omer et Francis Bernier
  */
 
-public class TypeServices extends AbstraiteServices implements Comparable<PaireNomUtilisateurEtTypeService> {
+public class TypeServices extends AbstraiteServices implements Comparable<Recherche> {
 
     private float tauxHorraire;
     private float prixFixe;
@@ -84,41 +84,41 @@ public class TypeServices extends AbstraiteServices implements Comparable<PaireN
         traiterPrixFixe(prixFixe);
     }
 
-    public static class TrierParTauxHorraire implements Comparator<PaireNomUtilisateurEtTypeService> {
+    public static class TrierParTauxHorraire implements Comparator<Recherche> {
 
         @Override
-        public int compare(PaireNomUtilisateurEtTypeService pair1, PaireNomUtilisateurEtTypeService pair2) {
+        public int compare(Recherche pair1, Recherche pair2) {
             return pair1.getService().getTauxHorraire() > pair2.getService().getTauxHorraire() ? 1 : (pair1.getService().getTauxHorraire() < pair2.getService().getTauxHorraire() ? -1 : 0);
         }
     }
 
-    public static class TrierParPrixFixe implements Comparator<PaireNomUtilisateurEtTypeService> {
+    public static class TrierParPrixFixe implements Comparator<Recherche> {
 
         @Override
-        public int compare(PaireNomUtilisateurEtTypeService pair1, PaireNomUtilisateurEtTypeService pair2) {
+        public int compare(Recherche pair1, Recherche pair2) {
             return pair1.getService().getPrixFixe() > pair2.getService().getPrixFixe() ? 1 : (pair1.getService().getPrixFixe() < pair2.getService().getPrixFixe() ? -1 : 0);
         }
     }
 
-    public static class TrierParNomService implements Comparator<PaireNomUtilisateurEtTypeService> {
+    public static class TrierParNomService implements Comparator<Recherche> {
 
         @Override
-        public int compare(PaireNomUtilisateurEtTypeService pair1, PaireNomUtilisateurEtTypeService pair2) {
+        public int compare(Recherche pair1, Recherche pair2) {
             return pair1.getService().getNomSservice().compareTo(pair2.getService().getNomSservice());
         }
     }
 
-    public static class TrierParVille implements Comparator<PaireNomUtilisateurEtTypeService> {
+    public static class TrierParVille implements Comparator<Recherche> {
 
         @Override
-        public int compare(PaireNomUtilisateurEtTypeService pair1, PaireNomUtilisateurEtTypeService pair2) {
+        public int compare(Recherche pair1, Recherche pair2) {
             return pair1.getService().getVille().compareTo(pair2.getService().getVille());
         }
     }
 
     //Pas implémenté, mais obligatoire pour le [implements Comparable<TypeServices>]
     @Override
-    public int compareTo(PaireNomUtilisateurEtTypeService o) {
+    public int compareTo(Recherche o) {
         return 0;
     }
 }

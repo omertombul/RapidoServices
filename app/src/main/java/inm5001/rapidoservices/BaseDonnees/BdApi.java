@@ -1,9 +1,8 @@
 package inm5001.rapidoservices.baseDonnees;
 
-import java.lang.reflect.Type;
 import java.sql.ResultSet;
 
-import inm5001.rapidoservices.PaireNomUtilisateurEtTypeService;
+import inm5001.rapidoservices.Recherche;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.utilisateur.Profile;
@@ -104,8 +103,8 @@ public class BdApi {
         DB.closeConnection();
     }
 
-    public ArrayList<PaireNomUtilisateurEtTypeService> servicesSearch(TypeServices s){
-        ArrayList<PaireNomUtilisateurEtTypeService> UserAndServicesArray = new ArrayList<>();
+    public ArrayList<Recherche> servicesSearch(TypeServices s){
+        ArrayList<Recherche> UserAndServicesArray = new ArrayList<>();
 
 
         String SQL = SQLservicesSearch(s);
@@ -339,9 +338,9 @@ public class BdApi {
         return U;
     }
 
-    private ArrayList<PaireNomUtilisateurEtTypeService> updateUserAndSerivcesArrayWithRS(
+    private ArrayList<Recherche> updateUserAndSerivcesArrayWithRS(
             ResultSet RSservices){
-        ArrayList<PaireNomUtilisateurEtTypeService> userAndServicesArray = new ArrayList<>();
+        ArrayList<Recherche> userAndServicesArray = new ArrayList<>();
         // userId and services is in the RSservices
         float tauxHorraire, prixFixe;
         String nomService, ville, noTelephone, courriel, description;
@@ -359,7 +358,7 @@ public class BdApi {
                         RSservices.getBoolean("disponibilite"), RSservices.getString("ville"),
                         RSservices.getByte("cote"), RSservices.getString("noTelephone"),
                         RSservices.getString("courriel"), RSservices.getString("description"));
-                PaireNomUtilisateurEtTypeService P = new PaireNomUtilisateurEtTypeService(
+                Recherche P = new Recherche(
                         RSservices.getString("idUsager"), S);
                 userAndServicesArray.add(P);
             }
