@@ -6,6 +6,7 @@ import java.util.Collections;
 
 import inm5001.rapidoservices.baseDonnees.BdApi;
 import inm5001.rapidoservices.service.TypeServices;
+import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.utilisateur.Identifiant;
@@ -41,6 +42,8 @@ public class Orchestrateur {
     private String numeroTelephoneProfile;
     private String adresseCourrielProfile;
     private Boolean estValider;
+//attributs EvaluationUtilisateur
+    private EvaluationUtilisateur evaluation;
 //attributs AbstraiteServices
     private String nomSservice;
     private String disponibleService;
@@ -137,22 +140,28 @@ public class Orchestrateur {
         return listePaires;
     }
 
-    public ArrayList<Recherche> trierResultatRecherche(ArrayList<Recherche> ListeResultatsRecherche, String trierPar) throws MyException {
+    public ArrayList<Recherche> trierResultatRecherche(ArrayList<Recherche> listeServices, String trierPar) throws MyException {
         if (trierPar.equals("tauxHorraire")) {
-            Collections.sort(ListeResultatsRecherche, new TypeServices.TrierParTauxHorraire());
+            Collections.sort(listeServices, new TypeServices.TrierParTauxHorraire());
         } else if (trierPar.equals("prixFixe")) {
-            Collections.sort(ListeResultatsRecherche, new TypeServices.TrierParPrixFixe());
+            Collections.sort(listeServices, new TypeServices.TrierParPrixFixe());
         } else if (trierPar.equals("nomService")) {
-            Collections.sort(ListeResultatsRecherche, new TypeServices.TrierParNomService());
+            Collections.sort(listeServices, new TypeServices.TrierParNomService());
         } else if (trierPar.equals("ville")) {
-            Collections.sort(ListeResultatsRecherche, new TypeServices.TrierParVille());
+            Collections.sort(listeServices, new TypeServices.TrierParVille());
         } else {
             MyException e = new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
             throw e;
         }
 
-        return ListeResultatsRecherche;
+        return listeServices;
     }
+/* manque la portion BD et les tests
+    public EvaluationUtilisateur evaluerUtilisateur(String nomUtilisateur, EvaluationUtilisateur evaluation) {
+        evaluation = bd.setUserEvaluation(nomUtilisateur, evaluation);
+        return evaluation;
+    }
+*/
     /*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
         utilisateur = bd.getUser(nomUtilisateur);

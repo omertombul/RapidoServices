@@ -17,18 +17,25 @@ public class Utilisateur {
     public ArrayList<AbstraiteServices> listeServices = new ArrayList<>();
     public ArrayList<String> listeCompetences = new ArrayList<>();
     public boolean disponible = false;
-    //public ArrayList<Evaluation> listeEvaluations;
-    //public ArrayList<Evaluation> lisetEvaluationServicesGlobal;
+    public EvaluationUtilisateur evaluation;
     //public Geolocalisation geolocalisation;
 
     public Utilisateur(){
     }
-
+    //Pour l'inscription d'un nouvel utilisateur
     public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
         traiterIdentifiant(identifiant);
         traiterProfile(profile);
         traiterListeServices(listeServices);
         traiterListeCompetences(listeCompetences);
+    }
+
+    public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences, EvaluationUtilisateur evaluation) throws MyException {
+        traiterIdentifiant(identifiant);
+        traiterProfile(profile);
+        traiterListeServices(listeServices);
+        traiterListeCompetences(listeCompetences);
+        traiterEvaluations(evaluation);
     }
 //premier niveau d'abstraction
     private void traiterIdentifiant(Identifiant identifiant) throws MyException {
@@ -51,6 +58,11 @@ public class Utilisateur {
         if (listeCompetences != null) {
             affecterValeurListeCompetences(listeCompetences);
         }
+    }
+
+    private void traiterEvaluations(EvaluationUtilisateur evaluation) throws MyException {
+        validerEvaluationPasNull(evaluation);
+        affecterValeurEvaluation(evaluation);
     }
 //deuxième niveau d'abstraction
     private void validerIdentifiantPasNull(Identifiant identifiant) throws MyException {
@@ -81,6 +93,17 @@ public class Utilisateur {
 
     private void affecterValeurListeCompetences(ArrayList<String> listeCompetences) {
         this.listeCompetences = listeCompetences;
+    }
+
+    private void validerEvaluationPasNull(EvaluationUtilisateur evaluation) throws MyException {
+        if (evaluation == null) {
+            MyException e = new MyException(MESSAGE_EVALUATION_NULL);
+            throw e;
+        }
+    }
+
+    private void affecterValeurEvaluation(EvaluationUtilisateur evaluation) {
+        this.evaluation = evaluation;
     }
 //MÉTHODES PUBLIC
 }

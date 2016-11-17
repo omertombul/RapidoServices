@@ -3,6 +3,7 @@ package inm5001.rapidoservices.baseDonnees;
 import java.sql.ResultSet;
 
 import inm5001.rapidoservices.Recherche;
+import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.utilisateur.Profile;
@@ -297,7 +298,9 @@ public class BdApi {
                         RSutilisateur.getString("courriel"));
                 ArrayList<AbstraiteServices> listServices = new ArrayList<>();
                 ArrayList<String> listeCompetences = new ArrayList<>();
-                U = new Utilisateur(I,P,listServices,listeCompetences);
+                //EvalutationUtilisateur E:  Fait pas Francis Bernier en attendant le vrai code
+                EvaluationUtilisateur E = new EvaluationUtilisateur(0, 0, 0, 0);
+                U = new Utilisateur(I,P,listServices,listeCompetences, E);
                 U.disponible = RSutilisateur.getByte("disponibilite") != 0;
             }
         } catch (Exception ex) {
