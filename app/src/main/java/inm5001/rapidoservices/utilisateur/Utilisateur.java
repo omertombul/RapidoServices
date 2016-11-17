@@ -17,25 +17,27 @@ public class Utilisateur {
     public ArrayList<AbstraiteServices> listeServices = new ArrayList<>();
     public ArrayList<String> listeCompetences = new ArrayList<>();
     public boolean disponible = false;
-    public EvaluationUtilisateur evaluation;
+    public EvaluationUtilisateur evaluationUtilisateur;
     //public Geolocalisation geolocalisation;
 
     public Utilisateur(){
     }
     //Pour l'inscription d'un nouvel utilisateur
-    public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
+    public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<AbstraiteServices> listeServices,
+                       ArrayList<String> listeCompetences) throws MyException {
         traiterIdentifiant(identifiant);
         traiterProfile(profile);
         traiterListeServices(listeServices);
         traiterListeCompetences(listeCompetences);
     }
 
-    public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences, EvaluationUtilisateur evaluation) throws MyException {
+    public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<AbstraiteServices> listeServices,
+                       ArrayList<String> listeCompetences, EvaluationUtilisateur evaluationUtilisateur) throws MyException {
         traiterIdentifiant(identifiant);
         traiterProfile(profile);
         traiterListeServices(listeServices);
         traiterListeCompetences(listeCompetences);
-        traiterEvaluations(evaluation);
+        traiterEvaluationUtilisateur(evaluationUtilisateur);
     }
 //premier niveau d'abstraction
     private void traiterIdentifiant(Identifiant identifiant) throws MyException {
@@ -60,9 +62,9 @@ public class Utilisateur {
         }
     }
 
-    private void traiterEvaluations(EvaluationUtilisateur evaluation) throws MyException {
-        validerEvaluationPasNull(evaluation);
-        affecterValeurEvaluation(evaluation);
+    private void traiterEvaluationUtilisateur(EvaluationUtilisateur evaluationUtilisateur) throws MyException {
+        validerEvaluationUtilisateurPasNull(evaluationUtilisateur);
+        affecterValeurEvaluationUtilisateur(evaluationUtilisateur);
     }
 //deuxième niveau d'abstraction
     private void validerIdentifiantPasNull(Identifiant identifiant) throws MyException {
@@ -95,15 +97,15 @@ public class Utilisateur {
         this.listeCompetences = listeCompetences;
     }
 
-    private void validerEvaluationPasNull(EvaluationUtilisateur evaluation) throws MyException {
-        if (evaluation == null) {
-            MyException e = new MyException(MESSAGE_EVALUATION_NULL);
+    private void validerEvaluationUtilisateurPasNull(EvaluationUtilisateur evaluationUtilisateur) throws MyException {
+        if (evaluationUtilisateur == null) {
+            MyException e = new MyException(MESSAGE_EVALUATIONUTILISATEUR_NULL);
             throw e;
         }
     }
 
-    private void affecterValeurEvaluation(EvaluationUtilisateur evaluation) {
-        this.evaluation = evaluation;
+    private void affecterValeurEvaluationUtilisateur(EvaluationUtilisateur evaluationUtilisateur) {
+        this.evaluationUtilisateur = evaluationUtilisateur;
     }
 //MÉTHODES PUBLIC
 }

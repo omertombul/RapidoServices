@@ -2,44 +2,44 @@ package inm5001.rapidoservices.utilisateur;
 
 import inm5001.rapidoservices.MyException;
 
-import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_EVALUATIONTYPESERVICESMOYENNE_NEGATIVE;
-import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_EVALUATIONUTILISATEUR_NEGATIVE;
+import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTETYPESERVICESMOYENNE_NEGATIVE;
+import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTEUTILISATEUR_NEGATIVE;
 
 /**
  * Created by Francis Bernier on 2016-11-17.
  */
 
 public class EvaluationUtilisateur {
-    public float evaluationUtilisateur;
+    public float coteUtilisateur;
     public int nombreDEvaluationUtilisateur;
-    public float evaluationTypeServicesMoyenne;
+    public float coteTypeServicesMoyenne;
     public int nombreDEvaluationTypeServicesMoyenne;
 
     public EvaluationUtilisateur(){
 
     }
 
-    public EvaluationUtilisateur(float evaluationUtilisateur, int nombreDEvaluationUtilisateur,
-                                 float evaluationTypeServicesMoyenne, int nombreDEvaluationTypeServicesMoyenne) throws MyException {
-        traiterEvaluationUtilisateur(evaluationUtilisateur);
+    public EvaluationUtilisateur(float coteUtilisateur, int nombreDEvaluationUtilisateur,
+                                 float coteTypeServicesMoyenne, int nombreDEvaluationTypeServicesMoyenne) throws MyException {
+        traiterCoteUtilisateur(coteUtilisateur);
         traiterNombreDEvaluationUtilisateur(nombreDEvaluationUtilisateur);
-        traiterEvaluationTypeServicesMoyenne(evaluationTypeServicesMoyenne);
+        traiterCoteTypeServicesMoyenne(coteTypeServicesMoyenne);
         traiterNombreDEvaluationTypeServicesMoyenne(nombreDEvaluationTypeServicesMoyenne);
     }
 
 //premier niveau d'abstraction
-    private void traiterEvaluationUtilisateur(float evaluationUtilisateur) throws MyException {
-        validerValeurEvaluationPasNegatif(evaluationUtilisateur);
-        affecterValeurEvaluation(evaluationUtilisateur);
+    private void traiterCoteUtilisateur(float coteUtilisateur) throws MyException {
+        validerValeurCoteUtilisateurPasNegatif(coteUtilisateur);
+        affecterValeurCoteUtilisateur(coteUtilisateur);
     }
 
     private void traiterNombreDEvaluationUtilisateur(int nombreDEvaluationUtilisateur) {
         affecterValeurNombreDEvaluationUtilisateur(nombreDEvaluationUtilisateur);
     }
 
-    private void traiterEvaluationTypeServicesMoyenne(float evaluationTypeServicesMoyenne) throws MyException {
-        validerValeurEvaluationTypeServicesMoyennePasNegatif(evaluationTypeServicesMoyenne);
-        affecterValeurEvaluationTypeServicesMoyenne(evaluationTypeServicesMoyenne);
+    private void traiterCoteTypeServicesMoyenne(float coteTypeServicesMoyenne) throws MyException {
+        validerValeurCoteTypeServicesMoyennePasNegatif(coteTypeServicesMoyenne);
+        affecterValeurCoteTypeServicesMoyenne(coteTypeServicesMoyenne);
     }
 
     private void traiterNombreDEvaluationTypeServicesMoyenne(int nombreDEvaluationTypeServicesMoyenne) {
@@ -47,30 +47,30 @@ public class EvaluationUtilisateur {
     }
 
 //deuxième niveau d'abstraction
-    private void validerValeurEvaluationPasNegatif(float evaluationUtilisateur) throws MyException {
-        if (evaluationUtilisateur < 0) {
-            MyException e = new MyException(MESSAGE_EVALUATIONUTILISATEUR_NEGATIVE);
+    private void validerValeurCoteUtilisateurPasNegatif(float coteUtilisateur) throws MyException {
+        if (coteUtilisateur < 0) {
+            MyException e = new MyException(MESSAGE_COTEUTILISATEUR_NEGATIVE);
             throw e;
         }
     }
 
-    private void affecterValeurEvaluation(float evaluationUtilisateur) {
-        this.evaluationUtilisateur = evaluationUtilisateur;
+    private void affecterValeurCoteUtilisateur(float coteUtilisateur) {
+        this.coteUtilisateur = coteUtilisateur;
     }
 
     private void affecterValeurNombreDEvaluationUtilisateur(int nombreDEvaluationUtilisateur) {
         this.nombreDEvaluationUtilisateur = nombreDEvaluationUtilisateur;
     }
 
-    private void validerValeurEvaluationTypeServicesMoyennePasNegatif(float evaluationTypeServicesMoyenne) throws MyException {
+    private void validerValeurCoteTypeServicesMoyennePasNegatif(float evaluationTypeServicesMoyenne) throws MyException {
         if (evaluationTypeServicesMoyenne < 0) {
-            MyException e = new MyException(MESSAGE_EVALUATIONTYPESERVICESMOYENNE_NEGATIVE);
+            MyException e = new MyException(MESSAGE_COTETYPESERVICESMOYENNE_NEGATIVE);
             throw e;
         }
     }
 
-    private void affecterValeurEvaluationTypeServicesMoyenne(float evaluationTypeServicesMoyenne) {
-        this.evaluationTypeServicesMoyenne = evaluationTypeServicesMoyenne;
+    private void affecterValeurCoteTypeServicesMoyenne(float coteTypeServicesMoyenne) {
+        this.coteTypeServicesMoyenne = coteTypeServicesMoyenne;
     }
 
     private void affecterValeurNombreDEvaluationTypeServicesMoyenne(int nombreDEvaluationTypeServicesMoyenne) {

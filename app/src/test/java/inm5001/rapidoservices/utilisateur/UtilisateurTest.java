@@ -28,7 +28,6 @@ public class UtilisateurTest {
     private ArrayList<String> listeCompetences;
     private String competence;
     private boolean disponibleUtilisateur;
-    private EvaluationUtilisateur evaluation;
     //private ArrayList<Evaluation> listeEvaluations;
     //private ArrayList<Evaluation> lisetEvaluationServicesGlobal;
     //private Evaluation evaluation;
@@ -54,10 +53,11 @@ public class UtilisateurTest {
     private float tauxHorraire;
     private float prixFixe;
 //attributs EvaluationUtilisateur
-    private float evaluationUtilisateur;
+    private float coteUtilisateur;
     private int nombreDEvaluationUtilisateur;
-    private float evaluationTypeServicesMoyenne;
+    private float coteTypeServicesMoyenne;
     private int nombreDEvaluationTypeServicesMoyenne;
+    private EvaluationUtilisateur evaluationUtilisateur;
 
     @Before
     public void setUp() throws MyException {
@@ -91,11 +91,11 @@ public class UtilisateurTest {
         listeCompetences.add("Plombier");
         listeCompetences.add("Electricien");
         //attributs EvaluationUtilisateur
-        evaluationUtilisateur = 3.5f;
+        coteUtilisateur = 3.5f;
         nombreDEvaluationUtilisateur = 210;
-        evaluationTypeServicesMoyenne = 4.5f;
+        coteTypeServicesMoyenne = 4.5f;
         nombreDEvaluationTypeServicesMoyenne = 1000;
-        evaluation = new EvaluationUtilisateur(evaluationUtilisateur, nombreDEvaluationUtilisateur, evaluationTypeServicesMoyenne, nombreDEvaluationTypeServicesMoyenne);
+        evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne, nombreDEvaluationTypeServicesMoyenne);
     }
 
     @After
@@ -123,46 +123,47 @@ public class UtilisateurTest {
         tauxHorraire = 0;
         prixFixe = 0;
         //attributs EvaluationUtilisateur
-        evaluationUtilisateur = 0;
+        coteUtilisateur = 0;
         nombreDEvaluationUtilisateur = 0;
-        evaluationTypeServicesMoyenne = 0;
+        coteTypeServicesMoyenne = 0;
         nombreDEvaluationTypeServicesMoyenne = 0;
+        evaluationUtilisateur = null;
     }
 
     @Test
     public void UtilisateurPasNull() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluation);
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
         assertNotNull(utilisateur);
     }
 
     @Test
     public void UtilisateurIdentifiantPasNull() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluation);
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
         assertNotNull(utilisateur.identifiant);
     }
 
     @Test
     public void UtilisateurProfilePasNull() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluation);
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
         assertNotNull(utilisateur.profile);
     }
 
     @Test
     public void UtilisateurListeServicesPasNull() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluation);
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
         assertNotNull(utilisateur.listeServices);
     }
 
     @Test
     public void UtilisateurEvaluationPasNull() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluation);
-        assertNotNull(utilisateur.evaluation);
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
+        assertNotNull(utilisateur.evaluationUtilisateur);
     }
 //IDENTIFIANT
     @Test
     public void ValiderIdentifiantPasNull() throws Exception {
         try {
-            utilisateur = new Utilisateur(null, profile, listeServices, listeCompetences, evaluation);
+            utilisateur = new Utilisateur(null, profile, listeServices, listeCompetences, evaluationUtilisateur);
         } catch (MyException e) {
             estValider = e.getMessage().equals(MESSAGE_IDENTIFIANT_NULL);
         }
@@ -171,21 +172,21 @@ public class UtilisateurTest {
 
     @Test
     public void UtilisateurIdentifiantNomUtilisateur() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluation);
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
         nomUtilisateur = utilisateur.identifiant.nomUtilisateur;
         assertEquals(nomUtilisateur, "FRANCIS");
     }
 
     @Test
     public void UtilisateurIdentifiaMotDePasse() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluation);
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
         motDePasse = utilisateur.identifiant.motDePasse;
         assertEquals(motDePasse, "Allo!234");
     }
 
     @Test
     public void UtilisateurDisponible() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluation);
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
         disponibleUtilisateur = utilisateur.disponible;
         assertFalse(disponibleUtilisateur);
     }
@@ -193,7 +194,7 @@ public class UtilisateurTest {
 @Test
     public void ValiderProfilePasNull() throws Exception {
         try {
-            utilisateur = new Utilisateur(identifiant, null, listeServices, listeCompetences, evaluation);
+            utilisateur = new Utilisateur(identifiant, null, listeServices, listeCompetences, evaluationUtilisateur);
         } catch (MyException e) {
             estValider = e.getMessage().equals(MESSAGE_PROFILE_NULL);
         }
@@ -202,76 +203,76 @@ public class UtilisateurTest {
 
     @Test
     public void UtilisateurProfileNom() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluation);
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
         nom = utilisateur.profile.nom;
         assertEquals(nom, "FRANCIS");
     }
 
     @Test
     public void UtilisateurProfileNumeroTelephone() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluation);
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
         numeroTelephoneProfile = utilisateur.profile.numeroTelephone;
         assertEquals(numeroTelephoneProfile, "5145972143");
     }
 
     @Test
     public void UtilisateurProfileAdresseCourriel() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluation);
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
         adresseCourrielProfile = utilisateur.profile.adresseCourriel;
         assertEquals(adresseCourrielProfile, "francis@hotmail.com");
     }
 //LISTESERVICES
     @Test
     public void TraiterListeServices() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluation);
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
         service = utilisateur.listeServices.get(1);
         assertEquals(service.getCourriel(), "service2@gmail.com");
     }
 
     @Test
     public void TraiterListeServicesNull() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, null, listeCompetences, evaluation);
+        utilisateur = new Utilisateur(identifiant, profile, null, listeCompetences, evaluationUtilisateur);
         assertTrue((utilisateur.listeServices).isEmpty());
     }
 //LISTECOMPETENCES
     @Test
     public void TraiterListeCompetences() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluation);
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
         competence = utilisateur.listeCompetences.get(1);
         assertEquals(competence, "Electricien");
     }
 
     @Test
     public void TraiterListeCompetencesNull() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, null, evaluation);
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, null, evaluationUtilisateur);
         assertTrue((utilisateur.listeCompetences).isEmpty());
     }
 //EVALUATIONUTILISATEUR
     @Test
-    public void traiterEvaluationEvaluationUtilisateur() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluation);
-        evaluationUtilisateur = utilisateur.evaluation.evaluationUtilisateur;
-        assertTrue(evaluationUtilisateur == 3.5);
+    public void traiterEvaluationUtilisateurCoteUtilisateur() throws Exception {
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
+        coteUtilisateur = utilisateur.evaluationUtilisateur.coteUtilisateur;
+        assertTrue(coteUtilisateur == 3.5);
     }
 
     @Test
-    public void traiterEvaluationNombreDEvaluationUtilisateur() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluation);
-        nombreDEvaluationUtilisateur = utilisateur.evaluation.nombreDEvaluationUtilisateur;
+    public void traiterEvaluationUtilisateurNombreDEvaluationUtilisateur() throws Exception {
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
+        nombreDEvaluationUtilisateur = utilisateur.evaluationUtilisateur.nombreDEvaluationUtilisateur;
         assertTrue(nombreDEvaluationUtilisateur == 210);
     }
 
     @Test
-    public void traiterEvaluationTypeServicesMoyenne() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluation);
-        evaluationTypeServicesMoyenne = utilisateur.evaluation.evaluationTypeServicesMoyenne;
-        assertTrue(evaluationTypeServicesMoyenne == 4.5);
+    public void traiterEvaluationUtilisateurCoteTypeServicesMoyenne() throws Exception {
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
+        coteTypeServicesMoyenne = utilisateur.evaluationUtilisateur.coteTypeServicesMoyenne;
+        assertTrue(coteTypeServicesMoyenne == 4.5);
     }
 
     @Test
-    public void traiterEvaluationNombreDEvaluationTypeServicesMoyenne() throws Exception {
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluation);
-        nombreDEvaluationTypeServicesMoyenne = utilisateur.evaluation.nombreDEvaluationTypeServicesMoyenne;
+    public void traiterEvaluationUtilisateurNombreDEvaluationTypeServicesMoyenne() throws Exception {
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
+        nombreDEvaluationTypeServicesMoyenne = utilisateur.evaluationUtilisateur.nombreDEvaluationTypeServicesMoyenne;
         assertTrue(nombreDEvaluationTypeServicesMoyenne == 1000);
     }
 

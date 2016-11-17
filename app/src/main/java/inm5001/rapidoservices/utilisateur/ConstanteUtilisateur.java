@@ -11,5 +11,5 @@ public interface ConstanteUtilisateur {
 
     String MESSAGE_PROFILE_NULL = "Un problème à l'enregistrement c'est produit avec la portion profile, celui-ci ne doit pas être null.";
 
-    String MESSAGE_EVALUATION_NULL = "Un problème à l'enregistrement c'est produit avec la portion evaluation, celui-ci ne doit pas être null.";
+    String MESSAGE_EVALUATIONUTILISATEUR_NULL = "Un problème à l'enregistrement c'est produit avec la portion evaluation, celui-ci ne doit pas être null.";
 }

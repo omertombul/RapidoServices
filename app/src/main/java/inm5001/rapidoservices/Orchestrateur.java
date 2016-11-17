@@ -29,9 +29,7 @@ public class Orchestrateur {
     private ArrayList<String> listeCompetences;
     private String competence;
     private String disponibleUtilisateur;
-    //private ArrayList<Evaluation> listeEvaluations;
-    //private ArrayList<Evaluation> lisetEvaluationServicesGlobal;
-    //private Evaluation evaluation;
+    private EvaluationUtilisateur evaluationUtilisateur;
     //private Geolocalisation geolocalisation;
 //attributs Identifiant
     private String nomUtilisateur;
@@ -42,8 +40,6 @@ public class Orchestrateur {
     private String numeroTelephoneProfile;
     private String adresseCourrielProfile;
     private Boolean estValider;
-//attributs EvaluationUtilisateur
-    private EvaluationUtilisateur evaluation;
 //attributs AbstraiteServices
     private String nomSservice;
     private String disponibleService;
@@ -157,9 +153,9 @@ public class Orchestrateur {
         return listeServices;
     }
 /* manque la portion BD et les tests
-    public EvaluationUtilisateur evaluerUtilisateur(String nomUtilisateur, EvaluationUtilisateur evaluation) {
-        evaluation = bd.setUserEvaluation(nomUtilisateur, evaluation);
-        return evaluation;
+    public EvaluationUtilisateur evaluerUtilisateur(String nomUtilisateur, EvaluationUtilisateur evaluationUtilisateur) {
+        evaluationUtilisateur = bd.setUserEvaluation(nomUtilisateur, evaluationUtilisateur);
+        return evaluationUtilisateur;
     }
 */
     /*

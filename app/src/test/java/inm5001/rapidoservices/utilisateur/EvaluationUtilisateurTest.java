@@ -6,9 +6,8 @@ import org.junit.Test;
 
 import inm5001.rapidoservices.MyException;
 
-import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_EVALUATIONTYPESERVICESMOYENNE_NEGATIVE;
-import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_EVALUATIONUTILISATEUR_NEGATIVE;
-import static inm5001.rapidoservices.utilisateur.ConstanteIdentifiant.MESSAGE_NOMUTILISATEUR_NULL;
+import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTETYPESERVICESMOYENNE_NEGATIVE;
+import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTEUTILISATEUR_NEGATIVE;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -17,80 +16,80 @@ import static org.junit.Assert.assertTrue;
  */
 
 public class EvaluationUtilisateurTest {
-    public float evaluationUtilisateur;
+    public float coteUtilisateur;
     public int nombreDEvaluationUtilisateur;
-    public float evaluationTypeServicesMoyenne;
+    public float coteTypeServicesMoyenne;
     public int nombreDEvaluationTypeServicesMoyenne;
-    private EvaluationUtilisateur evaluation;
+    private EvaluationUtilisateur evaluationUtilisateur;
     private Boolean estValider;
 
     @Before
     public void setUp() {
-        evaluationUtilisateur = 3.5f;
+        coteUtilisateur = 3.5f;
         nombreDEvaluationUtilisateur = 210;
-        evaluationTypeServicesMoyenne = 4.5f;
+        coteTypeServicesMoyenne = 4.5f;
         nombreDEvaluationTypeServicesMoyenne = 1000;
-        EvaluationUtilisateur evaluation = null;
+        EvaluationUtilisateur evaluationUtilisateur = null;
         estValider = false;
     }
 
     @After
     public void tearDown() {
-        evaluationUtilisateur = 0;
+        coteUtilisateur = 0;
         nombreDEvaluationUtilisateur = 0;
-        evaluationTypeServicesMoyenne = 0;
+        coteTypeServicesMoyenne = 0;
         nombreDEvaluationTypeServicesMoyenne = 0;
-        evaluation = null;
+        evaluationUtilisateur = null;
         estValider = null;
     }
 
     @Test
-    public void EvaluationPasNull() throws Exception {
-        evaluation = new EvaluationUtilisateur(evaluationUtilisateur, nombreDEvaluationUtilisateur, evaluationTypeServicesMoyenne,
+    public void EvaluationUtilisateurPasNull() throws Exception {
+        evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
                                                 nombreDEvaluationTypeServicesMoyenne);
-        assertNotNull(evaluation);
+        assertNotNull(evaluationUtilisateur);
     }
 
     @Test
-    public void validerValeurEvaluationPasNegatif() throws Exception {
+    public void validerValeurCoteUtilisateurPasNegatif() throws Exception {
         try {
-            evaluation = new EvaluationUtilisateur(-1, nombreDEvaluationUtilisateur, evaluationTypeServicesMoyenne,
+            evaluationUtilisateur = new EvaluationUtilisateur(-1, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
                                                     nombreDEvaluationTypeServicesMoyenne);
         } catch (MyException e) {
-            estValider =  e.getMessage().equals(MESSAGE_EVALUATIONUTILISATEUR_NEGATIVE);
+            estValider =  e.getMessage().equals(MESSAGE_COTEUTILISATEUR_NEGATIVE);
         }
         assertTrue(estValider);
     }
 
     @Test
-    public void affecterValeurEvaluation() throws Exception {
-        evaluation = new EvaluationUtilisateur(evaluationUtilisateur, nombreDEvaluationUtilisateur, evaluationTypeServicesMoyenne,
+    public void affecterValeurCoteUtilisateur() throws Exception {
+        evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
                 nombreDEvaluationTypeServicesMoyenne);
-        assertTrue(evaluation.evaluationUtilisateur == 3.5);
+        assertTrue(evaluationUtilisateur.coteUtilisateur == 3.5);
     }
 
     @Test
     public void affecterValeurNombreDEvaluationUtilisateur() throws Exception {
-        evaluation = new EvaluationUtilisateur(evaluationUtilisateur, nombreDEvaluationUtilisateur, evaluationTypeServicesMoyenne,
+        evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
                 nombreDEvaluationTypeServicesMoyenne);
-        assertTrue(evaluation.nombreDEvaluationUtilisateur == 210);
+        assertTrue(evaluationUtilisateur.nombreDEvaluationUtilisateur == 210);
     }
 
     @Test
-    public void validerValeurEvaluationTypeServicesMoyennePasNegatif() throws Exception {
+    public void validerValeurCoteTypeServicesMoyennePasNegatif() throws Exception {
         try {
-            evaluation = new EvaluationUtilisateur(evaluationUtilisateur, nombreDEvaluationUtilisateur, -1, nombreDEvaluationTypeServicesMoyenne);
+            evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, -1, nombreDEvaluationTypeServicesMoyenne);
         } catch (MyException e) {
-            estValider =  e.getMessage().equals(MESSAGE_EVALUATIONTYPESERVICESMOYENNE_NEGATIVE);
+            estValider =  e.getMessage().equals(MESSAGE_COTETYPESERVICESMOYENNE_NEGATIVE);
         }
         assertTrue(estValider);
     }
 
     @Test
-    public void affecterValeurEvaluationTypeServicesMoyenne() throws Exception {
-        evaluation = new EvaluationUtilisateur(evaluationUtilisateur, nombreDEvaluationUtilisateur, evaluationTypeServicesMoyenne,
+    public void affecterValeurCoteTypeServicesMoyenne() throws Exception {
+        evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
                 nombreDEvaluationTypeServicesMoyenne);
-        assertTrue(evaluation.evaluationTypeServicesMoyenne == 4.5);
+        assertTrue(evaluationUtilisateur.coteTypeServicesMoyenne == 4.5);
     }
 
     @Test

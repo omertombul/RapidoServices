@@ -298,9 +298,7 @@ public class BdApi {
                         RSutilisateur.getString("courriel"));
                 ArrayList<AbstraiteServices> listServices = new ArrayList<>();
                 ArrayList<String> listeCompetences = new ArrayList<>();
-                //EvalutationUtilisateur E:  Fait pas Francis Bernier en attendant le vrai code
-                EvaluationUtilisateur E = new EvaluationUtilisateur(0, 0, 0, 0);
-                U = new Utilisateur(I,P,listServices,listeCompetences, E);
+                U = new Utilisateur(I,P,listServices,listeCompetences);
                 U.disponible = RSutilisateur.getByte("disponibilite") != 0;
             }
         } catch (Exception ex) {
