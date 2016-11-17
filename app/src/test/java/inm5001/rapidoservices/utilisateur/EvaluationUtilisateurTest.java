@@ -93,6 +93,28 @@ public class EvaluationUtilisateurTest {
     }
 
     @Test
+    public void affecterValeurNombreDEvaluationTypeServicesMoyenne() throws Exception {
+        evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
+                nombreDEvaluationTypeServicesMoyenne);
+        assertTrue(evaluationUtilisateur.nombreDEvaluationTypeServicesMoyenne == 1000);
+    }
+
+    @Test
+    public void validationCoteUtilisateur() throws Exception {
+        try {
+            evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
+                                    nombreDEvaluationTypeServicesMoyenne);
+        } catch (MyException e) {
+            throw e;
+        } try {
+            evaluationUtilisateur.validationCoteUtilisateur(-1);
+        } catch (Exception e) {
+            estValider =  e.getMessage().equals(MESSAGE_COTEUTILISATEUR_NEGATIVE);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
     public void fauxPositif() throws Exception {
         assertTrue(false);
     }

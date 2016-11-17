@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import inm5001.rapidoservices.MyException;
+import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
 import inm5001.rapidoservices.utilisateur.Profile;
 
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_COURRIEL_FORMAT_VALIDE;
@@ -40,10 +41,13 @@ public class AbstraiteServicesTest {
     private float tauxHorraire;
     private float prixFixe;
     boolean estValider;
-
+    //attributs EvaluationService
+    private float coteService;
+    private int nombreDEvaluationService;
+    private EvaluationService evaluationService;
 
     @Before
-    public void setUp() {
+    public void setUp() throws MyException {
         nomSservice = "Plomberie";
         disponible = false;
         ville = "Montreal";
@@ -54,6 +58,10 @@ public class AbstraiteServicesTest {
         tauxHorraire = 14.50f;
         prixFixe = 50.00f;
         estValider = false;
+        //attributs EvaluationService
+        coteService = 3.5f;
+        nombreDEvaluationService = 210;
+        evaluationService = new EvaluationService(coteService, nombreDEvaluationService);
     }
 
     @After
@@ -68,6 +76,10 @@ public class AbstraiteServicesTest {
         tauxHorraire = 0;
         prixFixe = 0;
         estValider = false;
+        //attributs EvaluationService
+        coteService = 0;
+        nombreDEvaluationService = 0;
+        evaluationService = null;
     }
 
     @Test
@@ -124,6 +136,14 @@ public class AbstraiteServicesTest {
         service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
                 noTelephone, courriel, description);
         assertEquals(service.getDescription(), description);
+    }
+
+    @Test
+    public void AbstraiteServicesEvaluationService() throws MyException {
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
+                noTelephone, courriel, description, evaluationService);
+        assertTrue(service.getEvaluationService().coteService == evaluationService.coteService);
+        assertTrue(service.getEvaluationService().nombreDEvaluationService == evaluationService.nombreDEvaluationService);
     }
 //tauxHorraire
     @Test
@@ -474,9 +494,18 @@ public class AbstraiteServicesTest {
     @Test
     public void setDescription() throws MyException {
         service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, courriel, description);
+                                    noTelephone, courriel, description);
         service.setDescription("abcd");
         assertEquals(service.getDescription(), "abcd");
+    }
+
+    @Test
+    public void setEvaluationService() throws MyException {
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
+                                    noTelephone, courriel, description, evaluationService);
+        assertTrue(service.getEvaluationService().coteService == 3.5);
+        service.setEvaluationService(new EvaluationService(2, nombreDEvaluationService));
+        assertTrue(service.getEvaluationService().coteService == 2);
     }
 
     @Test

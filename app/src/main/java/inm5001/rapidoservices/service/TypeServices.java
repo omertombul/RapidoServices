@@ -17,11 +17,8 @@ public class TypeServices extends AbstraiteServices implements Comparable<Recher
     private float tauxHorraire;
     private float prixFixe;
 
-    public TypeServices(float tauxHorraire, float prixFixe, String nomSservice, boolean disponible, String ville,
-                        byte cote, String noTelephone, String courriel, String description) throws MyException {
-        super( nomSservice, disponible, ville, cote, noTelephone, courriel, description );
-        traiterTauxHorraire(tauxHorraire);
-        traiterPrixFixe(prixFixe);
+    public TypeServices(String nomSservice)throws MyException{
+        super(nomSservice);
     }
 
     public TypeServices(float tauxHorraire, float prixFixe, String nomSservice, String ville) throws MyException {
@@ -29,9 +26,18 @@ public class TypeServices extends AbstraiteServices implements Comparable<Recher
         traiterTauxHorraire(tauxHorraire);
         traiterPrixFixe(prixFixe);
     }
+    public TypeServices(float tauxHorraire, float prixFixe, String nomSservice, boolean disponible, String ville,
+                        byte cote, String noTelephone, String courriel, String description) throws MyException {
+        super( nomSservice, disponible, ville, cote, noTelephone, courriel, description );
+        traiterTauxHorraire(tauxHorraire);
+        traiterPrixFixe(prixFixe);
+    }
 
-    public TypeServices(String nomSservice)throws MyException{
-        super(nomSservice);
+    public TypeServices(float tauxHorraire, float prixFixe, String nomSservice, boolean disponible, String ville,
+                        byte cote, String noTelephone, String courriel, String description, EvaluationService evaluationService) throws MyException {
+        super( nomSservice, disponible, ville, cote, noTelephone, courriel, description, evaluationService );
+        traiterTauxHorraire(tauxHorraire);
+        traiterPrixFixe(prixFixe);
     }
 
 //premier niveau d'abstraction

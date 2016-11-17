@@ -76,4 +76,9 @@ public class EvaluationUtilisateur {
     private void affecterValeurNombreDEvaluationTypeServicesMoyenne(int nombreDEvaluationTypeServicesMoyenne) {
         this.nombreDEvaluationTypeServicesMoyenne = nombreDEvaluationTypeServicesMoyenne;
     }
+//MÉTHODES PUBLIC
+    public float validationCoteUtilisateur(float coteUtilisateur) throws MyException {
+        traiterCoteUtilisateur(coteUtilisateur);
+        return this.coteUtilisateur;
+    }
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import inm5001.rapidoservices.baseDonnees.BdApi;
+import inm5001.rapidoservices.service.EvaluationService;
 import inm5001.rapidoservices.service.TypeServices;
 import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
@@ -50,6 +51,7 @@ public class Orchestrateur {
     private String description;
     private float tauxHorraire;
     private float prixFixe;
+    private EvaluationService evaluationService;
 //attributs BdApi
     private static BdApi bd = new BdApi();
 
@@ -152,12 +154,20 @@ public class Orchestrateur {
 
         return listeServices;
     }
-/* manque la portion BD et les tests
-    public EvaluationUtilisateur evaluerUtilisateur(String nomUtilisateur, EvaluationUtilisateur evaluationUtilisateur) {
-        evaluationUtilisateur = bd.setUserEvaluation(nomUtilisateur, evaluationUtilisateur);
+// manque la portion BD et les tests
+    /*
+    public EvaluationUtilisateur evaluerUtilisateur(String nomUtilisateur, float coteUtilisateur) throws MyException {
+        evaluationUtilisateur.validationCoteUtilisateur(coteUtilisateur);
+        evaluationUtilisateur = bd.setUserEvaluation(nomUtilisateur, coteUtilisateur);
         return evaluationUtilisateur;
     }
-*/
+
+    public EvaluationUtilisateur evaluerService(String nomUtilisateur, String nomSservice, float coteService) throws MyException {
+        evaluationService.validationCoteService(coteService);
+        evaluationService = bd.setServiceEvaluation(nomUtilisateur, nomSservice, coteService);
+        return evaluationUtilisateur;
+    }
+    */
     /*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
         utilisateur = bd.getUser(nomUtilisateur);

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.service.AbstraiteServices;
+import inm5001.rapidoservices.service.EvaluationService;
 import inm5001.rapidoservices.service.TypeServices;
 
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_IDENTIFIANT_NULL;
@@ -58,6 +59,10 @@ public class UtilisateurTest {
     private float coteTypeServicesMoyenne;
     private int nombreDEvaluationTypeServicesMoyenne;
     private EvaluationUtilisateur evaluationUtilisateur;
+//attributs EvaluationService
+    private float coteService;
+    private int nombreDEvaluationService;
+    private EvaluationService evaluationService;
 
     @Before
     public void setUp() throws MyException {
@@ -95,7 +100,12 @@ public class UtilisateurTest {
         nombreDEvaluationUtilisateur = 210;
         coteTypeServicesMoyenne = 4.5f;
         nombreDEvaluationTypeServicesMoyenne = 1000;
-        evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne, nombreDEvaluationTypeServicesMoyenne);
+        evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
+                                                            nombreDEvaluationTypeServicesMoyenne);
+        //attributs EvaluationService
+        coteService = 3.5f;
+        nombreDEvaluationService = 210;
+        evaluationService = new EvaluationService(coteService, nombreDEvaluationService);
     }
 
     @After
@@ -128,6 +138,10 @@ public class UtilisateurTest {
         coteTypeServicesMoyenne = 0;
         nombreDEvaluationTypeServicesMoyenne = 0;
         evaluationUtilisateur = null;
+        //attributs EvaluationService
+        coteService = 0;
+        nombreDEvaluationService = 0;
+        evaluationService = null;
     }
 
     @Test
@@ -274,6 +288,29 @@ public class UtilisateurTest {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
         nombreDEvaluationTypeServicesMoyenne = utilisateur.evaluationUtilisateur.nombreDEvaluationTypeServicesMoyenne;
         assertTrue(nombreDEvaluationTypeServicesMoyenne == 1000);
+    }
+
+//EVALUATIONSERVICE
+    @Test
+    public void traiterEvaluationServiceCoteService() throws Exception {
+        service = new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, cote,
+                                    numeroTelephoneService, adresseCourrielService, description, evaluationService);
+        ArrayList<AbstraiteServices> listeServices2 = new ArrayList<>();
+        listeServices2.add(service);
+        utilisateur = new Utilisateur(identifiant, profile, listeServices2, listeCompetences, evaluationUtilisateur);
+        coteService = utilisateur.listeServices.get(0).getEvaluationService().coteService;
+        assertTrue(coteService == 3.5);
+    }
+
+    @Test
+    public void traiterEvaluationServiceNombreDEvaluationService() throws Exception {
+        service = new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, cote,
+                numeroTelephoneService, adresseCourrielService, description, evaluationService);
+        ArrayList<AbstraiteServices> listeServices2 = new ArrayList<>();
+        listeServices2.add(service);
+        utilisateur = new Utilisateur(identifiant, profile, listeServices2, listeCompetences, evaluationUtilisateur);
+        nombreDEvaluationService = utilisateur.listeServices.get(0).getEvaluationService().nombreDEvaluationService;
+        assertTrue(nombreDEvaluationService == 210);
     }
 
     @Test
