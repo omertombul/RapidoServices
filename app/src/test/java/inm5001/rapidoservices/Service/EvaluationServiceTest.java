@@ -1,4 +1,4 @@
-package inm5001.rapidoservices.utilisateur;
+package inm5001.rapidoservices.service;
 
 import org.junit.After;
 import org.junit.Before;
@@ -7,9 +7,7 @@ import org.junit.Test;
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.service.EvaluationService;
 
-import static inm5001.rapidoservices.service.ConstanteEvaluationService.MESSAGE_COTESERVICE_NEGATIVE;
-import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTETYPESERVICESMOYENNE_NEGATIVE;
-import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTEUTILISATEUR_NEGATIVE;
+import static inm5001.rapidoservices.service.ConstanteEvaluationService.MESSAGE_COTESERVICE_ENTREZEROETCINQ;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -46,11 +44,21 @@ public class EvaluationServiceTest {
     }
 
     @Test
-    public void validerValeurCoteServicePasNegatif() throws Exception {
+    public void validerValeurCoteServiceEntreZeroEtCinq1() throws Exception {
         try {
-            evaluationService = new EvaluationService(-1, nombreDEvaluationService);
+            evaluationService = new EvaluationService(-0.1f, nombreDEvaluationService);
         } catch (MyException e) {
-            estValider =  e.getMessage().equals(MESSAGE_COTESERVICE_NEGATIVE);
+            estValider =  e.getMessage().equals(MESSAGE_COTESERVICE_ENTREZEROETCINQ);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void validerValeurCoteServiceEntreZeroEtCinq2() throws Exception {
+        try {
+            evaluationService = new EvaluationService(5.1f, nombreDEvaluationService);
+        } catch (MyException e) {
+            estValider =  e.getMessage().equals(MESSAGE_COTESERVICE_ENTREZEROETCINQ);
         }
         assertTrue(estValider);
     }
@@ -76,7 +84,7 @@ public class EvaluationServiceTest {
         } try {
             evaluationService.validationCoteService(-1);
         } catch (Exception e) {
-            estValider =  e.getMessage().equals(MESSAGE_COTESERVICE_NEGATIVE);
+            estValider =  e.getMessage().equals(MESSAGE_COTESERVICE_ENTREZEROETCINQ);
         }
         assertTrue(estValider);
     }

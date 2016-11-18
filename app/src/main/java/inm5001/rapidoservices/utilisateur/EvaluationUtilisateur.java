@@ -5,10 +5,9 @@ import java.util.Comparator;
 
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Recherche;
-import inm5001.rapidoservices.service.TypeServices;
 
-import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTETYPESERVICESMOYENNE_NEGATIVE;
-import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTEUTILISATEUR_NEGATIVE;
+import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCINQ;
+import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTEUTILISATEUR_ENTREZEROETCINQ;
 
 /**
  * Created by Francis Bernier on 2016-11-17.
@@ -34,7 +33,7 @@ public class EvaluationUtilisateur implements Comparable<ArrayList<Utilisateur>>
 
 //premier niveau d'abstraction
     private void traiterCoteUtilisateur(float coteUtilisateur) throws MyException {
-        validerValeurCoteUtilisateurPasNegatif(coteUtilisateur);
+        validerValeurCoteUtilisateurEntreZeroEtCinq(coteUtilisateur);
         affecterValeurCoteUtilisateur(coteUtilisateur);
     }
 
@@ -43,7 +42,7 @@ public class EvaluationUtilisateur implements Comparable<ArrayList<Utilisateur>>
     }
 
     private void traiterCoteTypeServicesMoyenne(float coteTypeServicesMoyenne) throws MyException {
-        validerValeurCoteTypeServicesMoyennePasNegatif(coteTypeServicesMoyenne);
+        validerValeurCoteTypeServicesMoyenneEntreZeroEtCinq(coteTypeServicesMoyenne);
         affecterValeurCoteTypeServicesMoyenne(coteTypeServicesMoyenne);
     }
 
@@ -52,9 +51,9 @@ public class EvaluationUtilisateur implements Comparable<ArrayList<Utilisateur>>
     }
 
 //deuxième niveau d'abstraction
-    private void validerValeurCoteUtilisateurPasNegatif(float coteUtilisateur) throws MyException {
-        if (coteUtilisateur < 0) {
-            MyException e = new MyException(MESSAGE_COTEUTILISATEUR_NEGATIVE);
+    private void validerValeurCoteUtilisateurEntreZeroEtCinq(float coteUtilisateur) throws MyException {
+        if (coteUtilisateur < 0 || coteUtilisateur > 5) {
+            MyException e = new MyException(MESSAGE_COTEUTILISATEUR_ENTREZEROETCINQ);
             throw e;
         }
     }
@@ -67,9 +66,9 @@ public class EvaluationUtilisateur implements Comparable<ArrayList<Utilisateur>>
         this.nombreDEvaluationUtilisateur = nombreDEvaluationUtilisateur;
     }
 
-    private void validerValeurCoteTypeServicesMoyennePasNegatif(float evaluationTypeServicesMoyenne) throws MyException {
-        if (evaluationTypeServicesMoyenne < 0) {
-            MyException e = new MyException(MESSAGE_COTETYPESERVICESMOYENNE_NEGATIVE);
+    private void validerValeurCoteTypeServicesMoyenneEntreZeroEtCinq(float coteTypeServicesMoyenne) throws MyException {
+        if (coteTypeServicesMoyenne < 0 || coteTypeServicesMoyenne > 5) {
+            MyException e = new MyException(MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCINQ);
             throw e;
         }
     }

@@ -1,12 +1,11 @@
 package inm5001.rapidoservices.service;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Recherche;
 
-import static inm5001.rapidoservices.service.ConstanteEvaluationService.MESSAGE_COTESERVICE_NEGATIVE;
+import static inm5001.rapidoservices.service.ConstanteEvaluationService.MESSAGE_COTESERVICE_ENTREZEROETCINQ;
 
 /**
  * Created by Francis Bernier on 2016-11-17.
@@ -27,7 +26,7 @@ public class EvaluationService implements Comparable<Recherche> {
 
     //premier niveau d'abstraction
     private void traiterCoteService(float coteService) throws MyException {
-        validerValeurCoteServicePasNegatif(coteService);
+        validerValeurCoteServiceEntreZeroEtCinq(coteService);
         affecterValeurCoteService(coteService);
     }
 
@@ -36,9 +35,9 @@ public class EvaluationService implements Comparable<Recherche> {
     }
 
     //deuxième niveau d'abstraction
-    private void validerValeurCoteServicePasNegatif(float coteService) throws MyException {
-        if (coteService < 0) {
-            MyException e = new MyException(MESSAGE_COTESERVICE_NEGATIVE);
+    private void validerValeurCoteServiceEntreZeroEtCinq(float coteService) throws MyException {
+        if (coteService < 0 || coteService > 5) {
+            MyException e = new MyException(MESSAGE_COTESERVICE_ENTREZEROETCINQ);
             throw e;
         }
     }

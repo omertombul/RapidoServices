@@ -6,8 +6,8 @@ import org.junit.Test;
 
 import inm5001.rapidoservices.MyException;
 
-import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTETYPESERVICESMOYENNE_NEGATIVE;
-import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTEUTILISATEUR_NEGATIVE;
+import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCINQ;
+import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTEUTILISATEUR_ENTREZEROETCINQ;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -51,12 +51,23 @@ public class EvaluationUtilisateurTest {
     }
 
     @Test
-    public void validerValeurCoteUtilisateurPasNegatif() throws Exception {
+    public void validerValeurCoteUtilisateurEntreZeroEtCinq1() throws Exception {
         try {
-            evaluationUtilisateur = new EvaluationUtilisateur(-1, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
+            evaluationUtilisateur = new EvaluationUtilisateur(-0.1f, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
                                                     nombreDEvaluationTypeServicesMoyenne);
         } catch (MyException e) {
-            estValider =  e.getMessage().equals(MESSAGE_COTEUTILISATEUR_NEGATIVE);
+            estValider =  e.getMessage().equals(MESSAGE_COTEUTILISATEUR_ENTREZEROETCINQ);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void validerValeurCoteUtilisateurEntreZeroEtCinq2() throws Exception {
+        try {
+            evaluationUtilisateur = new EvaluationUtilisateur(5.1f, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
+                    nombreDEvaluationTypeServicesMoyenne);
+        } catch (MyException e) {
+            estValider =  e.getMessage().equals(MESSAGE_COTEUTILISATEUR_ENTREZEROETCINQ);
         }
         assertTrue(estValider);
     }
@@ -76,11 +87,21 @@ public class EvaluationUtilisateurTest {
     }
 
     @Test
-    public void validerValeurCoteTypeServicesMoyennePasNegatif() throws Exception {
+    public void validerValeurCoteTypeServicesMoyenneEntreZeroEtCinq1() throws Exception {
         try {
-            evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, -1, nombreDEvaluationTypeServicesMoyenne);
+            evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, -0.1f, nombreDEvaluationTypeServicesMoyenne);
         } catch (MyException e) {
-            estValider =  e.getMessage().equals(MESSAGE_COTETYPESERVICESMOYENNE_NEGATIVE);
+            estValider =  e.getMessage().equals(MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCINQ);
+        }
+        assertTrue(estValider);
+    }
+
+    @Test
+    public void validerValeurCoteTypeServicesMoyenneEntreZeroEtCinq2() throws Exception {
+        try {
+            evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, 5.1f, nombreDEvaluationTypeServicesMoyenne);
+        } catch (MyException e) {
+            estValider =  e.getMessage().equals(MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCINQ);
         }
         assertTrue(estValider);
     }
@@ -109,7 +130,7 @@ public class EvaluationUtilisateurTest {
         } try {
             evaluationUtilisateur.validationCoteUtilisateur(-1);
         } catch (Exception e) {
-            estValider =  e.getMessage().equals(MESSAGE_COTEUTILISATEUR_NEGATIVE);
+            estValider =  e.getMessage().equals(MESSAGE_COTEUTILISATEUR_ENTREZEROETCINQ);
         }
         assertTrue(estValider);
     }
