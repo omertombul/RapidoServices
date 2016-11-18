@@ -86,15 +86,16 @@ public class EvaluationUtilisateur implements Comparable<ArrayList<Utilisateur>>
         traiterCoteUtilisateur(coteUtilisateur);
         return this.coteUtilisateur;
     }
-/*
+
     public static class TrierParCoteUtilisateur implements Comparator<Recherche> {
 
         @Override
         public int compare(Recherche pair1, Recherche pair2) {
-            return pair1.getUtilisateur().getEvaluationUtilisateur().coteUtilisateur.compareTo(pair2.getUtilisateur().getEvaluationUtilisateur().coteUtilisateur);
+            return pair1.getUtilisateur().getEvaluationUtilisateur().coteUtilisateur > pair2.getUtilisateur().getEvaluationUtilisateur().coteUtilisateur ? 1 :
+                    (pair1.getUtilisateur().getEvaluationUtilisateur().coteUtilisateur < pair2.getUtilisateur().getEvaluationUtilisateur().coteUtilisateur ? -1 : 0);
         }
     }
-*/
+
     //Pas implémenté, mais obligatoire pour le [implements Comparable<TypeServices>]
     @Override
     public int compareTo(ArrayList<Utilisateur> o) {

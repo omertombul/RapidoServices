@@ -138,28 +138,35 @@ public class Orchestrateur {
         return listePaires;
     }
 
-    public ArrayList<Recherche> trierResultatRecherche(ArrayList<Recherche> listeServices, String trierPar) throws MyException {
-        if (trierPar.equals("tauxHorraire")) {
-            Collections.sort(listeServices, new TypeServices.TrierParTauxHorraire());
-        } else if (trierPar.equals("prixFixe")) {
-            Collections.sort(listeServices, new TypeServices.TrierParPrixFixe());
-        } else if (trierPar.equals("nomService")) {
-            Collections.sort(listeServices, new TypeServices.TrierParNomService());
-        } else if (trierPar.equals("ville")) {
-            Collections.sort(listeServices, new TypeServices.TrierParVille());
-        } else if (trierPar.equals("evaluationUtilisateur")) {
-            Collections.sort(listeServices, new TypeServices.TrierParVille());
-        } else if (trierPar.equals("evaluaationService")) {
-            Collections.sort(listeServices, new TypeServices.TrierParVille());
-        } else {
-            MyException e = new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
-            throw e;
+    public ArrayList<Recherche> trierResultatRecherche(ArrayList<Recherche> listeResultatRecherche, String trierPar) throws MyException {
+        switch (trierPar) {
+            case "tauxHorraire":
+                Collections.sort(listeResultatRecherche, new TypeServices.TrierParTauxHorraire());
+                break;
+            case "prixFixe":
+                Collections.sort(listeResultatRecherche, new TypeServices.TrierParPrixFixe());
+                break;
+            case "nomService":
+                Collections.sort(listeResultatRecherche, new TypeServices.TrierParNomService());
+                break;
+            case "ville":
+                Collections.sort(listeResultatRecherche, new TypeServices.TrierParVille());
+                break;
+            case "coteUtilisateur":
+                Collections.sort(listeResultatRecherche, new EvaluationUtilisateur.TrierParCoteUtilisateur());
+                break;
+            case "coteService":
+                Collections.sort(listeResultatRecherche, new EvaluationService.TrierParCoteService());
+                break;
+            default:
+                MyException e = new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
+                throw e;
         }
 
-        return listeServices;
+        return listeResultatRecherche;
     }
 // manque la portion BD et les tests
-    /*
+/*
     public EvaluationUtilisateur evaluerUtilisateur(String nomUtilisateur, float coteUtilisateur) throws MyException {
         evaluationUtilisateur.validationCoteUtilisateur(coteUtilisateur);
         evaluationUtilisateur = bd.setUserEvaluation(nomUtilisateur, coteUtilisateur);
@@ -171,7 +178,7 @@ public class Orchestrateur {
         evaluationService = bd.setServiceEvaluation(nomUtilisateur, nomSservice, coteService);
         return evaluationUtilisateur;
     }
-    */
+*/
     /*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
         utilisateur = bd.getUser(nomUtilisateur);

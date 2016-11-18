@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import inm5001.rapidoservices.service.AbstraiteServices;
+import inm5001.rapidoservices.service.EvaluationService;
 import inm5001.rapidoservices.service.TypeServices;
 import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
 import inm5001.rapidoservices.utilisateur.Identifiant;
@@ -71,7 +72,15 @@ public class OrchestrateurTest {
     public int nombreDEvaluationUtilisateur;
     public float coteTypeServicesMoyenne;
     public int nombreDEvaluationTypeServicesMoyenne;
-    private EvaluationUtilisateur evaluationUtilisateur;
+    private EvaluationUtilisateur evaluationUtilisateur1;
+    private EvaluationUtilisateur evaluationUtilisateur2;
+    private EvaluationUtilisateur evaluationUtilisateur3;
+    //attributs evaluationService
+    public float coteService;
+    public int nombreDEvaluationService;
+    private EvaluationService evaluationService1;
+    private EvaluationService evaluationService2;
+    private EvaluationService evaluationService3;
 
     @Before
     public void setUp() throws MyException {
@@ -95,12 +104,22 @@ public class OrchestrateurTest {
         nombreDEvaluationUtilisateur = 210;
         coteTypeServicesMoyenne = 4.5f;
         nombreDEvaluationTypeServicesMoyenne = 1000;
-        evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
+        evaluationUtilisateur1 = new EvaluationUtilisateur(1, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
                 nombreDEvaluationTypeServicesMoyenne);
+        evaluationUtilisateur2 = new EvaluationUtilisateur(2, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
+                nombreDEvaluationTypeServicesMoyenne);
+        evaluationUtilisateur3 = new EvaluationUtilisateur(3, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
+                nombreDEvaluationTypeServicesMoyenne);
+        //attributs EvaluationService
+        coteService = 3.5f;
+        nombreDEvaluationService = 210;
+        evaluationService1 = new EvaluationService(1, nombreDEvaluationService);
+        evaluationService2 = new EvaluationService(2, nombreDEvaluationService);
+        evaluationService3 = new EvaluationService(3, nombreDEvaluationService);
         utilisateur1 = null;
-        utilisateur1 = new Utilisateur(identifiant1, profile, listeServices, listeCompetences);
-        utilisateur2 = new Utilisateur(identifiant2, profile, listeServices, listeCompetences);
-        utilisateur3 = new Utilisateur(identifiant3, profile, listeServices, listeCompetences);
+        utilisateur1 = new Utilisateur(identifiant1, profile, listeServices, listeCompetences, evaluationUtilisateur1);
+        utilisateur2 = new Utilisateur(identifiant2, profile, listeServices, listeCompetences, evaluationUtilisateur2);
+        utilisateur3 = new Utilisateur(identifiant3, profile, listeServices, listeCompetences, evaluationUtilisateur3);
         estValider = true;
         nomSservice = "Plombier";
         disponibleUtilisateur = false;
@@ -139,7 +158,12 @@ public class OrchestrateurTest {
         nombreDEvaluationUtilisateur = 0;
         coteTypeServicesMoyenne = 0f;
         nombreDEvaluationTypeServicesMoyenne = 0;
-        evaluationUtilisateur = null;
+        evaluationUtilisateur1 = null;
+        evaluationUtilisateur2 = null;
+        evaluationUtilisateur3 = null;
+        evaluationService1 = null;
+        evaluationService2 = null;
+        evaluationService3 = null;
         utilisateur = null;
         utilisateur1 = null;
         utilisateur2 = null;
@@ -661,6 +685,44 @@ public class OrchestrateurTest {
         assertEquals(listeResultatsRecherche.get(0).getService().getVille(), "villeA");
         assertEquals(listeResultatsRecherche.get(1).getService().getVille(), "villeB");
         assertEquals(listeResultatsRecherche.get(2).getService().getVille(), "villeC");
+    }
+
+    @Test
+    public void trierResultatRechercheCoteUtilisateur() throws MyException {
+        ArrayList<Recherche> listeResultatsRecherche = new ArrayList<>();
+        Recherche pair1 = new Recherche(utilisateur3, service);
+        Recherche pair2 = new Recherche(utilisateur1, service2);
+        Recherche pair3 = new Recherche(utilisateur2, service3);
+        listeResultatsRecherche.add(pair3);
+        listeResultatsRecherche.add(pair1);
+        listeResultatsRecherche.add(pair2);
+
+        listeResultatsRecherche = orchestrateur.trierResultatRecherche(listeResultatsRecherche, "coteUtilisateur");
+        assertTrue(listeResultatsRecherche.get(0).getUtilisateur().evaluationUtilisateur.coteUtilisateur == 1);
+        assertTrue(listeResultatsRecherche.get(1).getUtilisateur().evaluationUtilisateur.coteUtilisateur == 2);
+        assertTrue(listeResultatsRecherche.get(2).getUtilisateur().evaluationUtilisateur.coteUtilisateur == 3);
+    }
+
+    @Test
+    public void trierResultatRechercheCoteService() throws MyException {
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, true, ville, numeroTelephoneService, adresseCourrielService,
+                description, evaluationService1);
+        service2 = new TypeServices(tauxHorraire, prixFixe, nomSservice, true, ville, numeroTelephoneService, adresseCourrielService,
+                description, evaluationService2);
+        service3 = new TypeServices(tauxHorraire, prixFixe, nomSservice, true, ville, numeroTelephoneService, adresseCourrielService,
+                description, evaluationService3);
+        ArrayList<Recherche> listeResultatsRecherche = new ArrayList<>();
+        Recherche pair1 = new Recherche(utilisateur1, service3);
+        Recherche pair2 = new Recherche(utilisateur2, service);
+        Recherche pair3 = new Recherche(utilisateur3, service2);
+        listeResultatsRecherche.add(pair3);
+        listeResultatsRecherche.add(pair1);
+        listeResultatsRecherche.add(pair2);
+
+        listeResultatsRecherche = orchestrateur.trierResultatRecherche(listeResultatsRecherche, "coteService");
+        assertTrue(listeResultatsRecherche.get(0).getService().getEvaluationService().coteService == 1);
+        assertTrue(listeResultatsRecherche.get(1).getService().getEvaluationService().coteService == 2);
+        assertTrue(listeResultatsRecherche.get(2).getService().getEvaluationService().coteService == 3);
     }
 
     @Test

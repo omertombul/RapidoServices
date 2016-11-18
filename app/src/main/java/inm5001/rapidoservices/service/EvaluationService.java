@@ -55,15 +55,16 @@ public class EvaluationService implements Comparable<Recherche> {
         traiterCoteService(coteService);
         return this.coteService;
     }
-/*
-    public static class TrierParCoteUtilisateur implements Comparator<Recherche> {
+
+    public static class TrierParCoteService implements Comparator<Recherche> {
 
         @Override
         public int compare(Recherche pair1, Recherche pair2) {
-            return pair1.getService().getCote() > pair2.getService().getPrixFixe() ? 1 : (pair1.getService().getPrixFixe() < pair2.getService().getPrixFixe() ? -1 : 0);
+            return pair1.getService().getEvaluationService().coteService > pair2.getService().getEvaluationService().coteService ? 1 :
+                    (pair1.getService().getEvaluationService().coteService < pair2.getService().getEvaluationService().coteService ? -1 : 0);
         }
     }
-*/
+
     //Pas implémenté, mais obligatoire pour le [implements Comparable<TypeServices>]
     @Override
     public int compareTo(Recherche o) {
