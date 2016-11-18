@@ -1,6 +1,10 @@
 package inm5001.rapidoservices.service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+
 import inm5001.rapidoservices.MyException;
+import inm5001.rapidoservices.Recherche;
 
 import static inm5001.rapidoservices.service.ConstanteEvaluationService.MESSAGE_COTESERVICE_NEGATIVE;
 
@@ -8,7 +12,7 @@ import static inm5001.rapidoservices.service.ConstanteEvaluationService.MESSAGE_
  * Created by Francis Bernier on 2016-11-17.
  */
 
-public class EvaluationService {
+public class EvaluationService implements Comparable<Recherche> {
     public float coteService;
     public int nombreDEvaluationService;
 
@@ -50,5 +54,19 @@ public class EvaluationService {
     public float validationCoteService(float coteService) throws MyException {
         traiterCoteService(coteService);
         return this.coteService;
+    }
+/*
+    public static class TrierParCoteUtilisateur implements Comparator<Recherche> {
+
+        @Override
+        public int compare(Recherche pair1, Recherche pair2) {
+            return pair1.getService().getCote() > pair2.getService().getPrixFixe() ? 1 : (pair1.getService().getPrixFixe() < pair2.getService().getPrixFixe() ? -1 : 0);
+        }
+    }
+*/
+    //Pas implémenté, mais obligatoire pour le [implements Comparable<TypeServices>]
+    @Override
+    public int compareTo(Recherche o) {
+        return 0;
     }
 }

@@ -147,6 +147,10 @@ public class Orchestrateur {
             Collections.sort(listeServices, new TypeServices.TrierParNomService());
         } else if (trierPar.equals("ville")) {
             Collections.sort(listeServices, new TypeServices.TrierParVille());
+        } else if (trierPar.equals("evaluationUtilisateur")) {
+            Collections.sort(listeServices, new TypeServices.TrierParVille());
+        } else if (trierPar.equals("evaluaationService")) {
+            Collections.sort(listeServices, new TypeServices.TrierParVille());
         } else {
             MyException e = new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
             throw e;

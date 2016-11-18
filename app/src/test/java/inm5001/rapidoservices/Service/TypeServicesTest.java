@@ -115,8 +115,8 @@ public class TypeServicesTest {
     public void TypeServicesConstructeur3() throws MyException {
         estValider = true;
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, cote,
-                    numeroTelephoneService, adresseCourrielService, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, numeroTelephoneService,
+                    adresseCourrielService, description);
         } catch (MyException e) {
             estValider = false;
         }
@@ -128,8 +128,8 @@ public class TypeServicesTest {
     public void TypeServicesConstructeur4() throws MyException {
         estValider = true;
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, cote,
-                                        numeroTelephoneService, adresseCourrielService, description, evaluationService);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, numeroTelephoneService,
+                    adresseCourrielService, description, evaluationService);
         } catch (MyException e) {
             estValider = false;
         }
@@ -141,8 +141,8 @@ public class TypeServicesTest {
     @Test
     public void TypeServicesTauxHorrairePasNegatif() throws MyException {
         try {
-            service = new TypeServices(-1, prixFixe, nomSservice, disponibleService, ville, cote,
-                    numeroTelephoneService, adresseCourrielService, description);
+            service = new TypeServices(-1, prixFixe, nomSservice, disponibleService, ville, numeroTelephoneService,
+                    adresseCourrielService, description);
         } catch (MyException e) {
             estValider = e.getMessage().equals(MESSAGE_TAUXHORRAIRE_NEGATIF);
         }
@@ -152,8 +152,8 @@ public class TypeServicesTest {
     @Test
     public void TypeServicesPrixFixePasNegatif() throws MyException {
         try {
-            service = new TypeServices(tauxHorraire, -1, nomSservice, disponibleService, ville, cote,
-                    numeroTelephoneService, adresseCourrielService, description);
+            service = new TypeServices(tauxHorraire, -1, nomSservice, disponibleService, ville, numeroTelephoneService,
+                    adresseCourrielService, description);
         } catch (MyException e) {
             estValider = e.getMessage().equals(MESSAGE_PRIXFIXE_NEGATIF);
         }
@@ -162,8 +162,8 @@ public class TypeServicesTest {
 
     @Test
     public void setTauxHorraire() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, cote,
-                numeroTelephoneService, adresseCourrielService, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, numeroTelephoneService,
+                adresseCourrielService, description);
         service.setTauxHorraire(11);
         tauxHorraire = service.getTauxHorraire();
         assertTrue(tauxHorraire == 11);
@@ -171,8 +171,8 @@ public class TypeServicesTest {
 
     @Test
     public void setPrixFixe() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, cote,
-                numeroTelephoneService, adresseCourrielService, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, numeroTelephoneService,
+                adresseCourrielService, description);
         service.setPrixFixe(11);
         prixFixe = service.getPrixFixe();
         assertTrue(prixFixe == 11);

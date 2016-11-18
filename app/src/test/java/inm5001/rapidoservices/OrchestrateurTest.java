@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.service.TypeServices;
+import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
 import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
@@ -25,8 +26,14 @@ import static org.junit.Assert.assertTrue;
 public class OrchestrateurTest {
     private Orchestrateur orchestrateur;
     private Utilisateur utilisateur;
+    private Utilisateur utilisateur1;
+    private Utilisateur utilisateur2;
+    private Utilisateur utilisateur3;
     //attributs Utilisateur
     private Identifiant identifiant;
+    private Identifiant identifiant1;
+    private Identifiant identifiant2;
+    private Identifiant identifiant3;
     private Profile profile;
     private ArrayList<AbstraiteServices> listeServices;
     private TypeServices service;
@@ -59,6 +66,12 @@ public class OrchestrateurTest {
     //attribut Plomberie
     private float tauxHorraire;
     private float prixFixe;
+    //attributs evaluationUtilisateur
+    public float coteUtilisateur;
+    public int nombreDEvaluationUtilisateur;
+    public float coteTypeServicesMoyenne;
+    public int nombreDEvaluationTypeServicesMoyenne;
+    private EvaluationUtilisateur evaluationUtilisateur;
 
     @Before
     public void setUp() throws MyException {
@@ -73,8 +86,21 @@ public class OrchestrateurTest {
         numeroTelephoneProfile = "5145972143";
         adresseCourrielProfile = "francis@hotmail.com";
         identifiant = new Identifiant(nomUtilisateur, motDePasse);
+        identifiant1 = new Identifiant("IdUser1", motDePasse);
+        identifiant2 = new Identifiant("IdUser2", motDePasse);
+        identifiant3 = new Identifiant("IdUser3", motDePasse);
         profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
-        utilisateur = null;
+        //attributs EvaluationUtilisateur
+        coteUtilisateur = 3.5f;
+        nombreDEvaluationUtilisateur = 210;
+        coteTypeServicesMoyenne = 4.5f;
+        nombreDEvaluationTypeServicesMoyenne = 1000;
+        evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
+                nombreDEvaluationTypeServicesMoyenne);
+        utilisateur1 = null;
+        utilisateur1 = new Utilisateur(identifiant1, profile, listeServices, listeCompetences);
+        utilisateur2 = new Utilisateur(identifiant2, profile, listeServices, listeCompetences);
+        utilisateur3 = new Utilisateur(identifiant3, profile, listeServices, listeCompetences);
         estValider = true;
         nomSservice = "Plombier";
         disponibleUtilisateur = false;
@@ -86,16 +112,20 @@ public class OrchestrateurTest {
         description = "Repare les tuyeaux";
         tauxHorraire = 14.50f;
         prixFixe = 50.00f;
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, cote,
-                numeroTelephoneService, adresseCourrielService, description);
-        service2 = new TypeServices(tauxHorraire, prixFixe, "Electricien", disponibleService, ville, cote,
-                numeroTelephoneService, adresseCourrielService, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, numeroTelephoneService,
+                adresseCourrielService, description);
+        service2 = new TypeServices(tauxHorraire, prixFixe, "Electricien", disponibleService, ville, numeroTelephoneService,
+                adresseCourrielService, description);
+
     }
 
     @After
     public void tearDown() throws MyException {
         orchestrateur = null;
         identifiant = null;
+        identifiant1 = null;
+        identifiant2 = null;
+        identifiant3 = null;
         profile = null;
         listeServices = null;
         listeCompetences = null;
@@ -104,7 +134,16 @@ public class OrchestrateurTest {
         prenom = null;
         numeroTelephoneProfile = null;
         adresseCourrielProfile = null;
+        //attributs EvaluationUtilisateur
+        coteUtilisateur = 0f;
+        nombreDEvaluationUtilisateur = 0;
+        coteTypeServicesMoyenne = 0f;
+        nombreDEvaluationTypeServicesMoyenne = 0;
+        evaluationUtilisateur = null;
         utilisateur = null;
+        utilisateur1 = null;
+        utilisateur2 = null;
+        utilisateur3 = null;
         motDePasse = null;
         estValider = null;
         nomSservice = null;
@@ -351,12 +390,12 @@ public class OrchestrateurTest {
     public void rechercheDeServicesPasDeCritere() throws MyException, SQLException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                 motDePasse, listeServices, listeCompetences);
-        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", cote,
-                "1234567890", adresseCourrielService, description);
-        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", cote,
-                "2234567890", adresseCourrielService, description);
-        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
-                "3234567890", adresseCourrielService, description);
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
+                adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
+                adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
+                adresseCourrielService, description);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service3);
@@ -375,12 +414,12 @@ public class OrchestrateurTest {
     public void rechercheDeServicesTauxHorraire() throws MyException, SQLException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                 motDePasse, listeServices, listeCompetences);
-        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", cote,
-                "1234567890", adresseCourrielService, description);
-        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", cote,
-                "2234567890", adresseCourrielService, description);
-        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
-                "3234567890", adresseCourrielService, description);
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
+                adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
+                adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
+                adresseCourrielService, description);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service3);
@@ -400,12 +439,12 @@ public class OrchestrateurTest {
     public void rechercheDeServicesPrixFix() throws MyException, SQLException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                 motDePasse, listeServices, listeCompetences);
-        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", cote,
-                "1234567890", adresseCourrielService, description);
-        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", cote,
-                "2234567890", adresseCourrielService, description);
-        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
-                "3234567890", adresseCourrielService, description);
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
+                adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
+                adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
+                adresseCourrielService, description);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service3);
@@ -425,12 +464,12 @@ public class OrchestrateurTest {
     public void rechercheDeServicesPrixFixServicesNonDisponible() throws MyException, SQLException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                 motDePasse, listeServices, listeCompetences);
-        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", cote,
-                "1234567890", adresseCourrielService, description);
-        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", cote,
-                "2234567890", adresseCourrielService, description);
-        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
-                "3234567890", adresseCourrielService, description);
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
+                adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
+                adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
+                adresseCourrielService, description);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service3);
@@ -450,12 +489,12 @@ public class OrchestrateurTest {
     public void rechercheDeServicesNomServiceEtServiceDisponible() throws MyException, SQLException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                 motDePasse, listeServices, listeCompetences);
-        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", cote,
-                "1234567890", adresseCourrielService, description);
-        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", cote,
-                "2234567890", adresseCourrielService, description);
-        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
-                "3234567890", adresseCourrielService, description);
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
+                adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
+                adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
+                adresseCourrielService, description);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service3);
@@ -474,12 +513,12 @@ public class OrchestrateurTest {
     public void rechercheDeServicesNomServiceEtServiceNonDisponible() throws MyException, SQLException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                 motDePasse, listeServices, listeCompetences);
-        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", cote,
-                "1234567890", adresseCourrielService, description);
-        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", cote,
-                "2234567890", adresseCourrielService, description);
-        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
-                "3234567890", adresseCourrielService, description);
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
+                adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
+                adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
+                adresseCourrielService, description);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service3);
@@ -498,12 +537,12 @@ public class OrchestrateurTest {
     public void rechercheDeServicesNomServiceEtUsagerNonDisponible() throws MyException, SQLException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                 motDePasse, listeServices, listeCompetences);
-        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", cote,
-                "1234567890", adresseCourrielService, description);
-        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", cote,
-                "2234567890", adresseCourrielService, description);
-        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
-                "3234567890", adresseCourrielService, description);
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
+                adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
+                adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
+                adresseCourrielService, description);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service3);
@@ -522,12 +561,12 @@ public class OrchestrateurTest {
     public void rechercheDeServicesVille() throws MyException, SQLException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                 motDePasse, listeServices, listeCompetences);
-        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", cote,
-                "1234567890", adresseCourrielService, description);
-        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", cote,
-                "2234567890", adresseCourrielService, description);
-        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
-                "3234567890", adresseCourrielService, description);
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
+                adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
+                adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
+                adresseCourrielService, description);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service3);
@@ -545,16 +584,16 @@ public class OrchestrateurTest {
 
     @Test
     public void trierResultatRechercheTauxHorraire() throws MyException {
-        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", cote,
-                "1234567890", adresseCourrielService, description);
-        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", cote,
-                "2234567890", adresseCourrielService, description);
-        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", cote,
-                "3234567890", adresseCourrielService, description);
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA",  "1234567890",
+                adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
+                adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
+                adresseCourrielService, description);
         ArrayList<Recherche> listeResultatsRecherche = new ArrayList<>();
-        Recherche pair1 = new Recherche("nomUtilisateur1", service);
-        Recherche pair2 = new Recherche("nomUtilisateur2", service2);
-        Recherche pair3 = new Recherche("nomUtilisateur3", service3);
+        Recherche pair1 = new Recherche(utilisateur1, service);
+        Recherche pair2 = new Recherche(utilisateur2, service2);
+        Recherche pair3 = new Recherche(utilisateur3, service3);
         listeResultatsRecherche.add(pair1);
         listeResultatsRecherche.add(pair2);
         listeResultatsRecherche.add(pair3);
@@ -567,16 +606,16 @@ public class OrchestrateurTest {
 
     @Test
     public void trierResultatRecherchePrixFixe() throws MyException {
-        service = new TypeServices(1, 3, "nomService1", disponibleService, "villeA", cote,
-                "1234567890", adresseCourrielService, description);
-        service2 = new TypeServices(2, 1, "nomService2", disponibleService, "villeB", cote,
-                "2234567890", adresseCourrielService, description);
-        service3 = new TypeServices(3, 2, "nomService3", disponibleService, "villeC", cote,
-                "3234567890", adresseCourrielService, description);
+        service = new TypeServices(1, 3, "nomService1", disponibleService, "villeA", "1234567890",
+                adresseCourrielService, description);
+        service2 = new TypeServices(2, 1, "nomService2", disponibleService, "villeB", "2234567890",
+                adresseCourrielService, description);
+        service3 = new TypeServices(3, 2, "nomService3", disponibleService, "villeC", "3234567890",
+                adresseCourrielService, description);
         ArrayList<Recherche> listeResultatsRecherche = new ArrayList<>();
-        Recherche pair1 = new Recherche("nomUtilisateur1", service);
-        Recherche pair2 = new Recherche("nomUtilisateur2", service2);
-        Recherche pair3 = new Recherche("nomUtilisateur3", service3);
+        Recherche pair1 = new Recherche(utilisateur1, service);
+        Recherche pair2 = new Recherche(utilisateur2, service2);
+        Recherche pair3 = new Recherche(utilisateur3, service3);
         listeResultatsRecherche.add(pair1);
         listeResultatsRecherche.add(pair2);
         listeResultatsRecherche.add(pair3);
@@ -589,16 +628,16 @@ public class OrchestrateurTest {
 
     @Test
     public void trierResultatRechercheNomService() throws MyException {
-        service = new TypeServices(1, 1, "nomService3", disponibleService, "villeA", cote,
-                "1234567890", adresseCourrielService, description);
-        service2 = new TypeServices(2, 2, "nomService1", disponibleService, "villeB", cote,
-                "2234567890", adresseCourrielService, description);
-        service3 = new TypeServices(3, 3, "nomService2", disponibleService, "villeC", cote,
-                "3234567890", adresseCourrielService, description);
+        service = new TypeServices(1, 1, "nomService3", disponibleService, "villeA", "1234567890",
+                adresseCourrielService, description);
+        service2 = new TypeServices(2, 2, "nomService1", disponibleService, "villeB", "2234567890",
+                adresseCourrielService, description);
+        service3 = new TypeServices(3, 3, "nomService2", disponibleService, "villeC", "3234567890",
+                adresseCourrielService, description);
         ArrayList<Recherche> listeResultatsRecherche = new ArrayList<>();
-        Recherche pair1 = new Recherche("nomUtilisateur1", service);
-        Recherche pair2 = new Recherche("nomUtilisateur2", service2);
-        Recherche pair3 = new Recherche("nomUtilisateur3", service3);
+        Recherche pair1 = new Recherche(utilisateur1, service);
+        Recherche pair2 = new Recherche(utilisateur2, service2);
+        Recherche pair3 = new Recherche(utilisateur3, service3);
         listeResultatsRecherche.add(pair1);
         listeResultatsRecherche.add(pair2);
         listeResultatsRecherche.add(pair3);
@@ -611,16 +650,16 @@ public class OrchestrateurTest {
 
     @Test
     public void trierResultatRechercheVille() throws MyException {
-        service = new TypeServices(1, 1, "nomService1", disponibleService, "villeC", cote,
-                "1234567890", adresseCourrielService, description);
-        service2 = new TypeServices(2, 2, "nomService2", disponibleService, "villeA", cote,
-                "2234567890", adresseCourrielService, description);
-        service3 = new TypeServices(3, 3, "nomService3", disponibleService, "villeB", cote,
-                "3234567890", adresseCourrielService, description);
+        service = new TypeServices(1, 1, "nomService1", disponibleService, "villeC", "1234567890",
+                adresseCourrielService, description);
+        service2 = new TypeServices(2, 2, "nomService2", disponibleService, "villeA", "2234567890",
+                adresseCourrielService, description);
+        service3 = new TypeServices(3, 3, "nomService3", disponibleService, "villeB", "3234567890",
+                adresseCourrielService, description);
         ArrayList<Recherche> listeResultatsRecherche = new ArrayList<>();
-        Recherche pair1 = new Recherche("nomUtilisateur1", service);
-        Recherche pair2 = new Recherche("nomUtilisateur2", service2);
-        Recherche pair3 = new Recherche("nomUtilisateur3", service3);
+        Recherche pair1 = new Recherche(utilisateur1, service);
+        Recherche pair2 = new Recherche(utilisateur2, service2);
+        Recherche pair3 = new Recherche(utilisateur3, service3);
         listeResultatsRecherche.add(pair1);
         listeResultatsRecherche.add(pair2);
         listeResultatsRecherche.add(pair3);
@@ -634,7 +673,7 @@ public class OrchestrateurTest {
     @Test
     public void trierResultatRechercheElse() throws MyException {
         ArrayList<Recherche> listeResultatsRecherche = new ArrayList<>();
-        Recherche pair1 = new Recherche("nomUtilisateur1", service);
+        Recherche pair1 = new Recherche(utilisateur1, service);
         listeResultatsRecherche.add(pair1);
 
         try {

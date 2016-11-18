@@ -2,6 +2,7 @@ package inm5001.rapidoservices.baseDonnees;
 
 import java.sql.ResultSet;
 
+import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Recherche;
 import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
@@ -30,7 +31,7 @@ public class BdApi {
         DB.closeConnection();
     }
 
-    public Utilisateur getUser(String nomUtilisateur) {
+    public Utilisateur getUser(String nomUtilisateur) throws MyException {
         Utilisateur U = new Utilisateur();
 
         String SQL = SQLgetUser(nomUtilisateur);
@@ -194,7 +195,8 @@ public class BdApi {
         SQL += S.getVille() + SQL_SEPARATEUR;
         SQL += S.getNoTelephone() + SQL_SEPARATEUR;
         SQL += S.getCourriel() + SQL_SEPARATEUR;
-        SQL += S.getCote() + SQL_SEPARATEUR;
+        System.out.println("********************************: " + S.getEvaluationService().coteService);
+        SQL += S.getEvaluationService().coteService + SQL_SEPARATEUR;
         SQL += S.getDescription() + SQL_FIN;
 // System.out.println("    String SQL addService Usager: " + SQL); // shows SQL String
         return SQL;
@@ -315,8 +317,8 @@ public class BdApi {
                 AbstraiteServices S = new TypeServices(RSservices.getFloat("prixHorraire"),
                         RSservices.getFloat("prixFixe"), RSservices.getString("nomService"),
                         RSservices.getByte("disponibilite") != 0, RSservices.getString("ville"),
-                        RSservices.getByte ("cote"), RSservices.getString("noTelephone"),
-                        RSservices.getString("courriel"), RSservices.getString("description"));
+                        RSservices.getString("noTelephone"), RSservices.getString("courriel"),
+                        RSservices.getString("description"));
                 U.listeServices.add(S);
             }
         } catch (Exception ex) {
@@ -357,10 +359,9 @@ public class BdApi {
                 TypeServices S = new TypeServices(RSservices.getFloat("prixHorraire"),
                         RSservices.getFloat("prixFixe"), RSservices.getString("nomService"),
                         RSservices.getBoolean("disponibilite"), RSservices.getString("ville"),
-                        RSservices.getByte("cote"), RSservices.getString("noTelephone"),
-                        RSservices.getString("courriel"), RSservices.getString("description"));
-                Recherche P = new Recherche(
-                        RSservices.getString("idUsager"), S);
+                        RSservices.getString("noTelephone"), RSservices.getString("courriel"),
+                        RSservices.getString("description"));
+                Recherche P = new Recherche(getUser(RSservices.getString("idUsager")), S);
                 userAndServicesArray.add(P);
             }
         } catch (Exception ex) {

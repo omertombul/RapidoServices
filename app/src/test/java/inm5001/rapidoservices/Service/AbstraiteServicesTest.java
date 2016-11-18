@@ -32,7 +32,6 @@ public class AbstraiteServicesTest {
     //attributs AbstraiteServices
     private boolean disponible;
     private String ville;
-    private byte cote;
     private String noTelephone;
     private String courriel;
     private String description;
@@ -51,7 +50,6 @@ public class AbstraiteServicesTest {
         nomSservice = "Plomberie";
         disponible = false;
         ville = "Montreal";
-        cote = 2;
         noTelephone = "5144444444";
         courriel = "plomberie@plomberi.com";
         description = "Repare les tuyeaux";
@@ -69,7 +67,6 @@ public class AbstraiteServicesTest {
         nomSservice = null;
         disponible = false;
         ville = null;
-        cote = 0;
         noTelephone = null;
         courriel = null;
         description = null;
@@ -84,73 +81,63 @@ public class AbstraiteServicesTest {
 
     @Test
     public void AbstraiteServicesPasNull() throws Exception {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, courriel, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, description);
         assertNotNull(service);
     }
 
     @Test
     public void AbstraiteServicesNomSservice() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, courriel, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, description);
         assertEquals(service.getNomSservice(), nomSservice);
     }
 
     @Test
     public void AbstraiteServicesDisponible() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, courriel, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, description);
         assertFalse(service.getDisponible());
     }
 
     @Test
     public void AbstraiteServicesVille() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, courriel, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, description);
         assertEquals(service.getVille(), ville);
     }
 
     @Test
     public void AbstraiteServicesCote() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, courriel, description);
-        assertTrue(service.getCote() == cote);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, description, evaluationService);
+        assertTrue(service.getEvaluationService().coteService == coteService);
     }
 
     @Test
     public void AbstraiteServicesNoTelephone() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, courriel, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, description);
         assertEquals(service.getNoTelephone(), noTelephone);
     }
 
     @Test
     public void AbstraiteServicesCourriel() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, courriel, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, description);
         assertEquals(service.getCourriel(), courriel);
     }
 
     @Test
     public void AbstraiteServicesDescription() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, courriel, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, description);
         assertEquals(service.getDescription(), description);
     }
 
     @Test
     public void AbstraiteServicesEvaluationService() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, courriel, description, evaluationService);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, description, evaluationService);
         assertTrue(service.getEvaluationService().coteService == evaluationService.coteService);
-        assertTrue(service.getEvaluationService().nombreDEvaluationService == evaluationService.nombreDEvaluationService);
+        assertTrue(service.getEvaluationService().nombreDEvaluationService == nombreDEvaluationService);
     }
 //tauxHorraire
     @Test
     public void validerNomServicePasNull() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, null, disponible, ville, cote,
-                    noTelephone, courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, null, disponible, ville, noTelephone, courriel, description);
         } catch (Exception e) {
             estValider = e.getMessage().equals(MESSAGE_NOMSERVICE_NULL);
         }
@@ -193,8 +180,7 @@ public class AbstraiteServicesTest {
     @Test
     public void validerNomSserviceMaxQuinzeCaracteres15() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, "abcdefghijklmno", disponible, ville, cote,
-                    noTelephone, courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, "abcdefghijklmno", disponible, ville, noTelephone, courriel, description);
         } catch (Exception e){
             estValider = e.getMessage().equals(MESSAGE_NOMSERVICE_MAX_QUINZE_CARACTERES);
         }
@@ -204,8 +190,7 @@ public class AbstraiteServicesTest {
     @Test
     public void validerNomSserviceMaxQuinzeCaracteres16() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, "abcdefghijklmnop", disponible, ville, cote,
-                    noTelephone, courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, "abcdefghijklmnop", disponible, ville, noTelephone, courriel, description);
         } catch (Exception e){
             estValider = e.getMessage().equals(MESSAGE_NOMSERVICE_MAX_QUINZE_CARACTERES);
         }
@@ -214,15 +199,14 @@ public class AbstraiteServicesTest {
 
     @Test
     public void convertirEnMajusculeNomSservice() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, "ab1c-", disponible, ville, cote,
-                noTelephone, courriel, description);
+        service = new TypeServices(tauxHorraire, prixFixe, "ab1c-", disponible, ville, noTelephone, courriel, description);
         assertEquals(service.getNomSservice(), "ab1c-");
     }
 //ville
     @Test
     public void validerVilleMaxQuaranteCaracteres40() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, "abcdefghijklmnopqrstuvwxyzabcdefghijklmn", cote,
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, "abcdefghijklmnopqrstuvwxyzabcdefghijklmn",
                     noTelephone, courriel, description);
         } catch (Exception e) {
             estValider = e.getMessage().equals(MESSAGE_VILLE_MAX_QUARANTE_CARACTERES);
@@ -233,7 +217,7 @@ public class AbstraiteServicesTest {
     @Test
     public void validerVilleMaxQuaranteCaracteres41() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, "abcdefghijklmnopqrstuvwxyzabcdefghijklmno", cote,
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, "abcdefghijklmnopqrstuvwxyzabcdefghijklmno",
                     noTelephone, courriel, description);
         } catch (Exception e) {
             estValider = e.getMessage().equals(MESSAGE_VILLE_MAX_QUARANTE_CARACTERES);
@@ -243,16 +227,14 @@ public class AbstraiteServicesTest {
 //NUMÉRO DE TÉLÉPHONE
     @Test
     public void TraiterNumeroTelephoneNull() throws Exception {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                null, courriel, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, null, courriel, description);
         String noTelephone = service.getNoTelephone();
         assertEquals(noTelephone, "");
     }
 
     @Test
     public void TraiterNumeroTelephoneVide() throws Exception {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                "", courriel, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "", courriel, description);
         String noTelephone = service.getNoTelephone();
         assertEquals(noTelephone, "");
     }
@@ -260,8 +242,7 @@ public class AbstraiteServicesTest {
     @Test
     public void ValiderNumeroTelephoneSeulementChiffre1() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                    "514 5972143", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "514 5972143", courriel, description);
         } catch (MyException e) {
             estValider = e.getMessage().equals(MESSAGE_NOTELEPHONE_SEULEMENT_CHIFFRE);
         }
@@ -271,8 +252,7 @@ public class AbstraiteServicesTest {
     @Test
     public void ValiderNumeroTelephoneSeulementChiffre2() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                    "514-5972143", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "514-5972143", courriel, description);
         } catch (MyException e) {
             estValider = e.getMessage().equals(MESSAGE_NOTELEPHONE_SEULEMENT_CHIFFRE);
         }
@@ -282,8 +262,7 @@ public class AbstraiteServicesTest {
     @Test
     public void ValiderNumeroTelephoneSeulementChiffre3() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                    "5i45972143", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "5i45972143", courriel, description);
         } catch (MyException e) {
             estValider = e.getMessage().equals(MESSAGE_NOTELEPHONE_SEULEMENT_CHIFFRE);
         }
@@ -293,8 +272,7 @@ public class AbstraiteServicesTest {
     @Test
     public void ValiderNumeroTelephoneDixChiffre9() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                    "514597214", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "514597214", courriel, description);
         } catch (MyException e) {
             estValider = e.getMessage().equals(MESSAGE_NOTELEPHONE_DIX_CHIFFRE);
         }
@@ -304,8 +282,7 @@ public class AbstraiteServicesTest {
     @Test
     public void ValiderNumeroTelephoneDixChiffre11() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                    "51459721433", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "51459721433", courriel, description);
         } catch (MyException e) {
             estValider = e.getMessage().equals(MESSAGE_NOTELEPHONE_DIX_CHIFFRE);
         }
@@ -314,16 +291,14 @@ public class AbstraiteServicesTest {
 //ADRESSE COURRIEL
     @Test
     public void ValiderAdresseCourrielNull() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, null, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, null, description);
         String courriel = service.getCourriel();
         assertEquals(courriel, "");
     }
 
     @Test
     public void ValiderAdresseCourrielVidel() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, "", description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, "", description);
         String courriel = service.getCourriel();
         assertEquals(courriel, "");
     }
@@ -331,8 +306,7 @@ public class AbstraiteServicesTest {
     @Test
     public void ValiderAdresseCourrielFormatValide1() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                    noTelephone, "@hotmail.com", description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, "@hotmail.com", description);
         } catch (MyException e) {
             estValider = e.getMessage().equals(MESSAGE_COURRIEL_FORMAT_VALIDE);
         }
@@ -342,8 +316,7 @@ public class AbstraiteServicesTest {
     @Test
     public void ValiderAdresseCourrielFormatValide2() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                    noTelephone, "francis@.com", description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, "francis@.com", description);
         } catch (MyException e) {
             estValider = e.getMessage().equals(MESSAGE_COURRIEL_FORMAT_VALIDE);
         }
@@ -353,8 +326,8 @@ public class AbstraiteServicesTest {
     @Test
     public void ValiderAdresseCourrielFormatValide3() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                    noTelephone, "francishotmail.com", description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone,
+                    "francishotmail.com", description);
         } catch (MyException e) {
             estValider = e.getMessage().equals(MESSAGE_COURRIEL_FORMAT_VALIDE);
         }
@@ -364,8 +337,8 @@ public class AbstraiteServicesTest {
     @Test
     public void ValiderAdresseCourrielFormatValide4() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                    noTelephone, "francis@hotmailcom", description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone,
+                    "francis@hotmailcom", description);
         } catch (MyException e) {
             estValider = e.getMessage().equals(MESSAGE_COURRIEL_FORMAT_VALIDE);
         }
@@ -375,8 +348,8 @@ public class AbstraiteServicesTest {
     @Test
     public void ValiderAdresseCourrielFormatValide5() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                    noTelephone, "francis@hotmail.", description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone,
+                    "francis@hotmail.", description);
         } catch (MyException e) {
             estValider = e.getMessage().equals(MESSAGE_COURRIEL_FORMAT_VALIDE);
         }
@@ -386,8 +359,8 @@ public class AbstraiteServicesTest {
     @Test
     public void ValiderAdresseCourrielFormatValide6() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                    noTelephone, "francis.bernier@hotmail.", description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone,
+                    "francis.bernier@hotmail.", description);
         } catch (MyException e) {
             estValider = e.getMessage().equals(MESSAGE_COURRIEL_FORMAT_VALIDE);
         }
@@ -397,8 +370,8 @@ public class AbstraiteServicesTest {
     @Test
     public void ValiderAdresseCourrielFormatValide7() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                    noTelephone, "francis1@hotmail.com", description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone,
+                    "francis1@hotmail.com", description);
         } catch (MyException e) {
             estValider = e.getMessage().equals(MESSAGE_COURRIEL_FORMAT_VALIDE);
         }
@@ -407,16 +380,14 @@ public class AbstraiteServicesTest {
 //description
     @Test
     public void ValiderDescriptionNull() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, courriel, null);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, null);
         String description = service.getDescription();
         assertEquals(description, "");
     }
 
     @Test
     public void ValiderDescriptionVide() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, courriel, "");
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, "");
         String description = service.getDescription();
         assertEquals(description, "");
     }
@@ -424,8 +395,8 @@ public class AbstraiteServicesTest {
     @Test
     public void validerDescriptionMaxDeuxCentCinquanteSixCaracteres256() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                    noTelephone, courriel, "abcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuv");
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel,
+                    "abcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuv");
         } catch (Exception e) {
             estValider = e.getMessage().equals(MESSAGE_DESCRIPTION_MAX_DEUXCENTCINQUANTESIX_CARACTERES);
         }
@@ -435,8 +406,8 @@ public class AbstraiteServicesTest {
     @Test
     public void validerDescriptionMaxDeuxCentCinquanteSixCaracteres257() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                    noTelephone, courriel, "abcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvw");
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel,
+                    "abcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvwxyzabcdefghijklnmopqrstuvw");
         } catch (Exception e) {
             estValider = e.getMessage().equals(MESSAGE_DESCRIPTION_MAX_DEUXCENTCINQUANTESIX_CARACTERES);
         }
@@ -445,64 +416,49 @@ public class AbstraiteServicesTest {
 
     @Test
     public void setNomSservice() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, courriel, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, description);
         service.setNomSservice("testtest");
         assertEquals(service.getNomSservice(), "testtest");
     }
 
     @Test
     public void setDisponible() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, courriel, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, description);
         service.setDisponible(true);
         assertEquals(service.getDisponible(), true);
     }
 
     @Test
     public void setVille() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, courriel, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, description);
         service.setVille("test");
         assertEquals(service.getVille(), "test");
     }
 
     @Test
-    public void setCote() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, courriel, description);
-        service.setCote((byte) 111);
-        assertEquals(service.getCote(), 111);
-    }
-
-    @Test
     public void setNoTelephone() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, courriel, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, description);
         service.setNoTelephone("1111111111");
         assertEquals(service.getNoTelephone(), "1111111111");
     }
 
     @Test
     public void setCourriel() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                noTelephone, courriel, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, description);
         service.setCourriel("111@tt.tv");
         assertEquals(service.getCourriel(), "111@tt.tv");
     }
 
     @Test
     public void setDescription() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                                    noTelephone, courriel, description);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, description);
         service.setDescription("abcd");
         assertEquals(service.getDescription(), "abcd");
     }
 
     @Test
     public void setEvaluationService() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote,
-                                    noTelephone, courriel, description, evaluationService);
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, description, evaluationService);
         assertTrue(service.getEvaluationService().coteService == 3.5);
         service.setEvaluationService(new EvaluationService(2, nombreDEvaluationService));
         assertTrue(service.getEvaluationService().coteService == 2);

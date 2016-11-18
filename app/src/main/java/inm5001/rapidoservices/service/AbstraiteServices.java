@@ -27,29 +27,26 @@ public abstract class AbstraiteServices {
 	private String nomSservice;
  	private boolean disponible;
  	private String ville = "";
- 	private byte cote;
  	private String noTelephone = "";
  	private String courriel = "";
  	private String description = "";
-    public EvaluationService evaluationService;
+    public EvaluationService evaluationService = new EvaluationService(0, 0);
 
-    public AbstraiteServices( String nomSservice, boolean disponible, String ville, byte cote, String noTelephone,
+    public AbstraiteServices( String nomSservice, boolean disponible, String ville, String noTelephone,
                               String courriel, String description ) throws MyException {
         traiterNomService(nomSservice);
         traiterDisponible(disponible);
         traiterVille(ville);
-        traiterCote(cote);
         traiterNoTelephone(noTelephone);
         traiterCourriel(courriel);
         traiterDescription(description);
     }
 
-    public AbstraiteServices( String nomSservice, boolean disponible, String ville, byte cote, String noTelephone,
+    public AbstraiteServices( String nomSservice, boolean disponible, String ville, String noTelephone,
                               String courriel, String description, EvaluationService evaluationService ) throws MyException {
         traiterNomService(nomSservice);
         traiterDisponible(disponible);
         traiterVille(ville);
-        traiterCote(cote);
         traiterNoTelephone(noTelephone);
         traiterCourriel(courriel);
         traiterDescription(description);
@@ -81,10 +78,6 @@ public abstract class AbstraiteServices {
     private void traiterVille(String ville) throws MyException {
         validerVilleMaxQuaranteCaracteres(ville);
         affecterValeurVille(ville);
-    }
-
-    private void traiterCote(byte cote) throws MyException {
-        affecterValeurCote(cote);
     }
 
     private void traiterNoTelephone(String noTelephone) throws MyException {
@@ -166,10 +159,6 @@ public abstract class AbstraiteServices {
         this.ville = ville;
     }
 
-    private void affecterValeurCote(byte cote) {
-        this.cote = cote;
-    }
-
     private void ValiderNoTelephoneSeulementChiffre(String noTelephone) throws MyException {
         if (Pattern.compile("[^0-9]+").matcher(noTelephone).find()) {
             MyException e = new MyException(MESSAGE_NOTELEPHONE_SEULEMENT_CHIFFRE);
@@ -247,14 +236,6 @@ public abstract class AbstraiteServices {
 
     public void setVille( String ville ) throws MyException {
         traiterVille(ville);
-    }
-
-    public byte getCote() {
-        return cote;
-    }
-
-    public void setCote( byte cote ) throws MyException {
-        traiterCote(cote);
     }
 
     public String getNoTelephone() {

@@ -112,9 +112,9 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                             if (!listeDePaire.isEmpty()) {
 
                                 for (Recherche p : listeDePaire) {
-                                    System.out.println("NOM UTILISATEUR RECHERCHE  " + p.getNomUtilisateur());
+                                    System.out.println("NOM UTILISATEUR RECHERCHE  " + p.getUtilisateur().identifiant.nomUtilisateur);
                                     System.out.println("Service : " + p.getService().getNomSservice());
-                                    affichage += ("\n" + "Nom Utilisateur : " + p.getNomUtilisateur() + "     No. Tel : "
+                                    affichage += ("\n" + "Nom Utilisateur : " + p.getUtilisateur().identifiant.nomUtilisateur + "     No. Tel : "
                                             + p.getService().getNoTelephone() + "    Service : " + p.getService().getNomSservice());
                                 }
                             } else {

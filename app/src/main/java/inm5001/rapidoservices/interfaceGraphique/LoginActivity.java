@@ -10,6 +10,7 @@ package inm5001.rapidoservices.interfaceGraphique;
 		import android.widget.Button;
 		import android.widget.EditText;
 
+		import inm5001.rapidoservices.MyException;
 		import inm5001.rapidoservices.Orchestrateur;
 		import inm5001.rapidoservices.R;
 		import inm5001.rapidoservices.utilisateur.Utilisateur;
@@ -43,7 +44,11 @@ public class LoginActivity extends Activity {
 
 		//Creation des objets
 		o = new Orchestrateur();
-		u = new Utilisateur();
+		try {
+			u = new Utilisateur();
+		} catch (MyException e) {
+			System.out.println(e.getMessage());
+		}
 
 		//Permission de connection
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

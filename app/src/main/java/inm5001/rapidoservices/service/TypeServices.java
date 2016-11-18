@@ -27,15 +27,15 @@ public class TypeServices extends AbstraiteServices implements Comparable<Recher
         traiterPrixFixe(prixFixe);
     }
     public TypeServices(float tauxHorraire, float prixFixe, String nomSservice, boolean disponible, String ville,
-                        byte cote, String noTelephone, String courriel, String description) throws MyException {
-        super( nomSservice, disponible, ville, cote, noTelephone, courriel, description );
+                        String noTelephone, String courriel, String description) throws MyException {
+        super( nomSservice, disponible, ville, noTelephone, courriel, description );
         traiterTauxHorraire(tauxHorraire);
         traiterPrixFixe(prixFixe);
     }
 
     public TypeServices(float tauxHorraire, float prixFixe, String nomSservice, boolean disponible, String ville,
-                        byte cote, String noTelephone, String courriel, String description, EvaluationService evaluationService) throws MyException {
-        super( nomSservice, disponible, ville, cote, noTelephone, courriel, description, evaluationService );
+                        String noTelephone, String courriel, String description, EvaluationService evaluationService) throws MyException {
+        super( nomSservice, disponible, ville, noTelephone, courriel, description, evaluationService );
         traiterTauxHorraire(tauxHorraire);
         traiterPrixFixe(prixFixe);
     }

@@ -17,10 +17,10 @@ public class Utilisateur {
     public ArrayList<AbstraiteServices> listeServices = new ArrayList<>();
     public ArrayList<String> listeCompetences = new ArrayList<>();
     public boolean disponible = false;
-    public EvaluationUtilisateur evaluationUtilisateur;
+    public EvaluationUtilisateur evaluationUtilisateur = new EvaluationUtilisateur(0, 0, 0, 0);
     //public Geolocalisation geolocalisation;
 
-    public Utilisateur(){
+    public Utilisateur() throws MyException {
     }
     //Pour l'inscription d'un nouvel utilisateur
     public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<AbstraiteServices> listeServices,
@@ -108,4 +108,7 @@ public class Utilisateur {
         this.evaluationUtilisateur = evaluationUtilisateur;
     }
 //MÉTHODES PUBLIC
+    public EvaluationUtilisateur getEvaluationUtilisateur(){
+        return evaluationUtilisateur;
+    }
 }

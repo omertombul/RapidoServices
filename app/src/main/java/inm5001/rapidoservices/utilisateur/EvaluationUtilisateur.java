@@ -1,6 +1,11 @@
 package inm5001.rapidoservices.utilisateur;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+
 import inm5001.rapidoservices.MyException;
+import inm5001.rapidoservices.Recherche;
+import inm5001.rapidoservices.service.TypeServices;
 
 import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTETYPESERVICESMOYENNE_NEGATIVE;
 import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTEUTILISATEUR_NEGATIVE;
@@ -9,7 +14,7 @@ import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.
  * Created by Francis Bernier on 2016-11-17.
  */
 
-public class EvaluationUtilisateur {
+public class EvaluationUtilisateur implements Comparable<ArrayList<Utilisateur>> {
     public float coteUtilisateur;
     public int nombreDEvaluationUtilisateur;
     public float coteTypeServicesMoyenne;
@@ -80,5 +85,19 @@ public class EvaluationUtilisateur {
     public float validationCoteUtilisateur(float coteUtilisateur) throws MyException {
         traiterCoteUtilisateur(coteUtilisateur);
         return this.coteUtilisateur;
+    }
+/*
+    public static class TrierParCoteUtilisateur implements Comparator<Recherche> {
+
+        @Override
+        public int compare(Recherche pair1, Recherche pair2) {
+            return pair1.getUtilisateur().getEvaluationUtilisateur().coteUtilisateur.compareTo(pair2.getUtilisateur().getEvaluationUtilisateur().coteUtilisateur);
+        }
+    }
+*/
+    //Pas implémenté, mais obligatoire pour le [implements Comparable<TypeServices>]
+    @Override
+    public int compareTo(ArrayList<Utilisateur> o) {
+        return 0;
     }
 }

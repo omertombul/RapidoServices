@@ -89,10 +89,10 @@ public class UtilisateurTest {
         description = "Repare les tuyeaux";
         tauxHorraire = 14.50f;
         prixFixe = 50.00f;
-        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, cote,
-                numeroTelephoneService, "service1@gmail.com", description));
-        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, cote,
-                numeroTelephoneService, "service2@gmail.com", description));
+        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, numeroTelephoneService,
+                "service1@gmail.com", description));
+        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, numeroTelephoneService,
+                "service2@gmail.com", description));
         listeCompetences.add("Plombier");
         listeCompetences.add("Electricien");
         //attributs EvaluationUtilisateur
@@ -293,8 +293,8 @@ public class UtilisateurTest {
 //EVALUATIONSERVICE
     @Test
     public void traiterEvaluationServiceCoteService() throws Exception {
-        service = new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, cote,
-                                    numeroTelephoneService, adresseCourrielService, description, evaluationService);
+        service = new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, numeroTelephoneService,
+                adresseCourrielService, description, evaluationService);
         ArrayList<AbstraiteServices> listeServices2 = new ArrayList<>();
         listeServices2.add(service);
         utilisateur = new Utilisateur(identifiant, profile, listeServices2, listeCompetences, evaluationUtilisateur);
@@ -304,8 +304,8 @@ public class UtilisateurTest {
 
     @Test
     public void traiterEvaluationServiceNombreDEvaluationService() throws Exception {
-        service = new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, cote,
-                numeroTelephoneService, adresseCourrielService, description, evaluationService);
+        service = new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, numeroTelephoneService,
+                adresseCourrielService, description, evaluationService);
         ArrayList<AbstraiteServices> listeServices2 = new ArrayList<>();
         listeServices2.add(service);
         utilisateur = new Utilisateur(identifiant, profile, listeServices2, listeCompetences, evaluationUtilisateur);
