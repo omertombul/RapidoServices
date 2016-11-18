@@ -272,7 +272,6 @@ public class OrchestrateurTest {
         }
         assertTrue(estValider);
         assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(0).getNomSservice(), nomSservice);
-        orchestrateur.retirerOffreDeService(nomUtilisateur, service);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
@@ -289,8 +288,6 @@ public class OrchestrateurTest {
         assertTrue(estValider);
         assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(1).getNomSservice(), nomSservice);
         assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeServices.get(0).getNomSservice(), "Electricien");
-        orchestrateur.retirerOffreDeService(nomUtilisateur, service);
-        orchestrateur.retirerOffreDeService(nomUtilisateur, service2);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
@@ -305,7 +302,6 @@ public class OrchestrateurTest {
             estValider = e.getMessage().equals(MESSAGE_SERVICE_EXISTANT);
         }
         assertTrue(estValider);
-        orchestrateur.retirerOffreDeService(nomUtilisateur, service);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
@@ -322,8 +318,6 @@ public class OrchestrateurTest {
         assertTrue(estValider);
         assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeCompetences.get(1), nomSservice);
         assertEquals(orchestrateur.recupererUtilisateur(nomUtilisateur).listeCompetences.get(0), "Electricien");
-        orchestrateur.retirerOffreDeService(nomUtilisateur, service);
-        orchestrateur.retirerOffreDeService(nomUtilisateur, service2);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
@@ -382,7 +376,6 @@ public class OrchestrateurTest {
         utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
         assertFalse(utilisateur.listeServices.get(0).getDisponible());
 
-        orchestrateur.retirerOffreDeService(nomUtilisateur, service);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
