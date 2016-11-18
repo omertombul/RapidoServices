@@ -139,9 +139,8 @@ public class Orchestrateur {
         return listePaires;
     }
 //tri brisé pour l'instant
-/*
     public ArrayList<Recherche> trierResultatRecherche(ArrayList<Recherche> listeResultatRecherche, String valeurDeTri) throws MyException {
-        switch (valeurDeTri) {
+        /*switch (valeurDeTri) {
             case "tauxHorraire":
                 System.out.println("**************: " + listeResultatRecherche.size());
                 Collections.sort(listeResultatRecherche, new Recherche.TrierParTauxHorraire());
@@ -168,10 +167,10 @@ public class Orchestrateur {
                 MyException e = new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
                 throw e;
         }
-
+        */
         return listeResultatRecherche;
     }
-*/
+
 // manque la portion BD et les tests
 /*
     public EvaluationUtilisateur evaluerUtilisateur(String nomUtilisateur, float coteUtilisateur) throws MyException {
