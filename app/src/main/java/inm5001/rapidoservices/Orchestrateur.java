@@ -152,11 +152,14 @@ public class Orchestrateur {
             case "ville":
                 Collections.sort(listeResultatRecherche, new TypeServices.TrierParVille());
                 break;
+            case "coteService":
+                Collections.sort(listeResultatRecherche, new EvaluationService.TrierParCoteService());
+                break;
             case "coteUtilisateur":
                 Collections.sort(listeResultatRecherche, new EvaluationUtilisateur.TrierParCoteUtilisateur());
                 break;
-            case "coteService":
-                Collections.sort(listeResultatRecherche, new EvaluationService.TrierParCoteService());
+            case "coteServiceMoyenne":
+                Collections.sort(listeResultatRecherche, new EvaluationUtilisateur.TrierParCoteServicesMoyenne());
                 break;
             default:
                 MyException e = new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
