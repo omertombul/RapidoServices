@@ -29,6 +29,9 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
     float prix = 0f;
     Orchestrateur o;
     ArrayList<Recherche> listeDePaire;
+    float coteUtilisateur = 0;
+    float coteServicesMoyenne = 0;
+    float coteService = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +101,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                     @Override
                     public void run() {
                         o = new Orchestrateur();
+
                         try {
                             String affichage = "";
                             float tHorraire = 0.0f;
@@ -108,7 +112,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                                 tHorraire = Float.valueOf(tauxHorraire.getText().toString());
                             }
 
-                            listeDePaire = o.rechercheDeServices(tHorraire, prix, nomService, ville);
+                            listeDePaire = o.rechercheDeServices(tHorraire, prix, nomService, ville, coteUtilisateur, coteServicesMoyenne, coteService);
                             if (!listeDePaire.isEmpty()) {
 
                                 for (Recherche p : listeDePaire) {

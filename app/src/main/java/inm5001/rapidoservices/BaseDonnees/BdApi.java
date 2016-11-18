@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Recherche;
+import inm5001.rapidoservices.service.EvaluationService;
 import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 import inm5001.rapidoservices.utilisateur.Identifiant;
@@ -105,7 +106,7 @@ public class BdApi {
         DB.closeConnection();
     }
 
-    public ArrayList<Recherche> servicesSearch(TypeServices s){
+    public ArrayList<Recherche> servicesSearch(TypeServices s, float coteUtilisateur, float coteServicesMoyenne, float coteService){
         ArrayList<Recherche> UserAndServicesArray = new ArrayList<>();
 
 

@@ -422,7 +422,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<Recherche> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "", "");
+        ArrayList<Recherche> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "", "", 0, 0, 0);
         assertTrue(listeResultatsRecherche.size() == 3);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
@@ -446,7 +446,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<Recherche> listeResultatsRecherche = orchestrateur.rechercheDeServices(2, 0, "", "");
+        ArrayList<Recherche> listeResultatsRecherche = orchestrateur.rechercheDeServices(2, 0, "", "", 0, 0, 0);
         assertTrue(listeResultatsRecherche.get(0).getService().getTauxHorraire() <= 2);
         assertTrue(listeResultatsRecherche.size() == 2);
         orchestrateur.supprimerCompte(nomUtilisateur);
@@ -471,7 +471,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<Recherche> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 2, "", "");
+        ArrayList<Recherche> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 2, "", "", 0, 0, 0);
         assertTrue(listeResultatsRecherche.get(0).getService().getPrixFixe() <= 2);
         assertTrue(listeResultatsRecherche.size() == 2);
         orchestrateur.supprimerCompte(nomUtilisateur);
@@ -496,7 +496,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), false);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<Recherche> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 2, "", "");
+        ArrayList<Recherche> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 2, "", "", 0, 0, 0);
         assertTrue(listeResultatsRecherche.get(0).getService().getPrixFixe() == 1);
         assertTrue(listeResultatsRecherche.size() == 1);
         orchestrateur.supprimerCompte(nomUtilisateur);
@@ -521,7 +521,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<Recherche> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "nomService1", "");
+        ArrayList<Recherche> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "nomService1", "", 0, 0, 0);
         assertEquals(listeResultatsRecherche.get(0).getService().getNomSservice(), "nomService1");
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
@@ -545,7 +545,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<Recherche> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "nomService1", "");
+        ArrayList<Recherche> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "nomService1", "", 0, 0, 0);
         assertTrue(listeResultatsRecherche.isEmpty());
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
@@ -569,7 +569,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<Recherche> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "nomService1", "");
+        ArrayList<Recherche> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "nomService1", "", 0, 0, 0);
         assertTrue(listeResultatsRecherche.isEmpty());
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
@@ -593,7 +593,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<Recherche> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "", "villeC");
+        ArrayList<Recherche> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "", "villeC", 0, 0, 0);
         assertEquals(listeResultatsRecherche.get(0).getService().getVille(), "villeC");
         assertTrue(listeResultatsRecherche.size() == 1);
         orchestrateur.supprimerCompte(nomUtilisateur);

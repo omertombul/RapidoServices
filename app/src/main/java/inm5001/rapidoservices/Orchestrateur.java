@@ -132,9 +132,10 @@ public class Orchestrateur {
         }
     }
 
-    public ArrayList<Recherche> rechercheDeServices(float tauxHorraire, float prixFixe, String nomSservice, String ville) throws MyException, SQLException {
+    public ArrayList<Recherche> rechercheDeServices(float tauxHorraire, float prixFixe, String nomSservice, String ville,
+                                                    float coteUtilisateur, float coteServicesMoyenne, float coteService) throws MyException, SQLException {
         TypeServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, ville);
-        ArrayList<Recherche> listePaires = bd.servicesSearch(service);
+        ArrayList<Recherche> listePaires = bd.servicesSearch(service, coteUtilisateur, coteServicesMoyenne, coteService);
         return listePaires;
     }
 
@@ -152,14 +153,14 @@ public class Orchestrateur {
             case "ville":
                 Collections.sort(listeResultatRecherche, new TypeServices.TrierParVille());
                 break;
-            case "coteService":
-                Collections.sort(listeResultatRecherche, new EvaluationService.TrierParCoteService());
-                break;
             case "coteUtilisateur":
                 Collections.sort(listeResultatRecherche, new EvaluationUtilisateur.TrierParCoteUtilisateur());
                 break;
             case "coteServiceMoyenne":
                 Collections.sort(listeResultatRecherche, new EvaluationUtilisateur.TrierParCoteServicesMoyenne());
+                break;
+            case "coteService":
+                Collections.sort(listeResultatRecherche, new EvaluationService.TrierParCoteService());
                 break;
             default:
                 MyException e = new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
