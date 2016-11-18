@@ -14,6 +14,7 @@ package inm5001.rapidoservices.interfaceGraphique;
         import inm5001.rapidoservices.Orchestrateur;
         import inm5001.rapidoservices.R;
         import inm5001.rapidoservices.service.AbstraiteServices;
+        import inm5001.rapidoservices.service.TypeServices;
         import inm5001.rapidoservices.utilisateur.Identifiant;
         import inm5001.rapidoservices.utilisateur.Profile;
         import inm5001.rapidoservices.utilisateur.Utilisateur;
@@ -36,7 +37,7 @@ public class InscriptionActivity extends Activity {
     Utilisateur user;
     Identifiant identifiant;
     Profile profile;
-    ArrayList<AbstraiteServices> listeServices;
+    ArrayList<TypeServices> listeServices;
     ArrayList<String> listeCompetences;
     AlertDialog.Builder dlgAlert  ;
     Orchestrateur orchestrateur;

@@ -65,7 +65,7 @@ public class Orchestrateur {
     }
 
     public void creerUtilisateur(String nom, String prenom, String numeroTelephoneProfile, String adresseCourrielProfile,
-                                                 String nomUtilisateur, String motDePasse, ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
+                                                 String nomUtilisateur, String motDePasse, ArrayList<TypeServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
         profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
         identifiant = new Identifiant(nomUtilisateur, motDePasse);
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
@@ -138,29 +138,31 @@ public class Orchestrateur {
         ArrayList<Recherche> listePaires = bd.servicesSearch(service, coteUtilisateur, coteServicesMoyenne, coteService);
         return listePaires;
     }
-
-    public ArrayList<Recherche> trierResultatRecherche(ArrayList<Recherche> listeResultatRecherche, String trierPar) throws MyException {
-        switch (trierPar) {
+//tri brisé pour l'instant
+/*
+    public ArrayList<Recherche> trierResultatRecherche(ArrayList<Recherche> listeResultatRecherche, String valeurDeTri) throws MyException {
+        switch (valeurDeTri) {
             case "tauxHorraire":
-                Collections.sort(listeResultatRecherche, new TypeServices.TrierParTauxHorraire());
+                System.out.println("**************: " + listeResultatRecherche.size());
+                Collections.sort(listeResultatRecherche, new Recherche.TrierParTauxHorraire());
                 break;
             case "prixFixe":
-                Collections.sort(listeResultatRecherche, new TypeServices.TrierParPrixFixe());
+                Collections.sort(listeResultatRecherche, new Recherche.TrierParPrixFixe());
                 break;
             case "nomService":
-                Collections.sort(listeResultatRecherche, new TypeServices.TrierParNomService());
+                Collections.sort(listeResultatRecherche, new Recherche.TrierParNomService());
                 break;
             case "ville":
-                Collections.sort(listeResultatRecherche, new TypeServices.TrierParVille());
+                Collections.sort(listeResultatRecherche, new Recherche.TrierParVille());
                 break;
             case "coteUtilisateur":
-                Collections.sort(listeResultatRecherche, new EvaluationUtilisateur.TrierParCoteUtilisateur());
+                Collections.sort(listeResultatRecherche, new Recherche.TrierParCoteUtilisateur());
                 break;
             case "coteServiceMoyenne":
-                Collections.sort(listeResultatRecherche, new EvaluationUtilisateur.TrierParCoteServicesMoyenne());
+                Collections.sort(listeResultatRecherche, new Recherche.TrierParCoteServicesMoyenne());
                 break;
             case "coteService":
-                Collections.sort(listeResultatRecherche, new EvaluationService.TrierParCoteService());
+                Collections.sort(listeResultatRecherche, new Recherche.TrierParCoteService());
                 break;
             default:
                 MyException e = new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
@@ -169,6 +171,7 @@ public class Orchestrateur {
 
         return listeResultatRecherche;
     }
+*/
 // manque la portion BD et les tests
 /*
     public EvaluationUtilisateur evaluerUtilisateur(String nomUtilisateur, float coteUtilisateur) throws MyException {

@@ -24,14 +24,11 @@ public class UtilisateurTest {
 //attributs Utilisateur
     private Identifiant identifiant;
     private Profile profile;
-    private ArrayList<AbstraiteServices> listeServices;
-    private AbstraiteServices service;
+    private ArrayList<TypeServices> listeServices;
+    private TypeServices service;
     private ArrayList<String> listeCompetences;
     private String competence;
     private boolean disponibleUtilisateur;
-    //private ArrayList<Evaluation> listeEvaluations;
-    //private ArrayList<Evaluation> lisetEvaluationServicesGlobal;
-    //private Evaluation evaluation;
     //private Geolocalisation geolocalisation;
 //attributs Identifiant
     private String nomUtilisateur;
@@ -295,7 +292,7 @@ public class UtilisateurTest {
     public void traiterEvaluationServiceCoteService() throws Exception {
         service = new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, numeroTelephoneService,
                 adresseCourrielService, description, evaluationService);
-        ArrayList<AbstraiteServices> listeServices2 = new ArrayList<>();
+        ArrayList<TypeServices> listeServices2 = new ArrayList<>();
         listeServices2.add(service);
         utilisateur = new Utilisateur(identifiant, profile, listeServices2, listeCompetences, evaluationUtilisateur);
         coteService = utilisateur.listeServices.get(0).getEvaluationService().coteService;
@@ -306,7 +303,7 @@ public class UtilisateurTest {
     public void traiterEvaluationServiceNombreDEvaluationService() throws Exception {
         service = new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, numeroTelephoneService,
                 adresseCourrielService, description, evaluationService);
-        ArrayList<AbstraiteServices> listeServices2 = new ArrayList<>();
+        ArrayList<TypeServices> listeServices2 = new ArrayList<>();
         listeServices2.add(service);
         utilisateur = new Utilisateur(identifiant, profile, listeServices2, listeCompetences, evaluationUtilisateur);
         nombreDEvaluationService = utilisateur.listeServices.get(0).getEvaluationService().nombreDEvaluationService;
