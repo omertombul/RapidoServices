@@ -7,6 +7,7 @@ Travail de session INM5001 UQAM
   - [x] 6b: gestion disponibilité de l'Utilisateur via BD.
   - [x] 8a: ajouter fonctionnalité recherche de Service dans BD.
   - [x] Preparation du rapport sprint 2.
+  
 ## Statut sprint 3
 - [ ] Objectifs Pour Mat.
   - [x] 10 Définir ce qu’est une Évaluation
