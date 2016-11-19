@@ -6,7 +6,6 @@ import android.widget.TextView;
 
 import inm5001.rapidoservices.Orchestrateur;
 import inm5001.rapidoservices.R;
-import inm5001.rapidoservices.PaireNomUtilisateurEtTypeService;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 
 /**
@@ -14,7 +13,6 @@ import inm5001.rapidoservices.utilisateur.Utilisateur;
  */
 
 public class AfficherSupprimerService extends Activity {
-    PaireNomUtilisateurEtTypeService objPaire;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
