@@ -12,6 +12,7 @@ import android.widget.Toast;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Orchestrateur;
@@ -46,7 +47,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
         final ArrayAdapter<String> adapter ;
 
         resultat = new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,resultat);
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,resultat);
 
 
 
@@ -64,7 +65,8 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
         spinner.setOnItemSelectedListener(this);
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ConstanteAbstraiteServices.listeNomServiceRecherche);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
+                ConstanteAbstraiteServices.listeNomServiceRecherche);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -83,7 +85,8 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
         // Spinner click listener
         spinnerVille.setOnItemSelectedListener(this);
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapterVille = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ConstanteAbstraiteServices.listeVilleRecherche);
+        ArrayAdapter<String> dataAdapterVille = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
+                ConstanteAbstraiteServices.listeVilleRecherche);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -109,9 +112,6 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                     public void run() {
                         o = new Orchestrateur();
                         try {
-
-
-
                             float tHorraire = 0.0f;
 
                             //validation taux horraire jamais vide ou null
@@ -132,7 +132,8 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                                         String affichage = "";
                                         for (Recherche p : listeDePaire) {
 
-                                            affichage = p.getUtilisateur().profile.nom + " " + p.recupererService().getNomSservice() + " " + p.recupererService().getNoTelephone();
+                                            affichage = p.getUtilisateur().profile.nom + " " + p.recupererService().getNomSservice()
+                                                    + " " + p.recupererService().getNoTelephone();
                                             resultat.add(affichage);
                                             System.out.println(affichage);
                                             System.out.println(resultat.isEmpty());
@@ -145,12 +146,27 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
 
                             } else {
 
-                                resultat.add("Liste vide !");
-                                System.out.println("LISTE VIDE ******");
+                                resultat.add("******* Aucun Service pour Vos Criteres ******");
+                                System.out.println("Liste vide");
                             }
                             //Ajouter adapteur pour lui donne la liste de nom et services
                             lView.setAdapter(adapter);
                             lView.invalidateViews();
+                            //Set an Item Click Listener for ListView items
+                            lView.setOnItemClickListener(new OnItemClickListener(){
+                                //onItemClick() callback method
+                                public void onItemClick(AdapterView<?> parent, View v, int position, long id){
+
+                                    //Generate a Toast message
+                                    String toastMessage = "Selected : "+  resultat.get(position) ;
+
+                                    System.out.println(resultat.get(position));
+
+                                    //Display user response as a Toast message
+                                    Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
 
                         } catch (SQLException e) {
                             System.out.println(e.getMessage());
@@ -185,9 +201,6 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
             case R.id.spinnerRechercheVille:
                 item = parent.getItemAtPosition(position).toString();
                 ville = item;
-                break;
-            case R.id.ListViewRechercheResult:
-                item = parent.getItemAtPosition(position).toString();
                 break;
 
         }
