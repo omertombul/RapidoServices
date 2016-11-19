@@ -91,15 +91,13 @@
         android:layout_toEndOf="@+id/textViewPrixRecherche"
         android:layout_marginStart="38dp" />
 
-    <TextView
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewAffichageResultRecherche"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textStyle="normal|italic"
-        android:textAllCaps="true"
-        android:layout_below="@+id/buttonRechercherRecherche"
+        android:id ="@+id/ListViewRechercheResult"
+        android:layout_height="match_parent"
+        android:layout_marginTop="233dp"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="37dp" />
+        android:layout_marginStart="11dp"
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>
