@@ -319,6 +319,10 @@ public class BdApi {
         try {
             RSutilisateur.beforeFirst();
             while (RSutilisateur.next()) {
+                EvaluationUtilisateur E = new EvaluationUtilisateur(
+                        RSutilisateur.getFloat("coteClient"), RSutilisateur.getInt("nbCoteClient"),
+                        RSutilisateur.getFloat("coteFournisseur"),
+                        RSutilisateur.getInt("nbCoteFournisseur"));
                 Identifiant I = new Identifiant(RSutilisateur.getString("idUsager"),
                         RSutilisateur.getString("motDePasse"));
                 Profile P = new Profile(RSutilisateur.getString("nom"),
@@ -326,7 +330,7 @@ public class BdApi {
                         RSutilisateur.getString("courriel"));
                 ArrayList<TypeServices> listServices = new ArrayList<>();
                 ArrayList<String> listeCompetences = new ArrayList<>();
-                U = new Utilisateur(I,P,listServices,listeCompetences);
+                U = new Utilisateur(I, P, listServices, listeCompetences, E);
                 U.disponible = RSutilisateur.getByte("disponibilite") != 0;
             }
         } catch (Exception ex) {
@@ -340,11 +344,13 @@ public class BdApi {
         try {
             RSservices.beforeFirst();
             while (RSservices.next()) {
+                EvaluationService E = new EvaluationService(RSservices.getFloat("cote"),
+                        RSservices.getInt("nbCote"));
                 TypeServices S = new TypeServices(RSservices.getFloat("prixHorraire"),
                         RSservices.getFloat("prixFixe"), RSservices.getString("nomService"),
                         RSservices.getByte("disponibilite") != 0, RSservices.getString("ville"),
                         RSservices.getString("noTelephone"), RSservices.getString("courriel"),
-                        RSservices.getString("description"));
+                        RSservices.getString("description"), E);
                 U.listeServices.add(S);
             }
         } catch (Exception ex) {
@@ -379,7 +385,7 @@ public class BdApi {
 // float tauxHorraire, float prixFixe, String nomSservice, boolean disponible, String ville,
 //  byte cote, String noTelephone, String courriel, String description
 // code example
-       //Commenté par Francis Bernier parce que j'ai changer les attributs de l'objet de type Recherche
+        //Commenté par Francis Bernier parce que j'ai changer les attributs de l'objet de type Recherche
         /* try {
             RSservices.beforeFirst();
             while (RSservices.next()) {
