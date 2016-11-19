@@ -140,35 +140,11 @@ public class Orchestrateur {
     }
 //tri brisé pour l'instant
     public ArrayList<Recherche> trierResultatRecherche(ArrayList<Recherche> listeResultatRecherche, String valeurDeTri) throws MyException {
-        /*switch (valeurDeTri) {
-            case "tauxHorraire":
-                System.out.println("**************: " + listeResultatRecherche.size());
-                Collections.sort(listeResultatRecherche, new Recherche.TrierParTauxHorraire());
-                break;
-            case "prixFixe":
-                Collections.sort(listeResultatRecherche, new Recherche.TrierParPrixFixe());
-                break;
-            case "nomService":
-                Collections.sort(listeResultatRecherche, new Recherche.TrierParNomService());
-                break;
-            case "ville":
-                Collections.sort(listeResultatRecherche, new Recherche.TrierParVille());
-                break;
-            case "coteUtilisateur":
-                Collections.sort(listeResultatRecherche, new Recherche.TrierParCoteUtilisateur());
-                break;
-            case "coteServiceMoyenne":
-                Collections.sort(listeResultatRecherche, new Recherche.TrierParCoteServicesMoyenne());
-                break;
-            case "coteService":
-                Collections.sort(listeResultatRecherche, new Recherche.TrierParCoteService());
-                break;
-            default:
-                MyException e = new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
-                throw e;
+        if (listeResultatRecherche.size() == 0) {
+            return listeResultatRecherche.get(0).trierListeRecherche(listeResultatRecherche, valeurDeTri);
+        } else {
+            return listeResultatRecherche;
         }
-        */
-        return listeResultatRecherche;
     }
 
 // manque la portion BD et les tests

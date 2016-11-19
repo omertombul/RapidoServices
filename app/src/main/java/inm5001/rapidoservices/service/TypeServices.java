@@ -51,8 +51,7 @@ public class TypeServices extends AbstraiteServices {
         validerPrixFixePasNegatif(prixFixe);
         affecterValeurPrixFixe(prixFixe);
     }
-
- //deuxième niveau d'abstraction
+//deuxième niveau d'abstraction
     private void validerTauxHorrairePasNegatif(float tauxHorraire) throws MyException {
         if (tauxHorraire < 0) {
             MyException e = new MyException(MESSAGE_TAUXHORRAIRE_NEGATIF);
@@ -74,7 +73,7 @@ public class TypeServices extends AbstraiteServices {
     private void affecterValeurPrixFixe(float prixFixe) {
         this.prixFixe = prixFixe;
     }
- //MÉTHODES PUBLIC
+//MÉTHODES PUBLIC
     public float getTauxHorraire() {
         return tauxHorraire;
     }
@@ -90,4 +89,6 @@ public class TypeServices extends AbstraiteServices {
     public void setPrixFixe( float prixFixe ) throws MyException {
         traiterPrixFixe(prixFixe);
     }
+
+
 }

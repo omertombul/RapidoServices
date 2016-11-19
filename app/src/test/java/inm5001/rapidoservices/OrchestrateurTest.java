@@ -595,6 +595,7 @@ public class OrchestrateurTest {
         assertTrue(listeResultatsRecherche.size() == 1);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
+
 /*
     @Test
     public void trierResultatRechercheTauxHorraire() throws MyException {
