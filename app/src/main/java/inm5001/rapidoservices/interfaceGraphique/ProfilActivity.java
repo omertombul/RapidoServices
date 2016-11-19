@@ -35,6 +35,7 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
     Button ajouter = null;
     Button rechercher = null;
     Button supprimerUsager = null;
+    Button electricien = null;
     Utilisateur user;
     Orchestrateur orc;
     ToggleButton toggle = null;
@@ -48,8 +49,8 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
         rechercher = (Button) findViewById(R.id.rechercher);
         supprimerUsager = (Button) findViewById(R.id.buttonDeleteUserProfile);
         toggle = (ToggleButton) findViewById(R.id.switchDispoUser);
-
-
+        electricien = (Button) findViewById(R.id.electricien);
+        final String electricienText = electricien.getText().toString();
         //recuper le userName et password de la page precedente
         Intent intent = getIntent();
         final String userName = intent.getStringExtra("userName");
@@ -165,6 +166,16 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
                 startActivity(ajouterService);
 
 
+            }
+        });
+
+        electricien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent serviceElectricien = new Intent(ProfilActivity.this, AfficherSupprimerService.class);
+                serviceElectricien.putExtra("userName", userName);
+                serviceElectricien.putExtra("electricien",electricienText);
+                startActivity(serviceElectricien);
             }
         });
 

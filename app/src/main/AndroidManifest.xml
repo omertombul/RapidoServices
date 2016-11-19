@@ -22,7 +22,10 @@
         <activity android:name=".interfaceGraphique.InscriptionActivity" />
         <activity android:name=".interfaceGraphique.ProfilActivity" />
         <activity android:name=".interfaceGraphique.AjouterServiceActivity" />
-        <activity android:name=".interfaceGraphique.RechercheActivity"></activity>
+        <activity android:name=".interfaceGraphique.RechercheActivity"> </activity>
+        <activity android:name=".interfaceGraphique.AfficherSupprimerService"/>
+        <activity android:name=".interfaceGraphique.InformationsVendeurActivity" />
+        <activity android:name=".interfaceGraphique.ServiceRechercherAvtivity" />
     </application>
 
 </manifest>

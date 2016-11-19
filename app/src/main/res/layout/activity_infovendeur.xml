@@ -4,84 +4,56 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Nom :"
+        android:text="Nom du vendeur :"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView" />
-
-
+        android:id="@+id/textView23" />
 
     <TextView
         android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/nomServ" />
+        android:id="@+id/textView24" />
 
     <TextView
-        android:text="Taux horaire"
+        android:text="Prénom :"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView13" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/taux" />
-
-    <TextView
-        android:text="Email :"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView16" />
+        android:id="@+id/textView25" />
 
     <TextView
         android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/mail" />
+        android:id="@+id/textView26" />
+
+    <TextView
+        android:text="Courriel :"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView27" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView28" />
 
     <TextView
         android:text="Telephone :"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView18" />
+        android:id="@+id/textView29" />
 
     <TextView
         android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/phone" />
-
-    <TextView
-        android:text="Description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView20" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/description" />
-
-
-    <RatingBar
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/ratingBar" />
-
-    <ToggleButton
-        android:text="Disponibilite"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/toggleButton" />
+        android:id="@+id/textView30" />
 
     <Button
-        android:text="Supprimer"
+        android:text="Retour au profil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button" />
-
-
+        android:id="@+id/button4" />
 </LinearLayout>
