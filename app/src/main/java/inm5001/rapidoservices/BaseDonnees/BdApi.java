@@ -144,7 +144,10 @@ public class BdApi {
         SQL += U.profile.prenom + SQL_SEPARATEUR;
         SQL += U.profile.adresseCourriel + SQL_SEPARATEUR;
         SQL += diponibilite + SQL_SEPARATEUR;  // dispo
-        SQL += "1" + SQL_SEPARATEUR;  // eval
+        SQL += "1" + SQL_SEPARATEUR;  // coteClient
+        SQL += "1" + SQL_SEPARATEUR;  // nbCoteClient
+        SQL += "1" + SQL_SEPARATEUR;  // coteFournisseur
+        SQL += "1" + SQL_SEPARATEUR;  // nbCoteFournisseur
         SQL += "1" + SQL_SEPARATEUR;         // geo coordonnees
         SQL += U.profile.numeroTelephone + SQL_FIN;
 //System.out.println("    String SQL addUser: " + SQL); // shows SQL String
@@ -164,9 +167,8 @@ public class BdApi {
         String SQL;
         String SQL_DEBUT = "SELECT * FROM servicesDUsager WHERE idUsager = '";
         String SQL_FIN = "';";
-//SQL = SQL_DEBUT + "Francis" + SQL_FIN; //U.identifiant.nomUtilisateur + SQL_FIN; // shows SQL String
         SQL = SQL_DEBUT + U.identifiant.nomUtilisateur + SQL_FIN;
-        System.out.println("    String SQL getServiceUtilisateur: " + SQL);
+//System.out.println("    String SQL getService: " + SQL); // shows SQL String
         return SQL;
     }
 
@@ -206,10 +208,10 @@ public class BdApi {
         SQL += S.getVille() + SQL_SEPARATEUR;
         SQL += S.getNoTelephone() + SQL_SEPARATEUR;
         SQL += S.getCourriel() + SQL_SEPARATEUR;
-        System.out.println("********************************: " + S.getEvaluationService().coteService);
         SQL += S.getEvaluationService().coteService + SQL_SEPARATEUR;
+        SQL += S.getEvaluationService().nombreDEvaluationService + SQL_SEPARATEUR;
         SQL += S.getDescription() + SQL_FIN;
-// System.out.println("    String SQL addService Usager: " + SQL); // shows SQL String
+System.out.println("    String SQL addService Usager: " + SQL); // shows SQL String
         return SQL;
     }
 
@@ -406,7 +408,8 @@ public class BdApi {
         try {
             RSservices.beforeFirst();
             while (RSservices.next()) {
-                Recherche P = new Recherche(getUser(RSservices.getString("idUsager")), RSservices.getString("nomService"));
+                Recherche P = new Recherche(getUser(RSservices.getString("idUsager")),
+                        RSservices.getString("nomService"));
                 userAndServicesArray.add(P);
             }
         } catch (Exception ex) {
