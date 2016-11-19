@@ -2,7 +2,10 @@ package inm5001.rapidoservices.baseDonnees;
 
 import java.sql.ResultSet;
 
+import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Recherche;
+import inm5001.rapidoservices.service.EvaluationService;
+import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.utilisateur.Profile;
@@ -29,7 +32,7 @@ public class BdApi {
         DB.closeConnection();
     }
 
-    public Utilisateur getUser(String nomUtilisateur) {
+    public Utilisateur getUser(String nomUtilisateur) throws MyException {
         Utilisateur U = new Utilisateur();
 
         String SQL = SQLgetUser(nomUtilisateur);
@@ -103,7 +106,7 @@ public class BdApi {
         DB.closeConnection();
     }
 
-    public ArrayList<Recherche> servicesSearch(TypeServices s){
+    public ArrayList<Recherche> servicesSearch(TypeServices s, float coteUtilisateur, float coteServicesMoyenne, float coteService){
         ArrayList<Recherche> UserAndServicesArray = new ArrayList<>();
 
 
@@ -193,7 +196,8 @@ public class BdApi {
         SQL += S.getVille() + SQL_SEPARATEUR;
         SQL += S.getNoTelephone() + SQL_SEPARATEUR;
         SQL += S.getCourriel() + SQL_SEPARATEUR;
-        SQL += S.getCote() + SQL_SEPARATEUR;
+        System.out.println("********************************: " + S.getEvaluationService().coteService);
+        SQL += S.getEvaluationService().coteService + SQL_SEPARATEUR;
         SQL += S.getDescription() + SQL_FIN;
 // System.out.println("    String SQL addService Usager: " + SQL); // shows SQL String
         return SQL;
@@ -295,7 +299,7 @@ public class BdApi {
                 Profile P = new Profile(RSutilisateur.getString("nom"),
                         RSutilisateur.getString("prenom"), RSutilisateur.getString("noTelephone"),
                         RSutilisateur.getString("courriel"));
-                ArrayList<AbstraiteServices> listServices = new ArrayList<>();
+                ArrayList<TypeServices> listServices = new ArrayList<>();
                 ArrayList<String> listeCompetences = new ArrayList<>();
                 U = new Utilisateur(I,P,listServices,listeCompetences);
                 U.disponible = RSutilisateur.getByte("disponibilite") != 0;
@@ -311,11 +315,11 @@ public class BdApi {
         try {
             RSservices.beforeFirst();
             while (RSservices.next()) {
-                AbstraiteServices S = new TypeServices(RSservices.getFloat("prixHorraire"),
+                TypeServices S = new TypeServices(RSservices.getFloat("prixHorraire"),
                         RSservices.getFloat("prixFixe"), RSservices.getString("nomService"),
                         RSservices.getByte("disponibilite") != 0, RSservices.getString("ville"),
-                        RSservices.getByte ("cote"), RSservices.getString("noTelephone"),
-                        RSservices.getString("courriel"), RSservices.getString("description"));
+                        RSservices.getString("noTelephone"), RSservices.getString("courriel"),
+                        RSservices.getString("description"));
                 U.listeServices.add(S);
             }
         } catch (Exception ex) {
@@ -350,16 +354,28 @@ public class BdApi {
 // float tauxHorraire, float prixFixe, String nomSservice, boolean disponible, String ville,
 //  byte cote, String noTelephone, String courriel, String description
 // code example
-        try {
+       //Commenté par Francis Bernier parce que j'ai changer les attributs de l'objet de type Recherche
+        /* try {
             RSservices.beforeFirst();
             while (RSservices.next()) {
                 TypeServices S = new TypeServices(RSservices.getFloat("prixHorraire"),
                         RSservices.getFloat("prixFixe"), RSservices.getString("nomService"),
                         RSservices.getBoolean("disponibilite"), RSservices.getString("ville"),
-                        RSservices.getByte("cote"), RSservices.getString("noTelephone"),
-                        RSservices.getString("courriel"), RSservices.getString("description"));
-                Recherche P = new Recherche(
-                        RSservices.getString("idUsager"), S);
+                        RSservices.getString("noTelephone"), RSservices.getString("courriel"),
+                        RSservices.getString("description"));
+                Recherche P = new Recherche(getUser(RSservices.getString("idUsager")), S);
+                userAndServicesArray.add(P);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex + "Error updating serviceSearchArray with RSservices");
+        }
+        return userAndServicesArray;
+    }*/
+        //Francis Bernier: nouvelle fonction avec nouveau attributs
+        try {
+            RSservices.beforeFirst();
+            while (RSservices.next()) {
+                Recherche P = new Recherche(getUser(RSservices.getString("idUsager")), RSservices.getString("nomService"));
                 userAndServicesArray.add(P);
             }
         } catch (Exception ex) {

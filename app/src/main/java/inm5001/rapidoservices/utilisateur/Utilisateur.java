@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.service.AbstraiteServices;
+import inm5001.rapidoservices.service.TypeServices;
 
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.*;
 
@@ -14,21 +15,30 @@ import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.*;
 public class Utilisateur {
     public Identifiant identifiant;
     public Profile profile;
-    public ArrayList<AbstraiteServices> listeServices = new ArrayList<>();
+    public ArrayList<TypeServices> listeServices = new ArrayList<>();
     public ArrayList<String> listeCompetences = new ArrayList<>();
     public boolean disponible = false;
-    //public ArrayList<Evaluation> listeEvaluations;
-    //public ArrayList<Evaluation> lisetEvaluationServicesGlobal;
+    public EvaluationUtilisateur evaluationUtilisateur = new EvaluationUtilisateur(0, 0, 0, 0);
     //public Geolocalisation geolocalisation;
 
-    public Utilisateur(){
+    public Utilisateur() throws MyException {
     }
-
-    public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
+    //Pour l'inscription d'un nouvel utilisateur
+    public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<TypeServices> listeServices,
+                       ArrayList<String> listeCompetences) throws MyException {
         traiterIdentifiant(identifiant);
         traiterProfile(profile);
         traiterListeServices(listeServices);
         traiterListeCompetences(listeCompetences);
+    }
+
+    public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<TypeServices> listeServices,
+                       ArrayList<String> listeCompetences, EvaluationUtilisateur evaluationUtilisateur) throws MyException {
+        traiterIdentifiant(identifiant);
+        traiterProfile(profile);
+        traiterListeServices(listeServices);
+        traiterListeCompetences(listeCompetences);
+        traiterEvaluationUtilisateur(evaluationUtilisateur);
     }
 //premier niveau d'abstraction
     private void traiterIdentifiant(Identifiant identifiant) throws MyException {
@@ -41,7 +51,7 @@ public class Utilisateur {
         affecterValeurProfile(profile);
     }
 
-    private void traiterListeServices(ArrayList<AbstraiteServices> listeServices) {
+    private void traiterListeServices(ArrayList<TypeServices> listeServices) {
         if (listeServices != null) {
             affecterValeurListeService(listeServices);
         }
@@ -51,6 +61,11 @@ public class Utilisateur {
         if (listeCompetences != null) {
             affecterValeurListeCompetences(listeCompetences);
         }
+    }
+
+    private void traiterEvaluationUtilisateur(EvaluationUtilisateur evaluationUtilisateur) throws MyException {
+        validerEvaluationUtilisateurPasNull(evaluationUtilisateur);
+        affecterValeurEvaluationUtilisateur(evaluationUtilisateur);
     }
 //deuxième niveau d'abstraction
     private void validerIdentifiantPasNull(Identifiant identifiant) throws MyException {
@@ -75,12 +90,26 @@ public class Utilisateur {
         this.profile = profile;
     }
 
-    private void affecterValeurListeService(ArrayList<AbstraiteServices> listeServices) {
+    private void affecterValeurListeService(ArrayList<TypeServices> listeServices) {
         this.listeServices = listeServices;
     }
 
     private void affecterValeurListeCompetences(ArrayList<String> listeCompetences) {
         this.listeCompetences = listeCompetences;
     }
+
+    private void validerEvaluationUtilisateurPasNull(EvaluationUtilisateur evaluationUtilisateur) throws MyException {
+        if (evaluationUtilisateur == null) {
+            MyException e = new MyException(MESSAGE_EVALUATIONUTILISATEUR_NULL);
+            throw e;
+        }
+    }
+
+    private void affecterValeurEvaluationUtilisateur(EvaluationUtilisateur evaluationUtilisateur) {
+        this.evaluationUtilisateur = evaluationUtilisateur;
+    }
 //MÉTHODES PUBLIC
+    public EvaluationUtilisateur getEvaluationUtilisateur(){
+        return evaluationUtilisateur;
+    }
 }

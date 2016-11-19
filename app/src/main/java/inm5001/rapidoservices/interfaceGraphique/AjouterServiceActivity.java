@@ -129,8 +129,7 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
                         }
                         AbstraiteServices s = new TypeServices(tH,
                             0.0f,
-                            nomService,false,ville,
-                            (byte)1,noTelService.getText().toString(),
+                            nomService,false,ville, noTelService.getText().toString(),
                             emailService.getText().toString(),description.getText().toString());
 
 

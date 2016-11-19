@@ -1,12 +1,12 @@
 package inm5001.rapidoservices.interfaceGraphique;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import inm5001.rapidoservices.Orchestrateur;
 import inm5001.rapidoservices.R;
+import inm5001.rapidoservices.PaireNomUtilisateurEtTypeService;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 
 /**
@@ -14,55 +14,39 @@ import inm5001.rapidoservices.utilisateur.Utilisateur;
  */
 
 public class AfficherSupprimerService extends Activity {
-
-    TextView nom = null;
-    TextView taux = null;
-    TextView  email = null;
-    TextView telephone = null;
-    TextView description = null;
+    PaireNomUtilisateurEtTypeService objPaire;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supservice);
 
-        Intent intent = getIntent();
-        final String us = intent.getStringExtra("userName");
-        final String se = intent.getStringExtra("electricien");
-
-
+/**
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 Orchestrateur o = new Orchestrateur();
+                orc = o;
                 Utilisateur u;
                 try {
-                    u = o.recupererUtilisateur(us);
+                    u = o.recupererUtilisateur(userName);
+                    user = u;
                     System.out.println("**************** nom :" +u.profile.nom);
-                    email = (TextView) findViewById(R.id.mail);
-                    telephone = (TextView) findViewById(R.id.phone);
-                    nom = (TextView) findViewById(R.id.nomServ);
-                    taux = (TextView) findViewById(R.id.taux);
-                    description = (TextView) findViewById(R.id.description);
-
-                    for (int i = 0; i < u.listeServices.size(); i++) {
-
-                        if (se.equals(u.listeServices.get(i))) {
-                            nom.setText(u.listeServices.get(i).getNomSservice());
-
-                            telephone.setText(u.listeServices.get(i).getNoTelephone());
-                            email.setText(u.listeServices.get(i).getCourriel());
-                            description.setText(u.listeServices.get(i).getDescription());
-
-                        }
-                    }
-
+                    courriel = (TextView) findViewById(R.id.courrielProfil);
+                    telephone = (TextView) findViewById(R.id.telProfil);
+                    nom = (TextView) findViewById(R.id.nomProfil);
+                    prenom = (TextView) findViewById(R.id.prenomProfil);
+                    nom.setText(u.profile.nom);
+                    prenom.setText(u.profile.prenom);
+                    courriel.setText(u.profile.adresseCourriel);
+                    telephone.setText(u.profile.numeroTelephone);
+                    toggle.setChecked(u.disponible);
                 } catch (Exception e) {
                     System.out.println(e);
                 }
             }
         });
-
+**/
     }
 }

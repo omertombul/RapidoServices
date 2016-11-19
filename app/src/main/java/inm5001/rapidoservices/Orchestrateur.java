@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import inm5001.rapidoservices.baseDonnees.BdApi;
+import inm5001.rapidoservices.service.EvaluationService;
 import inm5001.rapidoservices.service.TypeServices;
+import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.utilisateur.Identifiant;
@@ -28,9 +30,7 @@ public class Orchestrateur {
     private ArrayList<String> listeCompetences;
     private String competence;
     private String disponibleUtilisateur;
-    //private ArrayList<Evaluation> listeEvaluations;
-    //private ArrayList<Evaluation> lisetEvaluationServicesGlobal;
-    //private Evaluation evaluation;
+    private EvaluationUtilisateur evaluationUtilisateur;
     //private Geolocalisation geolocalisation;
 //attributs Identifiant
     private String nomUtilisateur;
@@ -51,6 +51,7 @@ public class Orchestrateur {
     private String description;
     private float tauxHorraire;
     private float prixFixe;
+    private EvaluationService evaluationService;
 //attributs BdApi
     private static BdApi bd = new BdApi();
 
@@ -64,7 +65,7 @@ public class Orchestrateur {
     }
 
     public void creerUtilisateur(String nom, String prenom, String numeroTelephoneProfile, String adresseCourrielProfile,
-                                                 String nomUtilisateur, String motDePasse, ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
+                                                 String nomUtilisateur, String motDePasse, ArrayList<TypeServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
         profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
         identifiant = new Identifiant(nomUtilisateur, motDePasse);
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
@@ -131,28 +132,35 @@ public class Orchestrateur {
         }
     }
 
-    public ArrayList<Recherche> rechercheDeServices(float tauxHorraire, float prixFixe, String nomSservice, String ville) throws MyException, SQLException {
+    public ArrayList<Recherche> rechercheDeServices(float tauxHorraire, float prixFixe, String nomSservice, String ville,
+                                                    float coteUtilisateur, float coteServicesMoyenne, float coteService) throws MyException, SQLException {
         TypeServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, ville);
-        ArrayList<Recherche> listePaires = bd.servicesSearch(service);
+        ArrayList<Recherche> listePaires = bd.servicesSearch(service, coteUtilisateur, coteServicesMoyenne, coteService);
         return listePaires;
     }
-
-    public ArrayList<Recherche> trierResultatRecherche(ArrayList<Recherche> ListeResultatsRecherche, String trierPar) throws MyException {
-        if (trierPar.equals("tauxHorraire")) {
-            Collections.sort(ListeResultatsRecherche, new TypeServices.TrierParTauxHorraire());
-        } else if (trierPar.equals("prixFixe")) {
-            Collections.sort(ListeResultatsRecherche, new TypeServices.TrierParPrixFixe());
-        } else if (trierPar.equals("nomService")) {
-            Collections.sort(ListeResultatsRecherche, new TypeServices.TrierParNomService());
-        } else if (trierPar.equals("ville")) {
-            Collections.sort(ListeResultatsRecherche, new TypeServices.TrierParVille());
+//tri brisé pour l'instant
+    public ArrayList<Recherche> trierResultatRecherche(ArrayList<Recherche> listeResultatRecherche, String valeurDeTri) throws MyException {
+        if (listeResultatRecherche.size() == 0) {
+            return listeResultatRecherche.get(0).trierListeRecherche(listeResultatRecherche, valeurDeTri);
         } else {
-            MyException e = new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
-            throw e;
+            return listeResultatRecherche;
         }
-
-        return ListeResultatsRecherche;
     }
+
+// manque la portion BD et les tests
+/*
+    public EvaluationUtilisateur evaluerUtilisateur(String nomUtilisateur, float coteUtilisateur) throws MyException {
+        evaluationUtilisateur.validationCoteUtilisateur(coteUtilisateur);
+        evaluationUtilisateur = bd.setUserEvaluation(nomUtilisateur, coteUtilisateur);
+        return evaluationUtilisateur;
+    }
+
+    public EvaluationUtilisateur evaluerService(String nomUtilisateur, String nomSservice, float coteService) throws MyException {
+        evaluationService.validationCoteService(coteService);
+        evaluationService = bd.setServiceEvaluation(nomUtilisateur, nomSservice, coteService);
+        return evaluationUtilisateur;
+    }
+*/
     /*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
         utilisateur = bd.getUser(nomUtilisateur);

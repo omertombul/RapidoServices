@@ -8,7 +8,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import inm5001.rapidoservices.MyException;
+import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
 
+import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_EVALUATIONSERVICE_NULL;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOMSERVICE_CARACTERE_SPECIAL;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOMSERVICE_NULL;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOTELEPHONE_DIX_CHIFFRE;
@@ -19,24 +21,36 @@ import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_COURRIEL_MAX_DEUXCENTCINQUANTESIX_CARACTERES;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_DESCRIPTION_MAX_DEUXCENTCINQUANTESIX_CARACTERES;
 import static inm5001.rapidoservices.utilisateur.ConstanteProfile.patternCourriel;
+import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_EVALUATIONUTILISATEUR_NULL;
 
 public abstract class AbstraiteServices {
 	private String nomSservice;
  	private boolean disponible;
  	private String ville = "";
- 	private byte cote;
  	private String noTelephone = "";
  	private String courriel = "";
  	private String description = "";
+    public EvaluationService evaluationService = new EvaluationService(0, 0);
 
-    public AbstraiteServices( String nomSservice, boolean disponible, String ville, byte cote, String noTelephone, String courriel, String description ) throws MyException {
+    public AbstraiteServices( String nomSservice, boolean disponible, String ville, String noTelephone,
+                              String courriel, String description ) throws MyException {
         traiterNomService(nomSservice);
         traiterDisponible(disponible);
         traiterVille(ville);
-        traiterCote(cote);
         traiterNoTelephone(noTelephone);
         traiterCourriel(courriel);
         traiterDescription(description);
+    }
+
+    public AbstraiteServices( String nomSservice, boolean disponible, String ville, String noTelephone,
+                              String courriel, String description, EvaluationService evaluationService ) throws MyException {
+        traiterNomService(nomSservice);
+        traiterDisponible(disponible);
+        traiterVille(ville);
+        traiterNoTelephone(noTelephone);
+        traiterCourriel(courriel);
+        traiterDescription(description);
+        traiterEvaluationService(evaluationService);
     }
 
     public AbstraiteServices( String nomSservice, String ville ) throws MyException {
@@ -66,10 +80,6 @@ public abstract class AbstraiteServices {
         affecterValeurVille(ville);
     }
 
-    private void traiterCote(byte cote) throws MyException {
-        affecterValeurCote(cote);
-    }
-
     private void traiterNoTelephone(String noTelephone) throws MyException {
         if (noTelephone != null && !noTelephone.equals("")) {
             ValiderNoTelephoneSeulementChiffre(noTelephone);
@@ -92,12 +102,28 @@ public abstract class AbstraiteServices {
             affecterValeurDescription(description);
         }
     }
+
+    private void traiterEvaluationService(EvaluationService evaluationService) throws MyException {
+        validerEvaluationServicePasNull(evaluationService);
+        affecterValeurEvaluationService(evaluationService);
+    }
 //deuxième niveau d'abstraction
     private void validerNomServicePasNull(String nomSservice) throws MyException {
         if (nomSservice == null) {
             MyException e = new MyException(MESSAGE_NOMSERVICE_NULL);
             throw e;
         }
+    }
+
+    private void validerEvaluationServicePasNull(EvaluationService evaluationService) throws MyException {
+        if (evaluationService == null) {
+            MyException e = new MyException(MESSAGE_EVALUATIONSERVICE_NULL);
+            throw e;
+        }
+    }
+
+    private void affecterValeurEvaluationService(EvaluationService evaluationService) {
+        this.evaluationService = evaluationService;
     }
 //problème avec REGEX car ne suport pas les caractères spéciaux
     private void validerNomServiceSansCaratereSpecial(String nomSservice) throws MyException {
@@ -131,10 +157,6 @@ public abstract class AbstraiteServices {
 
     private void affecterValeurVille(String ville) {
         this.ville = ville;
-    }
-
-    private void affecterValeurCote(byte cote) {
-        this.cote = cote;
     }
 
     private void ValiderNoTelephoneSeulementChiffre(String noTelephone) throws MyException {
@@ -216,14 +238,6 @@ public abstract class AbstraiteServices {
         traiterVille(ville);
     }
 
-    public byte getCote() {
-        return cote;
-    }
-
-    public void setCote( byte cote ) throws MyException {
-        traiterCote(cote);
-    }
-
     public String getNoTelephone() {
         return noTelephone;
     }
@@ -246,5 +260,13 @@ public abstract class AbstraiteServices {
 
     public void setDescription( String description ) throws MyException {
         traiterDescription(description);
+    }
+
+    public EvaluationService getEvaluationService() {
+        return evaluationService;
+    }
+
+    public void setEvaluationService( EvaluationService evaluationService ) throws MyException {
+        traiterEvaluationService(evaluationService);
     }
 }

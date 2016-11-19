@@ -27,14 +27,11 @@ public class BdApiTest {
     //attributs Utilisateur
     private Identifiant identifiant;
     private Profile profile;
-    private ArrayList<AbstraiteServices> listeServices;
+    private ArrayList<TypeServices> listeServices;
     private AbstraiteServices service;
     private ArrayList<String> listeCompetences;
     private String competence;
     private boolean disponibleUtilisateur;
-    //private ArrayList<Evaluation> listeEvaluations;
-    //private ArrayList<Evaluation> lisetEvaluationServicesGlobal;
-    //private Evaluation evaluation;
     //private Geolocalisation geolocalisation;
 //attributs Identifiant
     private String nomUtilisateur;
@@ -83,10 +80,10 @@ public class BdApiTest {
         description = "Repare les tuyeaux";
         tauxHorraire = 14.50f;
         prixFixe = 50.00f;
-        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, cote,
-                numeroTelephoneService, "service1@gmail.com", description));
-        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, cote,
-                numeroTelephoneService, "service2@gmail.com", description));
+        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, numeroTelephoneService,
+                "service1@gmail.com", description));
+        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, numeroTelephoneService,
+                "service2@gmail.com", description));
         listeCompetences.add("Plombier");
         listeCompetences.add("Electricien");
     }

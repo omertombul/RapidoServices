@@ -8,10 +8,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import android.widget.ListView;
 
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Orchestrateur;
@@ -19,26 +19,36 @@ import inm5001.rapidoservices.Recherche;
 import inm5001.rapidoservices.R;
 import inm5001.rapidoservices.service.ConstanteAbstraiteServices;
 
+/**
+ * Created By Omer Tombul
+ * */
+
 public class RechercheActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     String nomService;
     String ville;
     Button rechercher = null;
     EditText tauxHorraire = null;
-    TextView affichageRecherche = null;
     float prix = 0f;
     Orchestrateur o;
     ArrayList<Recherche> listeDePaire;
+    ArrayList<String> resultat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recherche);
-
         rechercher = (Button) findViewById(R.id.buttonRechercherRecherche);
         tauxHorraire = (EditText) findViewById(R.id.editTextPrixRecherche);
-        affichageRecherche = (TextView) findViewById(R.id.textViewAffichageResultRecherche);
+
+        final ListView lView = (ListView) findViewById(R.id.ListViewRechercheResult);
+        final ArrayAdapter<String> adapter ;
+
+        resultat = new ArrayList<String>();
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,resultat);
+
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -99,29 +109,49 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                     public void run() {
                         o = new Orchestrateur();
                         try {
-                            String affichage = "";
+
+
+
                             float tHorraire = 0.0f;
 
+                            //validation taux horraire jamais vide ou null
                             if (tauxHorraire.getText().toString().isEmpty() || tauxHorraire.getText().toString() == null) {
                                 tHorraire = 0.0f;
                             } else {
                                 tHorraire = Float.valueOf(tauxHorraire.getText().toString());
                             }
 
-                            listeDePaire = o.rechercheDeServices(tHorraire, prix, nomService, ville);
-                            if (!listeDePaire.isEmpty()) {
+                            //recuper la liste
+                            listeDePaire = o.rechercheDeServices(tHorraire, prix, nomService, ville,0f,0f,0f);
 
-                                for (Recherche p : listeDePaire) {
-                                    System.out.println("NOM UTILISATEUR RECHERCHE  " + p.getNomUtilisateur());
-                                    System.out.println("Service : " + p.getService().getNomSservice());
-                                    affichage += ("\n" + "Nom Utilisateur : " + p.getNomUtilisateur() + "     No. Tel : "
-                                            + p.getService().getNoTelephone() + "    Service : " + p.getService().getNomSservice());
-                                }
+                            if (!listeDePaire.isEmpty()) {
+                                resultat.clear();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        String affichage = "";
+                                        for (Recherche p : listeDePaire) {
+
+                                            affichage = p.getUtilisateur().profile.nom + " " + p.recupererService().getNomSservice() + " " + p.recupererService().getNoTelephone();
+                                            resultat.add(affichage);
+                                            System.out.println(affichage);
+                                            System.out.println(resultat.isEmpty());
+
+
+                                        }
+                                    }
+                                });
+
+
                             } else {
-                                affichage = "Aucun service correspondant a la recherche ! ";
+
+                                resultat.add("Liste vide !");
                                 System.out.println("LISTE VIDE ******");
                             }
-                            affichageRecherche.setText(affichage);
+                            //Ajouter adapteur pour lui donne la liste de nom et services
+                            lView.setAdapter(adapter);
+                            lView.invalidateViews();
+
                         } catch (SQLException e) {
                             System.out.println(e.getMessage());
                         } catch (MyException e) {
@@ -132,13 +162,14 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
 
             }
         });
+
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
 /**
- * Methode override pour le menu deroulant, qui est obligatoire quand
+ * Methode override pour le menu deroulant, ou la listViewResult qui est obligatoire quand
  * on fait un "implements AdapterView.OnItemSelectedListener"
  **/
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -155,6 +186,10 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                 item = parent.getItemAtPosition(position).toString();
                 ville = item;
                 break;
+            case R.id.ListViewRechercheResult:
+                item = parent.getItemAtPosition(position).toString();
+                break;
+
         }
         // Showing selected spinner item
         Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();

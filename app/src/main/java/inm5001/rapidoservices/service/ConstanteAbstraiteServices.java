@@ -27,6 +27,8 @@ public interface ConstanteAbstraiteServices {
 
     String MESSAGE_DESCRIPTION_MAX_DEUXCENTCINQUANTESIX_CARACTERES = "La description ne doit pas contenir plus de deux cent cinquante-six caractères" + MESSAGE_AUTRE_CHOIX;
 
+    String MESSAGE_EVALUATIONSERVICE_NULL = "Un problème à l'enregistrement c'est produit avec la portion evaluation du service, celui-ci ne doit pas être null.";
+
     String patternCourriel = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     String[] tabVilleAjout = new String []{"Montéal", "Québec", "Laval", "Gatineau", "Longueuil", "Sherbrooke", "Saguenay", "Lévis",
