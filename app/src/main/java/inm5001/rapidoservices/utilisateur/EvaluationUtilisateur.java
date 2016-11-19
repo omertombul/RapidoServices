@@ -1,13 +1,9 @@
 package inm5001.rapidoservices.utilisateur;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.Recherche;
 
-import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCINQ;
-import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTEUTILISATEUR_ENTREZEROETCINQ;
+import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCENT;
+import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTEUTILISATEUR_ENTREZEROETCENT;
 
 /**
  * Created by Francis Bernier on 2016-11-17.
@@ -33,7 +29,7 @@ public class EvaluationUtilisateur {
 
 //premier niveau d'abstraction
     private void traiterCoteUtilisateur(float coteUtilisateur) throws MyException {
-        validerValeurCoteUtilisateurEntreZeroEtCinq(coteUtilisateur);
+        validerValeurCoteUtilisateurEntreZeroEtCent(coteUtilisateur);
         affecterValeurCoteUtilisateur(coteUtilisateur);
     }
 
@@ -42,7 +38,7 @@ public class EvaluationUtilisateur {
     }
 
     private void traiterCoteTypeServicesMoyenne(float coteTypeServicesMoyenne) throws MyException {
-        validerValeurCoteTypeServicesMoyenneEntreZeroEtCinq(coteTypeServicesMoyenne);
+        validerValeurCoteTypeServicesMoyenneEntreZeroEtCent(coteTypeServicesMoyenne);
         affecterValeurCoteTypeServicesMoyenne(coteTypeServicesMoyenne);
     }
 
@@ -51,9 +47,9 @@ public class EvaluationUtilisateur {
     }
 
 //deuxième niveau d'abstraction
-    private void validerValeurCoteUtilisateurEntreZeroEtCinq(float coteUtilisateur) throws MyException {
-        if (coteUtilisateur < 0 || coteUtilisateur > 5) {
-            MyException e = new MyException(MESSAGE_COTEUTILISATEUR_ENTREZEROETCINQ);
+    private void validerValeurCoteUtilisateurEntreZeroEtCent(float coteUtilisateur) throws MyException {
+        if (coteUtilisateur < 0 || coteUtilisateur > 100) {
+            MyException e = new MyException(MESSAGE_COTEUTILISATEUR_ENTREZEROETCENT);
             throw e;
         }
     }
@@ -66,9 +62,9 @@ public class EvaluationUtilisateur {
         this.nombreDEvaluationUtilisateur = nombreDEvaluationUtilisateur;
     }
 
-    private void validerValeurCoteTypeServicesMoyenneEntreZeroEtCinq(float coteTypeServicesMoyenne) throws MyException {
-        if (coteTypeServicesMoyenne < 0 || coteTypeServicesMoyenne > 5) {
-            MyException e = new MyException(MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCINQ);
+    private void validerValeurCoteTypeServicesMoyenneEntreZeroEtCent(float coteTypeServicesMoyenne) throws MyException {
+        if (coteTypeServicesMoyenne < 0 || coteTypeServicesMoyenne > 100) {
+            MyException e = new MyException(MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCENT);
             throw e;
         }
     }
