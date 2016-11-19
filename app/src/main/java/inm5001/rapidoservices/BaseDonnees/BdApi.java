@@ -77,7 +77,8 @@ public class BdApi {
         DB.closeConnection();
     }
 
-    public void updateUserDisponibilite(String nomUtilisateur, String disponibilite) throws SQLException {
+    public void updateUserDisponibilite(String nomUtilisateur, String disponibilite)
+            throws SQLException {
         String SQL = SQLchangeUserDisponibilite(nomUtilisateur, disponibilite);
         BdConnection DB = new BdConnection(SQL);
         DB.insertToDB();
@@ -106,7 +107,8 @@ public class BdApi {
         DB.closeConnection();
     }
 
-    public ArrayList<Recherche> servicesSearch(TypeServices s, float coteUtilisateur, float coteServicesMoyenne, float coteService){
+    public ArrayList<Recherche> servicesSearch(TypeServices s, float coteUtilisateur,
+                                               float coteServicesMoyenne, float coteService){
         ArrayList<Recherche> UserAndServicesArray = new ArrayList<>();
 
 
@@ -116,6 +118,14 @@ public class BdApi {
         UserAndServicesArray = updateUserAndSerivcesArrayWithRS(RSservices);
         DB.closeConnection();
         return UserAndServicesArray;
+    }
+
+    public void gradeService(String gradedUserId, String gradingUserId, String nomService,
+                             float grade) throws SQLException{
+        String SQL = SQLgradeService(gradedUserId, gradingUserId, nomService, grade);
+        BdConnection DB = new BdConnection(SQL);
+        DB.insertToDB();
+        DB.closeConnection();
     }
 
     //*************************************************************************
@@ -283,6 +293,21 @@ public class BdApi {
         SQL = SQL_DEBUT + SQL_NOM_SERVICE + SQL_PRIX_FIXE + SQL_PRIX_HORRAIRE +
                 SQL_VILLE + SQL_FIN;
 //System.out.println("    String SQL servicesSearch: " + SQL); // shows SQL String
+        return SQL;
+    }
+
+    private String SQLgradeService(String gradedUserId, String gradingUserId, String nomService,
+                                   float grade){
+        String SQL;
+        String SQL_DEBUT = "INSERT INTO cotesServices VALUES('";
+        String SQL_SEPARATEUR = "' ,'";
+        String SQL_FIN = "');";
+        SQL = SQL_DEBUT;
+        SQL += gradedUserId + SQL_SEPARATEUR;
+        SQL += gradingUserId + SQL_SEPARATEUR;
+        SQL += nomService + SQL_SEPARATEUR;
+        SQL += grade + SQL_FIN;
+//System.out.println(" **gradeService** SQL is: " + SQL); // shows SQL String
         return SQL;
     }
 
