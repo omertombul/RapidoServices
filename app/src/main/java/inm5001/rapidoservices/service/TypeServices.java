@@ -12,7 +12,7 @@ import static inm5001.rapidoservices.service.ConstanteTypeServices.MESSAGE_PRIXF
  * @author omer et Francis Bernier
  */
 
-public class TypeServices extends AbstraiteServices implements Comparable<Recherche> {
+public class TypeServices extends AbstraiteServices {
 
     private float tauxHorraire;
     private float prixFixe;
@@ -26,6 +26,7 @@ public class TypeServices extends AbstraiteServices implements Comparable<Recher
         traiterTauxHorraire(tauxHorraire);
         traiterPrixFixe(prixFixe);
     }
+
     public TypeServices(float tauxHorraire, float prixFixe, String nomSservice, boolean disponible, String ville,
                         String noTelephone, String courriel, String description) throws MyException {
         super( nomSservice, disponible, ville, noTelephone, courriel, description );
@@ -50,8 +51,7 @@ public class TypeServices extends AbstraiteServices implements Comparable<Recher
         validerPrixFixePasNegatif(prixFixe);
         affecterValeurPrixFixe(prixFixe);
     }
-
- //deuxième niveau d'abstraction
+//deuxième niveau d'abstraction
     private void validerTauxHorrairePasNegatif(float tauxHorraire) throws MyException {
         if (tauxHorraire < 0) {
             MyException e = new MyException(MESSAGE_TAUXHORRAIRE_NEGATIF);
@@ -73,7 +73,7 @@ public class TypeServices extends AbstraiteServices implements Comparable<Recher
     private void affecterValeurPrixFixe(float prixFixe) {
         this.prixFixe = prixFixe;
     }
- //MÉTHODES PUBLIC
+//MÉTHODES PUBLIC
     public float getTauxHorraire() {
         return tauxHorraire;
     }
@@ -90,41 +90,5 @@ public class TypeServices extends AbstraiteServices implements Comparable<Recher
         traiterPrixFixe(prixFixe);
     }
 
-    public static class TrierParTauxHorraire implements Comparator<Recherche> {
 
-        @Override
-        public int compare(Recherche pair1, Recherche pair2) {
-            return pair1.getService().getTauxHorraire() > pair2.getService().getTauxHorraire() ? 1 : (pair1.getService().getTauxHorraire() < pair2.getService().getTauxHorraire() ? -1 : 0);
-        }
-    }
-
-    public static class TrierParPrixFixe implements Comparator<Recherche> {
-
-        @Override
-        public int compare(Recherche pair1, Recherche pair2) {
-            return pair1.getService().getPrixFixe() > pair2.getService().getPrixFixe() ? 1 : (pair1.getService().getPrixFixe() < pair2.getService().getPrixFixe() ? -1 : 0);
-        }
-    }
-
-    public static class TrierParNomService implements Comparator<Recherche> {
-
-        @Override
-        public int compare(Recherche pair1, Recherche pair2) {
-            return pair1.getService().getNomSservice().compareTo(pair2.getService().getNomSservice());
-        }
-    }
-
-    public static class TrierParVille implements Comparator<Recherche> {
-
-        @Override
-        public int compare(Recherche pair1, Recherche pair2) {
-            return pair1.getService().getVille().compareTo(pair2.getService().getVille());
-        }
-    }
-
-    //Pas implémenté, mais obligatoire pour le [implements Comparable<TypeServices>]
-    @Override
-    public int compareTo(Recherche o) {
-        return 0;
-    }
 }

@@ -12,8 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import android.widget.ListView;
 
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Orchestrateur;
@@ -27,25 +25,23 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
     String ville;
     Button rechercher = null;
     EditText tauxHorraire = null;
+    TextView affichageRecherche = null;
     float prix = 0f;
     Orchestrateur o;
     ArrayList<Recherche> listeDePaire;
-    ArrayList<String> resultat;
+    float coteUtilisateur = 0;
+    float coteServicesMoyenne = 0;
+    float coteService = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recherche);
+
         rechercher = (Button) findViewById(R.id.buttonRechercherRecherche);
         tauxHorraire = (EditText) findViewById(R.id.editTextPrixRecherche);
-        final ListView lView = (ListView) findViewById(R.id.ListViewRechercheResult);
-        final ArrayAdapter<String> adapter ;
-        resultat = new ArrayList<String>();
-
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,resultat);
-
-
+        affichageRecherche = (TextView) findViewById(R.id.textViewAffichageResultRecherche);
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -105,49 +101,31 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                     @Override
                     public void run() {
                         o = new Orchestrateur();
+
                         try {
-
-
-
+                            String affichage = "";
                             float tHorraire = 0.0f;
 
-                            //validation taux horraire jamais vide ou null
                             if (tauxHorraire.getText().toString().isEmpty() || tauxHorraire.getText().toString() == null) {
                                 tHorraire = 0.0f;
                             } else {
                                 tHorraire = Float.valueOf(tauxHorraire.getText().toString());
                             }
 
-                            //recuper la liste
-                            listeDePaire = o.rechercheDeServices(tHorraire, prix, nomService, ville);
+                            listeDePaire = o.rechercheDeServices(tHorraire, prix, nomService, ville, coteUtilisateur, coteServicesMoyenne, coteService);
                             if (!listeDePaire.isEmpty()) {
-                                resultat.clear();
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        String affichage = "";
-                                        for (Recherche p : listeDePaire) {
 
-                                            affichage = p.getUtilisateur().profile.nom + " " + p.getService().getNomSservice() + " " + p.getService().getNoTelephone();
-                                            resultat.add(affichage);
-                                            System.out.println(affichage);
-                                            System.out.println(resultat.isEmpty());
-
-
-                                        }
-                                    }
-                                });
-
-
-                                lView.setAdapter(adapter);
-                                lView.invalidateViews();
+                                for (Recherche p : listeDePaire) {
+                                    System.out.println("NOM UTILISATEUR RECHERCHE  " + p.getUtilisateur().identifiant.nomUtilisateur);
+                                    System.out.println("Service : " + p.recupererService().getNomSservice());
+                                    affichage += ("\n" + "Nom Utilisateur : " + p.getUtilisateur().identifiant.nomUtilisateur + "     No. Tel : "
+                                            + p.recupererService().getNoTelephone() + "    Service : " + p.recupererService().getNomSservice());
+                                }
                             } else {
-
-                                resultat.add("Liste vide !");
+                                affichage = "Aucun service correspondant a la recherche ! ";
                                 System.out.println("LISTE VIDE ******");
                             }
-
-
+                            affichageRecherche.setText(affichage);
                         } catch (SQLException e) {
                             System.out.println(e.getMessage());
                         } catch (MyException e) {
@@ -158,14 +136,13 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
 
             }
         });
-
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
 /**
- * Methode override pour le menu deroulant, ou la listViewResult qui est obligatoire quand
+ * Methode override pour le menu deroulant, qui est obligatoire quand
  * on fait un "implements AdapterView.OnItemSelectedListener"
  **/
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -182,10 +159,6 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                 item = parent.getItemAtPosition(position).toString();
                 ville = item;
                 break;
-            case R.id.ListViewRechercheResult:
-                item = parent.getItemAtPosition(position).toString();
-                break;
-
         }
         // Showing selected spinner item
         Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();

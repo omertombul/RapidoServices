@@ -27,14 +27,11 @@ public class BdApiTest {
     //attributs Utilisateur
     private Identifiant identifiant;
     private Profile profile;
-    private ArrayList<AbstraiteServices> listeServices;
+    private ArrayList<TypeServices> listeServices;
     private AbstraiteServices service;
     private ArrayList<String> listeCompetences;
     private String competence;
     private boolean disponibleUtilisateur;
-    //private ArrayList<Evaluation> listeEvaluations;
-    //private ArrayList<Evaluation> lisetEvaluationServicesGlobal;
-    //private Evaluation evaluation;
     //private Geolocalisation geolocalisation;
 //attributs Identifiant
     private String nomUtilisateur;

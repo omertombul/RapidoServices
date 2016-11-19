@@ -13,7 +13,7 @@ import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.
  * Created by Francis Bernier on 2016-11-17.
  */
 
-public class EvaluationUtilisateur implements Comparable<ArrayList<Utilisateur>> {
+public class EvaluationUtilisateur {
     public float coteUtilisateur;
     public int nombreDEvaluationUtilisateur;
     public float coteTypeServicesMoyenne;
@@ -84,29 +84,5 @@ public class EvaluationUtilisateur implements Comparable<ArrayList<Utilisateur>>
     public float validationCoteUtilisateur(float coteUtilisateur) throws MyException {
         traiterCoteUtilisateur(coteUtilisateur);
         return this.coteUtilisateur;
-    }
-
-    public static class TrierParCoteUtilisateur implements Comparator<Recherche> {
-
-        @Override
-        public int compare(Recherche pair1, Recherche pair2) {
-            return pair1.getUtilisateur().getEvaluationUtilisateur().coteUtilisateur > pair2.getUtilisateur().getEvaluationUtilisateur().coteUtilisateur ? 1 :
-                    (pair1.getUtilisateur().getEvaluationUtilisateur().coteUtilisateur < pair2.getUtilisateur().getEvaluationUtilisateur().coteUtilisateur ? -1 : 0);
-        }
-    }
-
-    public static class TrierParCoteServicesMoyenne implements Comparator<Recherche> {
-
-        @Override
-        public int compare(Recherche pair1, Recherche pair2) {
-            return pair1.getUtilisateur().getEvaluationUtilisateur().coteTypeServicesMoyenne > pair2.getUtilisateur().getEvaluationUtilisateur().coteTypeServicesMoyenne ? 1 :
-                    (pair1.getUtilisateur().getEvaluationUtilisateur().coteTypeServicesMoyenne < pair2.getUtilisateur().getEvaluationUtilisateur().coteTypeServicesMoyenne ? -1 : 0);
-        }
-    }
-
-    //Pas implémenté, mais obligatoire pour le [implements Comparable<TypeServices>]
-    @Override
-    public int compareTo(ArrayList<Utilisateur> o) {
-        return 0;
     }
 }

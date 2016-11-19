@@ -11,7 +11,7 @@ import static inm5001.rapidoservices.service.ConstanteEvaluationService.MESSAGE_
  * Created by Francis Bernier on 2016-11-17.
  */
 
-public class EvaluationService implements Comparable<Recherche> {
+public class EvaluationService {
     public float coteService;
     public int nombreDEvaluationService;
 
@@ -53,20 +53,5 @@ public class EvaluationService implements Comparable<Recherche> {
     public float validationCoteService(float coteService) throws MyException {
         traiterCoteService(coteService);
         return this.coteService;
-    }
-
-    public static class TrierParCoteService implements Comparator<Recherche> {
-
-        @Override
-        public int compare(Recherche pair1, Recherche pair2) {
-            return pair1.getService().getEvaluationService().coteService > pair2.getService().getEvaluationService().coteService ? 1 :
-                    (pair1.getService().getEvaluationService().coteService < pair2.getService().getEvaluationService().coteService ? -1 : 0);
-        }
-    }
-
-    //Pas implémenté, mais obligatoire pour le [implements Comparable<TypeServices>]
-    @Override
-    public int compareTo(Recherche o) {
-        return 0;
     }
 }

@@ -26,7 +26,7 @@ public class RechercheTest {
     //attributs Utilisateur
     private Identifiant identifiant;
     private Profile profile;
-    private ArrayList<AbstraiteServices> listeServices;
+    private ArrayList<TypeServices> listeServices;
     private ArrayList<String> listeCompetences;
     private String competence;
     private String disponibleUtilisateur;
@@ -80,7 +80,6 @@ public class RechercheTest {
         nombreDEvaluationTypeServicesMoyenne = 1000;
         evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
                                                             nombreDEvaluationTypeServicesMoyenne);
-        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
         //attributs service
         nomSservice = "Plombier";
         disponibleService = false;
@@ -93,6 +92,11 @@ public class RechercheTest {
         prixFixe = 50.00f;
         service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, numeroTelephoneService,
                 adresseCourrielService, description);
+        service2 = new TypeServices(tauxHorraire, prixFixe, "Electricien", disponibleService, ville, numeroTelephoneService,
+                adresseCourrielService, description);
+        listeServices.add(service);
+        listeServices.add(service2);
+        utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
     }
 
     @After
@@ -129,37 +133,41 @@ public class RechercheTest {
 
     @Test
     public void RecherchePasNull() throws MyException {
-        Recherche pair1 = new Recherche(utilisateur , service);
+        Recherche pair1 = new Recherche(utilisateur , nomSservice);
 
         assertNotNull(pair1);
     }
 
     @Test
     public void RechercheNomUtilisateurPasNull() throws MyException {
-        Recherche pair1 = new Recherche(utilisateur , service);
+        Recherche pair1 = new Recherche(utilisateur , nomSservice);
 
         assertNotNull(pair1.getUtilisateur());
     }
 
     @Test
     public void RechercheUtilisateurNomUtilisateur() throws MyException {
-        Recherche pair1 = new Recherche(utilisateur , service);
+        Recherche pair1 = new Recherche(utilisateur , nomSservice);
 
         assertEquals(pair1.getUtilisateur().identifiant.nomUtilisateur, "FRANCIS");
     }
 
     @Test
     public void RechercheServicePasNull() throws MyException {
-        Recherche pair1 = new Recherche(utilisateur , service);
+        Recherche pair1 = new Recherche(utilisateur , nomSservice);
 
-        assertNotNull(pair1.getService());
+        assertNotNull(pair1);
     }
 
     @Test
     public void RechercheServiceValiderParametres() throws MyException {
-        Recherche pair1 = new Recherche(utilisateur , service);
+        Recherche pair1 = new Recherche(utilisateur , "Plombier");
+        assertTrue(pair1.recupererService().getTauxHorraire() == tauxHorraire);
+        assertEquals(pair1.recupererService().getNomSservice(), "Plombier");
+    }
 
-        assertTrue(pair1.getService().getTauxHorraire() == tauxHorraire);
-        assertEquals(pair1.getService().getNomSservice(), "PLOMBIER");
+    @Test
+    public void fauxPositif() throws Exception {
+        assertTrue(false);
     }
 }
