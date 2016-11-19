@@ -8,10 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Orchestrateur;
@@ -19,29 +20,36 @@ import inm5001.rapidoservices.Recherche;
 import inm5001.rapidoservices.R;
 import inm5001.rapidoservices.service.ConstanteAbstraiteServices;
 
+/**
+ * Created By Omer Tombul
+ * */
+
 public class RechercheActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     String nomService;
     String ville;
     Button rechercher = null;
     EditText tauxHorraire = null;
-    TextView affichageRecherche = null;
     float prix = 0f;
     Orchestrateur o;
     ArrayList<Recherche> listeDePaire;
-    float coteUtilisateur = 0;
-    float coteServicesMoyenne = 0;
-    float coteService = 0;
+    ArrayList<String> resultat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recherche);
-
         rechercher = (Button) findViewById(R.id.buttonRechercherRecherche);
         tauxHorraire = (EditText) findViewById(R.id.editTextPrixRecherche);
-        affichageRecherche = (TextView) findViewById(R.id.textViewAffichageResultRecherche);
+
+        final ListView lView = (ListView) findViewById(R.id.ListViewRechercheResult);
+        final ArrayAdapter<String> adapter ;
+
+        resultat = new ArrayList<String>();
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,resultat);
+
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,7 +65,8 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
         spinner.setOnItemSelectedListener(this);
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ConstanteAbstraiteServices.listeNomServiceRecherche);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
+                ConstanteAbstraiteServices.listeNomServiceRecherche);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -76,7 +85,8 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
         // Spinner click listener
         spinnerVille.setOnItemSelectedListener(this);
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapterVille = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ConstanteAbstraiteServices.listeVilleRecherche);
+        ArrayAdapter<String> dataAdapterVille = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
+                ConstanteAbstraiteServices.listeVilleRecherche);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -101,31 +111,63 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                     @Override
                     public void run() {
                         o = new Orchestrateur();
-
                         try {
-                            String affichage = "";
                             float tHorraire = 0.0f;
 
+                            //validation taux horraire jamais vide ou null
                             if (tauxHorraire.getText().toString().isEmpty() || tauxHorraire.getText().toString() == null) {
                                 tHorraire = 0.0f;
                             } else {
                                 tHorraire = Float.valueOf(tauxHorraire.getText().toString());
                             }
 
-                            listeDePaire = o.rechercheDeServices(tHorraire, prix, nomService, ville, coteUtilisateur, coteServicesMoyenne, coteService);
-                            if (!listeDePaire.isEmpty()) {
+                            //recuper la liste
+                            listeDePaire = o.rechercheDeServices(tHorraire, prix, nomService, ville,0f,0f,0f);
 
-                                for (Recherche p : listeDePaire) {
-                                    System.out.println("NOM UTILISATEUR RECHERCHE  " + p.getUtilisateur().identifiant.nomUtilisateur);
-                                    System.out.println("Service : " + p.recupererService().getNomSservice());
-                                    affichage += ("\n" + "Nom Utilisateur : " + p.getUtilisateur().identifiant.nomUtilisateur + "     No. Tel : "
-                                            + p.recupererService().getNoTelephone() + "    Service : " + p.recupererService().getNomSservice());
-                                }
+                            if (!listeDePaire.isEmpty()) {
+                                resultat.clear();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        String affichage = "";
+                                        for (Recherche p : listeDePaire) {
+
+                                            affichage = p.getUtilisateur().profile.nom + " " + p.recupererService().getNomSservice()
+                                                    + " " + p.recupererService().getNoTelephone();
+                                            resultat.add(affichage);
+                                            System.out.println(affichage);
+                                            System.out.println(resultat.isEmpty());
+
+
+                                        }
+                                    }
+                                });
+
+
                             } else {
-                                affichage = "Aucun service correspondant a la recherche ! ";
-                                System.out.println("LISTE VIDE ******");
+
+                                resultat.add("******* Aucun Service pour Vos Criteres ******");
+                                System.out.println("Liste vide");
                             }
-                            affichageRecherche.setText(affichage);
+                            //Ajouter adapteur pour lui donne la liste de nom et services
+                            lView.setAdapter(adapter);
+                            lView.invalidateViews();
+                            //Set an Item Click Listener for ListView items
+                            lView.setOnItemClickListener(new OnItemClickListener(){
+                                //onItemClick() callback method
+                                public void onItemClick(AdapterView<?> parent, View v, int position, long id){
+
+                                    //Generate a Toast message
+                                    String toastMessage = "Selected : "+  resultat.get(position) ;
+
+                                    System.out.println(resultat.get(position));
+
+                                    //Display user response as a Toast message
+                                    Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+
                         } catch (SQLException e) {
                             System.out.println(e.getMessage());
                         } catch (MyException e) {
@@ -136,13 +178,14 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
 
             }
         });
+
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
 /**
- * Methode override pour le menu deroulant, qui est obligatoire quand
+ * Methode override pour le menu deroulant, ou la listViewResult qui est obligatoire quand
  * on fait un "implements AdapterView.OnItemSelectedListener"
  **/
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -159,6 +202,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                 item = parent.getItemAtPosition(position).toString();
                 ville = item;
                 break;
+
         }
         // Showing selected spinner item
         Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
