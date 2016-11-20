@@ -4,58 +4,75 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:text="Le Service "
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewTitleActiviteTrouver"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        android:textAllCaps="true" />
+
+    <TextView
         android:text="Nom du service :"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2" />
+        android:id="@+id/textViewNomTrouver" />
 
     <TextView
         android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3" />
+        android:id="@+id/textViewAfficheNomTrouver" />
 
     <TextView
         android:text="Ville :"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView12" />
+        android:id="@+id/textViewVilleTrouver" />
 
     <TextView
         android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView15" />
+        android:id="@+id/textViewAfficheVilleTrouver" />
 
     <TextView
         android:text="Taux horaire :"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView17" />
+        android:id="@+id/textViewTauxTrouver" />
 
     <TextView
         android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView19" />
+        android:id="@+id/textViewAfficheTauxTrouver" />
 
     <TextView
         android:text="Description :"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView21" />
+        android:id="@+id/textViewDescriTrouver" />
 
     <TextView
         android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView22" />
+        android:id="@+id/textViewAfficheDescriTrouver" />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:id="@+id/ratingBar2" />
 
     <Button
-        android:text="Buy"
+        android:text="Rate"
         android:layout_width="142dp"
         android:layout_height="wrap_content"
-        android:id="@+id/button2" />
+        android:id="@+id/buttonRateTrouver"
+        android:textStyle="normal|bold|italic" />
 
     <Button
         android:text="Cancel"
@@ -63,5 +80,6 @@
         android:layout_marginLeft="150dp"
         android:layout_marginTop="-50dp"
         android:layout_height="wrap_content"
-        android:id="@+id/button3" />
+        android:id="@+id/buttonCancelTrouver"
+        android:textStyle="normal|bold|italic" />
 </LinearLayout>

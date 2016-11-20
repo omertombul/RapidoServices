@@ -3,6 +3,7 @@ package inm5001.rapidoservices;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.io.Serializable;
 
 import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.service.TypeServices;
@@ -17,6 +18,7 @@ import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_MODE_TRI_INTR
 public class Recherche implements Comparable<Recherche> {
     private Utilisateur utilisateur;
     private String nomService;
+
 
     public Recherche(Utilisateur utilisateur, String nomService){
         this.utilisateur = utilisateur;

@@ -1,5 +1,6 @@
 package inm5001.rapidoservices.interfaceGraphique;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,7 @@ import inm5001.rapidoservices.Orchestrateur;
 import inm5001.rapidoservices.Recherche;
 import inm5001.rapidoservices.R;
 import inm5001.rapidoservices.service.ConstanteAbstraiteServices;
+import inm5001.rapidoservices.utilisateur.Utilisateur;
 
 /**
  * Created By Omer Tombul
@@ -161,9 +163,21 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                                     String toastMessage = "Selected : "+  resultat.get(position) ;
 
                                     System.out.println(resultat.get(position));
+                                    Intent intent = new Intent(RechercheActivity.this, ServiceRechercherAvtivity.class);
+                                    Recherche r = listeDePaire.get(position);
+                                    System.out.println(r.recupererService().getVille());
+                                    Float a = r.recupererService().getTauxHorraire();
+                                    String taux = a.toString();
+                                    intent.putExtra("nomService", r.getNomService());
+                                    intent.putExtra("villeService",r.recupererService().getVille());
+                                    intent.putExtra("taux",taux);
+                                    intent.putExtra("description",r.recupererService().getDescription());
+                                    intent.putExtra("userName",r.getUtilisateur().identifiant.nomUtilisateur);
+                                    startActivity(intent);
+
 
                                     //Display user response as a Toast message
-                                    Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
+                                   // Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
                                 }
                             });
 
