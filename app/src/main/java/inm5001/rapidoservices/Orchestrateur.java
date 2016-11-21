@@ -149,14 +149,7 @@ public class Orchestrateur {
         }
     }
 
-// manque la portion BD et les tests
-/*
-    public EvaluationUtilisateur evaluerUtilisateur(String nomUtilisateurFrounisseur, String nomUtilisateurClient, String nomSservice, float coteService) throws MyException {
-        evaluationUtilisateur.validationCoteUtilisateur(coteUtilisateur);
-        bd.setUserEvaluation(nomUtilisateurFrounisseur, nomUtilisateurClient, nomSservice, coteService);
-    }
-*/
-    public void evaluerService(String nomUtilisateurFrounisseur, String nomUtilisateurClient, String nomSservice, float coteService) throws MyException, SQLException {
+    public void faireUneEvaluation(String nomUtilisateurFrounisseur, String nomUtilisateurClient, String nomSservice, float coteService) throws MyException, SQLException {
         evaluationService = new EvaluationService(0, 0);
         evaluationService.validationCoteService(coteService);
         bd.gradeService(nomUtilisateurFrounisseur, nomUtilisateurClient, nomSservice, coteService);

@@ -7,7 +7,6 @@ import org.junit.Test;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.service.EvaluationService;
 import inm5001.rapidoservices.service.TypeServices;
 import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
@@ -405,23 +404,18 @@ public class OrchestrateurTest {
 
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
-/*L'objet utilisateur retourner par BdApi ne semble pas avoir les informations de L'évaluation service
-    @Test
+//L'objet utilisateur retourner par BdApi ne semble pas avoir les informations de L'évaluation service
+    /*@Test
     public void evaluerService() throws MyException, SQLException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                 motDePasse, listeServices, listeCompetences);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
-        orchestrateur.evaluerService(nomUtilisateur, "Client", "Plombier", 90);
+        orchestrateur.faireUneEvaluation(nomUtilisateur, "Client", "Plombier", 90);
         utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
         System.out.println("***************: " + utilisateur.listeServices.get(0).evaluationService.coteService);
         assertTrue(utilisateur.listeServices.get(0).evaluationService.coteService == 90);
     }
-
-    @Test
-    public void evaluerUtilisateur() {
-
-    }
-    */
+*/
     @Test
     public void rechercheDeServicesPasDeCritere() throws MyException, SQLException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
