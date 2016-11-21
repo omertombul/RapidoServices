@@ -79,6 +79,6 @@ public class EvaluationUtilisateur {
 //MÉTHODES PUBLIC
     public float validationCoteUtilisateur(float coteUtilisateur) throws MyException {
         traiterCoteUtilisateur(coteUtilisateur);
-        return this.coteUtilisateur;
+        return coteUtilisateur;
     }
 }
