@@ -49,6 +49,6 @@ public class EvaluationService {
 //MÉTHODES PUBLIC
     public float validationCoteService(float coteService) throws MyException {
         traiterCoteService(coteService);
-        return this.coteService;
+        return coteService;
     }
 }

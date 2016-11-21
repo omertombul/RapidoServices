@@ -65,7 +65,8 @@ public class Orchestrateur {
     }
 
     public void creerUtilisateur(String nom, String prenom, String numeroTelephoneProfile, String adresseCourrielProfile,
-                                                 String nomUtilisateur, String motDePasse, ArrayList<TypeServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
+                                 String nomUtilisateur, String motDePasse, ArrayList<TypeServices> listeServices,
+                                 ArrayList<String> listeCompetences) throws MyException {
         profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
         identifiant = new Identifiant(nomUtilisateur, motDePasse);
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
@@ -138,10 +139,11 @@ public class Orchestrateur {
         ArrayList<Recherche> listePaires = bd.servicesSearch(service, coteUtilisateur, coteServicesMoyenne, coteService);
         return listePaires;
     }
-//tri brisé pour l'instant
+
     public ArrayList<Recherche> trierResultatRecherche(ArrayList<Recherche> listeResultatRecherche, String valeurDeTri) throws MyException {
-        if (listeResultatRecherche.size() == 0) {
-            return listeResultatRecherche.get(0).trierListeRecherche(listeResultatRecherche, valeurDeTri);
+        if (listeResultatRecherche.size() > 1) {
+            listeResultatRecherche = listeResultatRecherche.get(0).trierListeRecherche(listeResultatRecherche, valeurDeTri);
+            return listeResultatRecherche;
         } else {
             return listeResultatRecherche;
         }
@@ -149,18 +151,17 @@ public class Orchestrateur {
 
 // manque la portion BD et les tests
 /*
-    public EvaluationUtilisateur evaluerUtilisateur(String nomUtilisateur, float coteUtilisateur) throws MyException {
+    public EvaluationUtilisateur evaluerUtilisateur(String nomUtilisateurFrounisseur, String nomUtilisateurClient, String nomSservice, float coteService) throws MyException {
         evaluationUtilisateur.validationCoteUtilisateur(coteUtilisateur);
-        evaluationUtilisateur = bd.setUserEvaluation(nomUtilisateur, coteUtilisateur);
-        return evaluationUtilisateur;
-    }
-
-    public EvaluationUtilisateur evaluerService(String nomUtilisateur, String nomSservice, float coteService) throws MyException {
-        evaluationService.validationCoteService(coteService);
-        evaluationService = bd.setServiceEvaluation(nomUtilisateur, nomSservice, coteService);
-        return evaluationUtilisateur;
+        bd.setUserEvaluation(nomUtilisateurFrounisseur, nomUtilisateurClient, nomSservice, coteService);
     }
 */
+    public void evaluerService(String nomUtilisateurFrounisseur, String nomUtilisateurClient, String nomSservice, float coteService) throws MyException, SQLException {
+        evaluationService = new EvaluationService(0, 0);
+        evaluationService.validationCoteService(coteService);
+        bd.gradeService(nomUtilisateurFrounisseur, nomUtilisateurClient, nomSservice, coteService);
+    }
+
     /*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
         utilisateur = bd.getUser(nomUtilisateur);

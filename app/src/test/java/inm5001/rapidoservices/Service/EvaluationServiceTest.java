@@ -81,7 +81,7 @@ public class EvaluationServiceTest {
         } catch (MyException e) {
             throw e;
         } try {
-            evaluationService.validationCoteService(-1);
+            evaluationService.validationCoteService(-1.0f);
         } catch (Exception e) {
             estValider =  e.getMessage().equals(MESSAGE_COTESERVICE_ENTREZEROETCENT);
         }

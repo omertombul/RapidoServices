@@ -15,11 +15,11 @@ import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 
-import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_MODE_TRI_INTROUVABLE;
 import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_MOT_DE_PASSE_INVALIDE;
 import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_SERVICE_EXISTANT;
 import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_UTILISATEUR_N_EXISTE_PAS;
 import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_NOMUTILISATEUR_PAS_UNIQUE;
+import static inm5001.rapidoservices.ConstanteRecherche.MESSAGE_MODE_TRI_INTROUVABLE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -107,11 +107,11 @@ public class OrchestrateurTest {
         nombreDEvaluationUtilisateur = 210;
         coteTypeServicesMoyenne = 4.5f;
         nombreDEvaluationTypeServicesMoyenne = 1000;
-        evaluationUtilisateur1 = new EvaluationUtilisateur(1, nombreDEvaluationUtilisateur, 1,
+        evaluationUtilisateur1 = new EvaluationUtilisateur(50, nombreDEvaluationUtilisateur, 50,
                 nombreDEvaluationTypeServicesMoyenne);
-        evaluationUtilisateur2 = new EvaluationUtilisateur(2, nombreDEvaluationUtilisateur, 2,
+        evaluationUtilisateur2 = new EvaluationUtilisateur(90, nombreDEvaluationUtilisateur, 90,
                 nombreDEvaluationTypeServicesMoyenne);
-        evaluationUtilisateur3 = new EvaluationUtilisateur(3, nombreDEvaluationUtilisateur, 3,
+        evaluationUtilisateur3 = new EvaluationUtilisateur(100, nombreDEvaluationUtilisateur, 100,
                 nombreDEvaluationTypeServicesMoyenne);
         //attributs EvaluationService
         coteService = 3.5f;
@@ -244,7 +244,7 @@ public class OrchestrateurTest {
     }
 
 //semble avoir un problème côté BdApi...l'exception est lancer dans l'étape de gestion de la listeServices
-// et pas quand on vérifie si l'utilisateur existe. le résultat est le même, mais pourrait nous jouer des tour éventuellement
+// et pas quand on vérifie si l'utilisateur existe. le résultat est le même, mais pourrait nous jouer un tour éventuellement.
     @Test
     public void validationLoginUtilisateurExistePas() throws MyException {
         try {
@@ -405,7 +405,23 @@ public class OrchestrateurTest {
 
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
+/*L'objet utilisateur retourner par BdApi ne semble pas avoir les informations de L'évaluation service
+    @Test
+    public void evaluerService() throws MyException, SQLException {
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, listeServices, listeCompetences);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
+        orchestrateur.evaluerService(nomUtilisateur, "Client", "Plombier", 90);
+        utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
+        System.out.println("***************: " + utilisateur.listeServices.get(0).evaluationService.coteService);
+        assertTrue(utilisateur.listeServices.get(0).evaluationService.coteService == 90);
+    }
 
+    @Test
+    public void evaluerUtilisateur() {
+
+    }
+    */
     @Test
     public void rechercheDeServicesPasDeCritere() throws MyException, SQLException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
@@ -605,11 +621,11 @@ public class OrchestrateurTest {
     @Test
     public void rechercheDeServicesCoteUtilisateur() throws MyException, SQLException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur1,
-                motDePasse, listeServices, listeCompetences, coteUtilisateur, evaluationUtilisateur1);
+                motDePasse, listeServices, listeCompetences);
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur2,
-                motDePasse, listeServices, listeCompetences, coteUtilisateur, evaluationUtilisateur2);
+                motDePasse, listeServices, listeCompetences);
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur3,
-                motDePasse, listeServices, listeCompetences, coteUtilisateur, evaluationUtilisateur3);
+                motDePasse, listeServices, listeCompetences);
         service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
                 adresseCourrielService, description);
         service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
@@ -709,27 +725,27 @@ public class OrchestrateurTest {
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 */
-/*
+
     @Test
     public void trierResultatRechercheTauxHorraire() throws MyException {
-        orchestrateur.creerUtilisateur(utilisateur1);
         service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
                 adresseCourrielService, description);
         service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
                 adresseCourrielService, description);
         service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
                 adresseCourrielService, description);
-        orchestrateur.ajouterOffreDeService("IdUser1", service);
-        orchestrateur.ajouterOffreDeService("IdUser1", service2);
-        orchestrateur.ajouterOffreDeService("IdUser1", service3);
+        utilisateur1.listeServices.add(service);
+        utilisateur1.listeServices.add(service2);
+        utilisateur1.listeServices.add(service3);
 
-        ArrayList<Recherche> listeResultatsRecherche = new ArrayList<>();
         Recherche pair1 = new Recherche(utilisateur1, "nomService1");
         Recherche pair2 = new Recherche(utilisateur1, "nomService2");
         Recherche pair3 = new Recherche(utilisateur1, "nomService3");
+
+        ArrayList<Recherche> listeResultatsRecherche = new ArrayList<>();
+        listeResultatsRecherche.add(pair3);
         listeResultatsRecherche.add(pair1);
         listeResultatsRecherche.add(pair2);
-        listeResultatsRecherche.add(pair3);
 
         listeResultatsRecherche = orchestrateur.trierResultatRecherche(listeResultatsRecherche, "tauxHorraire");
         assertTrue(listeResultatsRecherche.get(0).recupererService().getTauxHorraire() == 1);
@@ -739,13 +755,24 @@ public class OrchestrateurTest {
 
     @Test
     public void trierResultatRecherchePrixFixe() throws MyException {
-        ArrayList<Recherche> listeResultatsRecherche = new ArrayList<>();
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
+                adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
+                adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
+                adresseCourrielService, description);
+        utilisateur1.listeServices.add(service);
+        utilisateur1.listeServices.add(service2);
+        utilisateur1.listeServices.add(service3);
+
         Recherche pair1 = new Recherche(utilisateur1, "nomService1");
-        Recherche pair2 = new Recherche(utilisateur2, "nomService2");
-        Recherche pair3 = new Recherche(utilisateur3, "nomService3");
+        Recherche pair2 = new Recherche(utilisateur1, "nomService2");
+        Recherche pair3 = new Recherche(utilisateur1, "nomService3");
+
+        ArrayList<Recherche> listeResultatsRecherche = new ArrayList<>();
+        listeResultatsRecherche.add(pair3);
         listeResultatsRecherche.add(pair1);
         listeResultatsRecherche.add(pair2);
-        listeResultatsRecherche.add(pair3);
 
         listeResultatsRecherche = orchestrateur.trierResultatRecherche(listeResultatsRecherche, "prixFixe");
         assertTrue(listeResultatsRecherche.get(0).recupererService().getPrixFixe() == 1);
@@ -755,13 +782,24 @@ public class OrchestrateurTest {
 
     @Test
     public void trierResultatRechercheNomService() throws MyException {
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
+                adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
+                adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
+                adresseCourrielService, description);
+        utilisateur1.listeServices.add(service);
+        utilisateur1.listeServices.add(service2);
+        utilisateur1.listeServices.add(service3);
+
+        Recherche pair1 = new Recherche(utilisateur1, "nomService1");
+        Recherche pair2 = new Recherche(utilisateur1, "nomService2");
+        Recherche pair3 = new Recherche(utilisateur1, "nomService3");
+
         ArrayList<Recherche> listeResultatsRecherche = new ArrayList<>();
-        Recherche pair1 = new Recherche(utilisateur1, "nomService3");
-        Recherche pair2 = new Recherche(utilisateur2, "nomService1");
-        Recherche pair3 = new Recherche(utilisateur3, "nomService2");
+        listeResultatsRecherche.add(pair3);
         listeResultatsRecherche.add(pair1);
         listeResultatsRecherche.add(pair2);
-        listeResultatsRecherche.add(pair3);
 
         listeResultatsRecherche = orchestrateur.trierResultatRecherche(listeResultatsRecherche, "nomService");
         assertEquals(listeResultatsRecherche.get(0).recupererService().getNomSservice(), "nomService1");
@@ -771,13 +809,24 @@ public class OrchestrateurTest {
 
     @Test
     public void trierResultatRechercheVille() throws MyException {
-        ArrayList<Recherche> listeResultatsRecherche = new ArrayList<>();
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
+                adresseCourrielService, description);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
+                adresseCourrielService, description);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
+                adresseCourrielService, description);
+        utilisateur1.listeServices.add(service);
+        utilisateur1.listeServices.add(service2);
+        utilisateur1.listeServices.add(service3);
+
         Recherche pair1 = new Recherche(utilisateur1, "nomService1");
-        Recherche pair2 = new Recherche(utilisateur2, "nomService2");
-        Recherche pair3 = new Recherche(utilisateur3, "nomService3");
+        Recherche pair2 = new Recherche(utilisateur1, "nomService2");
+        Recherche pair3 = new Recherche(utilisateur1, "nomService3");
+
+        ArrayList<Recherche> listeResultatsRecherche = new ArrayList<>();
+        listeResultatsRecherche.add(pair3);
         listeResultatsRecherche.add(pair1);
         listeResultatsRecherche.add(pair2);
-        listeResultatsRecherche.add(pair3);
 
         listeResultatsRecherche = orchestrateur.trierResultatRecherche(listeResultatsRecherche, "ville");
         assertEquals(listeResultatsRecherche.get(0).recupererService().getVille(), "villeA");
@@ -787,57 +836,73 @@ public class OrchestrateurTest {
 
     @Test
     public void trierResultatRechercheCoteService() throws MyException {
+        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
+                adresseCourrielService, description, evaluationService1);
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
+                adresseCourrielService, description, evaluationService2);
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
+                adresseCourrielService, description, evaluationService3);
+        utilisateur1.listeServices.add(service);
+        utilisateur1.listeServices.add(service2);
+        utilisateur1.listeServices.add(service3);
+
+        Recherche pair1 = new Recherche(utilisateur1, "nomService1");
+        Recherche pair2 = new Recherche(utilisateur1, "nomService2");
+        Recherche pair3 = new Recherche(utilisateur1, "nomService3");
+
         ArrayList<Recherche> listeResultatsRecherche = new ArrayList<>();
-        Recherche pair1 = new Recherche(utilisateur1, "nomService3");
-        Recherche pair2 = new Recherche(utilisateur2, "nomService1");
-        Recherche pair3 = new Recherche(utilisateur3, "nomService2");
         listeResultatsRecherche.add(pair3);
         listeResultatsRecherche.add(pair1);
         listeResultatsRecherche.add(pair2);
 
         listeResultatsRecherche = orchestrateur.trierResultatRecherche(listeResultatsRecherche, "coteService");
-        assertTrue(listeResultatsRecherche.get(0).recupererService().getEvaluationService().coteService == 1);
-        assertTrue(listeResultatsRecherche.get(1).recupererService().getEvaluationService().coteService == 2);
-        assertTrue(listeResultatsRecherche.get(2).recupererService().getEvaluationService().coteService == 3);
+        assertTrue(listeResultatsRecherche.get(0).recupererService().getEvaluationService().coteService == 50);
+        assertTrue(listeResultatsRecherche.get(1).recupererService().getEvaluationService().coteService == 90);
+        assertTrue(listeResultatsRecherche.get(2).recupererService().getEvaluationService().coteService == 100);
     }
 
     @Test
     public void trierResultatRechercheCoteUtilisateur() throws MyException {
+        Recherche pair1 = new Recherche(utilisateur1, "nomService1");
+        Recherche pair2 = new Recherche(utilisateur2, "nomService2");
+        Recherche pair3 = new Recherche(utilisateur3, "nomService3");
+
         ArrayList<Recherche> listeResultatsRecherche = new ArrayList<>();
-        Recherche pair1 = new Recherche(utilisateur3, "nomService1");
-        Recherche pair2 = new Recherche(utilisateur1, "nomService2");
-        Recherche pair3 = new Recherche(utilisateur2, "nomService3");
         listeResultatsRecherche.add(pair3);
         listeResultatsRecherche.add(pair1);
         listeResultatsRecherche.add(pair2);
 
         listeResultatsRecherche = orchestrateur.trierResultatRecherche(listeResultatsRecherche, "coteUtilisateur");
-        assertTrue(listeResultatsRecherche.get(0).getUtilisateur().evaluationUtilisateur.coteUtilisateur == 1);
-        assertTrue(listeResultatsRecherche.get(1).getUtilisateur().evaluationUtilisateur.coteUtilisateur == 2);
-        assertTrue(listeResultatsRecherche.get(2).getUtilisateur().evaluationUtilisateur.coteUtilisateur == 3);
+        assertTrue(listeResultatsRecherche.get(0).getUtilisateur().evaluationUtilisateur.coteUtilisateur == 50);
+        assertTrue(listeResultatsRecherche.get(1).getUtilisateur().evaluationUtilisateur.coteUtilisateur == 90);
+        assertTrue(listeResultatsRecherche.get(2).getUtilisateur().evaluationUtilisateur.coteUtilisateur == 100);
     }
 
     @Test
     public void trierResultatRechercheCoteServicesMoyenne() throws MyException {
+        Recherche pair1 = new Recherche(utilisateur1, "nomService1");
+        Recherche pair2 = new Recherche(utilisateur2, "nomService2");
+        Recherche pair3 = new Recherche(utilisateur3, "nomService3");
+
         ArrayList<Recherche> listeResultatsRecherche = new ArrayList<>();
-        Recherche pair1 = new Recherche(utilisateur3, "nomService1");
-        Recherche pair2 = new Recherche(utilisateur1, "nomService2");
-        Recherche pair3 = new Recherche(utilisateur2, "nomService3");
         listeResultatsRecherche.add(pair3);
         listeResultatsRecherche.add(pair1);
         listeResultatsRecherche.add(pair2);
 
         listeResultatsRecherche = orchestrateur.trierResultatRecherche(listeResultatsRecherche, "coteServiceMoyenne");
-        assertTrue(listeResultatsRecherche.get(0).getUtilisateur().evaluationUtilisateur.coteTypeServicesMoyenne == 1);
-        assertTrue(listeResultatsRecherche.get(1).getUtilisateur().evaluationUtilisateur.coteTypeServicesMoyenne == 2);
-        assertTrue(listeResultatsRecherche.get(2).getUtilisateur().evaluationUtilisateur.coteTypeServicesMoyenne == 3);
+        assertTrue(listeResultatsRecherche.get(0).getUtilisateur().evaluationUtilisateur.coteTypeServicesMoyenne == 50);
+        assertTrue(listeResultatsRecherche.get(1).getUtilisateur().evaluationUtilisateur.coteTypeServicesMoyenne == 90);
+        assertTrue(listeResultatsRecherche.get(2).getUtilisateur().evaluationUtilisateur.coteTypeServicesMoyenne == 100);
     }
 
     @Test
     public void trierResultatRechercheElse() throws MyException {
+        Recherche pair1 = new Recherche(utilisateur1, "nomService1");
+        Recherche pair2 = new Recherche(utilisateur2, "nomService2");
+
         ArrayList<Recherche> listeResultatsRecherche = new ArrayList<>();
-        Recherche pair1 = new Recherche(utilisateur1, nomSservice);
         listeResultatsRecherche.add(pair1);
+        listeResultatsRecherche.add(pair2);
 
         try {
             orchestrateur.trierResultatRecherche(listeResultatsRecherche, "bidon");
@@ -846,7 +911,7 @@ public class OrchestrateurTest {
         }
         assertFalse(estValider);
     }
-*/
+
     @Test
     public void fauxPositif() throws Exception {
         assertTrue(false);

@@ -3,13 +3,11 @@ package inm5001.rapidoservices;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.io.Serializable;
 
-import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.service.TypeServices;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 
-import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_MODE_TRI_INTROUVABLE;
+import static inm5001.rapidoservices.ConstanteRecherche.MESSAGE_MODE_TRI_INTROUVABLE;
 
 /**
  * Created by Francis Bernier on 2016-11-10.
@@ -18,7 +16,6 @@ import static inm5001.rapidoservices.ConstanteOrchetrateur.MESSAGE_MODE_TRI_INTR
 public class Recherche implements Comparable<Recherche> {
     private Utilisateur utilisateur;
     private String nomService;
-
 
     public Recherche(Utilisateur utilisateur, String nomService){
         this.utilisateur = utilisateur;
@@ -99,9 +96,8 @@ public class Recherche implements Comparable<Recherche> {
     }
 
     public static ArrayList<Recherche> trierListeRecherche(ArrayList<Recherche> listeResultatRecherche, String valeurDeTri) throws MyException {
-        /*switch (valeurDeTri) {
+        switch (valeurDeTri) {
             case "tauxHorraire":
-                System.out.println("**************: " + listeResultatRecherche.size());
                 Collections.sort(listeResultatRecherche, new Recherche.TrierParTauxHorraire());
                 break;
             case "prixFixe":
@@ -126,16 +122,16 @@ public class Recherche implements Comparable<Recherche> {
                 MyException e = new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
                 throw e;
         }
-        */
+
         return listeResultatRecherche;
     }
 
     public Utilisateur getUtilisateur(){ return utilisateur; }
     public String getNomService(){ return nomService; }
-    public void setUtilisateur(Utilisateur utilisateur){ this.utilisateur = utilisateur; }
-    public void setService(String service){ this.nomService = nomService; }
+    //public void setUtilisateur(Utilisateur utilisateur){ this.utilisateur = utilisateur; }
+    //public void setService(String nomService){ this.nomService = nomService; }
 
-    //Pas implémenté, mais obligatoire pour le [implements Comparable<TypeServices>]
+    //Pas implémenté, mais obligatoire pour le [implements Comparable<Recherche>]
     @Override
     public int compareTo(Recherche o) {
         return 0;

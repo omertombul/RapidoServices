@@ -144,10 +144,10 @@ public class BdApi {
         SQL += U.profile.prenom + SQL_SEPARATEUR;
         SQL += U.profile.adresseCourriel + SQL_SEPARATEUR;
         SQL += diponibilite + SQL_SEPARATEUR;  // dispo
-        SQL += "1" + SQL_SEPARATEUR;  // coteClient
-        SQL += "1" + SQL_SEPARATEUR;  // nbCoteClient
-        SQL += "1" + SQL_SEPARATEUR;  // coteFournisseur
-        SQL += "1" + SQL_SEPARATEUR;  // nbCoteFournisseur
+        SQL += U.evaluationUtilisateur.coteUtilisateur + SQL_SEPARATEUR;  // coteClient
+        SQL += U.evaluationUtilisateur.nombreDEvaluationUtilisateur + SQL_SEPARATEUR;  // nbCoteClient
+        SQL += U.evaluationUtilisateur.coteTypeServicesMoyenne + SQL_SEPARATEUR;  // coteFournisseur
+        SQL += U.evaluationUtilisateur.nombreDEvaluationTypeServicesMoyenne + SQL_SEPARATEUR;  // nbCoteFournisseur
         SQL += "1" + SQL_SEPARATEUR;         // geo coordonnees
         SQL += U.profile.numeroTelephone + SQL_FIN;
 //System.out.println("    String SQL addUser: " + SQL); // shows SQL String

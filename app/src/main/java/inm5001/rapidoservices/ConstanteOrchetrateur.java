@@ -13,8 +13,6 @@ public interface ConstanteOrchetrateur {
 
     String MESSAGE_NOMUTILISATEUR_PAS_UNIQUE = "Le nom d'utilisateur existe déjà, veillez faire un autre choix.";
 
-    String MESSAGE_MODE_TRI_INTROUVABLE = "Le mode de tri sélectionné est introuvable.";
-
     String MESSAGE_SERVICE_EXISTANT = "Vous ne pouvez pas offrir le même service plus d'une foi.";
 }
 
