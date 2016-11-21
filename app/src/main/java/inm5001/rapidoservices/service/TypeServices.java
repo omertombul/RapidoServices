@@ -9,7 +9,7 @@ import static inm5001.rapidoservices.service.ConstanteTypeServices.MESSAGE_TAUXH
 import static inm5001.rapidoservices.service.ConstanteTypeServices.MESSAGE_PRIXFIXE_NEGATIF;
 
 /**
- * @author omer et Francis Bernier
+ * @author Omer Tombul et Francis Bernier
  */
 
 public class TypeServices extends AbstraiteServices {

@@ -184,6 +184,7 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
             @Override
             public void onClick(View v) {
                 Intent rechercherService = new Intent(ProfilActivity.this, RechercheActivity.class);
+                rechercherService.putExtra("userName",userName);
                 startActivity(rechercherService);
             }
         });

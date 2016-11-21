@@ -42,6 +42,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recherche);
+
         rechercher = (Button) findViewById(R.id.buttonRechercherRecherche);
         tauxHorraire = (EditText) findViewById(R.id.editTextPrixRecherche);
 
@@ -51,7 +52,8 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
         resultat = new ArrayList<String>();
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,resultat);
 
-
+        Intent intent = getIntent();
+        final String userName = intent.getStringExtra("userName");
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -172,7 +174,8 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                                     intent.putExtra("villeService",r.recupererService().getVille());
                                     intent.putExtra("taux",taux);
                                     intent.putExtra("description",r.recupererService().getDescription());
-                                    intent.putExtra("userName",r.getUtilisateur().identifiant.nomUtilisateur);
+                                    intent.putExtra("userNameService",r.getUtilisateur().identifiant.nomUtilisateur);
+                                    intent.putExtra("userName",userName);
                                     startActivity(intent);
 
 

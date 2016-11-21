@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
-        android:id="@+id/ratingBar2" />
+        android:id="@+id/ratingBarTrouver" />
 
     <Button
         android:text="Rate"
