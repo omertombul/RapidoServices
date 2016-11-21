@@ -32,6 +32,7 @@ public class ServiceRechercherAvtivity extends Activity {
     TextView description = null;
     TextView titreTrouver = null;
     Button rate = null;
+    Button cancel = null;
     RatingBar ratingStars = null;
     EvaluationService eval = null;
 
@@ -50,6 +51,7 @@ public class ServiceRechercherAvtivity extends Activity {
         String descrip = intent.getStringExtra("description");
         final String userNameService = intent.getStringExtra("userNameService");
         final String userName = intent.getStringExtra("userName");
+
         final Orchestrateur orc = new Orchestrateur();
 
         nomService = (TextView) findViewById(R.id.textViewAfficheNomTrouver);
@@ -66,6 +68,8 @@ public class ServiceRechercherAvtivity extends Activity {
         rate = (Button)findViewById(R.id.buttonRateTrouver);
         ratingStars = (RatingBar)findViewById(R.id.ratingBarTrouver);
         eval = new EvaluationService();
+        cancel = (Button) findViewById(R.id.buttonCancelTrouver);
+
 
 
 
@@ -80,10 +84,10 @@ public class ServiceRechercherAvtivity extends Activity {
                         try {
                             orc.faireUneEvaluation(userNameService, userName, nomS, ratingStars.getRating());
                         }catch(SQLException e){
-                            Toast.makeText(ServiceRechercherAvtivity.this,e.getMessage(),Toast.LENGTH_SHORT);
+
                             System.out.println(e.getMessage());
                         }catch(MyException e){
-                            Toast.makeText(ServiceRechercherAvtivity.this,e.getMessage(),Toast.LENGTH_SHORT);
+
                             System.out.println(e.getMessage());
                         }
                     }
@@ -94,6 +98,13 @@ public class ServiceRechercherAvtivity extends Activity {
             }
         });
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profilActivity = new Intent(ServiceRechercherAvtivity.this, ProfilActivity.class);
+                startActivity(profilActivity);
+            }
+        });
 
 
 
