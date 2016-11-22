@@ -86,7 +86,7 @@ public class AfficherSupprimerService extends Activity {
                     {
 
                         if (se.equals(u.listeServices.get(i).getNomSservice()) ){
-                            o.retirerOffreDeService(us, u.listeServices.get(i));
+                             o.retirerOffreDeService(us, u.listeServices.get(i));
 
                         }
 
