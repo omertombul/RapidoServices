@@ -346,8 +346,7 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
         try {
             RSservices.beforeFirst();
             while (RSservices.next()) {
-                EvaluationService E = new EvaluationService(-1,
-                               RSservices.getInt(-1));
+                EvaluationService E = new EvaluationService(-1,-1);
 System.out.println("la cote retourne par le serveur est:" + RSservices.getFloat("cote") + ".");
                 //EvaluationService E = new EvaluationService(RSservices.getFloat("cote"),
                  //       RSservices.getInt("nbCote"));
