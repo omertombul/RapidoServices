@@ -348,6 +348,7 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
             while (RSservices.next()) {
                 EvaluationService E = new EvaluationService(RSservices.getFloat("cote"),
                         RSservices.getInt("nbCote"));
+System.out.println(E.coteService);
                 TypeServices S = new TypeServices(RSservices.getFloat("prixHorraire"),
                         RSservices.getFloat("prixFixe"), RSservices.getString("nomService"),
                         RSservices.getByte("disponibilite") != 0, RSservices.getString("ville"),
