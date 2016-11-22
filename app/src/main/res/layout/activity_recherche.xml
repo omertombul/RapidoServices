@@ -59,13 +59,16 @@
         android:layout_below="@+id/textViewTitleRecherce"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:text="Rechercher"
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonRechercherRecherche"
-        android:layout_below="@+id/editTextPrixRecherche"
-        android:layout_alignParentStart="true" />
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextPrixRecherche"
+        android:text="0.0"
+        android:layout_below="@+id/spinnerRechercheVille"
+        android:layout_toEndOf="@+id/textViewPrixRecherche"
+        android:layout_marginStart="38dp" />
 
     <TextView
         android:text="Taux Horraire : "
@@ -80,24 +83,83 @@
         android:layout_alignBottom="@+id/editTextPrixRecherche"
         android:layout_alignParentStart="true" />
 
-    <EditText
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewTypeTrie"
+        android:layout_alignParentStart="true"
+        android:id="@+id/spinnerTypeTrie" />
+
+    <TextView
+        android:text="Cote du Srvice :"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/editTextPrixRecherche"
-        android:text="0.0"
-        android:layout_below="@+id/spinnerRechercheVille"
-        android:layout_toEndOf="@+id/textViewPrixRecherche"
-        android:layout_marginStart="38dp" />
+        android:id="@+id/textViewCoteService"
+        android:textStyle="normal|bold|italic"
+        android:textAllCaps="true"
+        android:textSize="17sp"
+        android:layout_alignBaseline="@+id/editTextCoteService"
+        android:layout_alignBottom="@+id/editTextCoteService"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Rechercher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonRechercherRecherche"
+        android:layout_marginTop="51dp"
+        android:layout_below="@+id/editTextCoteService"
+        android:layout_alignParentStart="true" />
 
     <ListView
         android:layout_width="match_parent"
         android:id ="@+id/ListViewRechercheResult"
         android:layout_height="match_parent"
-        android:layout_marginTop="233dp"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/buttonRechercherRecherche"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextCoteService"
+        android:layout_below="@+id/spinnerTypeTrie"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/editTextPrixRecherche" />
+
+    <TextView
+        android:text="Cote de l'utilisateur :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextCoteService"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="11dp"
-        android:layout_alignParentTop="true" />
+        android:id="@+id/textViewCoteUtilisateur"
+        android:textAllCaps="true"
+        android:textStyle="normal|bold|italic"
+        android:textSize="17sp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editText8"
+        android:layout_alignBaseline="@+id/textViewCoteUtilisateur"
+        android:layout_alignBottom="@+id/textViewCoteUtilisateur"
+        android:layout_toEndOf="@+id/textViewCoteUtilisateur"
+        android:layout_marginStart="11dp" />
+
+    <TextView
+        android:text="Type de trie :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewTypeTrie"
+        android:textStyle="normal|bold|italic"
+        android:textAllCaps="true"
+        android:textSize="17sp"
+        android:layout_below="@+id/editTextPrixRecherche"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

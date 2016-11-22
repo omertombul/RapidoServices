@@ -84,10 +84,10 @@ public class ServiceRechercherAvtivity extends Activity {
                         try {
                             orc.faireUneEvaluation(userNameService, userName, nomS, ratingStars.getRating());
                         }catch(SQLException e){
-
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                             System.out.println(e.getMessage());
                         }catch(MyException e){
-
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                             System.out.println(e.getMessage());
                         }
                     }

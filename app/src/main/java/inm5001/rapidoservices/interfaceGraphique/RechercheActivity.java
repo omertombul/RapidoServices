@@ -128,6 +128,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                             //recuper la liste
                             listeDePaire = o.rechercheDeServices(tHorraire, prix, nomService, ville,0f,0f,0f);
 
+
                             if (!listeDePaire.isEmpty()) {
                                 resultat.clear();
                                 runOnUiThread(new Runnable() {
