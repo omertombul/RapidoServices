@@ -82,4 +82,5 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttonCancelTrouver"
         android:textStyle="normal|bold|italic" />
+
 </LinearLayout>
