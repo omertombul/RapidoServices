@@ -160,10 +160,8 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                                         int i = 0;
                                         for (Recherche p : listeDePaire) {
                                             i++;
-                                            affichage = i + " - "+ p.getUtilisateur().identifiant.nomUtilisateur + " " + p.recupererService().getNomSservice()
-                                                    + " Taux Horraire : " + p.recupererService().getTauxHorraire() + " " + p.recupererService().getVille()
-                                                    + " Evaluation du Service : " +
-                                            p.recupererService().getEvaluationService().coteService + " ";
+                                            affichage = i + " - " + p.recupererService().getNomSservice()
+                                                    + "\nTaux Horraire : " + p.recupererService().getTauxHorraire() + " " + p.recupererService().getVille() ;
 
                                             resultat.add(affichage);
                                             System.out.println(affichage);
