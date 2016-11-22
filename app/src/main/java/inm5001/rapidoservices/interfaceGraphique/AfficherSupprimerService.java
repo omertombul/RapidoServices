@@ -82,7 +82,15 @@ public class AfficherSupprimerService extends Activity {
                 Utilisateur u;
                 try {
                     u = o.recupererUtilisateur(us);
-                    //o.retirerOffreDeService(us,);
+                    for (int i = 0; i < u.listeServices.size(); i++)
+                    {
+
+                        if (se.equals(u.listeServices.get(i).getNomSservice()) ){
+                            o.retirerOffreDeService(us, u.listeServices.get(i));
+
+                        }
+
+                    }
                     Intent profil = new Intent(AfficherSupprimerService.this, ProfilActivity.class);
                     startActivity(profil);
                 }catch(MyException e){
