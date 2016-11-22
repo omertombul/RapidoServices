@@ -11,5 +11,11 @@ import inm5001.rapidoservices.R;
 
 public class InformationsVendeurActivity extends Activity {
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
 
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_infovendeur);
+
+    }
 }
