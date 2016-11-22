@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import inm5001.rapidoservices.ConstanteRecherche;
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Orchestrateur;
 import inm5001.rapidoservices.Recherche;
@@ -93,15 +94,36 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                 ConstanteAbstraiteServices.listeVilleRecherche);
 
         // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dataAdapterVille.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // attaching data adapter to spinner
         spinnerVille.setAdapter(dataAdapterVille);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
+ *Menu deroulant Type de trie
+ */
+////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Spinne type trie
+        Spinner spinnerTypeTrie = (Spinner) findViewById(R.id.spinnerTypeTrie);
+
+        // Spinner click listener
+        spinnerTypeTrie.setOnItemSelectedListener(this);
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapterTrie = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
+                ConstanteRecherche.typeDeTrie);
+
+        // Drop down layout style - list view with radio button
+        dataAdapterTrie.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spinnerTypeTrie.setAdapter(dataAdapterTrie);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
  * Listener sur les bouttons
- * */
+ */
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -135,10 +157,14 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                                     @Override
                                     public void run() {
                                         String affichage = "";
+                                        int i = 0;
                                         for (Recherche p : listeDePaire) {
+                                            i++;
+                                            affichage = i + " - "+ p.getUtilisateur().identifiant.nomUtilisateur + " " + p.recupererService().getNomSservice()
+                                                    + " Taux Horraire : " + p.recupererService().getTauxHorraire() + " " + p.recupererService().getVille()
+                                                    + " Evaluation du Service : " +
+                                            p.recupererService().getEvaluationService().coteService + " ";
 
-                                            affichage = p.getUtilisateur().profile.nom + " " + p.recupererService().getNomSservice()
-                                                    + " " + p.recupererService().getNoTelephone();
                                             resultat.add(affichage);
                                             System.out.println(affichage);
                                             System.out.println(resultat.isEmpty());

@@ -119,16 +119,6 @@
         android:layout_below="@+id/buttonRechercherRecherche"
         android:layout_alignParentStart="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/editTextCoteService"
-        android:layout_below="@+id/spinnerTypeTrie"
-        android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/editTextPrixRecherche" />
-
     <TextView
         android:text="Cote de l'utilisateur :"
         android:layout_width="wrap_content"
@@ -145,7 +135,7 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/editText8"
+        android:id="@+id/editTextCoteUtilisateur"
         android:layout_alignBaseline="@+id/textViewCoteUtilisateur"
         android:layout_alignBottom="@+id/textViewCoteUtilisateur"
         android:layout_toEndOf="@+id/textViewCoteUtilisateur"
@@ -161,5 +151,14 @@
         android:textSize="17sp"
         android:layout_below="@+id/editTextPrixRecherche"
         android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextCoteService"
+        android:layout_below="@+id/spinnerTypeTrie"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

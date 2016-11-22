@@ -11,7 +11,7 @@ import java.util.List;
 public interface ConstanteRecherche {
     String MESSAGE_MODE_TRI_INTROUVABLE = "Le mode de tri sélectionné est introuvable.";
 
-    String[] trie =new String[]{"tauxHorraire","prixFixe","nomService","ville","coteUtilisateur","coteServiceMoyenne","coteService"};
+    String[] trie =new String[]{"tauxHorraire","nomService","ville","coteUtilisateur","coteServiceMoyenne","coteService"};
 
     List<String> typeDeTrie = (Arrays.asList(trie));
 
