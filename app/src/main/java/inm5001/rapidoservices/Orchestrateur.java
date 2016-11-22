@@ -133,6 +133,14 @@ public class Orchestrateur {
         }
     }
 
+    public ArrayList<String> obtenirInformationsDeContact(Recherche recherche) {
+        ArrayList<String> valeursDeRetour = new ArrayList<>();
+        valeursDeRetour.add(determinerNumeroTelephone(recherche));
+        valeursDeRetour.add(determinerAdresseCourriel(recherche));
+
+        return valeursDeRetour;
+    }
+
     public ArrayList<Recherche> rechercheDeServices(float tauxHorraire, float prixFixe, String nomSservice, String ville,
                                                     float coteUtilisateur, float coteServicesMoyenne, float coteService) throws MyException, SQLException {
         TypeServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, ville);
@@ -154,7 +162,6 @@ public class Orchestrateur {
         evaluationService.validationCoteService(coteService);
         bd.gradeService(nomUtilisateurFrounisseur, nomUtilisateurClient, nomSservice, coteService);
     }
-
     /*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
         utilisateur = bd.getUser(nomUtilisateur);
@@ -186,4 +193,26 @@ public class Orchestrateur {
         replaceProfile(nomUtilisateur, profile);
     }
     */
+//premier niveau d'abstraction
+    private String determinerNumeroTelephone(Recherche recherche) {
+        String numeroTelephone;
+        if (recherche.recupererService().getNoTelephone() != "") {
+            numeroTelephone = recherche.recupererService().getNoTelephone();
+        } else {
+            numeroTelephone = recherche.getUtilisateur().profile.numeroTelephone;
+        }
+
+        return numeroTelephone;
+    }
+
+    private String determinerAdresseCourriel(Recherche recherche) {
+        String adresseCourriel;
+        if (recherche.recupererService().getCourriel() != "") {
+            adresseCourriel = recherche.recupererService().getCourriel();
+        } else {
+            adresseCourriel = recherche.getUtilisateur().profile.adresseCourriel;
+        }
+
+        return adresseCourriel;
+    }
 }
