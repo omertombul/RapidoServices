@@ -133,14 +133,6 @@ public class Orchestrateur {
         }
     }
 
-    public ArrayList<String> obtenirInformationsDeContact(Recherche recherche) {
-        ArrayList<String> valeursDeRetour = new ArrayList<>();
-        valeursDeRetour.add(determinerNumeroTelephone(recherche));
-        valeursDeRetour.add(determinerAdresseCourriel(recherche));
-
-        return valeursDeRetour;
-    }
-
     public ArrayList<Recherche> rechercheDeServices(float tauxHorraire, float prixFixe, String nomSservice, String ville,
                                                     float coteUtilisateur, float coteServicesMoyenne, float coteService) throws MyException, SQLException {
         TypeServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, ville);
@@ -157,10 +149,18 @@ public class Orchestrateur {
         }
     }
 
-    public void faireUneEvaluation(String nomUtilisateurFrounisseur, String nomUtilisateurClient, String nomSservice, float coteService) throws MyException, SQLException {
+    public ArrayList<String> obtenirInformationsDeContact(Recherche recherche) {
+        ArrayList<String> valeursDeRetour = new ArrayList<>();
+        valeursDeRetour.add(determinerNumeroTelephone(recherche));
+        valeursDeRetour.add(determinerAdresseCourriel(recherche));
+
+        return valeursDeRetour;
+    }
+
+    public void faireUneEvaluation(String nomUtilisateurCoter, String nomUtilisateurCoteur, String nomSservice, float coteService) throws MyException, SQLException {
         evaluationService = new EvaluationService(0, 0);
         evaluationService.validationCoteService(coteService);
-        bd.gradeService(nomUtilisateurFrounisseur, nomUtilisateurClient, nomSservice, coteService);
+        bd.gradeService(nomUtilisateurCoter, nomUtilisateurCoteur, nomSservice, coteService);
     }
     /*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {

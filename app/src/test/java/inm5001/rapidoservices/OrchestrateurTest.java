@@ -406,57 +406,6 @@ public class OrchestrateurTest {
     }
 
     @Test
-    public void obtenirInformationsDeContactNoTelephoneService() {
-        utilisateur1.listeServices.add(service);
-        Recherche recherche = new Recherche(utilisateur1, "Plombier");
-
-        assertEquals(orchestrateur.obtenirInformationsDeContact(recherche).get(0), "5144444444");
-    }
-
-    @Test
-    public void obtenirInformationsDeContactCourrielService() {
-        utilisateur1.listeServices.add(service);
-        Recherche recherche = new Recherche(utilisateur1, "Plombier");
-
-        assertEquals(orchestrateur.obtenirInformationsDeContact(recherche).get(1), "plomberie@plomberi.com");
-    }
-
-    @Test
-    public void obtenirInformationsDeContactNoTelephoneUtilisateur() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, "nomService", disponibleService, ville, "", adresseCourrielService, description);
-        utilisateur1.listeServices.add(service);
-        Recherche recherche = new Recherche(utilisateur1, "nomService");
-
-        assertEquals(orchestrateur.obtenirInformationsDeContact(recherche).get(0), "5145972143");
-    }
-
-    @Test
-    public void obtenirInformationsDeContactCourrielUtilisateur() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, "nomService", disponibleService, ville, numeroTelephoneService, "", description);
-        utilisateur1.listeServices.add(service);
-        Recherche recherche = new Recherche(utilisateur1, "nomService");
-
-        assertEquals(orchestrateur.obtenirInformationsDeContact(recherche).get(1), "francis@hotmail.com");
-    }
-//L'objet utilisateur retourner par BdApi ne semble pas avoir les informations de L'évaluation service
-    @Test
-    public void evaluerService() throws MyException, SQLException {
-        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
-                motDePasse, listeServices, listeCompetences);
-        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, "Client",
-                motDePasse, listeServices, listeCompetences);
-        orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
-        orchestrateur.faireUneEvaluation(nomUtilisateur, "Client", "Plombier", 90);
-        utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
-        System.out.println("***************coteUtilisateur: " + utilisateur.getEvaluationUtilisateur().coteUtilisateur);
-        System.out.println("***************coteServiceMoyenne: " + utilisateur.getEvaluationUtilisateur().coteTypeServicesMoyenne);
-        System.out.println("***************coteService: " + utilisateur.listeServices.get(0).evaluationService.coteService);
-        //assertTrue(utilisateur.listeServices.get(0).evaluationService.coteService == 90);
-        orchestrateur.supprimerCompte(nomUtilisateur);
-        orchestrateur.supprimerCompte("Client");
-    }
-
-    @Test
     public void rechercheDeServicesPasDeCritere() throws MyException, SQLException {
         orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
                 motDePasse, listeServices, listeCompetences);
@@ -695,68 +644,12 @@ public class OrchestrateurTest {
 
     @Test
     public void rechercheDeServicesCoteServicesMoyenne() throws MyException, SQLException {
-        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur1,
-                motDePasse, listeServices, listeCompetences, coteUtilisateur, evaluationUtilisateur1);
-        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur2,
-                motDePasse, listeServices, listeCompetences, coteUtilisateur, evaluationUtilisateur2);
-        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur3,
-                motDePasse, listeServices, listeCompetences, coteUtilisateur, evaluationUtilisateur3);
-        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
-                adresseCourrielService, description);
-        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
-                adresseCourrielService, description);
-        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
-                adresseCourrielService, description);
-        orchestrateur.ajouterOffreDeService(nomUtilisateur1, service);
-        orchestrateur.ajouterOffreDeService(nomUtilisateur1, service2);
-        orchestrateur.ajouterOffreDeService(nomUtilisateur1, service3);
-        orchestrateur.modifierDisponibiliteUsager(nomUtilisateur1, true);
-        //orchestrateur.modifierDisponibiliteService(nomUtilisateur1, service.getNomSservice(), true);
-        //orchestrateur.modifierDisponibiliteService(nomUtilisateur1, service2.getNomSservice(), true);
-        //orchestrateur.modifierDisponibiliteService(nomUtilisateur1, service3.getNomSservice(), true);
 
-        orchestrateur.ajouterOffreDeService(nomUtilisateur2, service);
-        orchestrateur.ajouterOffreDeService(nomUtilisateur2, service2);
-        orchestrateur.modifierDisponibiliteUsager(nomUtilisateur2, true);
-        //orchestrateur.modifierDisponibiliteService(nomUtilisateur2, service.getNomSservice(), true);
-        //orchestrateur.modifierDisponibiliteService(nomUtilisateur2, service2.getNomSservice(), true);
-
-        orchestrateur.ajouterOffreDeService(nomUtilisateur3, service2);
-        orchestrateur.ajouterOffreDeService(nomUtilisateur3, service3);
-        orchestrateur.modifierDisponibiliteUsager(nomUtilisateur3, true);
-        //orchestrateur.modifierDisponibiliteService(nomUtilisateur3, service2.getNomSservice(), true);
-        //orchestrateur.modifierDisponibiliteService(nomUtilisateur3, service3.getNomSservice(), true);
-
-
-        ArrayList<Recherche> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "", "", 0, 90, 0);
-        //assertTrue(listeResultatsRecherche.get(0).getUtilisateur().getEvaluationUtilisateur().coteTypeServicesMoyenne == 90);
-        assertTrue(listeResultatsRecherche.size() == 2);
-        orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
     @Test
     public void rechercheDeServicesCoteService() throws MyException, SQLException {
-        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
-                motDePasse, listeServices, listeCompetences);
-        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
-                adresseCourrielService, description, evaluationService1);
-        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
-                adresseCourrielService, description, evaluationService1);
-        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
-                adresseCourrielService, description, evaluationService1);
-        orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
-        orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
-        orchestrateur.ajouterOffreDeService(nomUtilisateur, service3);
 
-        orchestrateur.modifierDisponibiliteUsager(nomUtilisateur, true);
-        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service.getNomSservice(), true);
-        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
-        orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
-
-        ArrayList<Recherche> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "", "", 0, 0, 90);
-        //assertTrue(listeResultatsRecherche.get(0).recupererService().getEvaluationService() == 90);
-        assertTrue(listeResultatsRecherche.size() == 2);
-        orchestrateur.supprimerCompte(nomUtilisateur);
     }
 */
 
@@ -944,6 +837,57 @@ public class OrchestrateurTest {
             estValider = !e.getMessage().equals(MESSAGE_MODE_TRI_INTROUVABLE);
         }
         assertFalse(estValider);
+    }
+
+    @Test
+    public void obtenirInformationsDeContactNoTelephoneService() {
+        utilisateur1.listeServices.add(service);
+        Recherche recherche = new Recherche(utilisateur1, "Plombier");
+
+        assertEquals(orchestrateur.obtenirInformationsDeContact(recherche).get(0), "5144444444");
+    }
+
+    @Test
+    public void obtenirInformationsDeContactCourrielService() {
+        utilisateur1.listeServices.add(service);
+        Recherche recherche = new Recherche(utilisateur1, "Plombier");
+
+        assertEquals(orchestrateur.obtenirInformationsDeContact(recherche).get(1), "plomberie@plomberi.com");
+    }
+
+    @Test
+    public void obtenirInformationsDeContactNoTelephoneUtilisateur() throws MyException {
+        service = new TypeServices(tauxHorraire, prixFixe, "nomService", disponibleService, ville, "", adresseCourrielService, description);
+        utilisateur1.listeServices.add(service);
+        Recherche recherche = new Recherche(utilisateur1, "nomService");
+
+        assertEquals(orchestrateur.obtenirInformationsDeContact(recherche).get(0), "5145972143");
+    }
+
+    @Test
+    public void obtenirInformationsDeContactCourrielUtilisateur() throws MyException {
+        service = new TypeServices(tauxHorraire, prixFixe, "nomService", disponibleService, ville, numeroTelephoneService, "", description);
+        utilisateur1.listeServices.add(service);
+        Recherche recherche = new Recherche(utilisateur1, "nomService");
+
+        assertEquals(orchestrateur.obtenirInformationsDeContact(recherche).get(1), "francis@hotmail.com");
+    }
+    //L'objet utilisateur retourner par BdApi ne semble pas avoir les informations de L'évaluation service
+    @Test
+    public void evaluerService() throws MyException, SQLException {
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
+                motDePasse, listeServices, listeCompetences);
+        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, "Client",
+                motDePasse, listeServices, listeCompetences);
+        orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
+        orchestrateur.faireUneEvaluation(nomUtilisateur, "Client", "Plombier", 90);
+        utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
+        System.out.println("***************coteUtilisateur: " + utilisateur.getEvaluationUtilisateur().coteUtilisateur);
+        System.out.println("***************coteServiceMoyenne: " + utilisateur.getEvaluationUtilisateur().coteTypeServicesMoyenne);
+        System.out.println("***************coteService: " + utilisateur.listeServices.get(0).evaluationService.coteService);
+        //assertTrue(utilisateur.listeServices.get(0).evaluationService.coteService == 90);
+        orchestrateur.supprimerCompte(nomUtilisateur);
+        orchestrateur.supprimerCompte("Client");
     }
 
     @Test
