@@ -6,8 +6,8 @@ import org.junit.Test;
 
 import inm5001.rapidoservices.MyException;
 
-import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCENT;
-import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTEUTILISATEUR_ENTREZEROETCENT;
+import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCINQ;
+import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTEUTILISATEUR_ENTREZEROETCINQ;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -56,7 +56,7 @@ public class EvaluationUtilisateurTest {
             evaluationUtilisateur = new EvaluationUtilisateur(-0.1f, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
                                                     nombreDEvaluationTypeServicesMoyenne);
         } catch (MyException e) {
-            estValider =  e.getMessage().equals(MESSAGE_COTEUTILISATEUR_ENTREZEROETCENT);
+            estValider =  e.getMessage().equals(MESSAGE_COTEUTILISATEUR_ENTREZEROETCINQ);
         }
         assertTrue(estValider);
     }
@@ -64,10 +64,10 @@ public class EvaluationUtilisateurTest {
     @Test
     public void validerValeurCoteUtilisateurEntreZeroEtCent2() throws Exception {
         try {
-            evaluationUtilisateur = new EvaluationUtilisateur(100.1f, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
+            evaluationUtilisateur = new EvaluationUtilisateur(5.1f, nombreDEvaluationUtilisateur, coteTypeServicesMoyenne,
                     nombreDEvaluationTypeServicesMoyenne);
         } catch (MyException e) {
-            estValider =  e.getMessage().equals(MESSAGE_COTEUTILISATEUR_ENTREZEROETCENT);
+            estValider =  e.getMessage().equals(MESSAGE_COTEUTILISATEUR_ENTREZEROETCINQ);
         }
         assertTrue(estValider);
     }
@@ -91,7 +91,7 @@ public class EvaluationUtilisateurTest {
         try {
             evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, -0.1f, nombreDEvaluationTypeServicesMoyenne);
         } catch (MyException e) {
-            estValider =  e.getMessage().equals(MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCENT);
+            estValider =  e.getMessage().equals(MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCINQ);
         }
         assertTrue(estValider);
     }
@@ -99,9 +99,9 @@ public class EvaluationUtilisateurTest {
     @Test
     public void validerValeurCoteTypeServicesMoyenneEntreZeroEtCent2() throws Exception {
         try {
-            evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, 100.1f, nombreDEvaluationTypeServicesMoyenne);
+            evaluationUtilisateur = new EvaluationUtilisateur(coteUtilisateur, nombreDEvaluationUtilisateur, 5.1f, nombreDEvaluationTypeServicesMoyenne);
         } catch (MyException e) {
-            estValider =  e.getMessage().equals(MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCENT);
+            estValider =  e.getMessage().equals(MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCINQ);
         }
         assertTrue(estValider);
     }
@@ -130,7 +130,7 @@ public class EvaluationUtilisateurTest {
         } try {
             evaluationUtilisateur.validationCoteUtilisateur(-1);
         } catch (Exception e) {
-            estValider =  e.getMessage().equals(MESSAGE_COTEUTILISATEUR_ENTREZEROETCENT);
+            estValider =  e.getMessage().equals(MESSAGE_COTEUTILISATEUR_ENTREZEROETCINQ);
         }
         assertTrue(estValider);
     }

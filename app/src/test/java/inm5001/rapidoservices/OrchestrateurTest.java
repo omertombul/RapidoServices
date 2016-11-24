@@ -107,18 +107,18 @@ public class OrchestrateurTest {
         nombreDEvaluationUtilisateur = 210;
         coteTypeServicesMoyenne = 4.5f;
         nombreDEvaluationTypeServicesMoyenne = 1000;
-        evaluationUtilisateur1 = new EvaluationUtilisateur(50, nombreDEvaluationUtilisateur, 50,
+        evaluationUtilisateur1 = new EvaluationUtilisateur(1, nombreDEvaluationUtilisateur, 1,
                 nombreDEvaluationTypeServicesMoyenne);
-        evaluationUtilisateur2 = new EvaluationUtilisateur(90, nombreDEvaluationUtilisateur, 90,
+        evaluationUtilisateur2 = new EvaluationUtilisateur(3, nombreDEvaluationUtilisateur, 3,
                 nombreDEvaluationTypeServicesMoyenne);
-        evaluationUtilisateur3 = new EvaluationUtilisateur(100, nombreDEvaluationUtilisateur, 100,
+        evaluationUtilisateur3 = new EvaluationUtilisateur(5, nombreDEvaluationUtilisateur, 5,
                 nombreDEvaluationTypeServicesMoyenne);
         //attributs EvaluationService
         coteService = 3.5f;
         nombreDEvaluationService = 210;
-        evaluationService1 = new EvaluationService(50, nombreDEvaluationService);
-        evaluationService2 = new EvaluationService(90, nombreDEvaluationService);
-        evaluationService3 = new EvaluationService(100, nombreDEvaluationService);
+        evaluationService1 = new EvaluationService(1, nombreDEvaluationService);
+        evaluationService2 = new EvaluationService(3, nombreDEvaluationService);
+        evaluationService3 = new EvaluationService(5, nombreDEvaluationService);
         utilisateur = null;
         utilisateur1 = new Utilisateur(identifiant1, profile, listeServices, listeCompetences, evaluationUtilisateur1);
         utilisateur2 = new Utilisateur(identifiant2, profile, listeServices, listeCompetences, evaluationUtilisateur2);
@@ -637,8 +637,8 @@ public class OrchestrateurTest {
         //orchestrateur.modifierDisponibiliteService(nomUtilisateur3, service3.getNomSservice(), true);
 
 
-        ArrayList<RechercheServices> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "", "", 0, 90, 0);
-        //assertTrue(listeResultatsRecherche.get(0).getUtilisateur().getEvaluationUtilisateur().coteUtilisateur == 90);
+        ArrayList<RechercheServices> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "", "", 0, 3.5f, 0);
+        //assertTrue(listeResultatsRecherche.get(0).getUtilisateur().getEvaluationUtilisateur().coteUtilisateur == 3.5);
         assertTrue(listeResultatsRecherche.size() == 2);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
@@ -784,9 +784,9 @@ public class OrchestrateurTest {
         listeResultatsRechercheServices.add(pair2);
 
         listeResultatsRechercheServices = orchestrateur.trierResultatRecherche(listeResultatsRechercheServices, "coteService");
-        assertTrue(listeResultatsRechercheServices.get(0).recupererService().getEvaluationService().coteService == 50);
-        assertTrue(listeResultatsRechercheServices.get(1).recupererService().getEvaluationService().coteService == 90);
-        assertTrue(listeResultatsRechercheServices.get(2).recupererService().getEvaluationService().coteService == 100);
+        assertTrue(listeResultatsRechercheServices.get(0).recupererService().getEvaluationService().coteService == 1);
+        assertTrue(listeResultatsRechercheServices.get(1).recupererService().getEvaluationService().coteService == 3);
+        assertTrue(listeResultatsRechercheServices.get(2).recupererService().getEvaluationService().coteService == 5);
     }
 
     @Test
@@ -801,9 +801,9 @@ public class OrchestrateurTest {
         listeResultatsRechercheServices.add(pair2);
 
         listeResultatsRechercheServices = orchestrateur.trierResultatRecherche(listeResultatsRechercheServices, "coteUtilisateur");
-        assertTrue(listeResultatsRechercheServices.get(0).getUtilisateur().evaluationUtilisateur.coteUtilisateur == 50);
-        assertTrue(listeResultatsRechercheServices.get(1).getUtilisateur().evaluationUtilisateur.coteUtilisateur == 90);
-        assertTrue(listeResultatsRechercheServices.get(2).getUtilisateur().evaluationUtilisateur.coteUtilisateur == 100);
+        assertTrue(listeResultatsRechercheServices.get(0).getUtilisateur().evaluationUtilisateur.coteUtilisateur == 1);
+        assertTrue(listeResultatsRechercheServices.get(1).getUtilisateur().evaluationUtilisateur.coteUtilisateur == 3);
+        assertTrue(listeResultatsRechercheServices.get(2).getUtilisateur().evaluationUtilisateur.coteUtilisateur == 5);
     }
 
     @Test
@@ -818,9 +818,9 @@ public class OrchestrateurTest {
         listeResultatsRechercheServices.add(pair2);
 
         listeResultatsRechercheServices = orchestrateur.trierResultatRecherche(listeResultatsRechercheServices, "coteServiceMoyenne");
-        assertTrue(listeResultatsRechercheServices.get(0).getUtilisateur().evaluationUtilisateur.coteTypeServicesMoyenne == 50);
-        assertTrue(listeResultatsRechercheServices.get(1).getUtilisateur().evaluationUtilisateur.coteTypeServicesMoyenne == 90);
-        assertTrue(listeResultatsRechercheServices.get(2).getUtilisateur().evaluationUtilisateur.coteTypeServicesMoyenne == 100);
+        assertTrue(listeResultatsRechercheServices.get(0).getUtilisateur().evaluationUtilisateur.coteTypeServicesMoyenne == 1);
+        assertTrue(listeResultatsRechercheServices.get(1).getUtilisateur().evaluationUtilisateur.coteTypeServicesMoyenne == 3);
+        assertTrue(listeResultatsRechercheServices.get(2).getUtilisateur().evaluationUtilisateur.coteTypeServicesMoyenne == 5);
     }
 
     @Test
@@ -930,11 +930,11 @@ public class OrchestrateurTest {
         RechercheServices rechercheServices = new RechercheServices(utilisateur1, "Plombier");
         orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur);
 
-        orchestrateur.faireUneEvaluation(utilisateur1.identifiant.nomUtilisateur, utilisateur2.identifiant.nomUtilisateur, "Plombier", 95);
+        orchestrateur.faireUneEvaluation(utilisateur1.identifiant.nomUtilisateur, utilisateur2.identifiant.nomUtilisateur, "Plombier", 3.5f);
         System.out.println("***************coteUtilisateur: " + utilisateur2.getEvaluationUtilisateur().coteUtilisateur);
         System.out.println("***************coteServiceMoyenne: " + utilisateur1.getEvaluationUtilisateur().coteTypeServicesMoyenne);
         System.out.println("***************coteService: " + utilisateur1.listeServices.get(0).evaluationService.coteService);
-        //assertTrue(utilisateur.listeServices.get(0).evaluationService.coteService == 90);
+        //assertTrue(utilisateur.listeServices.get(0).evaluationService.coteService == 3.5);
         orchestrateur.supprimerCompte(nomUtilisateur);
         orchestrateur.supprimerCompte("Client");
     }

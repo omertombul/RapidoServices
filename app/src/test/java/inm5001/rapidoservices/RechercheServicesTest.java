@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
  * Created by Francis Bernier on 2016-11-13.
  */
 
-public class RechercheTest {
+public class RechercheServicesTest {
 
     //attributs Utilisateur
     private Identifiant identifiant;

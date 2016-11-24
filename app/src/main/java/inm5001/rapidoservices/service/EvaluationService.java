@@ -2,7 +2,7 @@ package inm5001.rapidoservices.service;
 
 import inm5001.rapidoservices.MyException;
 
-import static inm5001.rapidoservices.service.ConstanteEvaluationService.MESSAGE_COTESERVICE_ENTREZEROETCENT;
+import static inm5001.rapidoservices.service.ConstanteEvaluationService.MESSAGE_COTESERVICE_ENTREZEROETCINQ;
 
 /**
  * Created by Francis Bernier on 2016-11-17.
@@ -33,8 +33,8 @@ public class EvaluationService {
 
     //deuxième niveau d'abstraction
     private void validerValeurCoteServiceEntreZeroEtCent(float coteService) throws MyException {
-        if (coteService < 0 || coteService > 100) {
-            MyException e = new MyException(MESSAGE_COTESERVICE_ENTREZEROETCENT);
+        if (coteService < 0 || coteService > 5) {
+            MyException e = new MyException(MESSAGE_COTESERVICE_ENTREZEROETCINQ);
             throw e;
         }
     }
