@@ -340,7 +340,7 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
         String SQL_WHERE = "' where gradedUserId = '";
         String SQL_AND1 = "' and gradingUserId = '";
         String SQL_AND2 = "' and nomService = '";
-        String SQL_FIN = "');";
+        String SQL_FIN = "';";
         SQL = SQL_DEBUT;
         SQL += grade;
         SQL += SQL_WHERE;
