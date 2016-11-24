@@ -164,7 +164,7 @@ public class Orchestrateur {
     public void faireUneEvaluation(String nomUtilisateurCoter, String nomUtilisateurCoteur, String nomSservice, float coteService) throws MyException, SQLException {
         evaluationService = new EvaluationService(0, 0);
         evaluationService.validationCoteService(coteService);
-        bd.gradeService(nomUtilisateurCoter, nomUtilisateurCoteur, nomSservice, coteService);
+        bd.addIntoCoteService(nomUtilisateurCoter, nomUtilisateurCoteur, nomSservice, coteService);
     }
     /*
     public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {

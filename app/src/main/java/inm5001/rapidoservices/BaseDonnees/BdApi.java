@@ -120,8 +120,8 @@ public class BdApi {
         return UserAndServicesArray;
     }
 
-    public void gradeService(String gradedUserId, String gradingUserId, String nomService,
-                             float grade) throws SQLException{
+    public void addIntoCoteService(String gradedUserId, String gradingUserId, String nomService,
+                                   float grade) throws SQLException{
         String SQL = SQLgradeService(gradedUserId, gradingUserId, nomService, grade);
         BdConnection DB = new BdConnection(SQL);
         DB.insertToDB();
@@ -322,7 +322,7 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
         SQL += gradingUserId + SQL_SEPARATEUR;
         SQL += nomService + SQL_SEPARATEUR;
         SQL += grade + SQL_FIN;
-//System.out.println(" **gradeService** SQL is: " + SQL); // shows SQL String
+//System.out.println(" **addIntoCoteService** SQL is: " + SQL); // shows SQL String
         return SQL;
     }
 
