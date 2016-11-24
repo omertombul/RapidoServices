@@ -122,6 +122,7 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
 
                 try{
                         float tH = 0.0f;
+
                         if(tauxHorraire.getText().toString() == null || tauxHorraire.getText().toString().isEmpty()){
                             tH = 0.0f;
                         }else{
@@ -133,7 +134,7 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
                             emailService.getText().toString(),description.getText().toString());
 
 
-
+                    System.out.println("sdaa a sadsa ads " + tH);
                     //System.out.println("username dans ajouter service "+userName);
                     connect(s);
 

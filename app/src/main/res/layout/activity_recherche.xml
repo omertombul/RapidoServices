@@ -83,22 +83,6 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/editTextPrixRecherche" />
 
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinnerTypeTrie"
-        android:layout_toEndOf="@+id/textViewServiceRecherche"
-        android:layout_marginStart="15dp" />
-
-    <ListView
-        android:layout_width="match_parent"
-        android:id ="@+id/ListViewRechercheResult"
-        android:layout_height="match_parent"
-        android:layout_marginRight="150dp"
-        android:layout_marginTop="22dp"
-        android:layout_below="@+id/spinnerTypeTrie"
-        android:layout_alignParentStart="true" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,12 +93,27 @@
         android:layout_below="@+id/spinnerRechercheVille"
         android:layout_alignParentEnd="true" />
 
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerTypeTrie"
+        android:layout_below="@+id/editTextPrixRecherche"
+        android:layout_toEndOf="@+id/textViewTypeTrie" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:id ="@+id/ListViewRechercheResult"
+        android:layout_height="match_parent"
+        android:layout_marginRight="150dp"
+        android:layout_below="@+id/buttonRechercherRecherche"
+        android:layout_alignParentStart="true" />
+
     <Button
         android:text="Rechercher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonRechercherRecherche"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/textViewTypeTrie"
         android:layout_alignParentStart="true" />
 
 </RelativeLayout>
