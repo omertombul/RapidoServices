@@ -2,9 +2,9 @@ package inm5001.rapidoservices;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import inm5001.rapidoservices.baseDonnees.BdApi;
+import inm5001.rapidoservices.recherche.RechercheServices;
 import inm5001.rapidoservices.service.EvaluationService;
 import inm5001.rapidoservices.service.TypeServices;
 import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
@@ -133,30 +133,34 @@ public class Orchestrateur {
         }
     }
 
-    public ArrayList<Recherche> rechercheDeServices(float tauxHorraire, float prixFixe, String nomSservice, String ville,
-                                                    float coteUtilisateur, float coteServicesMoyenne, float coteService) throws MyException, SQLException {
+    public ArrayList<RechercheServices> rechercheDeServices(float tauxHorraire, float prixFixe, String nomSservice, String ville,
+                                                            float coteUtilisateur, float coteServicesMoyenne, float coteService) throws MyException, SQLException {
         TypeServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, ville);
-        ArrayList<Recherche> listePaires = bd.servicesSearch(service, coteUtilisateur, coteServicesMoyenne, coteService);
+        ArrayList<RechercheServices> listePaires = bd.servicesSearch(service, coteUtilisateur, coteServicesMoyenne, coteService);
         return listePaires;
     }
 
-    public ArrayList<Recherche> trierResultatRecherche(ArrayList<Recherche> listeResultatRecherche, String valeurDeTri) throws MyException {
-        if (listeResultatRecherche.size() > 1) {
-            listeResultatRecherche = listeResultatRecherche.get(0).trierListeRecherche(listeResultatRecherche, valeurDeTri);
-            return listeResultatRecherche;
+    public ArrayList<RechercheServices> trierResultatRecherche(ArrayList<RechercheServices> listeResultatRechercheServices, String valeurDeTri) throws MyException {
+        if (listeResultatRechercheServices.size() > 1) {
+            listeResultatRechercheServices = listeResultatRechercheServices.get(0).trierListeRecherche(listeResultatRechercheServices, valeurDeTri);
+            return listeResultatRechercheServices;
         } else {
-            return listeResultatRecherche;
+            return listeResultatRechercheServices;
         }
     }
 
-    public ArrayList<String> obtenirInformationsDeContact(Recherche recherche) {
+    public ArrayList<String> obtenirInformationsDeContact(RechercheServices rechercheServices) {
         ArrayList<String> valeursDeRetour = new ArrayList<>();
-        valeursDeRetour.add(determinerNumeroTelephone(recherche));
-        valeursDeRetour.add(determinerAdresseCourriel(recherche));
-
+        valeursDeRetour.add(determinerNumeroTelephone(rechercheServices));
+        valeursDeRetour.add(determinerAdresseCourriel(rechercheServices));
+        //bd.createLinesInTable(nomUtilisateurCoter, nomUtilisateurCoteur, nomSservice, coteService);
         return valeursDeRetour;
     }
-
+/*
+    public RechercheACoter obtenirMesEvaluationsADonner(String nomUtilisateur) {
+        return bd.findMyNonGradedEvaluations(nomUtilisateur);
+    }
+*/
     public void faireUneEvaluation(String nomUtilisateurCoter, String nomUtilisateurCoteur, String nomSservice, float coteService) throws MyException, SQLException {
         evaluationService = new EvaluationService(0, 0);
         evaluationService.validationCoteService(coteService);
@@ -194,23 +198,23 @@ public class Orchestrateur {
     }
     */
 //premier niveau d'abstraction
-    private String determinerNumeroTelephone(Recherche recherche) {
+    private String determinerNumeroTelephone(RechercheServices rechercheServices) {
         String numeroTelephone;
-        if (recherche.recupererService().getNoTelephone() != "") {
-            numeroTelephone = recherche.recupererService().getNoTelephone();
+        if (rechercheServices.recupererService().getNoTelephone() != "") {
+            numeroTelephone = rechercheServices.recupererService().getNoTelephone();
         } else {
-            numeroTelephone = recherche.getUtilisateur().profile.numeroTelephone;
+            numeroTelephone = rechercheServices.getUtilisateur().profile.numeroTelephone;
         }
 
         return numeroTelephone;
     }
 
-    private String determinerAdresseCourriel(Recherche recherche) {
+    private String determinerAdresseCourriel(RechercheServices rechercheServices) {
         String adresseCourriel;
-        if (recherche.recupererService().getCourriel() != "") {
-            adresseCourriel = recherche.recupererService().getCourriel();
+        if (rechercheServices.recupererService().getCourriel() != "") {
+            adresseCourriel = rechercheServices.recupererService().getCourriel();
         } else {
-            adresseCourriel = recherche.getUtilisateur().profile.adresseCourriel;
+            adresseCourriel = rechercheServices.getUtilisateur().profile.adresseCourriel;
         }
 
         return adresseCourriel;

@@ -1,7 +1,6 @@
 package inm5001.rapidoservices.interfaceGraphique;
 
 import android.app.Activity;
-import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +14,6 @@ import java.sql.SQLException;
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Orchestrateur;
 import inm5001.rapidoservices.R;
-import inm5001.rapidoservices.Recherche;
 import inm5001.rapidoservices.service.EvaluationService;
 
 

@@ -1,9 +1,6 @@
 package inm5001.rapidoservices.service;
 
-import java.util.Comparator;
-
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.Recherche;
 
 import static inm5001.rapidoservices.service.ConstanteTypeServices.MESSAGE_TAUXHORRAIRE_NEGATIF;
 import static inm5001.rapidoservices.service.ConstanteTypeServices.MESSAGE_PRIXFIXE_NEGATIF;

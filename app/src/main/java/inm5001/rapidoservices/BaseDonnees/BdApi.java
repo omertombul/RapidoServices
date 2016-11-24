@@ -3,13 +3,12 @@ package inm5001.rapidoservices.baseDonnees;
 import java.sql.ResultSet;
 
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.Recherche;
+import inm5001.rapidoservices.recherche.RechercheServices;
 import inm5001.rapidoservices.service.EvaluationService;
 import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.utilisateur.Profile;
-import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.service.TypeServices;
 
 import java.sql.SQLException;
@@ -107,9 +106,9 @@ public class BdApi {
         DB.closeConnection();
     }
 
-    public ArrayList<Recherche> servicesSearch(TypeServices s, float coteUtilisateur,
-                                               float coteServicesMoyenne, float coteService){
-        ArrayList<Recherche> UserAndServicesArray = new ArrayList<>();
+    public ArrayList<RechercheServices> servicesSearch(TypeServices s, float coteUtilisateur,
+                                                       float coteServicesMoyenne, float coteService){
+        ArrayList<RechercheServices> UserAndServicesArray = new ArrayList<>();
 
 
         String SQL = SQLservicesSearch(s);
@@ -378,9 +377,9 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
         return U;
     }
 
-    private ArrayList<Recherche> updateUserAndSerivcesArrayWithRS(
+    private ArrayList<RechercheServices> updateUserAndSerivcesArrayWithRS(
             ResultSet RSservices){
-        ArrayList<Recherche> userAndServicesArray = new ArrayList<>();
+        ArrayList<RechercheServices> userAndServicesArray = new ArrayList<>();
         // userId and services is in the RSservices
         float tauxHorraire, prixFixe;
         String nomService, ville, noTelephone, courriel, description;
@@ -390,7 +389,7 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
 // float tauxHorraire, float prixFixe, String nomSservice, boolean disponible, String ville,
 //  byte cote, String noTelephone, String courriel, String description
 // code example
-        //Commenté par Francis Bernier parce que j'ai changer les attributs de l'objet de type Recherche
+        //Commenté par Francis Bernier parce que j'ai changer les attributs de l'objet de type RechercheServices
         /* try {
             RSservices.beforeFirst();
             while (RSservices.next()) {
@@ -399,7 +398,7 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
                         RSservices.getBoolean("disponibilite"), RSservices.getString("ville"),
                         RSservices.getString("noTelephone"), RSservices.getString("courriel"),
                         RSservices.getString("description"));
-                Recherche P = new Recherche(getUser(RSservices.getString("idUsager")), S);
+                RechercheServices P = new RechercheServices(getUser(RSservices.getString("idUsager")), S);
                 userAndServicesArray.add(P);
             }
         } catch (Exception ex) {
@@ -411,7 +410,7 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
         try {
             RSservices.beforeFirst();
             while (RSservices.next()) {
-                Recherche P = new Recherche(getUser(RSservices.getString("idUsager")),
+                RechercheServices P = new RechercheServices(getUser(RSservices.getString("idUsager")),
                         RSservices.getString("nomService"));
                 userAndServicesArray.add(P);
             }

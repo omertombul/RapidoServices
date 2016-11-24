@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import inm5001.rapidoservices.service.AbstraiteServices;
+import inm5001.rapidoservices.recherche.RechercheServices;
 import inm5001.rapidoservices.service.TypeServices;
 import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
 import inm5001.rapidoservices.utilisateur.Identifiant;
@@ -133,35 +133,35 @@ public class RechercheTest {
 
     @Test
     public void RecherchePasNull() throws MyException {
-        Recherche pair1 = new Recherche(utilisateur , nomSservice);
+        RechercheServices pair1 = new RechercheServices(utilisateur , nomSservice);
 
         assertNotNull(pair1);
     }
 
     @Test
     public void RechercheNomUtilisateurPasNull() throws MyException {
-        Recherche pair1 = new Recherche(utilisateur , nomSservice);
+        RechercheServices pair1 = new RechercheServices(utilisateur , nomSservice);
 
         assertNotNull(pair1.getUtilisateur());
     }
 
     @Test
     public void RechercheUtilisateurNomUtilisateur() throws MyException {
-        Recherche pair1 = new Recherche(utilisateur , nomSservice);
+        RechercheServices pair1 = new RechercheServices(utilisateur , nomSservice);
 
         assertEquals(pair1.getUtilisateur().identifiant.nomUtilisateur, "FRANCIS");
     }
 
     @Test
     public void RechercheServicePasNull() throws MyException {
-        Recherche pair1 = new Recherche(utilisateur , nomSservice);
+        RechercheServices pair1 = new RechercheServices(utilisateur , nomSservice);
 
         assertNotNull(pair1);
     }
 
     @Test
     public void RechercheServiceValiderParametres() throws MyException {
-        Recherche pair1 = new Recherche(utilisateur , "Plombier");
+        RechercheServices pair1 = new RechercheServices(utilisateur , "Plombier");
         assertTrue(pair1.recupererService().getTauxHorraire() == tauxHorraire);
         assertEquals(pair1.recupererService().getNomSservice(), "Plombier");
     }

@@ -18,10 +18,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import inm5001.rapidoservices.ConstanteRecherche;
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Orchestrateur;
-import inm5001.rapidoservices.Recherche;
+import inm5001.rapidoservices.recherche.RechercheServices;
 import inm5001.rapidoservices.R;
 import inm5001.rapidoservices.service.ConstanteAbstraiteServices;
-import inm5001.rapidoservices.utilisateur.Utilisateur;
 
 /**
  * Created By Omer Tombul
@@ -35,7 +34,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
     EditText tauxHorraire = null;
     float prix = 0f;
     Orchestrateur o;
-    ArrayList<Recherche> listeDePaire;
+    ArrayList<RechercheServices> listeDePaire;
     ArrayList<String> resultat;
 
     @Override
@@ -158,7 +157,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                                     public void run() {
                                         String affichage = "";
                                         int i = 0;
-                                        for (Recherche p : listeDePaire) {
+                                        for (RechercheServices p : listeDePaire) {
                                             i++;
                                             affichage = i + " - " + p.recupererService().getNomSservice()
                                                     + "\nTaux Horraire : " + p.recupererService().getTauxHorraire() + " " + p.recupererService().getVille() ;
@@ -191,7 +190,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
 
                                     System.out.println(resultat.get(position));
                                     Intent intent = new Intent(RechercheActivity.this, ServiceRechercherAvtivity.class);
-                                    Recherche r = listeDePaire.get(position);
+                                    RechercheServices r = listeDePaire.get(position);
                                     System.out.println(r.recupererService().getVille());
                                     Float a = r.recupererService().getTauxHorraire();
                                     String taux = a.toString();
