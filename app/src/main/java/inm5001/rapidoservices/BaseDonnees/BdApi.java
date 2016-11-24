@@ -3,6 +3,7 @@ package inm5001.rapidoservices.baseDonnees;
 import java.sql.ResultSet;
 
 import inm5001.rapidoservices.MyException;
+import inm5001.rapidoservices.recherche.RechercheACoter;
 import inm5001.rapidoservices.recherche.RechercheServices;
 import inm5001.rapidoservices.service.EvaluationService;
 import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
@@ -125,6 +126,19 @@ public class BdApi {
         BdConnection DB = new BdConnection(SQL);
         DB.insertToDB();
         DB.closeConnection();
+    }
+
+
+
+    public ArrayList<RechercheACoter> getRechercheACoter(String nomUtilisateur){
+        ArrayList<RechercheACoter> aCoterArray = new ArrayList<>();
+
+        String SQL = SQLgetACoter(nomUtilisateur);
+        BdConnection DB = new BdConnection(SQL);
+        ResultSet RSaCoter = DB.readFromDataBase();
+        aCoterArray = updateACoterWithRS(RSaCoter);
+        DB.closeConnection();
+        return aCoterArray;
     }
 
     //*************************************************************************
@@ -312,6 +326,17 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
         return SQL;
     }
 
+    private String SQLgetACoter(String nomUtilisateur){
+        String SQL;
+        String SQL_DEBUT = "SELECT * FROM cotesServices WHERE gradingUserId = '";
+        String SQL_AND = "' and cote = 'NULL'";
+        String SQL_FIN = ";";
+
+        SQL = SQL_DEBUT + nomUtilisateur + SQL_AND + SQL_FIN;
+//System.out.println("    String SQL getACoter: " + SQL); // shows SQL String
+        return SQL;
+    }
+
     //*************************************************************************
     // level 3 abstraction
     private Utilisateur updateUtilisateurWithRSutilisateurData(
@@ -418,5 +443,21 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
             System.out.println(ex + "Error updating serviceSearchArray with RSservices");
         }
         return userAndServicesArray;
+    }
+
+    private ArrayList<RechercheACoter> updateACoterWithRS(ResultSet RSaCoter){
+        ArrayList<RechercheACoter> aCoterArray = new ArrayList<RechercheACoter>();
+
+        try {
+            RSaCoter.beforeFirst();
+            while (RSaCoter.next()) {
+                RechercheACoter R = new RechercheACoter(RSaCoter.getString("gradedUserId"),
+                        RSaCoter.getString("nomService"));
+                aCoterArray.add(R);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex + "Error updating aCoterSearchArray with RSaCoter");
+        }
+        return aCoterArray;
     }
 }
