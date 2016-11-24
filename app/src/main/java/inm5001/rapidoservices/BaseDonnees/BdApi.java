@@ -122,13 +122,19 @@ public class BdApi {
 
     public void addIntoCoteService(String gradedUserId, String gradingUserId, String nomService,
                                    float grade) throws SQLException{
-        String SQL = SQLgradeService(gradedUserId, gradingUserId, nomService, grade);
+        String SQL = SQLaddIntoCoteService(gradedUserId, gradingUserId, nomService, grade);
         BdConnection DB = new BdConnection(SQL);
         DB.insertToDB();
         DB.closeConnection();
     }
 
-
+    public void gradeService(String gradedUserId, String gradingUserId, String nomService,
+                             float grade) throws SQLException{
+        String SQL = SQLgradeService(gradedUserId, gradingUserId, nomService, grade);
+        BdConnection DB = new BdConnection(SQL);
+        DB.insertToDB();
+        DB.closeConnection();
+    }
 
     public ArrayList<RechercheACoter> getRechercheACoter(String nomUtilisateur){
         ArrayList<RechercheACoter> aCoterArray = new ArrayList<>();
@@ -311,8 +317,8 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
         return SQL;
     }
 
-    private String SQLgradeService(String gradedUserId, String gradingUserId, String nomService,
-                                   float grade){
+    private String SQLaddIntoCoteService(String gradedUserId, String gradingUserId, String nomService,
+                                         float grade){
         String SQL;
         String SQL_DEBUT = "INSERT INTO cotesServices VALUES('";
         String SQL_SEPARATEUR = "' ,'";
@@ -322,6 +328,28 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
         SQL += gradingUserId + SQL_SEPARATEUR;
         SQL += nomService + SQL_SEPARATEUR;
         SQL += grade + SQL_FIN;
+//System.out.println(" **addIntoCoteService** SQL is: " + SQL); // shows SQL String
+        return SQL;
+    }
+
+    private String SQLgradeService(String gradedUserId, String gradingUserId, String nomService,
+                                   float grade){
+// UPDATE cotesServices SET cote = '32' where gradedUserId = 'Bill' and gradingUserId = 'Mat' and nomService = 'Menuisier';
+        String SQL;
+        String SQL_DEBUT = "UPDATE cotesServices SET cote = '";
+        String SQL_WHERE = "' where gradedUserId = '";
+        String SQL_AND1 = "' and gradingUserId = '";
+        String SQL_AND2 = "' and nomService = '";
+        String SQL_FIN = "');";
+        SQL = SQL_DEBUT;
+        SQL += grade;
+        SQL += SQL_WHERE;
+        SQL += gradedUserId;
+        SQL += SQL_AND1;
+        SQL += gradingUserId;
+        SQL += SQL_AND2;
+        SQL += nomService;
+        SQL += SQL_FIN;
 //System.out.println(" **addIntoCoteService** SQL is: " + SQL); // shows SQL String
         return SQL;
     }
