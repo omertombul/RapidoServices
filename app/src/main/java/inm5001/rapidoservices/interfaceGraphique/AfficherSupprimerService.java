@@ -5,7 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.ToggleButton;
+
+import java.sql.SQLException;
 
 import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Orchestrateur;
@@ -24,6 +28,8 @@ public class AfficherSupprimerService extends Activity {
     TextView mail = null;
     TextView telephone = null;
     Button supprimer = null;
+    ToggleButton dispo = null;
+    Orchestrateur orchestrateur = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +38,17 @@ public class AfficherSupprimerService extends Activity {
         setContentView(R.layout.activity_supservice);
         Intent intent = getIntent();
         final String us = intent.getStringExtra("userName");
-        final String se = intent.getStringExtra("electricien");
+        final String se = intent.getStringExtra("Électricien");
+        final String plomb = intent.getStringExtra("Plombier");
         supprimer = (Button) findViewById(R.id.supprimerService);
-
+        dispo = (ToggleButton) findViewById(R.id.toggleDispo);
 
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 Orchestrateur o = new Orchestrateur();
+                orchestrateur = o;
                 Utilisateur u;
                 try {
                     u = o.recupererUtilisateur(us);
@@ -48,17 +56,22 @@ public class AfficherSupprimerService extends Activity {
 
                     for (int i = 0; i < u.listeServices.size(); i++)
                     {
-
+                        nom = (TextView) findViewById(R.id.nomServ);
+                        description = (TextView) findViewById(R.id.description);
+                        mail = (TextView) findViewById(R.id.mail);
+                        telephone = (TextView) findViewById(R.id.phone);
                         if (se.equals(u.listeServices.get(i).getNomSservice()) ){
-                            nom = (TextView) findViewById(R.id.nomServ);
-                            description = (TextView) findViewById(R.id.description);
-                            mail = (TextView) findViewById(R.id.mail);
-                            telephone = (TextView) findViewById(R.id.phone);
+
                             nom.setText(u.listeServices.get(i).getNomSservice());
                             description.setText(u.listeServices.get(i).getDescription());
                             mail.setText(u.listeServices.get(i).getCourriel());
                             telephone.setText(u.listeServices.get(i).getNoTelephone());
 
+                        } else if (plomb.equals(u.listeServices.get(i).getNomSservice())) {
+                            nom.setText(u.listeServices.get(i).getNomSservice());
+                            description.setText(u.listeServices.get(i).getDescription());
+                            mail.setText(u.listeServices.get(i).getCourriel());
+                            telephone.setText(u.listeServices.get(i).getNoTelephone());
                         }
 
                     }
@@ -88,6 +101,8 @@ public class AfficherSupprimerService extends Activity {
                         if (se.equals(u.listeServices.get(i).getNomSservice()) ){
                              o.retirerOffreDeService(us, u.listeServices.get(i));
 
+                        } else if (plomb.equals(u.listeServices.get(i).getNomSservice())){
+                            o.retirerOffreDeService(us,u.listeServices.get(i));
                         }
 
                     }
@@ -95,6 +110,28 @@ public class AfficherSupprimerService extends Activity {
                     startActivity(profil);
                 }catch(MyException e){
                     System.out.println(e.getMessage());
+                }
+            }
+        });
+
+        dispo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked) {
+
+                    try {
+                        // The toggle is enabled
+                        orchestrateur.modifierDisponibiliteService(us, se, true);
+                    }catch(SQLException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else {
+
+                    try{
+                        orchestrateur.modifierDisponibiliteService(us, se, false);
+                    }catch(SQLException e){
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
         });

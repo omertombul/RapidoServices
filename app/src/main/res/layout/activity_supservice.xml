@@ -12,7 +12,7 @@
 
 
     <TextView
-        android:text="TextView"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/nomServ" />
@@ -24,7 +24,7 @@
         android:id="@+id/textView13" />
 
     <TextView
-        android:text="TextView"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/taux" />
@@ -36,7 +36,7 @@
         android:id="@+id/textView16" />
 
     <TextView
-        android:text="TextView"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/mail" />
@@ -48,7 +48,7 @@
         android:id="@+id/textView18" />
 
     <TextView
-        android:text="TextView"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/phone" />
@@ -60,7 +60,7 @@
         android:id="@+id/textView20" />
 
     <TextView
-        android:text="TextView"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/description" />
@@ -75,7 +75,7 @@
         android:text="Disponibilite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/toggleButton" />
+        android:id="@+id/toggleDispo" />
 
     <Button
         android:text="Supprimer"

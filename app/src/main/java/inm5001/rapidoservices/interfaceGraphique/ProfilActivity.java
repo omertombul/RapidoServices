@@ -36,9 +36,11 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
     Button rechercher = null;
     Button supprimerUsager = null;
     Button electricien = null;
+    Button plombier = null;
     Utilisateur user;
     Orchestrateur orc;
     ToggleButton toggle = null;
+    ToggleButton toggleElectricien = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +51,12 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
         rechercher = (Button) findViewById(R.id.rechercher);
         supprimerUsager = (Button) findViewById(R.id.buttonDeleteUserProfile);
         toggle = (ToggleButton) findViewById(R.id.switchDispoUser);
+        toggleElectricien = (ToggleButton) findViewById(R.id.switchDispoElecticien);
         electricien = (Button) findViewById(R.id.electricien);
+        plombier = (Button) findViewById(R.id.plombier);
+
         final String electricienText = electricien.getText().toString();
+        final String plombierText = plombier.getText().toString();
         //recuper le userName et password de la page precedente
         Intent intent = getIntent();
         final String userName = intent.getStringExtra("userName");
@@ -111,6 +117,27 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
             }
         });
 
+        toggleElectricien.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked) {
+
+                    try {
+                        // The toggle is enabled
+                        orc.modifierDisponibiliteService(userName, electricienText, true);
+                    }catch(SQLException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else {
+
+                    try{
+                        orc.modifierDisponibiliteService(userName, electricienText, false);
+                    }catch(SQLException e){
+                        System.out.println(e.getMessage());
+                    }
+                }
+            }
+        });
 
 
 
@@ -174,8 +201,18 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
             public void onClick(View v) {
                 Intent serviceElectricien = new Intent(ProfilActivity.this, AfficherSupprimerService.class);
                 serviceElectricien.putExtra("userName", userName);
-                serviceElectricien.putExtra("electricien",electricienText);
+                serviceElectricien.putExtra("Électricien",electricienText);
                 startActivity(serviceElectricien);
+            }
+        });
+
+        plombier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent service = new Intent(ProfilActivity.this, AfficherSupprimerService.class);
+                service.putExtra("userName", userName);
+                service.putExtra("Plombier",plombierText);
+                startActivity(service);
             }
         });
 
