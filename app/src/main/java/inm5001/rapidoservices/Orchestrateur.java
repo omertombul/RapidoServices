@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import inm5001.rapidoservices.baseDonnees.BdApi;
+import inm5001.rapidoservices.recherche.RechercheACoter;
 import inm5001.rapidoservices.recherche.RechercheServices;
 import inm5001.rapidoservices.service.EvaluationService;
 import inm5001.rapidoservices.service.TypeServices;
@@ -149,55 +150,38 @@ public class Orchestrateur {
         }
     }
 
-    public ArrayList<String> obtenirInformationsDeContact(RechercheServices rechercheServices) {
-        ArrayList<String> valeursDeRetour = new ArrayList<>();
-        valeursDeRetour.add(determinerNumeroTelephone(rechercheServices));
-        valeursDeRetour.add(determinerAdresseCourriel(rechercheServices));
-        //bd.createLinesInTable(nomUtilisateurCoter, nomUtilisateurCoteur, nomSservice, coteService);
-        return valeursDeRetour;
+    public ArrayList<String> accepterUnFournisseurDeService(RechercheServices rechercheServices, String nomUtilisateurCoteur) throws SQLException {
+        ArrayList<String> listeInformationsDeContact = new ArrayList<>();
+        listeInformationsDeContact = obtenirInformationsDeContact(rechercheServices);
+        creationDeLignesCoteService(rechercheServices, nomUtilisateurCoteur);
+
+        return listeInformationsDeContact;
     }
 /*
-    public RechercheACoter obtenirMesEvaluationsADonner(String nomUtilisateur) {
-        return bd.findMyNonGradedEvaluations(nomUtilisateur);
+    public ArrayList<RechercheACoter> obtenirMesEvaluationsADonner(String nomUtilisateur) {
+        return bd.getRechercheACoter(nomUtilisateur);
     }
 */
     public void faireUneEvaluation(String nomUtilisateurCoter, String nomUtilisateurCoteur, String nomSservice, float coteService) throws MyException, SQLException {
         evaluationService = new EvaluationService(0, 0);
         evaluationService.validationCoteService(coteService);
-        bd.addIntoCoteService(nomUtilisateurCoter, nomUtilisateurCoteur, nomSservice, coteService);
+        bd.gradeService(nomUtilisateurCoter, nomUtilisateurCoteur, nomSservice, coteService);
     }
-    /*
-    public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
-        utilisateur = bd.getUser(nomUtilisateur);
-        utilisateur.identifiant.validationMotDePasse(motDePasse);
-        bd.setPassword(nomUtilisateur, motDePasse);
-    }
-
-    public void remplacerNomProfile(String nomUtilisateur, String nom) throws MyException throws MyException {
-        profile = bd.getUser(nomUtilisateur).profile;
-        profile = new Profile (nom, profile.prenom, profile.numeroTelephone, profile.adresseCourriel);
-        bd.replaceProfile(nomUtilisateur, profile);
-    }
-
-    public void remplacerPrenomProfile(String nomUtilisateur, String prenom) throws MyException throws MyException {
-        profile = bd.getUser(nomUtilisateur).profile;
-        profile = new Profile (profile.nom, prenom, profile.numeroTelephone, profile.adresseCourriel);
-        bd.replaceProfile(nomUtilisateur, profile);
-    }
-
-    public void remplacerNumeroTelephoneProfile(String nomUtilisateur, String numeroTelephone) throws MyException {
-        profile = bd.getUser(nomUtilisateur).profile;
-        profile = new Profile (profile.nom, profile.prenom, numeroTelephone, profile.adresseCourriel);
-        bd.replaceProfile(nomUtilisateur, profile);
-    }
-
-    public void remplacerAdresseCourrielProfile(String nomUtilisateur, String adresseCourriel) throws MyException {
-        profile = bd.getUser(nomUtilisateur).profile;
-        profile = new Profile (profile.nom, profile.prenom, profile.numeroTelephone, adresseCourriel);
-        replaceProfile(nomUtilisateur, profile);
-    }
-    */
 //premier niveau d'abstraction
+    private ArrayList<String> obtenirInformationsDeContact(RechercheServices rechercheServices) throws SQLException {
+        ArrayList<String> listeInformationsDeContact = new ArrayList<>();
+        listeInformationsDeContact.add(determinerNumeroTelephone(rechercheServices));
+        listeInformationsDeContact.add(determinerAdresseCourriel(rechercheServices));
+
+        return listeInformationsDeContact;
+    }
+
+    private void creationDeLignesCoteService(RechercheServices rechercheServices, String nomUtilisateurCoteur) throws SQLException {
+        bd.addIntoCoteService(rechercheServices.getUtilisateur().identifiant.nomUtilisateur, nomUtilisateurCoteur,
+                rechercheServices.recupererService().getNomSservice(), 0);
+        bd.addIntoCoteService(nomUtilisateurCoteur, rechercheServices.getUtilisateur().identifiant.nomUtilisateur, "Client", 0);
+    }
+//deuxième niveau d'abstraction
     private String determinerNumeroTelephone(RechercheServices rechercheServices) {
         String numeroTelephone;
         if (rechercheServices.recupererService().getNoTelephone() != "") {

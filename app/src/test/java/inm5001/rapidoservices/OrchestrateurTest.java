@@ -841,51 +841,99 @@ public class OrchestrateurTest {
     }
 
     @Test
-    public void obtenirInformationsDeContactNoTelephoneService() {
+    public void accepterUnFournisseurDeServiceNoTelephoneService() throws SQLException, MyException {
         utilisateur1.listeServices.add(service);
+        orchestrateur.creerUtilisateur(utilisateur1);
+        orchestrateur.creerUtilisateur(utilisateur2);
         RechercheServices rechercheServices = new RechercheServices(utilisateur1, "Plombier");
 
-        assertEquals(orchestrateur.obtenirInformationsDeContact(rechercheServices).get(0), "5144444444");
+        assertEquals(orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur).get(0), "5144444444");
+        orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
+        orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
     }
 
     @Test
-    public void obtenirInformationsDeContactCourrielService() {
+    public void accepterUnFournisseurDeServiceCourrielService() throws SQLException, MyException {
         utilisateur1.listeServices.add(service);
+        orchestrateur.creerUtilisateur(utilisateur1);
+        orchestrateur.creerUtilisateur(utilisateur2);
         RechercheServices rechercheServices = new RechercheServices(utilisateur1, "Plombier");
 
-        assertEquals(orchestrateur.obtenirInformationsDeContact(rechercheServices).get(1), "plomberie@plomberi.com");
+        assertEquals(orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur).get(1), "plomberie@plomberi.com");
+        orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
+        orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
     }
 
     @Test
-    public void obtenirInformationsDeContactNoTelephoneUtilisateur() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, "nomService", disponibleService, ville, "", adresseCourrielService, description);
+    public void accepterUnFournisseurDeServiceNoTelephoneUtilisateur() throws MyException, SQLException {
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, "", adresseCourrielService, description);
         utilisateur1.listeServices.add(service);
-        RechercheServices rechercheServices = new RechercheServices(utilisateur1, "nomService");
+        orchestrateur.creerUtilisateur(utilisateur1);
+        orchestrateur.creerUtilisateur(utilisateur2);
+        RechercheServices rechercheServices = new RechercheServices(utilisateur1, "Plombier");
 
-        assertEquals(orchestrateur.obtenirInformationsDeContact(rechercheServices).get(0), "5145972143");
+        assertEquals(orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur).get(0), "5145972143");
+        orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
+        orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
     }
 
     @Test
-    public void obtenirInformationsDeContactCourrielUtilisateur() throws MyException {
-        service = new TypeServices(tauxHorraire, prixFixe, "nomService", disponibleService, ville, numeroTelephoneService, "", description);
+    public void accepterUnFournisseurDeServiceCourrielUtilisateur() throws MyException, SQLException {
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, numeroTelephoneService, "", description);
         utilisateur1.listeServices.add(service);
-        RechercheServices rechercheServices = new RechercheServices(utilisateur1, "nomService");
+        orchestrateur.creerUtilisateur(utilisateur1);
+        orchestrateur.creerUtilisateur(utilisateur2);
+        RechercheServices rechercheServices = new RechercheServices(utilisateur1, "Plombier");
 
-        assertEquals(orchestrateur.obtenirInformationsDeContact(rechercheServices).get(1), "francis@hotmail.com");
+        assertEquals(orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur).get(1), "francis@hotmail.com");
+        orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
+        orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
     }
+
+    @Test
+    public void accepterUnFournisseurDeServiceCreationDeLignesCoteServiceService() throws MyException, SQLException {
+        utilisateur1.listeServices.add(service);
+        orchestrateur.creerUtilisateur(utilisateur1);
+        orchestrateur.creerUtilisateur(utilisateur2);
+        RechercheServices rechercheServices = new RechercheServices(utilisateur1, "Plombier");
+        orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur);
+
+        assertTrue(orchestrateur.obtenirMesEvaluationsADonner(utilisateur1.identifiant.nomUtilisateur).size() == 1);
+        orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
+        orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
+    }
+
+    @Test
+    public void accepterUnFournisseurDeServiceCreationDeLignesCoteServiceClient() throws MyException, SQLException {
+        utilisateur1.listeServices.add(service);
+        orchestrateur.creerUtilisateur(utilisateur1);
+        orchestrateur.creerUtilisateur(utilisateur2);
+        RechercheServices rechercheServices = new RechercheServices(utilisateur1, "Plombier");
+        orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur);
+
+        assertTrue(orchestrateur.obtenirMesEvaluationsADonner(utilisateur2.identifiant.nomUtilisateur).size() == 1);
+        orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
+        orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
+    }
+/*
+    @Test
+    public void obtenirMesEvaluationsADonner() {
+
+    }
+*/
     //L'objet utilisateur retourner par BdApi ne semble pas avoir les informations de L'évaluation service
     @Test
     public void faireUneEvaluation() throws MyException, SQLException {
-        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur,
-                motDePasse, listeServices, listeCompetences);
-        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, "Client",
-                motDePasse, listeServices, listeCompetences);
-        orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
-        orchestrateur.faireUneEvaluation(nomUtilisateur, "Client", "Plombier", 90);
-        utilisateur = orchestrateur.recupererUtilisateur(nomUtilisateur);
-        System.out.println("***************coteUtilisateur: " + utilisateur.getEvaluationUtilisateur().coteUtilisateur);
-        System.out.println("***************coteServiceMoyenne: " + utilisateur.getEvaluationUtilisateur().coteTypeServicesMoyenne);
-        System.out.println("***************coteService: " + utilisateur.listeServices.get(0).evaluationService.coteService);
+        utilisateur1.listeServices.add(service);
+        orchestrateur.creerUtilisateur(utilisateur1);
+        orchestrateur.creerUtilisateur(utilisateur2);
+        RechercheServices rechercheServices = new RechercheServices(utilisateur1, "Plombier");
+        orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur);
+
+        orchestrateur.faireUneEvaluation(utilisateur1.identifiant.nomUtilisateur, utilisateur2.identifiant.nomUtilisateur, "Plombier", 95);
+        System.out.println("***************coteUtilisateur: " + utilisateur2.getEvaluationUtilisateur().coteUtilisateur);
+        System.out.println("***************coteServiceMoyenne: " + utilisateur1.getEvaluationUtilisateur().coteTypeServicesMoyenne);
+        System.out.println("***************coteService: " + utilisateur1.listeServices.get(0).evaluationService.coteService);
         //assertTrue(utilisateur.listeServices.get(0).evaluationService.coteService == 90);
         orchestrateur.supprimerCompte(nomUtilisateur);
         orchestrateur.supprimerCompte("Client");
