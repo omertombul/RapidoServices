@@ -1,4 +1,4 @@
-package inm5001.rapidoservices.baseDonnees;
+package inm5001.rapidoservices.baseDonnees2;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
