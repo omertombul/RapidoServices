@@ -3,7 +3,7 @@ package inm5001.rapidoservices;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import inm5001.rapidoservices.baseDonnees2.BdApi;
+import inm5001.rapidoservices.baseDonnees.BdApi;
 import inm5001.rapidoservices.recherche.RechercheServices;
 import inm5001.rapidoservices.service.EvaluationService;
 import inm5001.rapidoservices.service.TypeServices;
