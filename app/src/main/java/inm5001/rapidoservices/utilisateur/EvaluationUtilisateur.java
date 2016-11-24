@@ -2,8 +2,8 @@ package inm5001.rapidoservices.utilisateur;
 
 import inm5001.rapidoservices.MyException;
 
-import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCENT;
-import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTEUTILISATEUR_ENTREZEROETCENT;
+import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCINQ;
+import static inm5001.rapidoservices.utilisateur.ConstanteEvaluationUtilisateur.MESSAGE_COTEUTILISATEUR_ENTREZEROETCINQ;
 
 /**
  * Created by Francis Bernier on 2016-11-17.
@@ -48,8 +48,8 @@ public class EvaluationUtilisateur {
 
 //deuxième niveau d'abstraction
     private void validerValeurCoteUtilisateurEntreZeroEtCent(float coteUtilisateur) throws MyException {
-        if (coteUtilisateur < 0 || coteUtilisateur > 100) {
-            MyException e = new MyException(MESSAGE_COTEUTILISATEUR_ENTREZEROETCENT);
+        if (coteUtilisateur < 0 || coteUtilisateur > 5) {
+            MyException e = new MyException(MESSAGE_COTEUTILISATEUR_ENTREZEROETCINQ);
             throw e;
         }
     }
@@ -63,8 +63,8 @@ public class EvaluationUtilisateur {
     }
 
     private void validerValeurCoteTypeServicesMoyenneEntreZeroEtCent(float coteTypeServicesMoyenne) throws MyException {
-        if (coteTypeServicesMoyenne < 0 || coteTypeServicesMoyenne > 100) {
-            MyException e = new MyException(MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCENT);
+        if (coteTypeServicesMoyenne < 0 || coteTypeServicesMoyenne > 5) {
+            MyException e = new MyException(MESSAGE_COTETYPESERVICESMOYENNE_ENTREZEROETCINQ);
             throw e;
         }
     }

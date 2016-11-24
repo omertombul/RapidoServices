@@ -157,11 +157,11 @@ public class Orchestrateur {
 
         return listeInformationsDeContact;
     }
-/*
+
     public ArrayList<RechercheACoter> obtenirMesEvaluationsADonner(String nomUtilisateur) {
         return bd.getRechercheACoter(nomUtilisateur);
     }
-*/
+
     public void faireUneEvaluation(String nomUtilisateurCoter, String nomUtilisateurCoteur, String nomSservice, float coteService) throws MyException, SQLException {
         evaluationService = new EvaluationService(0, 0);
         evaluationService.validationCoteService(coteService);

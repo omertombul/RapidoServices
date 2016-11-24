@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import inm5001.rapidoservices.MyException;
 
-import static inm5001.rapidoservices.service.ConstanteEvaluationService.MESSAGE_COTESERVICE_ENTREZEROETCENT;
+import static inm5001.rapidoservices.service.ConstanteEvaluationService.MESSAGE_COTESERVICE_ENTREZEROETCINQ;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -47,7 +47,7 @@ public class EvaluationServiceTest {
         try {
             evaluationService = new EvaluationService(-0.1f, nombreDEvaluationService);
         } catch (MyException e) {
-            estValider =  e.getMessage().equals(MESSAGE_COTESERVICE_ENTREZEROETCENT);
+            estValider =  e.getMessage().equals(MESSAGE_COTESERVICE_ENTREZEROETCINQ);
         }
         assertTrue(estValider);
     }
@@ -55,9 +55,9 @@ public class EvaluationServiceTest {
     @Test
     public void validerValeurCoteServiceEntreZeroEtCent2() throws Exception {
         try {
-            evaluationService = new EvaluationService(100.1f, nombreDEvaluationService);
+            evaluationService = new EvaluationService(5.1f, nombreDEvaluationService);
         } catch (MyException e) {
-            estValider =  e.getMessage().equals(MESSAGE_COTESERVICE_ENTREZEROETCENT);
+            estValider =  e.getMessage().equals(MESSAGE_COTESERVICE_ENTREZEROETCINQ);
         }
         assertTrue(estValider);
     }
@@ -83,7 +83,7 @@ public class EvaluationServiceTest {
         } try {
             evaluationService.validationCoteService(-1.0f);
         } catch (Exception e) {
-            estValider =  e.getMessage().equals(MESSAGE_COTESERVICE_ENTREZEROETCENT);
+            estValider =  e.getMessage().equals(MESSAGE_COTESERVICE_ENTREZEROETCINQ);
         }
         assertTrue(estValider);
     }
