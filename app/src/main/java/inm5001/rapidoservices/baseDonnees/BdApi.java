@@ -401,10 +401,9 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
         try {
             RSservices.beforeFirst();
             while (RSservices.next()) {
-                EvaluationService E = new EvaluationService(5,5);
 //System.out.println("la cote retourne par le serveur est:" + RSservices.getFloat("cote") + ".");
-                //EvaluationService E = new EvaluationService(RSservices.getFloat("cote"),
-                 //       RSservices.getInt("nbCote"));
+                EvaluationService E = new EvaluationService(RSservices.getFloat("cote"),
+                        RSservices.getInt("nbCote"));
 //System.out.println(E.coteService);
                 TypeServices S = new TypeServices(RSservices.getFloat("prixHorraire"),
                         RSservices.getFloat("prixFixe"), RSservices.getString("nomService"),
