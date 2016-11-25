@@ -151,7 +151,6 @@ public class BdApi {
     // level 2 abstraction
     private String SQLaddUser(Utilisateur U) {
         byte diponibilite = (byte) (U.disponible?1:0);
-
         String SQL;
         String SQL_DEBUT = "INSERT INTO utilisateur VALUES('";
         String SQL_SEPARATEUR = "' ,'";
@@ -175,7 +174,11 @@ public class BdApi {
 
     private String SQLgetUser(String nomUtilisateur) {
         String SQL;
-        String SQL_DEBUT = "SELECT * FROM utilisateur WHERE idUsager = '";
+        //String SQL_DEBUT = "SELECT * FROM utilisateur WHERE idUsager = '"; // need test before del
+        String SQL_DEBUT = "SELECT idUsager, motDePasse, nom, prenom, courriel, disponibilite, " +
+                "ifnull(coteClient, 0) as coteClient, nbCoteClient, ifnull(coteFournisseur, 0) " +
+                "as coteFournisseur, nbCoteFournisseur, coordonnees, noTelephone " +
+                "FROM utilisateur WHERE idUsager = '"; // 'ifnull' handles NULL as 0 from DB table
         String SQL_FIN = "';";
         SQL = SQL_DEBUT + nomUtilisateur + SQL_FIN;
 //System.out.println("    String SQL getUser: " + SQL); // shows SQL String
