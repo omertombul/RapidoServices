@@ -917,28 +917,87 @@ public class OrchestrateurTest {
     }
 /*
     @Test
-    public void obtenirMesEvaluationsADonner() {
-
-    }
-*/
-    //L'objet utilisateur retourner par BdApi ne semble pas avoir les informations de L'évaluation service
-    @Test
-    public void faireUneEvaluation() throws MyException, SQLException {
+    public void obtenirMesEvaluationsADonner() throws MyException, SQLException {
         utilisateur1.listeServices.add(service);
+        utilisateur1.listeServices.add(service2);
         orchestrateur.creerUtilisateur(utilisateur1);
         orchestrateur.creerUtilisateur(utilisateur2);
         RechercheServices rechercheServices = new RechercheServices(utilisateur1, "Plombier");
         orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur);
+        rechercheServices = new RechercheServices(utilisateur1, "Electricien");
+        //problème lorsque je tente d'accepter une deuxième transaction entre deux même fournisseur/client mais pour un autre service.
+        //...causé par une contrainte d'intégrité côté BD
+        orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur);
 
-        orchestrateur.faireUneEvaluation(utilisateur1.identifiant.nomUtilisateur, utilisateur2.identifiant.nomUtilisateur, "Plombier", 3.5f);
+        assertTrue(orchestrateur.obtenirMesEvaluationsADonner(utilisateur2.identifiant.nomUtilisateur).size() == 2);
+        orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
+        orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
+    }
+*/
+    @Test
+    public void faireUneEvaluationCoteUtilisateur() throws MyException, SQLException {
+        orchestrateur.creerUtilisateur(utilisateur1);
+        orchestrateur.creerUtilisateur(utilisateur2);
+        orchestrateur.ajouterOffreDeService(utilisateur1.identifiant.nomUtilisateur, service);
+        utilisateur1 = orchestrateur.recupererUtilisateur(utilisateur1.identifiant.nomUtilisateur);
+        RechercheServices rechercheServices = new RechercheServices(utilisateur1, service.getNomSservice());
+        orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur);
+
+        orchestrateur.faireUneEvaluation(utilisateur2.identifiant.nomUtilisateur, utilisateur1.identifiant.nomUtilisateur, "Client", 4.1f);
+
+        utilisateur1 = orchestrateur.recupererUtilisateur(utilisateur1.identifiant.nomUtilisateur);
+        utilisateur2 = orchestrateur.recupererUtilisateur(utilisateur2.identifiant.nomUtilisateur);
+        System.out.println("***************coteUtilisateur: " + utilisateur2.getEvaluationUtilisateur().coteUtilisateur);
+        assertTrue(utilisateur2.getEvaluationUtilisateur().coteUtilisateur == 4.1f);
+        orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
+        orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
+    }
+
+    @Test
+    public void faireUneEvaluationCoteServiceMoyenne() throws MyException, SQLException {
+        orchestrateur.creerUtilisateur(utilisateur1);
+        orchestrateur.creerUtilisateur(utilisateur2);
+        orchestrateur.creerUtilisateur(utilisateur3);
+        orchestrateur.ajouterOffreDeService(utilisateur1.identifiant.nomUtilisateur, service);
+        utilisateur1 = orchestrateur.recupererUtilisateur(utilisateur1.identifiant.nomUtilisateur);
+        RechercheServices rechercheServices = new RechercheServices(utilisateur1, service.getNomSservice());
+
+        orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur);
+        orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur3.identifiant.nomUtilisateur);
+
+        orchestrateur.faireUneEvaluation(utilisateur1.identifiant.nomUtilisateur, utilisateur2.identifiant.nomUtilisateur, service.getNomSservice(), 1.2f);
+        orchestrateur.faireUneEvaluation(utilisateur1.identifiant.nomUtilisateur, utilisateur3.identifiant.nomUtilisateur, service.getNomSservice(), 5f);
+
+        utilisateur1 = orchestrateur.recupererUtilisateur(utilisateur1.identifiant.nomUtilisateur);
+        assertTrue(utilisateur1.getEvaluationUtilisateur().coteTypeServicesMoyenne == 3.1f);
+        orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
+        orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
+        orchestrateur.supprimerCompte(utilisateur3.identifiant.nomUtilisateur);
+    }
+/*
+    @Test
+    public void faireUneEvaluationCoteService() throws MyException, SQLException {
+        orchestrateur.creerUtilisateur(utilisateur1);
+        orchestrateur.creerUtilisateur(utilisateur2);
+        orchestrateur.ajouterOffreDeService(utilisateur1.identifiant.nomUtilisateur, service);
+        utilisateur1 = orchestrateur.recupererUtilisateur(utilisateur1.identifiant.nomUtilisateur);
+        RechercheServices rechercheServices = new RechercheServices(utilisateur1, service.getNomSservice());
+//erreur au niveau BD, ajoute un compte dans nmCote et nmCoteFournisseur, mais devrait pas...hypothese...doit compter la deuxième ligne (Client)
+        orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur);
+
+        orchestrateur.faireUneEvaluation(utilisateur1.identifiant.nomUtilisateur, utilisateur2.identifiant.nomUtilisateur, service.getNomSservice(), 3.5f);
+        orchestrateur.faireUneEvaluation(utilisateur1.identifiant.nomUtilisateur, utilisateur2.identifiant.nomUtilisateur, service.getNomSservice(), 3.7f);
+
+        utilisateur1 = orchestrateur.recupererUtilisateur(utilisateur1.identifiant.nomUtilisateur);
+        utilisateur2 = orchestrateur.recupererUtilisateur(utilisateur2.identifiant.nomUtilisateur);
         System.out.println("***************coteUtilisateur: " + utilisateur2.getEvaluationUtilisateur().coteUtilisateur);
         System.out.println("***************coteServiceMoyenne: " + utilisateur1.getEvaluationUtilisateur().coteTypeServicesMoyenne);
         System.out.println("***************coteService: " + utilisateur1.listeServices.get(0).evaluationService.coteService);
         //assertTrue(utilisateur.listeServices.get(0).evaluationService.coteService == 3.5);
-        orchestrateur.supprimerCompte(nomUtilisateur);
-        orchestrateur.supprimerCompte("Client");
+        orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
+        orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
     }
-
+*/
     @Test
     public void fauxPositif() throws Exception {
         assertTrue(false);
