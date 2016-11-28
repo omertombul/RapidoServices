@@ -39,9 +39,7 @@ public class AfficherSupprimerService extends Activity {
         setContentView(R.layout.activity_supservice);
         Intent intent = getIntent();
         final String us = intent.getStringExtra("userName");
-        final String se = intent.getStringExtra("Électricien");
-        final String plomb = intent.getStringExtra("Plombier");
-        final String menu = intent.getStringExtra("Menuisier");
+
         final String service = intent.getStringExtra("service");
         supprimer = (Button) findViewById(R.id.supprimerService);
         dispo = (ToggleButton) findViewById(R.id.toggleDispoService);
@@ -57,30 +55,21 @@ public class AfficherSupprimerService extends Activity {
                     user = o.recupererUtilisateur(us);
                     orchestrateur = o;
                     System.out.println("**************** nom :" +user.profile.nom);
-
+                    nom = (TextView) findViewById(R.id.nomServ);
+                    description = (TextView) findViewById(R.id.description);
+                    mail = (TextView) findViewById(R.id.mail);
+                    telephone = (TextView) findViewById(R.id.phone);
                     for (int i = 0; i < user.listeServices.size(); i++)
                     {
-                        nom = (TextView) findViewById(R.id.nomServ);
-                        description = (TextView) findViewById(R.id.description);
-                        mail = (TextView) findViewById(R.id.mail);
-                        telephone = (TextView) findViewById(R.id.phone);
-                        if (user.listeServices.get(i).getNomSservice().equals(se) ){
+
+
+                        if (user.listeServices.get(i).getNomSservice().equals(service) ) {
 
                             nom.setText(user.listeServices.get(i).getNomSservice());
                             description.setText(user.listeServices.get(i).getDescription());
                             mail.setText(user.listeServices.get(i).getCourriel());
                             telephone.setText(user.listeServices.get(i).getNoTelephone());
 
-                        }else if (user.listeServices.get(i).getNomSservice().equals(plomb)) {
-                            nom.setText(user.listeServices.get(i).getNomSservice());
-                            description.setText(user.listeServices.get(i).getDescription());
-                            mail.setText(user.listeServices.get(i).getCourriel());
-                            telephone.setText(user.listeServices.get(i).getNoTelephone());
-                        } else if (user.listeServices.get(i).getNomSservice().equals(menu)){
-                            nom.setText(user.listeServices.get(i).getNomSservice());
-                            description.setText(user.listeServices.get(i).getDescription());
-                            mail.setText(user.listeServices.get(i).getCourriel());
-                            telephone.setText(user.listeServices.get(i).getNoTelephone());
                         }
 
                     }
@@ -104,16 +93,13 @@ public class AfficherSupprimerService extends Activity {
 
 
                 try {
-
                     for (int i = 0; i < user.listeServices.size(); i++)
                     {
 
                         if (user.listeServices.get(i).getNomSservice().equals(service) ){
 
                             orchestrateur.retirerOffreDeService(us, user.listeServices.get(i));
-
-
-                    }
+                        }
                     }
 
                     Intent profil = new Intent(AfficherSupprimerService.this, ProfilActivity.class);
@@ -132,14 +118,14 @@ public class AfficherSupprimerService extends Activity {
 
                     try {
                         // The toggle is enabled
-                        orchestrateur.modifierDisponibiliteService(us, se, true);
+                        orchestrateur.modifierDisponibiliteService(us, service, true);
                     }catch(SQLException e) {
                         System.out.println(e.getMessage());
                     }
                 } else {
 
                     try{
-                        orchestrateur.modifierDisponibiliteService(us, se, false);
+                        orchestrateur.modifierDisponibiliteService(us, service, false);
                     }catch(SQLException e){
                         System.out.println(e.getMessage());
                     }

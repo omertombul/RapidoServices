@@ -94,8 +94,18 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
                     courriel.setText(u.profile.adresseCourriel);
                     telephone.setText(u.profile.numeroTelephone);
                     toggle.setChecked(u.disponible);
-                } catch (Exception e) {
-                    System.out.println(e);
+                    for (int i = 0; i < user.listeServices.size(); i++) {
+                        if (user.listeServices.get(i).getNomSservice().equals("Électricien")){
+                            toggleElectricien.setChecked(user.listeServices.get(i).getDisponible());
+                        }else if(user.listeServices.get(i).getNomSservice().equals("Plombier")){
+                            togglePlombier.setChecked((user.listeServices.get(i).getDisponible()));
+                        }else if(user.listeServices.get(i).getNomSservice().equals("Menuisier")){
+                            toggleMenuisier.setChecked(user.listeServices.get(i).getDisponible());
+                        }
+                    }
+
+                    } catch (Exception e) {
+                    System.out.println(e.getMessage());
                 }
             }
         });
