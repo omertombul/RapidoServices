@@ -75,7 +75,7 @@
         android:text="Disponibilite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/toggleDispo" />
+        android:id="@+id/toggleDispoService" />
 
     <Button
         android:text="Supprimer"

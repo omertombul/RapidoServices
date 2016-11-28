@@ -18,9 +18,8 @@ public interface ConstanteAbstraiteServices {
 
     String MESSAGE_VILLE_MAX_QUARANTE_CARACTERES = "La ville ne doit pas contenir plus de quarante caractères" + MESSAGE_AUTRE_CHOIX;
 
-    String MESSAGE_NOTELEPHONE = "Le numéro de téléphone ";
-    String MESSAGE_NOTELEPHONE_SEULEMENT_CHIFFRE = MESSAGE_NOTELEPHONE + "ne doit être constitué que de chiffres" + MESSAGE_AUTRE_CHOIX;
-    String MESSAGE_NOTELEPHONE_DIX_CHIFFRE = MESSAGE_NOTELEPHONE + "doit être constitué de 10 chiffres" + MESSAGE_AUTRE_CHOIX;
+    String MESSAGE_NUMEROTELEPHONE_FORMAT_VALIDE = "Ceci n'est pas un format de numéro de téléphone valide" + MESSAGE_AUTRE_CHOIX;
+    String patternNumeroTelephone = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
 
     String MESSAGE_COURRIEL_FORMAT_VALIDE = "Ceci n'est pas une adresse de courriel valide" + MESSAGE_AUTRE_CHOIX;
     String MESSAGE_COURRIEL_MAX_DEUXCENTCINQUANTESIX_CARACTERES = "L'adresse courriel ne doit pas contenir plus de deux cent cinquante-six caractères" + MESSAGE_AUTRE_CHOIX;

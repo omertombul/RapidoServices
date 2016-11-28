@@ -30,6 +30,7 @@ public class AfficherSupprimerService extends Activity {
     Button supprimer = null;
     ToggleButton dispo = null;
     Orchestrateur orchestrateur = null;
+    Utilisateur user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,50 +41,59 @@ public class AfficherSupprimerService extends Activity {
         final String us = intent.getStringExtra("userName");
         final String se = intent.getStringExtra("Électricien");
         final String plomb = intent.getStringExtra("Plombier");
+        final String menu = intent.getStringExtra("Menuisier");
+        final String service = intent.getStringExtra("service");
         supprimer = (Button) findViewById(R.id.supprimerService);
-        dispo = (ToggleButton) findViewById(R.id.toggleDispo);
+        dispo = (ToggleButton) findViewById(R.id.toggleDispoService);
 
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 Orchestrateur o = new Orchestrateur();
-                orchestrateur = o;
-                Utilisateur u;
-                try {
-                    u = o.recupererUtilisateur(us);
-                    System.out.println("**************** nom :" +u.profile.nom);
 
-                    for (int i = 0; i < u.listeServices.size(); i++)
+                
+                try {
+                    user = o.recupererUtilisateur(us);
+                    orchestrateur = o;
+                    System.out.println("**************** nom :" +user.profile.nom);
+
+                    for (int i = 0; i < user.listeServices.size(); i++)
                     {
                         nom = (TextView) findViewById(R.id.nomServ);
                         description = (TextView) findViewById(R.id.description);
                         mail = (TextView) findViewById(R.id.mail);
                         telephone = (TextView) findViewById(R.id.phone);
-                        if (se.equals(u.listeServices.get(i).getNomSservice()) ){
+                        if (user.listeServices.get(i).getNomSservice().equals(se) ){
 
-                            nom.setText(u.listeServices.get(i).getNomSservice());
-                            description.setText(u.listeServices.get(i).getDescription());
-                            mail.setText(u.listeServices.get(i).getCourriel());
-                            telephone.setText(u.listeServices.get(i).getNoTelephone());
+                            nom.setText(user.listeServices.get(i).getNomSservice());
+                            description.setText(user.listeServices.get(i).getDescription());
+                            mail.setText(user.listeServices.get(i).getCourriel());
+                            telephone.setText(user.listeServices.get(i).getNoTelephone());
 
-                        } else if (plomb.equals(u.listeServices.get(i).getNomSservice())) {
-                            nom.setText(u.listeServices.get(i).getNomSservice());
-                            description.setText(u.listeServices.get(i).getDescription());
-                            mail.setText(u.listeServices.get(i).getCourriel());
-                            telephone.setText(u.listeServices.get(i).getNoTelephone());
+                        }else if (user.listeServices.get(i).getNomSservice().equals(plomb)) {
+                            nom.setText(user.listeServices.get(i).getNomSservice());
+                            description.setText(user.listeServices.get(i).getDescription());
+                            mail.setText(user.listeServices.get(i).getCourriel());
+                            telephone.setText(user.listeServices.get(i).getNoTelephone());
+                        } else if (user.listeServices.get(i).getNomSservice().equals(menu)){
+                            nom.setText(user.listeServices.get(i).getNomSservice());
+                            description.setText(user.listeServices.get(i).getDescription());
+                            mail.setText(user.listeServices.get(i).getCourriel());
+                            telephone.setText(user.listeServices.get(i).getNoTelephone());
                         }
 
                     }
                     //courriel = (TextView) findViewById(R.id.courrielProfil);
                     //telephone = (TextView) findViewById(R.id.telProfil);
                     //prenom = (TextView) findViewById(R.id.prenomProfil);
-                    //prenom.setText(u.profile.prenom);
-                    //courriel.setText(u.profile.adresseCourriel);
-                    //telephone.setText(u.profile.numeroTelephone);
-                    //toggle.setChecked(u.disponible);
+                    //prenom.setText(user.profile.prenom);
+                    //courriel.setText(user.profile.adresseCourriel);
+                    //telephone.setText(user.profile.numeroTelephone);
+                    //toggle.setChecked(user.disponible);
                 } catch (Exception e) {
-                    System.out.println(e);
+                    System.out.println("Dans le try catch du for ******");
+                    System.out.println(e.getMessage());
                 }
             }
         });
@@ -91,21 +101,21 @@ public class AfficherSupprimerService extends Activity {
         supprimer.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Orchestrateur o = new Orchestrateur();
-                Utilisateur u;
+
+
                 try {
-                    u = o.recupererUtilisateur(us);
-                    for (int i = 0; i < u.listeServices.size(); i++)
+
+                    for (int i = 0; i < user.listeServices.size(); i++)
                     {
 
-                        if (se.equals(u.listeServices.get(i).getNomSservice()) ){
-                             o.retirerOffreDeService(us, u.listeServices.get(i));
+                        if (user.listeServices.get(i).getNomSservice().equals(service) ){
 
-                        } else if (plomb.equals(u.listeServices.get(i).getNomSservice())){
-                            o.retirerOffreDeService(us,u.listeServices.get(i));
-                        }
+                            orchestrateur.retirerOffreDeService(us, user.listeServices.get(i));
+
 
                     }
+                    }
+
                     Intent profil = new Intent(AfficherSupprimerService.this, ProfilActivity.class);
                     startActivity(profil);
                 }catch(MyException e){

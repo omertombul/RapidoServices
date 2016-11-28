@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Le Service "
+        android:text="Service Offert"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewTitleActiviteTrouver"
@@ -20,7 +20,7 @@
         android:id="@+id/textViewNomTrouver" />
 
     <TextView
-        android:text="TextView"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewAfficheNomTrouver" />
@@ -32,7 +32,7 @@
         android:id="@+id/textViewVilleTrouver" />
 
     <TextView
-        android:text="TextView"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewAfficheVilleTrouver" />
@@ -44,7 +44,7 @@
         android:id="@+id/textViewTauxTrouver" />
 
     <TextView
-        android:text="TextView"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewAfficheTauxTrouver" />
@@ -56,7 +56,7 @@
         android:id="@+id/textViewDescriTrouver" />
 
     <TextView
-        android:text="TextView"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewAfficheDescriTrouver" />
