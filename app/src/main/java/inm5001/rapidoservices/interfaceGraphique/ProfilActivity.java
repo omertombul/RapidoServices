@@ -253,6 +253,7 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
                 Intent serviceElectricien = new Intent(ProfilActivity.this, AfficherSupprimerService.class);
                 serviceElectricien.putExtra("userName", userName);
                 serviceElectricien.putExtra("Électricien",electricienText);
+                serviceElectricien.putExtra("service",electricienText);
                 startActivity(serviceElectricien);
             }
         });
@@ -263,6 +264,7 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
                 Intent servicePlombier = new Intent(ProfilActivity.this, AfficherSupprimerService.class);
                 servicePlombier.putExtra("userName", userName);
                 servicePlombier.putExtra("Plombier",plombierText);
+                servicePlombier.putExtra("service",plombierText);
                 startActivity(servicePlombier);
             }
         });
@@ -273,6 +275,7 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
                 Intent serviceMenusier = new Intent(ProfilActivity.this, AfficherSupprimerService.class);
                 serviceMenusier.putExtra("userName", userName);
                 serviceMenusier.putExtra("Menuisier",menuisierText);
+                serviceMenusier.putExtra("service",menuisierText);
                 startActivity(serviceMenusier);
             }
         });
