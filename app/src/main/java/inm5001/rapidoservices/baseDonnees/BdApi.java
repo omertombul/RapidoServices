@@ -365,7 +365,7 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
     private String SQLgetACoter(String nomUtilisateur){
         String SQL;
         String SQL_DEBUT = "SELECT * FROM cotesServices WHERE gradingUserId = '";
-        String SQL_AND = "' and cote = 'NULL'";
+        String SQL_AND = "' and cote is null";
         String SQL_FIN = ";";
 
         SQL = SQL_DEBUT + nomUtilisateur + SQL_AND + SQL_FIN;
