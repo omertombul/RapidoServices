@@ -120,9 +120,8 @@ public class BdApi {
         return UserAndServicesArray;
     }
 
-    public void addIntoCoteService(String gradedUserId, String gradingUserId, String nomService,
-                                   float grade) throws SQLException{
-        String SQL = SQLaddIntoCoteService(gradedUserId, gradingUserId, nomService, grade);
+    public void addIntoCoteService(String gradedUserId, String gradingUserId, String nomService) throws SQLException{
+        String SQL = SQLaddIntoCoteService(gradedUserId, gradingUserId, nomService);
         BdConnection DB = new BdConnection(SQL);
         DB.insertToDB();
         DB.closeConnection();
@@ -320,20 +319,22 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
         return SQL;
     }
 
-    private String SQLaddIntoCoteService(String gradedUserId, String gradingUserId, String nomService,
-                                         float grade){
+    private String SQLaddIntoCoteService(String gradedUserId, String gradingUserId,
+                                         String nomService){
         String SQL;
         String SQL_DEBUT = "INSERT INTO cotesServices VALUES('";
         String SQL_SEPARATEUR = "' ,'";
-        String SQL_FIN_INSERT = "') ";
+        String SQL_GRADE = "NULL";
+        String SQL_FIN_INSERT = ") ";
         String SQL_ON_DUPLICATE = "ON DUPLICATE gradedUserId=values(gradedUserId), " +
                 "gradingUserId=values(gradingUserId), nomService=values(nomService), " +
                 "cote=values(cote);";
+
         SQL = SQL_DEBUT;
         SQL += gradedUserId + SQL_SEPARATEUR;
         SQL += gradingUserId + SQL_SEPARATEUR;
-        SQL += nomService + SQL_SEPARATEUR;
-        SQL += grade + SQL_FIN_INSERT;
+        SQL += nomService + "', ";
+        SQL += SQL_GRADE + SQL_FIN_INSERT;
         SQL += SQL_ON_DUPLICATE;
 //System.out.println(" **addIntoCoteService** SQL is: " + SQL); // shows SQL String
         return SQL;
