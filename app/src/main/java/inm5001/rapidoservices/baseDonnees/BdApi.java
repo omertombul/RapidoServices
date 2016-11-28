@@ -326,7 +326,7 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
         String SQL_SEPARATEUR = "' ,'";
         String SQL_GRADE = "NULL";
         String SQL_FIN_INSERT = ") ";
-        String SQL_ON_DUPLICATE = "ON DUPLICATE gradedUserId=values(gradedUserId), " +
+        String SQL_ON_DUPLICATE = "ON DUPLICATE KEY UPDATE gradedUserId=values(gradedUserId), " +
                 "gradingUserId=values(gradingUserId), nomService=values(nomService), " +
                 "cote=values(cote);";
 
@@ -365,7 +365,7 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
     private String SQLgetACoter(String nomUtilisateur){
         String SQL;
         String SQL_DEBUT = "SELECT * FROM cotesServices WHERE gradingUserId = '";
-        String SQL_AND = "' and cote = 'NULL'";
+        String SQL_AND = "' and cote is null";
         String SQL_FIN = ";";
 
         SQL = SQL_DEBUT + nomUtilisateur + SQL_AND + SQL_FIN;
