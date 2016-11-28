@@ -60,7 +60,6 @@ public class OrchestrateurTest {
     private String nomSservice;
     private boolean disponibleService;
     private String ville;
-    private byte cote;
     private String numeroTelephoneService;
     private String adresseCourrielService;
     private String description;
@@ -128,17 +127,17 @@ public class OrchestrateurTest {
         disponibleUtilisateur = false;
         disponibleService = false;
         ville = "Montreal";
-        cote = 2;
         numeroTelephoneService = "5144444444";
         adresseCourrielService = "plomberie@plomberi.com";
         description = "Repare les tuyeaux";
         tauxHorraire = 14.50f;
         prixFixe = 50.00f;
         service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, numeroTelephoneService,
-                adresseCourrielService, description);
+                adresseCourrielService, description, evaluationService1);
         service2 = new TypeServices(tauxHorraire, prixFixe, "Electricien", disponibleService, ville, numeroTelephoneService,
-                adresseCourrielService, description);
-
+                adresseCourrielService, description, evaluationService2);
+        service3 = new TypeServices(tauxHorraire, prixFixe, "Mixer", disponibleService, ville, numeroTelephoneService,
+                adresseCourrielService, description, evaluationService3);
     }
 
     @After
@@ -177,7 +176,6 @@ public class OrchestrateurTest {
         disponibleUtilisateur = false;
         disponibleService = false;
         ville = null;
-        cote = 0;
         numeroTelephoneService = null;
         adresseCourrielService = null;
         description = null;
@@ -185,6 +183,7 @@ public class OrchestrateurTest {
         prixFixe = 0;
         service = null;
         service2 = null;
+        service3 = null;
     }
 
     @Test
@@ -604,56 +603,113 @@ public class OrchestrateurTest {
 /*
     @Test
     public void rechercheDeServicesCoteUtilisateur() throws MyException, SQLException {
-        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur1,
-                motDePasse, listeServices, listeCompetences);
-        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur2,
-                motDePasse, listeServices, listeCompetences);
-        orchestrateur.creerUtilisateur(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile, nomUtilisateur3,
-                motDePasse, listeServices, listeCompetences);
-        service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
-                adresseCourrielService, description);
-        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
-                adresseCourrielService, description);
-        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
-                adresseCourrielService, description);
-        orchestrateur.ajouterOffreDeService(nomUtilisateur1, service);
-        orchestrateur.ajouterOffreDeService(nomUtilisateur1, service2);
-        orchestrateur.ajouterOffreDeService(nomUtilisateur1, service3);
-        orchestrateur.modifierDisponibiliteUsager(nomUtilisateur1, true);
-        //orchestrateur.modifierDisponibiliteService(nomUtilisateur1, service.getNomSservice(), true);
-        //orchestrateur.modifierDisponibiliteService(nomUtilisateur1, service2.getNomSservice(), true);
-        //orchestrateur.modifierDisponibiliteService(nomUtilisateur1, service3.getNomSservice(), true);
+        orchestrateur.creerUtilisateur(utilisateur1);
+        orchestrateur.creerUtilisateur(utilisateur2);
+        orchestrateur.creerUtilisateur(utilisateur3);
 
-        orchestrateur.ajouterOffreDeService(nomUtilisateur2, service);
-        orchestrateur.ajouterOffreDeService(nomUtilisateur2, service2);
-        orchestrateur.modifierDisponibiliteUsager(nomUtilisateur2, true);
-        //orchestrateur.modifierDisponibiliteService(nomUtilisateur2, service.getNomSservice(), true);
-        //orchestrateur.modifierDisponibiliteService(nomUtilisateur2, service2.getNomSservice(), true);
+        orchestrateur.ajouterOffreDeService(utilisateur1.identifiant.nomUtilisateur, service);
+        orchestrateur.ajouterOffreDeService(utilisateur2.identifiant.nomUtilisateur, service2);
+        orchestrateur.ajouterOffreDeService(utilisateur3.identifiant.nomUtilisateur, service3);
 
-        orchestrateur.ajouterOffreDeService(nomUtilisateur3, service2);
-        orchestrateur.ajouterOffreDeService(nomUtilisateur3, service3);
-        orchestrateur.modifierDisponibiliteUsager(nomUtilisateur3, true);
-        //orchestrateur.modifierDisponibiliteService(nomUtilisateur3, service2.getNomSservice(), true);
-        //orchestrateur.modifierDisponibiliteService(nomUtilisateur3, service3.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteUsager(utilisateur1.identifiant.nomUtilisateur, true);
+        orchestrateur.modifierDisponibiliteUsager(utilisateur2.identifiant.nomUtilisateur, true);
+        orchestrateur.modifierDisponibiliteUsager(utilisateur3.identifiant.nomUtilisateur, true);
+        orchestrateur.modifierDisponibiliteService(utilisateur1.identifiant.nomUtilisateur, service.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(utilisateur2.identifiant.nomUtilisateur, service2.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(utilisateur3.identifiant.nomUtilisateur, service3.getNomSservice(), true);
 
+        ArrayList<RechercheServices> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "", "", 3, 0, 0);
+        System.out.println("********************Size: " + listeResultatsRecherche.size());
+        //assertTrue(listeResultatsRecherche.size() == 2);
+        System.out.println("********************1: " + listeResultatsRecherche.get(0).getUtilisateur().getEvaluationUtilisateur().coteUtilisateur);
+        System.out.println("********************2: " + listeResultatsRecherche.get(1).getUtilisateur().getEvaluationUtilisateur().coteUtilisateur);
+        //assertTrue(listeResultatsRecherche.get(0).getUtilisateur().getEvaluationUtilisateur().coteUtilisateur == 1);
+        //assertTrue(listeResultatsRecherche.get(0).getUtilisateur().getEvaluationUtilisateur().coteUtilisateur == 3);
 
-        ArrayList<RechercheServices> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "", "", 0, 3.5f, 0);
-        //assertTrue(listeResultatsRecherche.get(0).getUtilisateur().getEvaluationUtilisateur().coteUtilisateur == 3.5);
-        assertTrue(listeResultatsRecherche.size() == 2);
-        orchestrateur.supprimerCompte(nomUtilisateur);
+        orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
+        orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
+        orchestrateur.supprimerCompte(utilisateur3.identifiant.nomUtilisateur);
     }
 
     @Test
     public void rechercheDeServicesCoteServicesMoyenne() throws MyException, SQLException {
+        orchestrateur.creerUtilisateur(utilisateur1);
+        orchestrateur.creerUtilisateur(utilisateur2);
+        orchestrateur.creerUtilisateur(utilisateur3);
 
+        orchestrateur.ajouterOffreDeService(utilisateur1.identifiant.nomUtilisateur, service);
+        orchestrateur.ajouterOffreDeService(utilisateur1.identifiant.nomUtilisateur, service2);
+        orchestrateur.ajouterOffreDeService(utilisateur2.identifiant.nomUtilisateur, service2);
+        orchestrateur.ajouterOffreDeService(utilisateur3.identifiant.nomUtilisateur, service3);
+
+        orchestrateur.modifierDisponibiliteUsager(utilisateur1.identifiant.nomUtilisateur, true);
+        orchestrateur.modifierDisponibiliteUsager(utilisateur2.identifiant.nomUtilisateur, true);
+        orchestrateur.modifierDisponibiliteUsager(utilisateur3.identifiant.nomUtilisateur, true);
+        orchestrateur.modifierDisponibiliteService(utilisateur1.identifiant.nomUtilisateur, service.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(utilisateur2.identifiant.nomUtilisateur, service2.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(utilisateur3.identifiant.nomUtilisateur, service3.getNomSservice(), true);
+
+        ArrayList<RechercheServices> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "", "", 0, 3, 0);
+        System.out.println("********************Size: " + listeResultatsRecherche.size());
+        //assertTrue(listeResultatsRecherche.size() == 2);
+        System.out.println("********************1: " + listeResultatsRecherche.get(0).getUtilisateur().getEvaluationUtilisateur().coteTypeServicesMoyenne);
+        System.out.println("********************2: " + listeResultatsRecherche.get(1).getUtilisateur().getEvaluationUtilisateur().coteTypeServicesMoyenne);
+        //assertTrue(listeResultatsRecherche.get(0).getUtilisateur().getEvaluationUtilisateur().coteTypeServicesMoyenne == 1);
+        //assertTrue(listeResultatsRecherche.get(0).getUtilisateur().getEvaluationUtilisateur().coteTypeServicesMoyenne == 3);
+
+        orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
+        orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
+        orchestrateur.supprimerCompte(utilisateur3.identifiant.nomUtilisateur);
     }
 
     @Test
     public void rechercheDeServicesCoteService() throws MyException, SQLException {
+        orchestrateur.creerUtilisateur(utilisateur1);
+        orchestrateur.creerUtilisateur(utilisateur2);
+        orchestrateur.creerUtilisateur(utilisateur3);
 
+        orchestrateur.ajouterOffreDeService(utilisateur1.identifiant.nomUtilisateur, service);
+        orchestrateur.ajouterOffreDeService(utilisateur2.identifiant.nomUtilisateur, service2);
+        orchestrateur.ajouterOffreDeService(utilisateur3.identifiant.nomUtilisateur, service3);
+
+        orchestrateur.modifierDisponibiliteUsager(utilisateur1.identifiant.nomUtilisateur, true);
+        orchestrateur.modifierDisponibiliteUsager(utilisateur2.identifiant.nomUtilisateur, true);
+        orchestrateur.modifierDisponibiliteUsager(utilisateur3.identifiant.nomUtilisateur, true);
+        orchestrateur.modifierDisponibiliteService(utilisateur1.identifiant.nomUtilisateur, service.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(utilisateur2.identifiant.nomUtilisateur, service2.getNomSservice(), true);
+        orchestrateur.modifierDisponibiliteService(utilisateur3.identifiant.nomUtilisateur, service3.getNomSservice(), true);
+
+        utilisateur1 = orchestrateur.recupererUtilisateur(utilisateur1.identifiant.nomUtilisateur);
+        RechercheServices rechercheServices = new RechercheServices(utilisateur1, utilisateur1.listeServices.get(0).getNomSservice());
+        //ajoute 1 compte dans nbCote pour idUser1 (égale a 1), mais devrais pas....table servicesDUsager
+        orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur);
+        orchestrateur.faireUneEvaluation(utilisateur1.identifiant.nomUtilisateur, utilisateur2.identifiant.nomUtilisateur, utilisateur1.listeServices.get(0).getNomSservice(), 1);
+
+        utilisateur2 = orchestrateur.recupererUtilisateur(utilisateur2.identifiant.nomUtilisateur);
+        rechercheServices = new RechercheServices(utilisateur2, utilisateur2.listeServices.get(0).getNomSservice());
+        //transfer le compte de iduser1 a iduser2, augmente le compte de iduser2 (égale a 3) et réinitialise le compte de iduser1 a 0....table servicesDUsager
+        orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur1.identifiant.nomUtilisateur);
+        orchestrateur.faireUneEvaluation(utilisateur2.identifiant.nomUtilisateur, utilisateur1.identifiant.nomUtilisateur, utilisateur2.listeServices.get(0).getNomSservice(), 3);
+
+        utilisateur3 = orchestrateur.recupererUtilisateur(utilisateur3.identifiant.nomUtilisateur);
+        rechercheServices = new RechercheServices(utilisateur3, utilisateur3.listeServices.get(0).getNomSservice());
+        //transfer le compte de iduser2 a iduser3 et augment le compte de 1 (égale a 5)....table servicesDUsager
+        orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur1.identifiant.nomUtilisateur);
+        orchestrateur.faireUneEvaluation(utilisateur3.identifiant.nomUtilisateur, utilisateur1.identifiant.nomUtilisateur, utilisateur3.listeServices.get(0).getNomSservice(), 5);
+
+        ArrayList<RechercheServices> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "", "", 0, 0, 3);
+        System.out.println("********************Size: " + listeResultatsRecherche.size());
+        //assertTrue(listeResultatsRecherche.size() == 2);
+        System.out.println("********************1: " + listeResultatsRecherche.get(0).getUtilisateur().listeServices.get(0).evaluationService.coteService);
+        System.out.println("********************2: " + listeResultatsRecherche.get(1).getUtilisateur().listeServices.get(0).evaluationService.coteService);
+        //assertTrue(listeResultatsRecherche.get(0).getUtilisateur().listeServices.get(0) == 1);
+        //assertTrue(listeResultatsRecherche.get(0).getUtilisateur().listeServices.get(1) == 3);
+
+        orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
+        orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
+        orchestrateur.supprimerCompte(utilisateur3.identifiant.nomUtilisateur);
     }
 */
-
     @Test
     public void trierResultatRechercheTauxHorraire() throws MyException {
         service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
