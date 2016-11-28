@@ -325,12 +325,16 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
         String SQL;
         String SQL_DEBUT = "INSERT INTO cotesServices VALUES('";
         String SQL_SEPARATEUR = "' ,'";
-        String SQL_FIN = "');";
+        String SQL_FIN_INSERT = "') ";
+        String SQL_ON_DUPLICATE = "ON DUPLICATE gradedUserId=values(gradedUserId), " +
+                "gradingUserId=values(gradingUserId), nomService=values(nomService), " +
+                "cote=values(cote);";
         SQL = SQL_DEBUT;
         SQL += gradedUserId + SQL_SEPARATEUR;
         SQL += gradingUserId + SQL_SEPARATEUR;
         SQL += nomService + SQL_SEPARATEUR;
-        SQL += grade + SQL_FIN;
+        SQL += grade + SQL_FIN_INSERT;
+        SQL += SQL_ON_DUPLICATE;
 //System.out.println(" **addIntoCoteService** SQL is: " + SQL); // shows SQL String
         return SQL;
     }
