@@ -64,7 +64,7 @@ public class ProfileTest {
     public void ProfileNumeroTelephone() throws Exception {
         profile = new Profile(nom, prenom, numeroTelephone, adresseCourriel);
         String numeroTelephone = profile.numeroTelephone;
-        assertEquals(numeroTelephone, "5145972143");
+        assertEquals(numeroTelephone, "(514) 597-2143");
     }
 
     @Test
@@ -75,21 +75,21 @@ public class ProfileTest {
     }
 //NOM
     @Test
-    public void TraiterNomNull() throws MyException {
+    public void traiterNomNull() throws MyException {
         profile = new Profile(null, prenom, numeroTelephone, adresseCourriel);
         String nom = profile.nom;
         assertEquals(nom, "");
     }
 
     @Test
-    public void TraiterNomVide() throws MyException {
+    public void traiterNomVide() throws MyException {
         profile = new Profile("", prenom, numeroTelephone, adresseCourriel);
         String nom = profile.nom;
         assertEquals(nom, "");
     }
 
     @Test
-    public void ValiderNomSansChiffre() {
+    public void validerNomSansChiffre() {
         try {
             profile = new Profile("Franc1s", prenom, numeroTelephone, adresseCourriel);
         } catch (MyException e) {
@@ -99,7 +99,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void ValiderNomSansCaratereSpecial1() {
+    public void validerNomSansCaratereSpecial1() {
         try {
             profile = new Profile("Franc!s", prenom, numeroTelephone, adresseCourriel);
         } catch (MyException e) {
@@ -109,7 +109,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void ValiderNomSansCaratereSpecial2() {
+    public void validerNomSansCaratereSpecial2() {
         try {
             profile = new Profile("Francis B", prenom, numeroTelephone, adresseCourriel);
         } catch (MyException e) {
@@ -119,7 +119,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void ValiderNomSansCaratereSpecia3() {
+    public void validerNomSansCaratereSpecia3() {
         try {
             profile = new Profile("Francis-B", prenom, numeroTelephone, adresseCourriel);
         } catch (MyException e) {
@@ -129,21 +129,21 @@ public class ProfileTest {
     }
 //PRENOM
     @Test
-    public void TraiterPrenomNull() throws Exception {
+    public void traiterPrenomNull() throws Exception {
         profile = new Profile(nom, null, numeroTelephone, adresseCourriel);
         String prenom = profile.prenom;
         assertEquals(prenom, "");
     }
 
     @Test
-    public void TraiterPrenomVide() throws Exception {
+    public void traiterPrenomVide() throws Exception {
         profile = new Profile(nom, "", numeroTelephone, adresseCourriel);
         String prenom = profile.prenom;
         assertEquals(prenom, "");
     }
 
     @Test
-    public void ValiderPreomSansChiffre() {
+    public void validerPreomSansChiffre() {
         try {
             profile = new Profile(nom, "Bern1er", numeroTelephone, adresseCourriel);
         } catch (MyException e) {
@@ -153,7 +153,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void ValiderPrenomSansCaratereSpecial1() {
+    public void validerPrenomSansCaratereSpecial1() {
         try {
             profile = new Profile(nom, "Bern!er", numeroTelephone, adresseCourriel);
         } catch (MyException e) {
@@ -163,7 +163,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void ValiderPrenomSansCaratereSpecial2() {
+    public void validerPrenomSansCaratereSpecial2() {
         try {
             profile = new Profile(nom, "F Bernier", numeroTelephone, adresseCourriel);
         } catch (MyException e) {
@@ -173,7 +173,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void ValiderPrenomSansCaratereSpecia3() {
+    public void validerPrenomSansCaratereSpecia3() {
         try {
             profile = new Profile(nom, "B-Francis", numeroTelephone, adresseCourriel);
         } catch (MyException e) {
@@ -183,61 +183,114 @@ public class ProfileTest {
     }
 //NUMÉRO DE TÉLÉPHONE
     @Test
-    public void TraiterNumeroTelephoneNull() throws Exception {
+    public void traiterNumeroTelephoneNull() throws Exception {
         profile = new Profile(nom, prenom, null, adresseCourriel);
         String numeroTelephone = profile.numeroTelephone;
         assertEquals(numeroTelephone, "");
     }
 
     @Test
-    public void TraiterNumeroTelephoneVide() throws Exception {
+    public void traiterNumeroTelephoneVide() throws Exception {
         profile = new Profile(nom, prenom, "", adresseCourriel);
         String numeroTelephone = profile.numeroTelephone;
         assertEquals(numeroTelephone, "");
     }
 
     @Test
-    public void ValiderNumeroTelephoneSeulementChiffre1() {
+    public void validerNumeroTelephoneValides() {
+        estValider = true;
+
         try {
-            profile = new Profile(nom, prenom, "514 5972143", adresseCourriel);
+            profile = new Profile(nom, prenom, "1234567890", adresseCourriel);
+            profile = new Profile(nom, prenom, "123 4567890", adresseCourriel);
+            profile = new Profile(nom, prenom, "123 456 7890", adresseCourriel);
+            profile = new Profile(nom, prenom, "123-456-7890", adresseCourriel);
+            profile = new Profile(nom, prenom, "123-4567890", adresseCourriel);
+            profile = new Profile(nom, prenom, "123456-7890", adresseCourriel);
+            profile = new Profile(nom, prenom, "123-456 7890", adresseCourriel);
+            profile = new Profile(nom, prenom, "123 456-7890", adresseCourriel);
+            profile = new Profile(nom, prenom, "123.456.7890", adresseCourriel);
+            profile = new Profile(nom, prenom, "123456.7890", adresseCourriel);
+            profile = new Profile(nom, prenom, "123.4567890", adresseCourriel);
+            profile = new Profile(nom, prenom, "123.456 7890", adresseCourriel);
+            profile = new Profile(nom, prenom, "123 456.7890", adresseCourriel);
+            profile = new Profile(nom, prenom, "(123) 456 7890", adresseCourriel);
+            profile = new Profile(nom, prenom, "(123)456 7890", adresseCourriel);
+            profile = new Profile(nom, prenom, "(123) 4567890", adresseCourriel);
+            profile = new Profile(nom, prenom, "(123)4567890", adresseCourriel);
+            profile = new Profile(nom, prenom, "(123)-456-7890", adresseCourriel);
+            profile = new Profile(nom, prenom, "(123) 456-7890", adresseCourriel);
+            profile = new Profile(nom, prenom, "(123)-456 7890", adresseCourriel);
+            profile = new Profile(nom, prenom, "(123).456.7890", adresseCourriel);
+            profile = new Profile(nom, prenom, "(123) 456.7890", adresseCourriel);
+            profile = new Profile(nom, prenom, "(123).456 7890", adresseCourriel);
+            profile = new Profile(nom, prenom, "(123).456-7890", adresseCourriel);
         } catch (MyException e) {
-            estValider = e.getMessage().equals(MESSAGE_NUMEROTELEPHONE_SEULEMENT_CHIFFRE);
+            estValider = false;
         }
         assertTrue(estValider);
     }
 
     @Test
-    public void ValiderNumeroTelephoneSeulementChiffre2() {
+    public void validerNumeroTelephoneInvalide9Chiffres() {
         try {
-            profile = new Profile(nom, prenom, "514-5972143", adresseCourriel);
+            profile = new Profile(nom, prenom, "123456789", adresseCourriel);
         } catch (MyException e) {
-            estValider = e.getMessage().equals(MESSAGE_NUMEROTELEPHONE_SEULEMENT_CHIFFRE);
+            estValider = e.getMessage().equals(MESSAGE_NUMEROTELEPHONE_FORMAT_VALIDE);
         }
         assertTrue(estValider);
     }
 
     @Test
-    public void ValiderNumeroTelephoneSeulementChiffre3() {
+    public void validerNumeroTelephoneInvalide11Chiffres() {
         try {
-            profile = new Profile(nom, prenom, "5i45972143", adresseCourriel);
+            profile = new Profile(nom, prenom, "12345678900", adresseCourriel);
         } catch (MyException e) {
-            estValider = e.getMessage().equals(MESSAGE_NUMEROTELEPHONE_SEULEMENT_CHIFFRE);
+            estValider = e.getMessage().equals(MESSAGE_NUMEROTELEPHONE_FORMAT_VALIDE);
         }
         assertTrue(estValider);
     }
 
     @Test
-    public void ValiderNumeroTelephoneDixChiffre() {
+    public void validerNumeroTelephoneInvalideChar() {
         try {
-            profile = new Profile(nom, prenom, "514597214", adresseCourriel);
+            profile = new Profile(nom, prenom, "123x4567890", adresseCourriel);
         } catch (MyException e) {
-            estValider = e.getMessage().equals(MESSAGE_NUMEROTELEPHONE_DIX_CHIFFRE);
+            estValider = e.getMessage().equals(MESSAGE_NUMEROTELEPHONE_FORMAT_VALIDE);
         }
         assertTrue(estValider);
+    }
+
+    @Test
+    public void formaterNumeroTelephone1() throws MyException {
+        profile = new Profile(nom, prenom, "1234567890", adresseCourriel);
+
+        assertEquals(profile.numeroTelephone, "(123) 456-7890");
+    }
+
+    @Test
+    public void formaterNumeroTelephone2() throws MyException {
+        profile = new Profile(nom, prenom, "(123)4567890", adresseCourriel);
+
+        assertEquals(profile.numeroTelephone, "(123) 456-7890");
+    }
+
+    @Test
+    public void formaterNumeroTelephone3() throws MyException {
+        profile = new Profile(nom, prenom, "123-4567890", adresseCourriel);
+
+        assertEquals(profile.numeroTelephone, "(123) 456-7890");
+    }
+
+    @Test
+    public void formaterNumeroTelephone4() throws MyException {
+        profile = new Profile(nom, prenom, "123.4567890", adresseCourriel);
+
+        assertEquals(profile.numeroTelephone, "(123) 456-7890");
     }
 //ADRESSE COURRIEL
     @Test
-    public void ValiderAdresseCourrielPasNull() {
+    public void validerAdresseCourrielPasNull() {
         try {
             profile = new Profile(nom, prenom, numeroTelephone, null);
         } catch (MyException e) {
@@ -247,7 +300,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void ValiderAdresseCourrielFormatValide1() {
+    public void validerAdresseCourrielFormatValide1() {
         try {
             profile = new Profile(nom, prenom, numeroTelephone, "@hotmail.com");
         } catch (MyException e) {
@@ -257,7 +310,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void ValiderAdresseCourrielFormatValide2() {
+    public void validerAdresseCourrielFormatValide2() {
         try {
             profile = new Profile(nom, prenom, numeroTelephone, "francis@.com");
         } catch (MyException e) {
@@ -267,7 +320,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void ValiderAdresseCourrielFormatValide3() {
+    public void validerAdresseCourrielFormatValide3() {
         try {
             profile = new Profile(nom, prenom, numeroTelephone, "francishotmail.com");
         } catch (MyException e) {
@@ -277,7 +330,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void ValiderAdresseCourrielFormatValide4() {
+    public void validerAdresseCourrielFormatValide4() {
         try {
             profile = new Profile(nom, prenom, numeroTelephone, "francis@hotmailcom");
         } catch (MyException e) {
@@ -287,7 +340,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void ValiderAdresseCourrielFormatValide5() {
+    public void validerAdresseCourrielFormatValide5() {
         try {
             profile = new Profile(nom, prenom, numeroTelephone, "francis@hotmail.");
         } catch (MyException e) {
@@ -297,7 +350,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void ValiderAdresseCourrielFormatValide6() {
+    public void validerAdresseCourrielFormatValide6() {
         try {
             profile = new Profile(nom, prenom, numeroTelephone, "francis.bernier@hotmail.");
         } catch (MyException e) {
@@ -307,7 +360,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void ValiderAdresseCourrielFormatValide7() {
+    public void validerAdresseCourrielFormatValide7() {
         try {
             profile = new Profile(nom, prenom, numeroTelephone, "francis1@hotmail.com");
         } catch (MyException e) {

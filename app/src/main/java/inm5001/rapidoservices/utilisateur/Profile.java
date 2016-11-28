@@ -45,8 +45,8 @@ public class Profile {
 
     private void traiterNumeroTelephone(String numeroTelephone) throws MyException {
         if (numeroTelephone != null && !numeroTelephone.equals("")) {
-            ValiderNumeroTelephoneSeulementChiffre(numeroTelephone);
-            validerNumeroTelephoneDixChiffre(numeroTelephone);
+            validerNumeroTelephone(numeroTelephone);
+            numeroTelephone = formaterNumeroTelephone(numeroTelephone);
             affecterValeurNumeroTelephone(numeroTelephone);
         }
     }
@@ -93,18 +93,20 @@ public class Profile {
         this.prenom = prenom;
     }
 
-    private void ValiderNumeroTelephoneSeulementChiffre(String numeroTelephone) throws MyException {
-        if (Pattern.compile("[^0-9]+").matcher(numeroTelephone).find()) {
-            MyException e = new MyException(MESSAGE_NUMEROTELEPHONE_SEULEMENT_CHIFFRE);
+    private void validerNumeroTelephone(String numeroTelephone) throws MyException {
+        Pattern pattern = Pattern.compile(patternNumeroTelephone);
+
+        Matcher matcher = pattern.matcher(numeroTelephone);
+        if (!matcher.matches()) {
+            MyException e = new MyException(MESSAGE_NUMEROTELEPHONE_FORMAT_VALIDE);
             throw e;
         }
     }
 
-    private void validerNumeroTelephoneDixChiffre(String numeroTelephone) throws MyException {
-        if (numeroTelephone.length() != 10) {
-            MyException e = new MyException(MESSAGE_NUMEROTELEPHONE_DIX_CHIFFRE);
-            throw e;
-        }
+    private String formaterNumeroTelephone (String numeroTelephone) {
+        Pattern pattern = Pattern.compile(patternNumeroTelephone);
+        Matcher matcher = pattern.matcher(numeroTelephone);
+        return matcher.replaceFirst("($1) $2-$3");
     }
 
     private void affecterValeurNumeroTelephone(String numeroTelephone) {

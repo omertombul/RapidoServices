@@ -872,7 +872,7 @@ public class OrchestrateurTest {
         orchestrateur.creerUtilisateur(utilisateur2);
         RechercheServices rechercheServices = new RechercheServices(utilisateur1, "Plombier");
 
-        assertEquals(orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur).get(0), "5145972143");
+        assertEquals(orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur).get(0), "(514) 597-2143");
         orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
         orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
     }
@@ -930,6 +930,7 @@ public class OrchestrateurTest {
         orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur);
 
         assertTrue(orchestrateur.obtenirMesEvaluationsADonner(utilisateur2.identifiant.nomUtilisateur).size() == 2);
+        assertTrue(orchestrateur.obtenirMesEvaluationsADonner(utilisateur1.identifiant.nomUtilisateur).size() == 1);
         orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
         orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
     }
@@ -974,7 +975,7 @@ public class OrchestrateurTest {
         orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
         orchestrateur.supprimerCompte(utilisateur3.identifiant.nomUtilisateur);
     }
-/*
+
     @Test
     public void faireUneEvaluationCoteService() throws MyException, SQLException {
         orchestrateur.creerUtilisateur(utilisateur1);
@@ -997,7 +998,7 @@ public class OrchestrateurTest {
         orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
         orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
     }
-*/
+
     @Test
     public void fauxPositif() throws Exception {
         assertTrue(false);

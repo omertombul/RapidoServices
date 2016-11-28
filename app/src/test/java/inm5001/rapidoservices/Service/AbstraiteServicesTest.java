@@ -5,22 +5,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
-import inm5001.rapidoservices.utilisateur.Profile;
 
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_COURRIEL_FORMAT_VALIDE;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_DESCRIPTION_MAX_DEUXCENTCINQUANTESIX_CARACTERES;
-import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOMSERVICE_CARACTERE_SPECIAL;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOMSERVICE_MAX_QUINZE_CARACTERES;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOMSERVICE_NULL;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOTELEPHONE_DIX_CHIFFRE;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOTELEPHONE_SEULEMENT_CHIFFRE;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_VILLE_MAX_QUARANTE_CARACTERES;
-import static inm5001.rapidoservices.utilisateur.ConstanteProfile.MESSAGE_ADRESSECOURRIEL_FORMAT_VALIDE;
-import static inm5001.rapidoservices.utilisateur.ConstanteProfile.MESSAGE_ADRESSECOURRIEL_NULL;
-import static inm5001.rapidoservices.utilisateur.ConstanteProfile.MESSAGE_NOM_CARACTERE_SPECIAL;
-import static inm5001.rapidoservices.utilisateur.ConstanteProfile.MESSAGE_NUMEROTELEPHONE_DIX_CHIFFRE;
-import static inm5001.rapidoservices.utilisateur.ConstanteProfile.MESSAGE_NUMEROTELEPHONE_SEULEMENT_CHIFFRE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
