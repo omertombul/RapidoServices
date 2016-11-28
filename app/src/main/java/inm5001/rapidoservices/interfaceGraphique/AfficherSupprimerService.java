@@ -40,6 +40,7 @@ public class AfficherSupprimerService extends Activity {
         final String us = intent.getStringExtra("userName");
         final String se = intent.getStringExtra("Électricien");
         final String plomb = intent.getStringExtra("Plombier");
+        final String menu = intent.getStringExtra("Menuisier");
         supprimer = (Button) findViewById(R.id.supprimerService);
         dispo = (ToggleButton) findViewById(R.id.toggleDispo);
 
@@ -60,14 +61,19 @@ public class AfficherSupprimerService extends Activity {
                         description = (TextView) findViewById(R.id.description);
                         mail = (TextView) findViewById(R.id.mail);
                         telephone = (TextView) findViewById(R.id.phone);
-                        if (se.equals(u.listeServices.get(i).getNomSservice()) ){
+                        if (u.listeServices.get(i).getNomSservice().equals(se) ){
 
                             nom.setText(u.listeServices.get(i).getNomSservice());
                             description.setText(u.listeServices.get(i).getDescription());
                             mail.setText(u.listeServices.get(i).getCourriel());
                             telephone.setText(u.listeServices.get(i).getNoTelephone());
 
-                        } else if (plomb.equals(u.listeServices.get(i).getNomSservice())) {
+                        }else if (u.listeServices.get(i).getNomSservice().equals(plomb)) {
+                            nom.setText(u.listeServices.get(i).getNomSservice());
+                            description.setText(u.listeServices.get(i).getDescription());
+                            mail.setText(u.listeServices.get(i).getCourriel());
+                            telephone.setText(u.listeServices.get(i).getNoTelephone());
+                        } else if (u.listeServices.get(i).getNomSservice().equals(menu)){
                             nom.setText(u.listeServices.get(i).getNomSservice());
                             description.setText(u.listeServices.get(i).getDescription());
                             mail.setText(u.listeServices.get(i).getCourriel());
@@ -98,11 +104,14 @@ public class AfficherSupprimerService extends Activity {
                     for (int i = 0; i < u.listeServices.size(); i++)
                     {
 
-                        if (se.equals(u.listeServices.get(i).getNomSservice()) ){
+                        if (u.listeServices.get(i).getNomSservice().equals(se) ){
                              o.retirerOffreDeService(us, u.listeServices.get(i));
 
-                        } else if (plomb.equals(u.listeServices.get(i).getNomSservice())){
+                        } else if (u.listeServices.get(i).getNomSservice().equals(plomb)){
                             o.retirerOffreDeService(us,u.listeServices.get(i));
+
+                        } else if (u.listeServices.get(i).getNomSservice().equals(menu)){
+                            o.retirerOffreDeService(us, u.listeServices.get(i));
                         }
 
                     }

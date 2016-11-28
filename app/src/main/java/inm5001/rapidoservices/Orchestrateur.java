@@ -1,5 +1,7 @@
 package inm5001.rapidoservices;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -179,6 +181,15 @@ public class Orchestrateur {
     private void creationDeLignesCoteService(RechercheServices rechercheServices, String nomUtilisateurCoteur) throws SQLException {
         bd.addIntoCoteService(rechercheServices.getUtilisateur().identifiant.nomUtilisateur, nomUtilisateurCoteur,
                 rechercheServices.recupererService().getNomSservice(), 0);
+        /*try {
+            bd.addIntoCoteService(nomUtilisateurCoteur, rechercheServices.getUtilisateur().identifiant.nomUtilisateur, "Client", 0);
+        } catch (MySQLIntegrityConstraintViolationException e) {
+            System.out.println("*********************: " + e);
+            System.out.println("*********************: " + "com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException: Duplicate entry " + "\'" + "IDUSER2-IDUSER1-Client" + "\'" + " for key " + "\'" + "PRIMARY" + "\'");
+            if (!e.equals("com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException: Duplicate entry " + "\'" + "IDUSER2-IDUSER1-Client" + "\'" + " for key " + "\'" + "PRIMARY" + "\'")) {
+                throw e;
+            }
+        }*/
         bd.addIntoCoteService(nomUtilisateurCoteur, rechercheServices.getUtilisateur().identifiant.nomUtilisateur, "Client", 0);
     }
 //deuxième niveau d'abstraction

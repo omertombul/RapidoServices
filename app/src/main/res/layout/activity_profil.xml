@@ -193,17 +193,18 @@
                 android:layout_marginTop="-45dp"
                 android:id="@+id/ratingBarPlombier" />
 
+
             <Button
-                android:text="Mecano"
+                android:text="Menuisier"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/mecano" />
+                android:id="@+id/menuisier" />
 
             <ToggleButton
                 android:text="Disponibilite"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/switchDispoMecano"
+                android:id="@+id/switchDispoMenuisier"
                 tools:text="Disponibilite"
                 android:background="@drawable/btn_toggle"
                 android:layout_marginTop="-45dp"
@@ -215,55 +216,7 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="220dp"
                 android:layout_marginTop="-45dp"
-                android:id="@+id/ratingBarMecano" />
-
-            <Button
-                android:text="Technicien"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/technicien" />
-
-            <ToggleButton
-                android:text="Disponibilite"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/switchDispoTechnicien"
-                tools:text="Disponibilite"
-                android:background="@drawable/btn_toggle"
-                android:layout_marginTop="-45dp"
-                android:layout_marginLeft="125dp"
-                />
-
-            <RatingBar
-                android:layout_width="145dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="220dp"
-                android:layout_marginTop="-45dp"
-                android:id="@+id/ratingBarTechnicien" />
-
-            <Button
-                android:text="Menusier"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/menusier" />
-
-            <ToggleButton
-                android:text="Disponibilite"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/switchDispoMenusier"
-                tools:text="Disponibilite"
-                android:background="@drawable/btn_toggle"
-                android:layout_marginTop="-45dp"
-                android:layout_marginLeft="125dp"
-                />
-
-            <RatingBar
-                android:layout_width="145dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="220dp"
-                android:layout_marginTop="-45dp"
-                android:id="@+id/ratingBarMenusier" />
+                android:id="@+id/ratingBarMenuisier" />
 
 
 

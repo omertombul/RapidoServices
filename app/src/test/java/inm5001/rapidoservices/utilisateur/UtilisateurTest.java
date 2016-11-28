@@ -223,7 +223,7 @@ public class UtilisateurTest {
     public void UtilisateurProfileNumeroTelephone() throws Exception {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);
         numeroTelephoneProfile = utilisateur.profile.numeroTelephone;
-        assertEquals(numeroTelephoneProfile, "5145972143");
+        assertEquals(numeroTelephoneProfile, "(514) 597-2143");
     }
 
     @Test

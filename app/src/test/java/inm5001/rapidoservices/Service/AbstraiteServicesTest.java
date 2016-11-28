@@ -5,22 +5,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
+import inm5001.rapidoservices.utilisateur.ConstanteProfile;
 import inm5001.rapidoservices.utilisateur.Profile;
 
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_COURRIEL_FORMAT_VALIDE;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_DESCRIPTION_MAX_DEUXCENTCINQUANTESIX_CARACTERES;
-import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOMSERVICE_CARACTERE_SPECIAL;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOMSERVICE_MAX_QUINZE_CARACTERES;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOMSERVICE_NULL;
-import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOTELEPHONE_DIX_CHIFFRE;
-import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOTELEPHONE_SEULEMENT_CHIFFRE;
+import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NUMEROTELEPHONE_FORMAT_VALIDE;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_VILLE_MAX_QUARANTE_CARACTERES;
-import static inm5001.rapidoservices.utilisateur.ConstanteProfile.MESSAGE_ADRESSECOURRIEL_FORMAT_VALIDE;
-import static inm5001.rapidoservices.utilisateur.ConstanteProfile.MESSAGE_ADRESSECOURRIEL_NULL;
-import static inm5001.rapidoservices.utilisateur.ConstanteProfile.MESSAGE_NOM_CARACTERE_SPECIAL;
-import static inm5001.rapidoservices.utilisateur.ConstanteProfile.MESSAGE_NUMEROTELEPHONE_DIX_CHIFFRE;
-import static inm5001.rapidoservices.utilisateur.ConstanteProfile.MESSAGE_NUMEROTELEPHONE_SEULEMENT_CHIFFRE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -112,7 +105,7 @@ public class AbstraiteServicesTest {
     @Test
     public void AbstraiteServicesNoTelephone() throws MyException {
         service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, description);
-        assertEquals(service.getNoTelephone(), noTelephone);
+        assertEquals(service.getNoTelephone(), "(514) 444-4444");
     }
 
     @Test
@@ -240,53 +233,92 @@ public class AbstraiteServicesTest {
     }
 
     @Test
-    public void ValiderNumeroTelephoneSeulementChiffre1() {
+    public void validerNumeroTelephoneValides() {
+        estValider = true;
+
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "514 5972143", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "1234567890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "123 4567890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "123 456 7890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "123-456-7890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "123-4567890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "123456-7890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "123-456 7890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "123 456-7890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "123.456.7890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "123456.7890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "123.4567890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "123.456 7890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "123 456.7890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "(123) 456 7890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "(123)456 7890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "(123) 4567890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "(123)4567890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "(123)-456-7890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "(123) 456-7890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "(123)-456 7890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "(123).456.7890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "(123) 456.7890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "(123).456 7890", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "(123).456-7890", courriel, description);
         } catch (MyException e) {
-            estValider = e.getMessage().equals(MESSAGE_NOTELEPHONE_SEULEMENT_CHIFFRE);
+            estValider = false;
         }
         assertTrue(estValider);
     }
 
     @Test
-    public void ValiderNumeroTelephoneSeulementChiffre2() {
+    public void ValiderNumeroTelephoneInvalide9Chiffres() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "514-5972143", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "123456789", courriel, description);
         } catch (MyException e) {
-            estValider = e.getMessage().equals(MESSAGE_NOTELEPHONE_SEULEMENT_CHIFFRE);
+            estValider = e.getMessage().equals(MESSAGE_NUMEROTELEPHONE_FORMAT_VALIDE);
         }
         assertTrue(estValider);
     }
 
     @Test
-    public void ValiderNumeroTelephoneSeulementChiffre3() {
+    public void ValiderNumeroTelephoneInvalide11Chiffres() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "5i45972143", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "12345678900", courriel, description);
         } catch (MyException e) {
-            estValider = e.getMessage().equals(MESSAGE_NOTELEPHONE_SEULEMENT_CHIFFRE);
+            estValider = e.getMessage().equals(MESSAGE_NUMEROTELEPHONE_FORMAT_VALIDE);
         }
         assertTrue(estValider);
     }
 
     @Test
-    public void ValiderNumeroTelephoneDixChiffre9() {
+    public void ValiderNumeroTelephoneInvalideChar() {
         try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "514597214", courriel, description);
+            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "123x4567890", courriel, description);
         } catch (MyException e) {
-            estValider = e.getMessage().equals(MESSAGE_NOTELEPHONE_DIX_CHIFFRE);
+            estValider = e.getMessage().equals(MESSAGE_NUMEROTELEPHONE_FORMAT_VALIDE);
         }
         assertTrue(estValider);
     }
 
     @Test
-    public void ValiderNumeroTelephoneDixChiffre11() {
-        try {
-            service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "51459721433", courriel, description);
-        } catch (MyException e) {
-            estValider = e.getMessage().equals(MESSAGE_NOTELEPHONE_DIX_CHIFFRE);
-        }
-        assertTrue(estValider);
+    public void ValiderNumeroTelephone1() throws MyException {
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "1234567890", courriel, description);
+        assertEquals(service.getNoTelephone(), "(123) 456-7890");
+    }
+
+    @Test
+    public void ValiderNumeroTelephone2() throws MyException {
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "(123)4567890", courriel, description);
+        assertEquals(service.getNoTelephone(), "(123) 456-7890");
+    }
+
+    @Test
+    public void ValiderNumeroTelephone3() throws MyException {
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "123-4567890", courriel, description);
+        assertEquals(service.getNoTelephone(), "(123) 456-7890");
+    }
+
+    @Test
+    public void ValiderNumeroTelephone4() throws MyException {
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, "123.4567890", courriel, description);
+        assertEquals(service.getNoTelephone(), "(123) 456-7890");
     }
 //ADRESSE COURRIEL
     @Test
@@ -439,7 +471,7 @@ public class AbstraiteServicesTest {
     public void setNoTelephone() throws MyException {
         service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, noTelephone, courriel, description);
         service.setNoTelephone("1111111111");
-        assertEquals(service.getNoTelephone(), "1111111111");
+        assertEquals(service.getNoTelephone(), "(111) 111-1111");
     }
 
     @Test

@@ -37,10 +37,13 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
     Button supprimerUsager = null;
     Button electricien = null;
     Button plombier = null;
+    Button menusier = null;
     Utilisateur user;
     Orchestrateur orc;
     ToggleButton toggle = null;
     ToggleButton toggleElectricien = null;
+    ToggleButton togglePlombier = null;
+    ToggleButton toggleMenuisier = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +55,15 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
         supprimerUsager = (Button) findViewById(R.id.buttonDeleteUserProfile);
         toggle = (ToggleButton) findViewById(R.id.switchDispoUser);
         toggleElectricien = (ToggleButton) findViewById(R.id.switchDispoElecticien);
+        togglePlombier = (ToggleButton) findViewById(R.id.switchDispoPlombier);
+        toggleMenuisier = (ToggleButton) findViewById(R.id.switchDispoMenuisier);
         electricien = (Button) findViewById(R.id.electricien);
         plombier = (Button) findViewById(R.id.plombier);
+        menusier = (Button) findViewById(R.id.menuisier);
 
         final String electricienText = electricien.getText().toString();
         final String plombierText = plombier.getText().toString();
+        final String menuisierText = menusier.getText().toString();
         //recuper le userName et password de la page precedente
         Intent intent = getIntent();
         final String userName = intent.getStringExtra("userName");
@@ -110,6 +117,50 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
 
                     try{
                         orc.modifierDisponibiliteUsager(userName,false);
+                    }catch(SQLException e){
+                        System.out.println(e.getMessage());
+                    }
+                }
+            }
+        });
+
+        togglePlombier.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked) {
+
+                    try {
+                        // The toggle is enabled
+                        orc.modifierDisponibiliteService(userName, plombierText, true);
+                    }catch(SQLException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else {
+
+                    try{
+                        orc.modifierDisponibiliteService(userName, plombierText, false);
+                    }catch(SQLException e){
+                        System.out.println(e.getMessage());
+                    }
+                }
+            }
+        });
+
+        toggleMenuisier.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked) {
+
+                    try {
+                        // The toggle is enabled
+                        orc.modifierDisponibiliteService(userName, menuisierText, true);
+                    }catch(SQLException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else {
+
+                    try{
+                        orc.modifierDisponibiliteService(userName, menuisierText, false);
                     }catch(SQLException e){
                         System.out.println(e.getMessage());
                     }
@@ -209,10 +260,20 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
         plombier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent service = new Intent(ProfilActivity.this, AfficherSupprimerService.class);
-                service.putExtra("userName", userName);
-                service.putExtra("Plombier",plombierText);
-                startActivity(service);
+                Intent servicePlombier = new Intent(ProfilActivity.this, AfficherSupprimerService.class);
+                servicePlombier.putExtra("userName", userName);
+                servicePlombier.putExtra("Plombier",plombierText);
+                startActivity(servicePlombier);
+            }
+        });
+
+        menusier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent serviceMenusier = new Intent(ProfilActivity.this, AfficherSupprimerService.class);
+                serviceMenusier.putExtra("userName", userName);
+                serviceMenusier.putExtra("Menuisier",menuisierText);
+                startActivity(serviceMenusier);
             }
         });
 
