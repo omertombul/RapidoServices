@@ -117,6 +117,7 @@ public class AfficherSupprimerService extends Activity {
                     }
 
                     Intent profil = new Intent(AfficherSupprimerService.this, ProfilActivity.class);
+                    profil.putExtra("userName",us);
                     startActivity(profil);
                 }catch(MyException e){
                     System.out.println(e.getMessage());
