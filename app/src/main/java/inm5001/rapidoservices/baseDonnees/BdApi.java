@@ -326,7 +326,7 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
         String SQL_SEPARATEUR = "' ,'";
         String SQL_GRADE = "NULL";
         String SQL_FIN_INSERT = ") ";
-        String SQL_ON_DUPLICATE = "ON DUPLICATE gradedUserId=values(gradedUserId), " +
+        String SQL_ON_DUPLICATE = "ON DUPLICATE KEY UPDATE gradedUserId=values(gradedUserId), " +
                 "gradingUserId=values(gradingUserId), nomService=values(nomService), " +
                 "cote=values(cote);";
 
