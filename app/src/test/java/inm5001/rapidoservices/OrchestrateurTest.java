@@ -847,7 +847,7 @@ public class OrchestrateurTest {
         orchestrateur.creerUtilisateur(utilisateur2);
         RechercheServices rechercheServices = new RechercheServices(utilisateur1, "Plombier");
 
-        assertEquals(orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur).get(0), "5144444444");
+        assertEquals(orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur).get(0), "(514) 444-4444");
         orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
         orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
     }

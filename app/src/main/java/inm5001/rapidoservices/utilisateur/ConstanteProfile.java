@@ -16,10 +16,9 @@ public interface ConstanteProfile {
     String MESSAGE_PRENOM_CARACTERE_SPECIAL = MESSAGE_PRENOM + "de caractère spécial" + MESSAGE_AUTRE_CHOIX;
 
     String MESSAGE_NUMEROTELEPHONE_FORMAT_VALIDE = "Ceci n'est pas un format de numéro de téléphone valide" + MESSAGE_AUTRE_CHOIX;
+    String patternNumeroTelephone = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
 
     String MESSAGE_ADRESSECOURRIEL_NULL = "L'adresse courriel est obligatoire.";
     String MESSAGE_ADRESSECOURRIEL_FORMAT_VALIDE = "Ceci n'est pas une adresse de courriel valide" + MESSAGE_AUTRE_CHOIX;
-
     String patternCourriel = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-    String patternNumeroTelephone = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
 }
