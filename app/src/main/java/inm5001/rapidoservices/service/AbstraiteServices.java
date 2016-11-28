@@ -8,20 +8,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
 
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_EVALUATIONSERVICE_NULL;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOMSERVICE_CARACTERE_SPECIAL;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOMSERVICE_NULL;
-import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOTELEPHONE_DIX_CHIFFRE;
-import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOTELEPHONE_SEULEMENT_CHIFFRE;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_COURRIEL_FORMAT_VALIDE;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOMSERVICE_MAX_QUINZE_CARACTERES;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_VILLE_MAX_QUARANTE_CARACTERES;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_COURRIEL_MAX_DEUXCENTCINQUANTESIX_CARACTERES;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_DESCRIPTION_MAX_DEUXCENTCINQUANTESIX_CARACTERES;
+import static inm5001.rapidoservices.utilisateur.ConstanteProfile.MESSAGE_NUMEROTELEPHONE_FORMAT_VALIDE;
 import static inm5001.rapidoservices.utilisateur.ConstanteProfile.patternCourriel;
-import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_EVALUATIONUTILISATEUR_NULL;
+import static inm5001.rapidoservices.utilisateur.ConstanteProfile.patternNumeroTelephone;
 
 public abstract class AbstraiteServices {
 	private String nomSservice;
@@ -82,8 +80,8 @@ public abstract class AbstraiteServices {
 
     private void traiterNoTelephone(String noTelephone) throws MyException {
         if (noTelephone != null && !noTelephone.equals("")) {
-            ValiderNoTelephoneSeulementChiffre(noTelephone);
-            validerNoTelephoneDixChiffre(noTelephone);
+            validerNumeroTelephone(noTelephone);
+            noTelephone = formaterNumeroTelephone(noTelephone);
             affecterValeurNoTelephone(noTelephone);
         }
     }
@@ -159,18 +157,20 @@ public abstract class AbstraiteServices {
         this.ville = ville;
     }
 
-    private void ValiderNoTelephoneSeulementChiffre(String noTelephone) throws MyException {
-        if (Pattern.compile("[^0-9]+").matcher(noTelephone).find()) {
-            MyException e = new MyException(MESSAGE_NOTELEPHONE_SEULEMENT_CHIFFRE);
+    private void validerNumeroTelephone(String noTelephone) throws MyException {
+        Pattern pattern = Pattern.compile(patternNumeroTelephone);
+
+        Matcher matcher = pattern.matcher(noTelephone);
+        if (!matcher.matches()) {
+            MyException e = new MyException(MESSAGE_NUMEROTELEPHONE_FORMAT_VALIDE);
             throw e;
         }
     }
 
-    private void validerNoTelephoneDixChiffre(String noTelephone) throws MyException {
-        if (noTelephone.length() != 10) {
-            MyException e = new MyException(MESSAGE_NOTELEPHONE_DIX_CHIFFRE);
-            throw e;
-        }
+    private String formaterNumeroTelephone (String noTelephone) {
+        Pattern pattern = Pattern.compile(patternNumeroTelephone);
+        Matcher matcher = pattern.matcher(noTelephone);
+        return matcher.replaceFirst("($1) $2-$3");
     }
 
     private void affecterValeurNoTelephone(String noTelephone) {
