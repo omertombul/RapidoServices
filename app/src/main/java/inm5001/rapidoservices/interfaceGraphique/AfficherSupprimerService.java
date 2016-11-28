@@ -42,7 +42,7 @@ public class AfficherSupprimerService extends Activity {
         final String plomb = intent.getStringExtra("Plombier");
         final String menu = intent.getStringExtra("Menuisier");
         supprimer = (Button) findViewById(R.id.supprimerService);
-        dispo = (ToggleButton) findViewById(R.id.toggleDispo);
+        dispo = (ToggleButton) findViewById(R.id.toggleDispoService);
 
 
         runOnUiThread(new Runnable() {
