@@ -128,8 +128,6 @@ public class RechercheServices implements Comparable<RechercheServices> {
 
     public Utilisateur getUtilisateur(){ return utilisateur; }
     public String getNomService(){ return nomService; }
-    //public void setUtilisateur(Utilisateur utilisateur){ this.utilisateur = utilisateur; }
-    //public void setService(String nomService){ this.nomService = nomService; }
 
     //Pas implémenté, mais obligatoire pour le [implements Comparable<RechercheServices>]
     @Override
