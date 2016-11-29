@@ -141,16 +141,18 @@ public class ProfilActivity extends Activity {
             resultat.add(user.listeServices.get(i).getNomSservice());
         }
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,resultat);
-        final Intent intentServ = new Intent(ProfilActivity.this,AfficherSupprimerService.class);
+
+
 
         lView.setAdapter(adapter);
 
         lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intentServ = new Intent(ProfilActivity.this,AfficherSupprimerService.class);
+                intentServ.putExtra("userName",userName);
 
-                intentServ.putExtra(userName,"u");
-                intentServ.putExtra( adapter.getItem(position),"service");
+                intentServ.putExtra("service",adapter.getItem(position));
 
                 startActivity(intentServ);
             }

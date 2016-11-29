@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
     <TextView
         android:text="Nom :"
@@ -15,19 +16,20 @@
         android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/nomServ" />
+        android:id="@+id/nomServ"
+        android:layout_weight="0.11" />
 
     <TextView
-        android:text="Taux horaire"
+        android:text="Taux horaire :"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView13" />
 
     <TextView
-        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/taux" />
+        android:id="@+id/taux"
+        android:layout_weight="0.10" />
 
     <TextView
         android:text="Email :"
@@ -39,7 +41,8 @@
         android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/mail" />
+        android:id="@+id/mail"
+        android:layout_weight="0.11" />
 
     <TextView
         android:text="Telephone :"
@@ -51,7 +54,8 @@
         android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/phone" />
+        android:id="@+id/phone"
+        android:layout_weight="0.10" />
 
     <TextView
         android:text="Description"
@@ -62,20 +66,28 @@
     <TextView
         android:text=""
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/description" />
+        android:layout_height="0dp"
+        android:id="@+id/description"
+        android:layout_weight="0.15" />
 
 
     <RatingBar
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ratingBar" />
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+        android:focusable="false"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:id="@+id/ratingBarServiceOffert" />
 
     <ToggleButton
         android:text="Disponibilite"
-        android:layout_width="match_parent"
+        android:layout_width="148dp"
         android:layout_height="wrap_content"
-        android:id="@+id/toggleDispoService" />
+        android:id="@+id/toggleDispoService"
+        android:background="@drawable/btn_toggle"
+        />
 
     <Button
         android:text="Supprimer"
