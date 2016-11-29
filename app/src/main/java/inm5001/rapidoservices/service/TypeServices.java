@@ -86,6 +86,4 @@ public class TypeServices extends AbstraiteServices {
     public void setPrixFixe( float prixFixe ) throws MyException {
         traiterPrixFixe(prixFixe);
     }
-
-
 }
