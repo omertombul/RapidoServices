@@ -28,11 +28,7 @@ public class BdApiTest {
     private Identifiant identifiant;
     private Profile profile;
     private ArrayList<TypeServices> listeServices;
-    private AbstraiteServices service;
     private ArrayList<String> listeCompetences;
-    private String competence;
-    private boolean disponibleUtilisateur;
-    //private Geolocalisation geolocalisation;
 //attributs Identifiant
     private String nomUtilisateur;
     private String motDePasse;
@@ -41,16 +37,12 @@ public class BdApiTest {
     private String prenom;
     private String numeroTelephoneProfile;
     private String adresseCourrielProfile;
-    private Boolean estValider;
     //attributs AbstraiteServices
     private boolean disponibleService;
     private String ville;
-    private byte cote;
     private String numeroTelephoneService;
-    private String adresseCourrielService;
     private String description;
     //attribut Plomberie
-    private String nomSservice;
     private float tauxHorraire;
     private float prixFixe;
 
@@ -58,9 +50,7 @@ public class BdApiTest {
     public void setUp() throws MyException {
         bd = new BdApi();
         listeServices = new ArrayList<>();
-        service = null;
         listeCompetences = new ArrayList<>();
-        competence = null;
         nomUtilisateur = "Francis";
         motDePasse = "Allo!234";
         nom = "Francis";
@@ -70,13 +60,9 @@ public class BdApiTest {
         identifiant = new Identifiant(nomUtilisateur, motDePasse);
         profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
         utilisateur = null;
-        estValider = false;
-        disponibleUtilisateur = false;
         disponibleService = false;
         ville = "Montreal";
-        cote = 2;
         numeroTelephoneService ="5144444444";
-        adresseCourrielService = "plomberie@plomberi.com";
         description = "Repare les tuyeaux";
         tauxHorraire = 14.50f;
         prixFixe = 50.00f;
@@ -94,22 +80,16 @@ public class BdApiTest {
         identifiant = null;
         profile = null;
         listeServices = null;
-        service = null;
         listeCompetences = null;
-        competence = null;
         nom = null;
         prenom = null;
         numeroTelephoneProfile = null;
         adresseCourrielProfile = null;
         utilisateur = null;
         motDePasse = null;
-        estValider = null;
-        disponibleUtilisateur = false;
         disponibleService = false;
         ville = null;
-        cote = 0;
         numeroTelephoneService = null;
-        adresseCourrielService = null;
         description = null;
         tauxHorraire = 0;
         prixFixe = 0;
