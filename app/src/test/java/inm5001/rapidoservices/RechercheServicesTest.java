@@ -28,8 +28,6 @@ public class RechercheServicesTest {
     private Profile profile;
     private ArrayList<TypeServices> listeServices;
     private ArrayList<String> listeCompetences;
-    private String competence;
-    private String disponibleUtilisateur;
     //attributs Identifiant
     private String nomUtilisateur;
     private String motDePasse;
@@ -38,12 +36,10 @@ public class RechercheServicesTest {
     private String prenom;
     private String numeroTelephoneProfile;
     private String adresseCourrielProfile;
-    private Boolean estValider;
     //attributs AbstraiteServices
     private String nomSservice;
     private boolean disponibleService;
     private String ville;
-    private byte cote;
     private String numeroTelephoneService;
     private String adresseCourrielService;
     private String description;
@@ -64,7 +60,6 @@ public class RechercheServicesTest {
     public void setUp() throws MyException {
         listeServices = new ArrayList<>();
         listeCompetences = new ArrayList<>();
-        competence = null;
         nomUtilisateur = "Francis";
         motDePasse = "Allo!234";
         nom = "Francis";
@@ -84,7 +79,6 @@ public class RechercheServicesTest {
         nomSservice = "Plombier";
         disponibleService = false;
         ville = "Montreal";
-        cote = 2;
         numeroTelephoneService ="5144444444";
         adresseCourrielService = "plomberie@plomberi.com";
         description = "Repare les tuyeaux";
@@ -103,7 +97,6 @@ public class RechercheServicesTest {
     public void tearDown() throws MyException {
         listeServices = null;
         listeCompetences = null;
-        competence = null;
         nomUtilisateur = null;
         motDePasse = null;
         nom = null;
