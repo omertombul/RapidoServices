@@ -108,11 +108,9 @@ public class BdApi {
     }
 
     public ArrayList<RechercheServices> servicesSearch(TypeServices s, float coteUtilisateur,
-                                                       float coteServicesMoyenne, float coteService){
+                float coteServicesMoyenne, float coteService){
         ArrayList<RechercheServices> UserAndServicesArray = new ArrayList<>();
-
-
-        String SQL = SQLservicesSearch(s);
+        String SQL = SQLservicesSearch(s, coteUtilisateur, coteServicesMoyenne, coteService);
         BdConnection DB = new BdConnection(SQL);
         ResultSet RSservices = DB.readFromDataBase();
         UserAndServicesArray = updateUserAndSerivcesArrayWithRS(RSservices);
@@ -289,18 +287,22 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
         return SQL;
     }
 
-    private String SQLservicesSearch(TypeServices s){
+    private String SQLservicesSearch(TypeServices s, float coteUtilisateur,
+                                     float coteSerivcesMoyenne, float coteService){
         String SQL;
         String SQL_NOM_SERVICE = " and nomService = '" + s.getNomSservice() + "'";
         String SQL_PRIX_FIXE = " and prixFixe <= " + s.getPrixFixe();
         String SQL_PRIX_HORRAIRE = " and prixHorraire <= " + s.getTauxHorraire();
         String SQL_VILLE = " and ville = '" + s.getVille() + "'";
+        String SQL_COTE_UTILISATEUR = " and coteClient >= " + coteUtilisateur;
+        String SQL_COTE_SERVICE_MOYENNE = " and coteFournisseur >= " + coteSerivcesMoyenne;
+        String SQL_COTE_SERVICE = " and cote >= " + coteService;
         String SQL_FIN = ";";
 
         // criteres de recherche possibles: nomService, disponibilite, prixFixe, prixHorraire, ville
         String SQL_DEBUT = "SELECT * FROM utilisateur u, servicesDUsager s " +
                 "WHERE u.idUsager = s.idUsager and u.disponibilite = 1 and s.disponibilite = 1";
-        if(s.getNomSservice() == "") {
+        if(s.getNomSservice().equals("")) {
             SQL_NOM_SERVICE = "";
         }
         if(s.getPrixFixe() == 0) {
@@ -309,12 +311,13 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
         if(s.getTauxHorraire() == 0) {
             SQL_PRIX_HORRAIRE = "";
         }
-        if(s.getVille() == "") {
+        if(s.getVille().equals("")) {
             SQL_VILLE = "";
         }
 
         SQL = SQL_DEBUT + SQL_NOM_SERVICE + SQL_PRIX_FIXE + SQL_PRIX_HORRAIRE +
-                SQL_VILLE + SQL_FIN;
+                SQL_VILLE + SQL_COTE_UTILISATEUR + SQL_COTE_SERVICE_MOYENNE + SQL_COTE_SERVICE +
+                SQL_FIN;
 //System.out.println("    String SQL servicesSearch: " + SQL); // shows SQL String
         return SQL;
     }
