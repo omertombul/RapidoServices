@@ -24,7 +24,6 @@ public class EvaluationServiceTest {
     public void setUp() {
         coteService = 3.5f;
         nombreDEvaluationService = 210;
-        EvaluationService evaluationService = null;
         estValider = false;
     }
 

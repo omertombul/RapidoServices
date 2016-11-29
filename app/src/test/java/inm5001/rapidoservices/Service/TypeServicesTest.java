@@ -22,7 +22,6 @@ public class TypeServicesTest {
     //attributs AbstraiteServices
     private boolean disponibleService;
     private String ville;
-    private byte cote;
     private String numeroTelephoneService;
     private String adresseCourrielService;
     private String description;
@@ -40,7 +39,6 @@ public class TypeServicesTest {
     public void setUp() throws MyException {
         disponibleService = false;
         ville = "Montreal";
-        cote = 2;
         numeroTelephoneService ="5144444444";
         adresseCourrielService = "plomberie@plomberi.com";
         description = "Repare les tuyeaux";
@@ -59,7 +57,6 @@ public class TypeServicesTest {
         service = null;
         disponibleService = false;
         ville = null;
-        cote = 0;
         numeroTelephoneService = null;
         adresseCourrielService = null;
         description = null;
