@@ -8,7 +8,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.service.TypeServices;
 import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.utilisateur.Profile;
@@ -29,7 +28,7 @@ public class BdApiTest {
     private Profile profile;
     private ArrayList<TypeServices> listeServices;
     private ArrayList<String> listeCompetences;
-//attributs Identifiant
+    //attributs Identifiant
     private String nomUtilisateur;
     private String motDePasse;
     //attributs Profile

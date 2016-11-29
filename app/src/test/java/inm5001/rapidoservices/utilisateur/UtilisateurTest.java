@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 public class UtilisateurTest {
 
     private Utilisateur utilisateur;
-//attributs Utilisateur
+    //attributs Utilisateur
     private Identifiant identifiant;
     private Profile profile;
     private ArrayList<TypeServices> listeServices;
@@ -28,31 +28,31 @@ public class UtilisateurTest {
     private ArrayList<String> listeCompetences;
     private String competence;
     private boolean disponibleUtilisateur;
-//attributs Identifiant
+    //attributs Identifiant
     private String nomUtilisateur;
     private String motDePasse;
-//attributs Profile
+    //attributs Profile
     private String nom;
     private String prenom;
     private String numeroTelephoneProfile;
     private String adresseCourrielProfile;
     private Boolean estValider;
-//attributs AbstraiteServices
+    //attributs AbstraiteServices
     private boolean disponibleService;
     private String ville;
     private String numeroTelephoneService;
     private String adresseCourrielService;
     private String description;
-//attribut Plomberie
+    //attribut Plomberie
     private float tauxHorraire;
     private float prixFixe;
-//attributs EvaluationUtilisateur
+    //attributs EvaluationUtilisateur
     private float coteUtilisateur;
     private int nombreDEvaluationUtilisateur;
     private float coteTypeServicesMoyenne;
     private int nombreDEvaluationTypeServicesMoyenne;
     private EvaluationUtilisateur evaluationUtilisateur;
-//attributs EvaluationService
+    //attributs EvaluationService
     private float coteService;
     private int nombreDEvaluationService;
     private EvaluationService evaluationService;
