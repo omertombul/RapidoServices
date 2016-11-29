@@ -29,7 +29,6 @@ public class EvaluationUtilisateurTest {
         nombreDEvaluationUtilisateur = 210;
         coteTypeServicesMoyenne = 4.5f;
         nombreDEvaluationTypeServicesMoyenne = 1000;
-        EvaluationUtilisateur evaluationUtilisateur = null;
         estValider = false;
     }
 

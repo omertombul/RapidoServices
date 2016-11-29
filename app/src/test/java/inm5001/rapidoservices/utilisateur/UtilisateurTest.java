@@ -7,7 +7,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.service.EvaluationService;
 import inm5001.rapidoservices.service.TypeServices;
 
@@ -29,7 +28,6 @@ public class UtilisateurTest {
     private ArrayList<String> listeCompetences;
     private String competence;
     private boolean disponibleUtilisateur;
-    //private Geolocalisation geolocalisation;
 //attributs Identifiant
     private String nomUtilisateur;
     private String motDePasse;
@@ -42,12 +40,10 @@ public class UtilisateurTest {
 //attributs AbstraiteServices
     private boolean disponibleService;
     private String ville;
-    private byte cote;
     private String numeroTelephoneService;
     private String adresseCourrielService;
     private String description;
 //attribut Plomberie
-    private String nomSservice;
     private float tauxHorraire;
     private float prixFixe;
 //attributs EvaluationUtilisateur
@@ -80,7 +76,6 @@ public class UtilisateurTest {
         disponibleUtilisateur = false;
         disponibleService = false;
         ville = "Montreal";
-        cote = 2;
         numeroTelephoneService ="5144444444";
         adresseCourrielService = "plomberie@plomberi.com";
         description = "Repare les tuyeaux";
@@ -123,7 +118,6 @@ public class UtilisateurTest {
         disponibleUtilisateur = false;
         disponibleService = false;
         ville = null;
-        cote = 0;
         numeroTelephoneService = null;
         adresseCourrielService = null;
         description = null;
