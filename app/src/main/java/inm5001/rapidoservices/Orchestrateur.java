@@ -152,10 +152,11 @@ public class Orchestrateur {
         }
     }
 
-    public ArrayList<String> accepterUnFournisseurDeService(RechercheServices rechercheServices, String nomUtilisateurCoteur) throws SQLException {
+    public ArrayList<String> accepterUnFournisseurDeService(RechercheServices rechercheServices, String nomUtilisateurClient) throws SQLException {
         ArrayList<String> listeInformationsDeContact = new ArrayList<>();
         listeInformationsDeContact = obtenirInformationsDeContact(rechercheServices);
-        creationDeLignesCoteService(rechercheServices, nomUtilisateurCoteur);
+        creationDeLignesCoteService(rechercheServices, nomUtilisateurClient);
+        //mettre nom fournisseur disponible
 
         return listeInformationsDeContact;
     }
