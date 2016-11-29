@@ -68,8 +68,8 @@ public class RechercheServices implements Comparable<RechercheServices> {
 
         @Override
         public int compare(RechercheServices pair1, RechercheServices pair2) {
-            return pair1.getUtilisateur().getEvaluationUtilisateur().coteUtilisateur > pair2.getUtilisateur().getEvaluationUtilisateur().coteUtilisateur ? 1 :
-                    (pair1.getUtilisateur().getEvaluationUtilisateur().coteUtilisateur < pair2.getUtilisateur().getEvaluationUtilisateur().coteUtilisateur ? -1 : 0);
+            return pair1.getUtilisateur().evaluationUtilisateur.coteUtilisateur > pair2.getUtilisateur().evaluationUtilisateur.coteUtilisateur ? 1 :
+                    (pair1.getUtilisateur().evaluationUtilisateur.coteUtilisateur < pair2.getUtilisateur().evaluationUtilisateur.coteUtilisateur ? -1 : 0);
         }
     }
 
@@ -77,8 +77,8 @@ public class RechercheServices implements Comparable<RechercheServices> {
 
         @Override
         public int compare(RechercheServices pair1, RechercheServices pair2) {
-            return pair1.getUtilisateur().getEvaluationUtilisateur().coteTypeServicesMoyenne > pair2.getUtilisateur().getEvaluationUtilisateur().coteTypeServicesMoyenne ? 1 :
-                    (pair1.getUtilisateur().getEvaluationUtilisateur().coteTypeServicesMoyenne < pair2.getUtilisateur().getEvaluationUtilisateur().coteTypeServicesMoyenne ? -1 : 0);
+            return pair1.getUtilisateur().evaluationUtilisateur.coteTypeServicesMoyenne > pair2.getUtilisateur().evaluationUtilisateur.coteTypeServicesMoyenne ? 1 :
+                    (pair1.getUtilisateur().evaluationUtilisateur.coteTypeServicesMoyenne < pair2.getUtilisateur().evaluationUtilisateur.coteTypeServicesMoyenne ? -1 : 0);
         }
     }
 //MÉTHODES PUBLIC
@@ -120,8 +120,7 @@ public class RechercheServices implements Comparable<RechercheServices> {
                 Collections.sort(listeResultatRechercheServices, new RechercheServices.TrierParCoteService());
                 break;
             default:
-                MyException e = new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
-                throw e;
+                throw new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
         }
 
         return listeResultatRechercheServices;
@@ -129,8 +128,6 @@ public class RechercheServices implements Comparable<RechercheServices> {
 
     public Utilisateur getUtilisateur(){ return utilisateur; }
     public String getNomService(){ return nomService; }
-    //public void setUtilisateur(Utilisateur utilisateur){ this.utilisateur = utilisateur; }
-    //public void setService(String nomService){ this.nomService = nomService; }
 
     //Pas implémenté, mais obligatoire pour le [implements Comparable<RechercheServices>]
     @Override

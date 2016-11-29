@@ -7,7 +7,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.service.EvaluationService;
 import inm5001.rapidoservices.service.TypeServices;
 
@@ -21,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 public class UtilisateurTest {
 
     private Utilisateur utilisateur;
-//attributs Utilisateur
+    //attributs Utilisateur
     private Identifiant identifiant;
     private Profile profile;
     private ArrayList<TypeServices> listeServices;
@@ -29,34 +28,31 @@ public class UtilisateurTest {
     private ArrayList<String> listeCompetences;
     private String competence;
     private boolean disponibleUtilisateur;
-    //private Geolocalisation geolocalisation;
-//attributs Identifiant
+    //attributs Identifiant
     private String nomUtilisateur;
     private String motDePasse;
-//attributs Profile
+    //attributs Profile
     private String nom;
     private String prenom;
     private String numeroTelephoneProfile;
     private String adresseCourrielProfile;
     private Boolean estValider;
-//attributs AbstraiteServices
+    //attributs AbstraiteServices
     private boolean disponibleService;
     private String ville;
-    private byte cote;
     private String numeroTelephoneService;
     private String adresseCourrielService;
     private String description;
-//attribut Plomberie
-    private String nomSservice;
+    //attribut Plomberie
     private float tauxHorraire;
     private float prixFixe;
-//attributs EvaluationUtilisateur
+    //attributs EvaluationUtilisateur
     private float coteUtilisateur;
     private int nombreDEvaluationUtilisateur;
     private float coteTypeServicesMoyenne;
     private int nombreDEvaluationTypeServicesMoyenne;
     private EvaluationUtilisateur evaluationUtilisateur;
-//attributs EvaluationService
+    //attributs EvaluationService
     private float coteService;
     private int nombreDEvaluationService;
     private EvaluationService evaluationService;
@@ -80,7 +76,6 @@ public class UtilisateurTest {
         disponibleUtilisateur = false;
         disponibleService = false;
         ville = "Montreal";
-        cote = 2;
         numeroTelephoneService ="5144444444";
         adresseCourrielService = "plomberie@plomberi.com";
         description = "Repare les tuyeaux";
@@ -123,7 +118,6 @@ public class UtilisateurTest {
         disponibleUtilisateur = false;
         disponibleService = false;
         ville = null;
-        cote = 0;
         numeroTelephoneService = null;
         adresseCourrielService = null;
         description = null;

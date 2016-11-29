@@ -15,10 +15,6 @@ public class EvaluationUtilisateur {
     public float coteTypeServicesMoyenne;
     public int nombreDEvaluationTypeServicesMoyenne;
 
-    public EvaluationUtilisateur(){
-
-    }
-
     public EvaluationUtilisateur(float coteUtilisateur, int nombreDEvaluationUtilisateur,
                                  float coteTypeServicesMoyenne, int nombreDEvaluationTypeServicesMoyenne) throws MyException {
         traiterCoteUtilisateur(coteUtilisateur);

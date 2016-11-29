@@ -5,8 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.utilisateur.ConstanteProfile;
-import inm5001.rapidoservices.utilisateur.Profile;
 
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_COURRIEL_FORMAT_VALIDE;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_DESCRIPTION_MAX_DEUXCENTCINQUANTESIX_CARACTERES;
@@ -136,40 +134,7 @@ public class AbstraiteServicesTest {
         }
         assertTrue(estValider);
     }
-/*
-    @Test
-    public void validerNomServiceSansCaratereSpecial() {
-        try {
-            service = new TypeServices(tauxHorraire, prixFixe, "plom!ier", disponible, ville, cote,
-                    noTelephone, courriel, description);
-        } catch (Exception e) {
-            estValider = e.getMessage().equals(MESSAGE_NOMSERVICE_CARACTERE_SPECIAL);
-        }
-        assertTrue(estValider);
-    }
 
-    @Test
-    public void validerNomServiceSansCaratereSpecialExeption1() {
-        try {
-            service = new TypeServices(tauxHorraire, prixFixe, "plombi-er", disponible, ville, cote,
-                    noTelephone, courriel, description);
-        } catch (Exception e) {
-            estValider = e.getMessage().equals(MESSAGE_NOMSERVICE_CARACTERE_SPECIAL);
-        }
-        assertFalse(estValider);
-    }
-
-    @Test
-    public void validerNomServiceSansCaratereSpecialException2() {
-        try {
-            service = new TypeServices(tauxHorraire, prixFixe, "plom bier", disponible, ville, cote,
-                    noTelephone, courriel, description);
-        } catch (Exception e) {
-            estValider = e.getMessage().equals(MESSAGE_NOMSERVICE_CARACTERE_SPECIAL);
-        }
-        assertFalse(estValider);
-    }
-*/
     @Test
     public void validerNomSserviceMaxQuinzeCaracteres15() {
         try {

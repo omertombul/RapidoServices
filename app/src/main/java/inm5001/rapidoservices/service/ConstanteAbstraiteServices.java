@@ -1,6 +1,5 @@
 package inm5001.rapidoservices.service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,16 +18,15 @@ public interface ConstanteAbstraiteServices {
     String MESSAGE_VILLE_MAX_QUARANTE_CARACTERES = "La ville ne doit pas contenir plus de quarante caractères" + MESSAGE_AUTRE_CHOIX;
 
     String MESSAGE_NUMEROTELEPHONE_FORMAT_VALIDE = "Ceci n'est pas un format de numéro de téléphone valide" + MESSAGE_AUTRE_CHOIX;
-    String patternNumeroTelephone = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
+    String PATTERN_NO_TELEPHONE = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
 
     String MESSAGE_COURRIEL_FORMAT_VALIDE = "Ceci n'est pas une adresse de courriel valide" + MESSAGE_AUTRE_CHOIX;
     String MESSAGE_COURRIEL_MAX_DEUXCENTCINQUANTESIX_CARACTERES = "L'adresse courriel ne doit pas contenir plus de deux cent cinquante-six caractères" + MESSAGE_AUTRE_CHOIX;
+    String PATTERN_COURRIEL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     String MESSAGE_DESCRIPTION_MAX_DEUXCENTCINQUANTESIX_CARACTERES = "La description ne doit pas contenir plus de deux cent cinquante-six caractères" + MESSAGE_AUTRE_CHOIX;
 
     String MESSAGE_EVALUATIONSERVICE_NULL = "Un problème à l'enregistrement c'est produit avec la portion evaluation du service, celui-ci ne doit pas être null.";
-
-    String patternCourriel = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     String[] tabVilleAjout = new String []{"Montéal", "Québec", "Laval", "Gatineau", "Longueuil", "Sherbrooke", "Saguenay", "Lévis",
             "Trois-Rivières", "Terrebonne", "Saint-Jean-sur-Richelieu", "Brossard", "Repentigny", "Drummondville",

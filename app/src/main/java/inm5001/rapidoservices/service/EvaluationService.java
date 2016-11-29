@@ -21,7 +21,7 @@ public class EvaluationService {
         traiterNombreDEvaluationService(nombreDEvaluationService);
     }
 
-    //premier niveau d'abstraction
+//premier niveau d'abstraction
     private void traiterCoteService(float coteService) throws MyException {
         validerValeurCoteServiceEntreZeroEtCent(coteService);
         affecterValeurCoteService(coteService);
@@ -31,7 +31,7 @@ public class EvaluationService {
         affecterValeurNombreDEvaluationService(nombreDEvaluationService);
     }
 
-    //deuxième niveau d'abstraction
+//deuxième niveau d'abstraction
     private void validerValeurCoteServiceEntreZeroEtCent(float coteService) throws MyException {
         if (coteService < 0 || coteService > 5) {
             MyException e = new MyException(MESSAGE_COTESERVICE_ENTREZEROETCINQ);

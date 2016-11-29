@@ -156,8 +156,7 @@ public class Orchestrateur {
         ArrayList<String> listeInformationsDeContact = new ArrayList<>();
         listeInformationsDeContact = obtenirInformationsDeContact(rechercheServices);
         creationDeLignesCoteService(rechercheServices, nomUtilisateurClient);
-        //mettre nom fournisseur disponible
-
+        modifierDisponibiliteUsager(rechercheServices.getUtilisateur().identifiant.nomUtilisateur, false);
         return listeInformationsDeContact;
     }
 

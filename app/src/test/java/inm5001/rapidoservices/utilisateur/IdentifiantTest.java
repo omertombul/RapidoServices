@@ -109,27 +109,6 @@ public class IdentifiantTest {
         }
         assertTrue(estValider);
     }
-    /*
-    @Test
-    public void IdentifiantNomUtilisateurValeurUnique() {
-        try {
-            identifiant = new Identifiant("ilExiste", motDePasse);
-        } catch (MyException e) {
-            estValider = e.getMessage().equals(MESSAGE_NOMUTILISATEUR_PAS_UNIQUE);
-        }
-        assertTrue(estValider);
-    }
-
-    @Test
-    public void IdentifiantNomUtilisateurValeurExistante() {
-        try {
-            identifiant = new Identifiant("ilExiste", motDePasse);
-        } catch (MyException e) {
-            estValider = e.getMessage().equals(MESSAGE_NOMUTILISATEUR_PAS_UNIQUE);
-        }
-        assertTrue(estValider);
-    }
-    */
 //MOT DE PASSE
     @Test
     public void ValiderMotDePassePasNull() {

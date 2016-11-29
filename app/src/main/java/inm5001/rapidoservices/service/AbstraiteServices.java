@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 import inm5001.rapidoservices.MyException;
 
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_EVALUATIONSERVICE_NULL;
-import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOMSERVICE_CARACTERE_SPECIAL;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOMSERVICE_NULL;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_COURRIEL_FORMAT_VALIDE;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_NOMSERVICE_MAX_QUINZE_CARACTERES;
@@ -18,8 +17,8 @@ import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_COURRIEL_MAX_DEUXCENTCINQUANTESIX_CARACTERES;
 import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.MESSAGE_DESCRIPTION_MAX_DEUXCENTCINQUANTESIX_CARACTERES;
 import static inm5001.rapidoservices.utilisateur.ConstanteProfile.MESSAGE_NUMEROTELEPHONE_FORMAT_VALIDE;
-import static inm5001.rapidoservices.utilisateur.ConstanteProfile.patternCourriel;
-import static inm5001.rapidoservices.utilisateur.ConstanteProfile.patternNumeroTelephone;
+import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.PATTERN_COURRIEL;
+import static inm5001.rapidoservices.service.ConstanteAbstraiteServices.PATTERN_NO_TELEPHONE;
 
 public abstract class AbstraiteServices {
 	private String nomSservice;
@@ -63,9 +62,7 @@ public abstract class AbstraiteServices {
 //premier niveau d'abstraction
     private void traiterNomService(String nomSservice) throws MyException {
         validerNomServicePasNull(nomSservice);
-        //validerNomServiceSansCaratereSpecial(nomSservice);
         validerNomSserviceMaxQuinzeCaracteres(nomSservice);
-        //nomSservice = convertirEnMajuscule(nomSservice);
         affecterValeurNomService(nomSservice);
     }
 
@@ -123,13 +120,6 @@ public abstract class AbstraiteServices {
     private void affecterValeurEvaluationService(EvaluationService evaluationService) {
         this.evaluationService = evaluationService;
     }
-//problème avec REGEX car ne suport pas les caractères spéciaux
-    private void validerNomServiceSansCaratereSpecial(String nomSservice) throws MyException {
-        if (!nomSservice.matches("[A-Za-z0-9 -]*")) {
-            MyException e = new MyException(MESSAGE_NOMSERVICE_CARACTERE_SPECIAL);
-            throw e;
-        }
-    }
 
     private void validerNomSserviceMaxQuinzeCaracteres(String nomSservice) throws MyException {
         if (nomSservice.length() > 15) {
@@ -158,7 +148,7 @@ public abstract class AbstraiteServices {
     }
 
     private void validerNumeroTelephone(String noTelephone) throws MyException {
-        Pattern pattern = Pattern.compile(patternNumeroTelephone);
+        Pattern pattern = Pattern.compile(PATTERN_NO_TELEPHONE);
 
         Matcher matcher = pattern.matcher(noTelephone);
         if (!matcher.matches()) {
@@ -168,7 +158,7 @@ public abstract class AbstraiteServices {
     }
 
     private String formaterNumeroTelephone (String noTelephone) {
-        Pattern pattern = Pattern.compile(patternNumeroTelephone);
+        Pattern pattern = Pattern.compile(PATTERN_NO_TELEPHONE);
         Matcher matcher = pattern.matcher(noTelephone);
         return matcher.replaceFirst("($1) $2-$3");
     }
@@ -178,7 +168,7 @@ public abstract class AbstraiteServices {
     }
 
     private void validerCourrielFormatValide(String courriel) throws MyException {
-        Pattern pattern = Pattern.compile(patternCourriel);
+        Pattern pattern = Pattern.compile(PATTERN_COURRIEL);
         Matcher matcher = pattern.matcher(courriel);
 
         if (!matcher.matches()) {
@@ -207,10 +197,6 @@ public abstract class AbstraiteServices {
 
     private void affecterValeurDescription(String description) {
         this.description = description;
-    }
-//MÉTHODES GLOBAL
-    private String convertirEnMajuscule(String uneChaine) {
-        return uneChaine.toUpperCase();
     }
 
 //MÉTHODES PUBLIC

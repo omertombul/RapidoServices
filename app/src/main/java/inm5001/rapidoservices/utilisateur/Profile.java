@@ -94,7 +94,7 @@ public class Profile {
     }
 
     private void validerNumeroTelephone(String numeroTelephone) throws MyException {
-        Pattern pattern = Pattern.compile(patternNumeroTelephone);
+        Pattern pattern = Pattern.compile(PATTERN_NUMERO_TELEPHONE);
 
         Matcher matcher = pattern.matcher(numeroTelephone);
         if (!matcher.matches()) {
@@ -104,7 +104,7 @@ public class Profile {
     }
 
     private String formaterNumeroTelephone (String numeroTelephone) {
-        Pattern pattern = Pattern.compile(patternNumeroTelephone);
+        Pattern pattern = Pattern.compile(PATTERN_NUMERO_TELEPHONE);
         Matcher matcher = pattern.matcher(numeroTelephone);
         return matcher.replaceFirst("($1) $2-$3");
     }
@@ -121,7 +121,7 @@ public class Profile {
     }
 
     private void validerAdresseCourrielFormatValide(String adresseCourriel) throws MyException {
-        Pattern pattern = Pattern.compile(patternCourriel);
+        Pattern pattern = Pattern.compile(PATTERN_ADRESSE_COURRIEL);
         Matcher matcher = pattern.matcher(adresseCourriel);
 
         if (!matcher.matches()) {
@@ -137,5 +137,4 @@ public class Profile {
     private String convertirEnMajuscule(String uneChaine) {
         return uneChaine.toUpperCase();
     }
-//MÉTHODES PUBLIC
 }
