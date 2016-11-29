@@ -68,7 +68,7 @@
         android:id="@+id/ratingBarTrouver" />
 
     <Button
-        android:text="Rate"
+        android:text="Accepter"
         android:layout_width="142dp"
         android:layout_height="wrap_content"
         android:id="@+id/buttonRateTrouver"
@@ -83,5 +83,28 @@
         android:id="@+id/buttonCancelTrouver"
         android:textStyle="normal|bold|italic" />
 
+    <TextView
+        android:text="Numéro de Téléphone :"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:id="@+id/textview3" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/noTel" />
+
+    <TextView
+        android:text="Courriel :"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:id="@+id/textView12" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/courrier" />
 
 </LinearLayout>
