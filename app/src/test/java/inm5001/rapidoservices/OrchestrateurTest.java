@@ -989,18 +989,18 @@ public class OrchestrateurTest {
         orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
         orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
     }
-/*
+
     @Test
     public void obtenirMesEvaluationsADonner() throws MyException, SQLException {
         utilisateur1.listeServices.add(service);
         utilisateur1.listeServices.add(service2);
         orchestrateur.creerUtilisateur(utilisateur1);
         orchestrateur.creerUtilisateur(utilisateur2);
+
         RechercheServices rechercheServices = new RechercheServices(utilisateur1, "Plombier");
         orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur);
+
         rechercheServices = new RechercheServices(utilisateur1, "Electricien");
-        //problème lorsque je tente d'accepter une deuxième transaction entre deux même fournisseur/client mais pour un autre service.
-        //...causé par une contrainte d'intégrité côté BD
         orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur);
 
         assertTrue(orchestrateur.obtenirMesEvaluationsADonner(utilisateur2.identifiant.nomUtilisateur).size() == 2);
@@ -1008,7 +1008,7 @@ public class OrchestrateurTest {
         orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
         orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
     }
-*/
+
     @Test
     public void faireUneEvaluationCoteUtilisateur() throws MyException, SQLException {
         orchestrateur.creerUtilisateur(utilisateur1);
