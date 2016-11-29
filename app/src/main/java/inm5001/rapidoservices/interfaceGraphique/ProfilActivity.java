@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.content.Intent;
 
@@ -27,23 +28,20 @@ import inm5001.rapidoservices.utilisateur.Utilisateur;
  * and Omer Tombul
  */
 
-public class ProfilActivity extends Activity implements AdapterView.OnItemSelectedListener{
+public class ProfilActivity extends Activity {
     TextView nom = null;
     TextView prenom = null;
     TextView courriel = null;
     TextView telephone = null;
     Button ajouter = null;
     Button rechercher = null;
+    Button rate = null;
     Button supprimerUsager = null;
-    Button electricien = null;
-    Button plombier = null;
-    Button menusier = null;
+    String us;
     Utilisateur user;
     Orchestrateur orc;
     ToggleButton toggle = null;
-    ToggleButton toggleElectricien = null;
-    ToggleButton togglePlombier = null;
-    ToggleButton toggleMenuisier = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,22 +50,23 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
 
         ajouter = (Button) findViewById(R.id.ajouter);
         rechercher = (Button) findViewById(R.id.rechercher);
+        rate = (Button) findViewById(R.id.rate);
         supprimerUsager = (Button) findViewById(R.id.buttonDeleteUserProfile);
         toggle = (ToggleButton) findViewById(R.id.switchDispoUser);
-        toggleElectricien = (ToggleButton) findViewById(R.id.switchDispoElecticien);
-        togglePlombier = (ToggleButton) findViewById(R.id.switchDispoPlombier);
-        toggleMenuisier = (ToggleButton) findViewById(R.id.switchDispoMenuisier);
-        electricien = (Button) findViewById(R.id.electricien);
-        plombier = (Button) findViewById(R.id.plombier);
-        menusier = (Button) findViewById(R.id.menuisier);
 
-        final String electricienText = electricien.getText().toString();
-        final String plombierText = plombier.getText().toString();
-        final String menuisierText = menusier.getText().toString();
         //recuper le userName et password de la page precedente
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         final String userName = intent.getStringExtra("userName");
-        //String pass = intent.getStringExtra("password");
+        us = userName;
+
+
+
+        //Liste de Service offert cliquable
+
+        final ListView lView = (ListView) findViewById(R.id.listViewMesServices);
+        final ArrayAdapter<String> adapter ;
+
+
 
 
 
@@ -94,15 +93,7 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
                     courriel.setText(u.profile.adresseCourriel);
                     telephone.setText(u.profile.numeroTelephone);
                     toggle.setChecked(u.disponible);
-                    for (int i = 0; i < user.listeServices.size(); i++) {
-                        if (user.listeServices.get(i).getNomSservice().equals("Électricien")){
-                            toggleElectricien.setChecked(user.listeServices.get(i).getDisponible());
-                        }else if(user.listeServices.get(i).getNomSservice().equals("Plombier")){
-                            togglePlombier.setChecked((user.listeServices.get(i).getDisponible()));
-                        }else if(user.listeServices.get(i).getNomSservice().equals("Menuisier")){
-                            toggleMenuisier.setChecked(user.listeServices.get(i).getDisponible());
-                        }
-                    }
+
 
                     } catch (Exception e) {
                     System.out.println(e.getMessage());
@@ -134,85 +125,47 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
             }
         });
 
-        togglePlombier.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                if (isChecked) {
 
-                    try {
-                        // The toggle is enabled
-                        orc.modifierDisponibiliteService(userName, plombierText, true);
-                    }catch(SQLException e) {
-                        System.out.println(e.getMessage());
-                    }
-                } else {
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ *
+ *
+ * */
+        final ArrayList resultat = new ArrayList<String>();
+        if(user.listeServices.size() == 0 || user.listeServices == null){
+            resultat.add("Pas de Service");
+        }
 
-                    try{
-                        orc.modifierDisponibiliteService(userName, plombierText, false);
-                    }catch(SQLException e){
-                        System.out.println(e.getMessage());
-                    }
-                }
+        for(int i = 0; i < user.listeServices.size(); i++) {
+            resultat.add(user.listeServices.get(i).getNomSservice());
+        }
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,resultat);
+
+
+
+        lView.setAdapter(adapter);
+
+        lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intentServ = new Intent(ProfilActivity.this,AfficherSupprimerService.class);
+                intentServ.putExtra("userName",userName);
+
+                intentServ.putExtra("service",adapter.getItem(position));
+
+                startActivity(intentServ);
             }
+
         });
 
-        toggleMenuisier.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                if (isChecked) {
 
-                    try {
-                        // The toggle is enabled
-                        orc.modifierDisponibiliteService(userName, menuisierText, true);
-                    }catch(SQLException e) {
-                        System.out.println(e.getMessage());
-                    }
-                } else {
 
-                    try{
-                        orc.modifierDisponibiliteService(userName, menuisierText, false);
-                    }catch(SQLException e){
-                        System.out.println(e.getMessage());
-                    }
-                }
-            }
-        });
-
-        toggleElectricien.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if (isChecked) {
-
-                    try {
-                        // The toggle is enabled
-                        orc.modifierDisponibiliteService(userName, electricienText, true);
-                    }catch(SQLException e) {
-                        System.out.println(e.getMessage());
-                    }
-                } else {
-
-                    try{
-                        orc.modifierDisponibiliteService(userName, electricienText, false);
-                    }catch(SQLException e){
-                        System.out.println(e.getMessage());
-                    }
-                }
-            }
-        });
 
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////
         /**
         // Spinner element
         Spinner spinner = (Spinner) findViewById(R.id.spinnerServiceProfile);
@@ -257,38 +210,7 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
             }
         });
 
-        electricien.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent serviceElectricien = new Intent(ProfilActivity.this, AfficherSupprimerService.class);
-                serviceElectricien.putExtra("userName", userName);
-                serviceElectricien.putExtra("Électricien",electricienText);
-                serviceElectricien.putExtra("service",electricienText);
-                startActivity(serviceElectricien);
-            }
-        });
 
-        plombier.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent servicePlombier = new Intent(ProfilActivity.this, AfficherSupprimerService.class);
-                servicePlombier.putExtra("userName", userName);
-                servicePlombier.putExtra("Plombier",plombierText);
-                servicePlombier.putExtra("service",plombierText);
-                startActivity(servicePlombier);
-            }
-        });
-
-        menusier.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent serviceMenusier = new Intent(ProfilActivity.this, AfficherSupprimerService.class);
-                serviceMenusier.putExtra("userName", userName);
-                serviceMenusier.putExtra("Menuisier",menuisierText);
-                serviceMenusier.putExtra("service",menuisierText);
-                startActivity(serviceMenusier);
-            }
-        });
 
         //listner sur le boutton rechercher
         rechercher.setOnClickListener(new View.OnClickListener() {
@@ -313,17 +235,16 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
             }
         });
 
-    }
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-        String item = parent.getItemAtPosition(position).toString();
-        // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+        rate.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent evaluer = new Intent(ProfilActivity.this, EvaluationActivity.class);
+                evaluer.putExtra("userName", userName);
+                startActivity(evaluer);
+
+            }
+        });
 
     }
 
-    public void onNothingSelected(AdapterView<?> arg0) {
-
-    }
 }

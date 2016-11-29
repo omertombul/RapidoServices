@@ -1,5 +1,6 @@
 package inm5001.rapidoservices.interfaceGraphique;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
     Orchestrateur o;
     ArrayList<RechercheServices> listeDePaire;
     ArrayList<String> resultat;
+    AlertDialog.Builder dlgAlert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
         rechercher = (Button) findViewById(R.id.buttonRechercherRecherche);
         tauxHorraire = (EditText) findViewById(R.id.editTextPrixRecherche);
 
+        //Liste cliquable pour la recherche
         final ListView lView = (ListView) findViewById(R.id.ListViewRechercheResult);
         final ArrayAdapter<String> adapter ;
 
@@ -55,6 +58,11 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
         Intent intent = getIntent();
         final String userName = intent.getStringExtra("userName");
 
+
+        //creation du alert box
+        dlgAlert  = new AlertDialog.Builder(this);
+        dlgAlert.setPositiveButton("OK", null);
+        dlgAlert.setCancelable(true);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -174,17 +182,28 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
 
                             } else {
 
-                                resultat.add("******* Aucun Service pour Vos Criteres ******");
-                                System.out.println("Liste vide");
+                                dlgAlert.setTitle("Erreur!");
+
+                                dlgAlert.setMessage("******* Aucun Service pour Vos Criteres ******");
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        dlgAlert.create().show();
+                                    }
+                                });
+
+                                //resultat.add("******* Aucun Service pour Vos Criteres ******");
+                                //System.out.println("Liste vide");
                             }
                             //Ajouter adapteur pour lui donne la liste de nom et services
                             lView.setAdapter(adapter);
-                            lView.invalidateViews();
+
                             //Set an Item Click Listener for ListView items
                             lView.setOnItemClickListener(new OnItemClickListener(){
                                 //onItemClick() callback method
                                 public void onItemClick(AdapterView<?> parent, View v, int position, long id){
 
+                                    lView.invalidateViews();
                                     //Generate a Toast message
                                     String toastMessage = "Selected : "+  resultat.get(position) ;
 

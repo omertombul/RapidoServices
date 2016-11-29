@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -31,44 +32,66 @@ public class AfficherSupprimerService extends Activity {
     ToggleButton dispo = null;
     Orchestrateur orchestrateur = null;
     Utilisateur user;
+    RatingBar rate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supservice);
-        Intent intent = getIntent();
-        final String us = intent.getStringExtra("userName");
 
+        //recupere info de l'activite precedente
+        Intent intent = getIntent();
+        final String uName = intent.getStringExtra("userName");
         final String service = intent.getStringExtra("service");
+
+
         supprimer = (Button) findViewById(R.id.supprimerService);
-        dispo = (ToggleButton) findViewById(R.id.toggleDispoService);
+
+
+
 
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Orchestrateur o = new Orchestrateur();
+              orchestrateur = new Orchestrateur();
 
                 
                 try {
-                    user = o.recupererUtilisateur(us);
-                    orchestrateur = o;
-                    System.out.println("**************** nom :" +user.profile.nom);
+
+                    user = orchestrateur.recupererUtilisateur(uName);
+
+
+                  System.out.println("**************** nom :" + user.profile.nom);
                     nom = (TextView) findViewById(R.id.nomServ);
                     description = (TextView) findViewById(R.id.description);
                     mail = (TextView) findViewById(R.id.mail);
+                    taux = (TextView) findViewById(R.id.taux);
                     telephone = (TextView) findViewById(R.id.phone);
+                    rate = (RatingBar) findViewById(R.id.ratingBarServiceOffert);
+                    dispo = (ToggleButton) findViewById(R.id.toggleDispoService);
+                    String tauxH = "0.0";
+                    Float t = 0.0f;
+
                     for (int i = 0; i < user.listeServices.size(); i++)
                     {
 
 
                         if (user.listeServices.get(i).getNomSservice().equals(service) ) {
 
+
+                            tauxH = Float.toString(user.listeServices.get(i).getTauxHorraire());
                             nom.setText(user.listeServices.get(i).getNomSservice());
+                            taux.setText(tauxH);
                             description.setText(user.listeServices.get(i).getDescription());
+                            dispo.setChecked(user.listeServices.get(i).getDisponible());
                             mail.setText(user.listeServices.get(i).getCourriel());
                             telephone.setText(user.listeServices.get(i).getNoTelephone());
+                            rate.setRating(3.0f);
+
+
+                            //rate.setIsIndicator(true);
 
                         }
 
@@ -98,12 +121,12 @@ public class AfficherSupprimerService extends Activity {
 
                         if (user.listeServices.get(i).getNomSservice().equals(service) ){
 
-                            orchestrateur.retirerOffreDeService(us, user.listeServices.get(i));
+                            orchestrateur.retirerOffreDeService(uName, user.listeServices.get(i));
                         }
                     }
 
                     Intent profil = new Intent(AfficherSupprimerService.this, ProfilActivity.class);
-                    profil.putExtra("userName",us);
+                    profil.putExtra("userName",uName);
                     startActivity(profil);
                 }catch(MyException e){
                     System.out.println(e.getMessage());
@@ -118,14 +141,14 @@ public class AfficherSupprimerService extends Activity {
 
                     try {
                         // The toggle is enabled
-                        orchestrateur.modifierDisponibiliteService(us, service, true);
+                        orchestrateur.modifierDisponibiliteService(uName, service, true);
                     }catch(SQLException e) {
                         System.out.println(e.getMessage());
                     }
                 } else {
 
                     try{
-                        orchestrateur.modifierDisponibiliteService(us, service, false);
+                        orchestrateur.modifierDisponibiliteService(uName, service, false);
                     }catch(SQLException e){
                         System.out.println(e.getMessage());
                     }
