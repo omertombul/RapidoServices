@@ -3,7 +3,6 @@ package inm5001.rapidoservices.utilisateur;
 import java.util.ArrayList;
 
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.service.TypeServices;
 
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.*;
@@ -19,11 +18,10 @@ public class Utilisateur {
     public ArrayList<String> listeCompetences = new ArrayList<>();
     public boolean disponible = false;
     public EvaluationUtilisateur evaluationUtilisateur = new EvaluationUtilisateur(0, 0, 0, 0);
-    //public Geolocalisation geolocalisation;
 
     public Utilisateur() throws MyException {
     }
-    //Pour l'inscription d'un nouvel utilisateur
+
     public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<TypeServices> listeServices,
                        ArrayList<String> listeCompetences) throws MyException {
         traiterIdentifiant(identifiant);

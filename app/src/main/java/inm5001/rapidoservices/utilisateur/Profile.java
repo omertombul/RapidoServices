@@ -137,5 +137,4 @@ public class Profile {
     private String convertirEnMajuscule(String uneChaine) {
         return uneChaine.toUpperCase();
     }
-//MÉTHODES PUBLIC
 }
