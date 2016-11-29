@@ -46,6 +46,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
         rechercher = (Button) findViewById(R.id.buttonRechercherRecherche);
         tauxHorraire = (EditText) findViewById(R.id.editTextPrixRecherche);
 
+        //Liste cliquable pour la recherche
         final ListView lView = (ListView) findViewById(R.id.ListViewRechercheResult);
         final ArrayAdapter<String> adapter ;
 
@@ -179,12 +180,13 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                             }
                             //Ajouter adapteur pour lui donne la liste de nom et services
                             lView.setAdapter(adapter);
-                            lView.invalidateViews();
+
                             //Set an Item Click Listener for ListView items
                             lView.setOnItemClickListener(new OnItemClickListener(){
                                 //onItemClick() callback method
                                 public void onItemClick(AdapterView<?> parent, View v, int position, long id){
 
+                                    lView.invalidateViews();
                                     //Generate a Toast message
                                     String toastMessage = "Selected : "+  resultat.get(position) ;
 

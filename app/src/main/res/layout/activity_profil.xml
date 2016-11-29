@@ -137,91 +137,10 @@
         android:textStyle="normal|bold"
         android:textAllCaps="true" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="270dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-            <Button
-                android:text="Électricien"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/electricien" />
-
-            <ToggleButton
-                android:text="Disponibilite"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/switchDispoElecticien"
-                tools:text="Disponibilite"
-                android:background="@drawable/btn_toggle"
-                android:layout_marginTop="-50dp"
-                android:layout_marginLeft="125dp"
-                />
-
-            <RatingBar
-                android:layout_width="145dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="220dp"
-                android:layout_marginTop="-45dp"
-                android:id="@+id/ratingBarElectricien" />
-
-            <Button
-                android:text="Plombier"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/plombier" />
-
-            <ToggleButton
-                android:text="Disponibilite"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/switchDispoPlombier"
-                tools:text="Disponibilite"
-                android:background="@drawable/btn_toggle"
-                android:layout_marginTop="-45dp"
-                android:layout_marginLeft="125dp"
-                />
-
-            <RatingBar
-                android:layout_width="145dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="220dp"
-                android:layout_marginTop="-45dp"
-                android:id="@+id/ratingBarPlombier" />
-
-
-            <Button
-                android:text="Menuisier"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/menuisier" />
-
-            <ToggleButton
-                android:text="Disponibilite"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/switchDispoMenuisier"
-                tools:text="Disponibilite"
-                android:background="@drawable/btn_toggle"
-                android:layout_marginTop="-45dp"
-                android:layout_marginLeft="125dp"
-                />
-
-            <RatingBar
-                android:layout_width="145dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="220dp"
-                android:layout_marginTop="-45dp"
-                android:id="@+id/ratingBarMenuisier" />
-
-
-
-        </LinearLayout>
-    </ScrollView>
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="202dp"
+        android:id="@+id/listViewMesServices" />
 
     <Button
         android:text="Supprimer Usager"
