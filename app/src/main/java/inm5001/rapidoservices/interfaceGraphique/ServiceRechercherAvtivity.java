@@ -15,6 +15,7 @@ import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.Orchestrateur;
 import inm5001.rapidoservices.R;
 import inm5001.rapidoservices.service.EvaluationService;
+import inm5001.rapidoservices.utilisateur.Utilisateur;
 
 
 /**
@@ -79,7 +80,11 @@ public class ServiceRechercherAvtivity extends Activity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Orchestrateur o = new Orchestrateur();
+                        Utilisateur u;
+
                         try {
+                            u = o.recupererUtilisateur(userName);
                             orc.faireUneEvaluation(userNameService, userName, nomS, ratingStars.getRating());
                         }catch(SQLException e){
                             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -88,6 +93,8 @@ public class ServiceRechercherAvtivity extends Activity {
                             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                             System.out.println(e.getMessage());
                         }
+
+
                     }
                 });
 

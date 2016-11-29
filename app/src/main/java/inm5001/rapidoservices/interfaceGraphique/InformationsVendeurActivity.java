@@ -18,4 +18,5 @@ public class InformationsVendeurActivity extends Activity {
         setContentView(R.layout.activity_infovendeur);
 
     }
+
 }

@@ -35,6 +35,7 @@ public class ProfilActivity extends Activity {
     TextView telephone = null;
     Button ajouter = null;
     Button rechercher = null;
+    Button rate = null;
     Button supprimerUsager = null;
     String us;
     Utilisateur user;
@@ -49,6 +50,7 @@ public class ProfilActivity extends Activity {
 
         ajouter = (Button) findViewById(R.id.ajouter);
         rechercher = (Button) findViewById(R.id.rechercher);
+        rate = (Button) findViewById(R.id.rate);
         supprimerUsager = (Button) findViewById(R.id.buttonDeleteUserProfile);
         toggle = (ToggleButton) findViewById(R.id.switchDispoUser);
 
@@ -228,6 +230,16 @@ public class ProfilActivity extends Activity {
                 }catch(MyException e){
                     System.out.println(e.getMessage());
                 }
+            }
+        });
+
+        rate.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent evaluer = new Intent(ProfilActivity.this, EvaluationActivity.class);
+                evaluer.putExtra("userName", userName);
+                startActivity(evaluer);
+
             }
         });
 
