@@ -67,16 +67,16 @@ public class OrchestrateurTest {
     private float tauxHorraire;
     private float prixFixe;
     //attributs evaluationUtilisateur
-    public float coteUtilisateur;
-    public int nombreDEvaluationUtilisateur;
-    public float coteTypeServicesMoyenne;
-    public int nombreDEvaluationTypeServicesMoyenne;
+    private float coteUtilisateur;
+    private int nombreDEvaluationUtilisateur;
+    private float coteTypeServicesMoyenne;
+    private int nombreDEvaluationTypeServicesMoyenne;
     private EvaluationUtilisateur evaluationUtilisateur1;
     private EvaluationUtilisateur evaluationUtilisateur2;
     private EvaluationUtilisateur evaluationUtilisateur3;
     //attributs evaluationService
-    public float coteService;
-    public int nombreDEvaluationService;
+    private float coteService;
+    private int nombreDEvaluationService;
     private EvaluationService evaluationService1;
     private EvaluationService evaluationService2;
     private EvaluationService evaluationService3;
@@ -1022,8 +1022,8 @@ public class OrchestrateurTest {
 
         utilisateur1 = orchestrateur.recupererUtilisateur(utilisateur1.identifiant.nomUtilisateur);
         utilisateur2 = orchestrateur.recupererUtilisateur(utilisateur2.identifiant.nomUtilisateur);
-        System.out.println("***************coteUtilisateur: " + utilisateur2.getEvaluationUtilisateur().coteUtilisateur);
-        assertTrue(utilisateur2.getEvaluationUtilisateur().coteUtilisateur == 4.1f);
+        System.out.println("***************coteUtilisateur: " + utilisateur2.evaluationUtilisateur.coteUtilisateur);
+        assertTrue(utilisateur2.evaluationUtilisateur.coteUtilisateur == 4.1f);
         orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
         orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
     }
@@ -1044,7 +1044,7 @@ public class OrchestrateurTest {
         orchestrateur.faireUneEvaluation(utilisateur1.identifiant.nomUtilisateur, utilisateur3.identifiant.nomUtilisateur, service.getNomSservice(), 5f);
 
         utilisateur1 = orchestrateur.recupererUtilisateur(utilisateur1.identifiant.nomUtilisateur);
-        assertTrue(utilisateur1.getEvaluationUtilisateur().coteTypeServicesMoyenne == 3.1f);
+        assertTrue(utilisateur1.evaluationUtilisateur.coteTypeServicesMoyenne == 3.1f);
         orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
         orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
         orchestrateur.supprimerCompte(utilisateur3.identifiant.nomUtilisateur);
@@ -1065,8 +1065,8 @@ public class OrchestrateurTest {
 
         utilisateur1 = orchestrateur.recupererUtilisateur(utilisateur1.identifiant.nomUtilisateur);
         utilisateur2 = orchestrateur.recupererUtilisateur(utilisateur2.identifiant.nomUtilisateur);
-        System.out.println("***************coteUtilisateur: " + utilisateur2.getEvaluationUtilisateur().coteUtilisateur);
-        System.out.println("***************coteServiceMoyenne: " + utilisateur1.getEvaluationUtilisateur().coteTypeServicesMoyenne);
+        System.out.println("***************coteUtilisateur: " + utilisateur2.evaluationUtilisateur.coteUtilisateur);
+        System.out.println("***************coteServiceMoyenne: " + utilisateur1.evaluationUtilisateur.coteTypeServicesMoyenne);
         System.out.println("***************coteService: " + utilisateur1.listeServices.get(0).evaluationService.coteService);
         //assertTrue(utilisateur.listeServices.get(0).evaluationService.coteService == 3.5);
         orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);

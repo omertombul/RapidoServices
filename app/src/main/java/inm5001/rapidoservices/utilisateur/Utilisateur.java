@@ -70,8 +70,7 @@ public class Utilisateur {
 //deuxième niveau d'abstraction
     private void validerIdentifiantPasNull(Identifiant identifiant) throws MyException {
         if (identifiant == null) {
-            MyException e = new MyException(MESSAGE_IDENTIFIANT_NULL);
-            throw e;
+            throw new MyException(MESSAGE_IDENTIFIANT_NULL);
         }
     }
 
@@ -81,8 +80,7 @@ public class Utilisateur {
 
     private void validerProfilePasNull(Profile profile) throws MyException {
         if (profile == null) {
-            MyException e = new MyException(MESSAGE_PROFILE_NULL);
-            throw e;
+            throw new MyException(MESSAGE_PROFILE_NULL);
         }
     }
 
@@ -100,16 +98,11 @@ public class Utilisateur {
 
     private void validerEvaluationUtilisateurPasNull(EvaluationUtilisateur evaluationUtilisateur) throws MyException {
         if (evaluationUtilisateur == null) {
-            MyException e = new MyException(MESSAGE_EVALUATIONUTILISATEUR_NULL);
-            throw e;
+            throw new MyException(MESSAGE_EVALUATIONUTILISATEUR_NULL);
         }
     }
 
     private void affecterValeurEvaluationUtilisateur(EvaluationUtilisateur evaluationUtilisateur) {
         this.evaluationUtilisateur = evaluationUtilisateur;
-    }
-//MÉTHODES PUBLIC
-    public EvaluationUtilisateur getEvaluationUtilisateur(){
-        return evaluationUtilisateur;
     }
 }
