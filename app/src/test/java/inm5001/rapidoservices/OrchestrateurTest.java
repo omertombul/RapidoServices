@@ -31,7 +31,6 @@ public class OrchestrateurTest {
     private Utilisateur utilisateur2;
     private Utilisateur utilisateur3;
     //attributs Utilisateur
-    private Identifiant identifiant;
     private Identifiant identifiant1;
     private Identifiant identifiant2;
     private Identifiant identifiant3;
@@ -41,14 +40,8 @@ public class OrchestrateurTest {
     private TypeServices service2;
     private TypeServices service3;
     private ArrayList<String> listeCompetences;
-    private String competence;
-    private boolean disponibleUtilisateur;
-    //private Geolocalisation geolocalisation;
-//attributs Identifiant
+    //attributs Identifiant
     private String nomUtilisateur;
-    private String nomUtilisateur1;
-    private String nomUtilisateur2;
-    private String nomUtilisateur3;
     private String motDePasse;
     //attributs Profile
     private String nom;
@@ -67,9 +60,7 @@ public class OrchestrateurTest {
     private float tauxHorraire;
     private float prixFixe;
     //attributs evaluationUtilisateur
-    private float coteUtilisateur;
     private int nombreDEvaluationUtilisateur;
-    private float coteTypeServicesMoyenne;
     private int nombreDEvaluationTypeServicesMoyenne;
     private EvaluationUtilisateur evaluationUtilisateur1;
     private EvaluationUtilisateur evaluationUtilisateur2;
@@ -86,25 +77,18 @@ public class OrchestrateurTest {
         orchestrateur = new Orchestrateur();
         listeServices = new ArrayList<>();
         listeCompetences = new ArrayList<>();
-        competence = null;
         nomUtilisateur = "Francis";
-        nomUtilisateur1 = "IdUser1";
-        nomUtilisateur2 = "IdUser2";
-        nomUtilisateur2 = "IdUser3";
         motDePasse = "Allo!234";
         nom = "Francis";
         prenom = "Bernier";
         numeroTelephoneProfile = "5145972143";
         adresseCourrielProfile = "francis@hotmail.com";
-        identifiant = new Identifiant(nomUtilisateur, motDePasse);
         identifiant1 = new Identifiant("IdUser1", motDePasse);
         identifiant2 = new Identifiant("IdUser2", motDePasse);
         identifiant3 = new Identifiant("IdUser3", motDePasse);
         profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
         //attributs EvaluationUtilisateur
-        coteUtilisateur = 3.5f;
         nombreDEvaluationUtilisateur = 210;
-        coteTypeServicesMoyenne = 4.5f;
         nombreDEvaluationTypeServicesMoyenne = 1000;
         evaluationUtilisateur1 = new EvaluationUtilisateur(1, nombreDEvaluationUtilisateur, 1, nombreDEvaluationTypeServicesMoyenne);
         evaluationUtilisateur2 = new EvaluationUtilisateur(3, nombreDEvaluationUtilisateur, 3, nombreDEvaluationTypeServicesMoyenne);
@@ -121,7 +105,6 @@ public class OrchestrateurTest {
         utilisateur3 = new Utilisateur(identifiant3, profile, listeServices, listeCompetences, evaluationUtilisateur3);
         estValider = true;
         nomSservice = "Plombier";
-        disponibleUtilisateur = false;
         disponibleService = false;
         ville = "Montreal";
         numeroTelephoneService = "5144444444";
@@ -140,22 +123,18 @@ public class OrchestrateurTest {
     @After
     public void tearDown() throws MyException {
         orchestrateur = null;
-        identifiant = null;
         identifiant1 = null;
         identifiant2 = null;
         identifiant3 = null;
         profile = null;
         listeServices = null;
         listeCompetences = null;
-        competence = null;
         nom = null;
         prenom = null;
         numeroTelephoneProfile = null;
         adresseCourrielProfile = null;
         //attributs EvaluationUtilisateur
-        coteUtilisateur = 0f;
         nombreDEvaluationUtilisateur = 0;
-        coteTypeServicesMoyenne = 0f;
         nombreDEvaluationTypeServicesMoyenne = 0;
         evaluationUtilisateur1 = null;
         evaluationUtilisateur2 = null;
@@ -170,7 +149,6 @@ public class OrchestrateurTest {
         motDePasse = null;
         estValider = null;
         nomSservice = null;
-        disponibleUtilisateur = false;
         disponibleService = false;
         ville = null;
         numeroTelephoneService = null;
