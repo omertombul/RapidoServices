@@ -1057,7 +1057,6 @@ public class OrchestrateurTest {
         orchestrateur.ajouterOffreDeService(utilisateur1.identifiant.nomUtilisateur, service);
         utilisateur1 = orchestrateur.recupererUtilisateur(utilisateur1.identifiant.nomUtilisateur);
         RechercheServices rechercheServices = new RechercheServices(utilisateur1, service.getNomSservice());
-//erreur au niveau BD, ajoute un compte dans nmCote et nmCoteFournisseur, mais devrait pas...hypothese...doit compter la deuxième ligne (Client)
         orchestrateur.accepterUnFournisseurDeService(rechercheServices, utilisateur2.identifiant.nomUtilisateur);
 
         orchestrateur.faireUneEvaluation(utilisateur1.identifiant.nomUtilisateur, utilisateur2.identifiant.nomUtilisateur, service.getNomSservice(), 3.5f);
@@ -1065,10 +1064,7 @@ public class OrchestrateurTest {
 
         utilisateur1 = orchestrateur.recupererUtilisateur(utilisateur1.identifiant.nomUtilisateur);
         utilisateur2 = orchestrateur.recupererUtilisateur(utilisateur2.identifiant.nomUtilisateur);
-        System.out.println("***************coteUtilisateur: " + utilisateur2.evaluationUtilisateur.coteUtilisateur);
-        System.out.println("***************coteServiceMoyenne: " + utilisateur1.evaluationUtilisateur.coteTypeServicesMoyenne);
-        System.out.println("***************coteService: " + utilisateur1.listeServices.get(0).evaluationService.coteService);
-        //assertTrue(utilisateur.listeServices.get(0).evaluationService.coteService == 3.5);
+        assertTrue(utilisateur1.listeServices.get(0).evaluationService.coteService == 3.7f);
         orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
         orchestrateur.supprimerCompte(utilisateur2.identifiant.nomUtilisateur);
     }
