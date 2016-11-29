@@ -109,7 +109,7 @@ public class BdApi {
 
     public ArrayList<RechercheServices> servicesSearch(TypeServices s, float coteUtilisateur,
                 float coteServicesMoyenne, float coteService){
-        ArrayList<RechercheServices> UserAndServicesArray = new ArrayList<>();
+        ArrayList<RechercheServices> UserAndServicesArray;
         String SQL = SQLservicesSearch(s, coteUtilisateur, coteServicesMoyenne, coteService);
         BdConnection DB = new BdConnection(SQL);
         ResultSet RSservices = DB.readFromDataBase();
@@ -230,7 +230,7 @@ public class BdApi {
         SQL += S.getEvaluationService().coteService + SQL_SEPARATEUR;
         SQL += S.getEvaluationService().nombreDEvaluationService + SQL_SEPARATEUR;
         SQL += S.getDescription() + SQL_FIN;
-System.out.println("    String SQL addService Usager: " + SQL); // shows SQL String
+//System.out.println("    String SQL addService Usager: " + SQL); // shows SQL String
         return SQL;
     }
 
@@ -318,7 +318,7 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
         SQL = SQL_DEBUT + SQL_NOM_SERVICE + SQL_PRIX_FIXE + SQL_PRIX_HORRAIRE +
                 SQL_VILLE + SQL_COTE_UTILISATEUR + SQL_COTE_SERVICE_MOYENNE + SQL_COTE_SERVICE +
                 SQL_FIN;
-//System.out.println("    String SQL servicesSearch: " + SQL); // shows SQL String
+System.out.println("    String SQL servicesSearch: " + SQL); // shows SQL String
         return SQL;
     }
 
@@ -443,33 +443,7 @@ System.out.println("    String SQL addService Usager: " + SQL); // shows SQL Str
     private ArrayList<RechercheServices> updateUserAndSerivcesArrayWithRS(
             ResultSet RSservices){
         ArrayList<RechercheServices> userAndServicesArray = new ArrayList<>();
-        // userId and services is in the RSservices
-        float tauxHorraire, prixFixe;
-        String nomService, ville, noTelephone, courriel, description;
-        boolean disponible;
-        byte cote;
 
-// float tauxHorraire, float prixFixe, String nomSservice, boolean disponible, String ville,
-//  byte cote, String noTelephone, String courriel, String description
-// code example
-        //Commenté par Francis Bernier parce que j'ai changer les attributs de l'objet de type RechercheServices
-        /* try {
-            RSservices.beforeFirst();
-            while (RSservices.next()) {
-                TypeServices S = new TypeServices(RSservices.getFloat("prixHorraire"),
-                        RSservices.getFloat("prixFixe"), RSservices.getString("nomService"),
-                        RSservices.getBoolean("disponibilite"), RSservices.getString("ville"),
-                        RSservices.getString("noTelephone"), RSservices.getString("courriel"),
-                        RSservices.getString("description"));
-                RechercheServices P = new RechercheServices(getUser(RSservices.getString("idUsager")), S);
-                userAndServicesArray.add(P);
-            }
-        } catch (Exception ex) {
-            System.out.println(ex + "Error updating serviceSearchArray with RSservices");
-        }
-        return userAndServicesArray;
-    }*/
-        //Francis Bernier: nouvelle fonction avec nouveau attributs
         try {
             RSservices.beforeFirst();
             while (RSservices.next()) {
