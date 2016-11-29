@@ -28,7 +28,7 @@ import inm5001.rapidoservices.utilisateur.Utilisateur;
  * and Omer Tombul
  */
 
-public class ProfilActivity extends Activity implements AdapterView.OnItemSelectedListener{
+public class ProfilActivity extends Activity {
     TextView nom = null;
     TextView prenom = null;
     TextView courriel = null;
@@ -36,7 +36,7 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
     Button ajouter = null;
     Button rechercher = null;
     Button supprimerUsager = null;
-
+    String us;
     Utilisateur user;
     Orchestrateur orc;
     ToggleButton toggle = null;
@@ -53,9 +53,11 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
         toggle = (ToggleButton) findViewById(R.id.switchDispoUser);
 
         //recuper le userName et password de la page precedente
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         final String userName = intent.getStringExtra("userName");
-        //String pass = intent.getStringExtra("password");
+        us = userName;
+
+
 
         //Liste de Service offert cliquable
 
@@ -137,6 +139,7 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
             resultat.add(user.listeServices.get(i).getNomSservice());
         }
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,resultat);
+        final Intent intentServ = new Intent(ProfilActivity.this,AfficherSupprimerService.class);
 
         lView.setAdapter(adapter);
 
@@ -144,10 +147,10 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent serviceAfficheSup = new Intent(ProfilActivity.this,AfficherSupprimerService.class);
-                serviceAfficheSup.putExtra( adapter.getItem(position),"service");
-                serviceAfficheSup.putExtra(userName,"userName");
-                startActivity(serviceAfficheSup);
+                intentServ.putExtra(userName,"u");
+                intentServ.putExtra( adapter.getItem(position),"service");
+
+                startActivity(intentServ);
             }
 
         });
@@ -229,16 +232,5 @@ public class ProfilActivity extends Activity implements AdapterView.OnItemSelect
         });
 
     }
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-        String item = parent.getItemAtPosition(position).toString();
-        // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
 
-    }
-
-    public void onNothingSelected(AdapterView<?> arg0) {
-
-    }
 }

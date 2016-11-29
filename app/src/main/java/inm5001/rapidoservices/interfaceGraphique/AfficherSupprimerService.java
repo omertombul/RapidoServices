@@ -37,10 +37,14 @@ public class AfficherSupprimerService extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supservice);
-        Intent intent = getIntent();
-        final String us = intent.getStringExtra("userName");
 
+        Intent intent = getIntent();
+
+        String us = intent.getStringExtra("u");
+        System.out.println(us + " dans affiche  ");
         final String service = intent.getStringExtra("service");
+
+        final String uName = us;
         supprimer = (Button) findViewById(R.id.supprimerService);
         dispo = (ToggleButton) findViewById(R.id.toggleDispoService);
 
@@ -48,31 +52,33 @@ public class AfficherSupprimerService extends Activity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Orchestrateur o = new Orchestrateur();
+              orchestrateur = new Orchestrateur();
 
                 
                 try {
-                    user = o.recupererUtilisateur(us);
-                    orchestrateur = o;
-                    System.out.println("**************** nom :" +user.profile.nom);
-                    nom = (TextView) findViewById(R.id.nomServ);
-                    description = (TextView) findViewById(R.id.description);
-                    mail = (TextView) findViewById(R.id.mail);
-                    telephone = (TextView) findViewById(R.id.phone);
-                    for (int i = 0; i < user.listeServices.size(); i++)
-                    {
+
+                    user = orchestrateur.recupererUtilisateur("omer");
 
 
-                        if (user.listeServices.get(i).getNomSservice().equals(service) ) {
-
-                            nom.setText(user.listeServices.get(i).getNomSservice());
-                            description.setText(user.listeServices.get(i).getDescription());
-                            mail.setText(user.listeServices.get(i).getCourriel());
-                            telephone.setText(user.listeServices.get(i).getNoTelephone());
-
-                        }
-
-                    }
+                  System.out.println("**************** nom :" + user.profile.nom);
+//                    nom = (TextView) findViewById(R.id.nomServ);
+//                    description = (TextView) findViewById(R.id.description);
+//                    mail = (TextView) findViewById(R.id.mail);
+//                    telephone = (TextView) findViewById(R.id.phone);
+//                    for (int i = 0; i < user.listeServices.size(); i++)
+//                    {
+//
+//
+//                        if (user.listeServices.get(i).getNomSservice().equals(service) ) {
+//
+//                            nom.setText(user.listeServices.get(i).getNomSservice());
+//                            description.setText(user.listeServices.get(i).getDescription());
+//                            mail.setText(user.listeServices.get(i).getCourriel());
+//                            telephone.setText(user.listeServices.get(i).getNoTelephone());
+//
+//                        }
+//
+//                    }
                     //courriel = (TextView) findViewById(R.id.courrielProfil);
                     //telephone = (TextView) findViewById(R.id.telProfil);
                     //prenom = (TextView) findViewById(R.id.prenomProfil);
@@ -98,12 +104,12 @@ public class AfficherSupprimerService extends Activity {
 
                         if (user.listeServices.get(i).getNomSservice().equals(service) ){
 
-                            orchestrateur.retirerOffreDeService(us, user.listeServices.get(i));
+                            orchestrateur.retirerOffreDeService(uName, user.listeServices.get(i));
                         }
                     }
 
                     Intent profil = new Intent(AfficherSupprimerService.this, ProfilActivity.class);
-                    profil.putExtra("userName",us);
+                    profil.putExtra("userName",uName);
                     startActivity(profil);
                 }catch(MyException e){
                     System.out.println(e.getMessage());
@@ -118,14 +124,14 @@ public class AfficherSupprimerService extends Activity {
 
                     try {
                         // The toggle is enabled
-                        orchestrateur.modifierDisponibiliteService(us, service, true);
+                        orchestrateur.modifierDisponibiliteService(uName, service, true);
                     }catch(SQLException e) {
                         System.out.println(e.getMessage());
                     }
                 } else {
 
                     try{
-                        orchestrateur.modifierDisponibiliteService(us, service, false);
+                        orchestrateur.modifierDisponibiliteService(uName, service, false);
                     }catch(SQLException e){
                         System.out.println(e.getMessage());
                     }
