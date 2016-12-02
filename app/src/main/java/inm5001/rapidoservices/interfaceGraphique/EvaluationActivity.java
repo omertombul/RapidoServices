@@ -63,7 +63,18 @@ public class EvaluationActivity extends Activity {
                     //Ajouter adapteur pour lui donne la liste de nom et services
                     lView.setAdapter(adapter);
 
+                lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intentServ = new Intent(EvaluationActivity.this,RateActivity.class);
+                intentServ.putExtra("userName",userName);
 
+                intentServ.putExtra("service",adapter.getItem(position));
+
+                startActivity(intentServ);
+            }
+
+        });
 
 
     }

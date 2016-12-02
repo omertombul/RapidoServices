@@ -24,7 +24,7 @@
         <activity android:name=".interfaceGraphique.AjouterServiceActivity" />
         <activity android:name=".interfaceGraphique.RechercheActivity"> </activity>
         <activity android:name=".interfaceGraphique.AfficherSupprimerService"/>
-        <activity android:name=".interfaceGraphique.InformationsVendeurActivity" />
+        <activity android:name=".interfaceGraphique.RateActivity" />
         <activity android:name=".interfaceGraphique.ServiceRechercherAvtivity" />
         <activity android:name=".interfaceGraphique.EvaluationActivity" />
     </application>
