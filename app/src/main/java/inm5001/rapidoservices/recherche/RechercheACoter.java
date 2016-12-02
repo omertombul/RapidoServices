@@ -13,6 +13,13 @@ public class RechercheACoter {
         this.nomService = nomService;
     }
 
+    public String getNomUtilisateurACoter(){
+        return nomUtilisateurACoter;
+    }
+
+    public String getNomService(){
+        return nomService;
+    }
     public String toString(){
         return " " + nomUtilisateurACoter +" " +nomService;
     }

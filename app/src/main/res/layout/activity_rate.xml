@@ -7,11 +7,11 @@
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ratingBar" />
+        android:id="@+id/ratingBarRate" />
 
     <Button
         android:text="Rate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/evaluer" />
+        android:id="@+id/evaluerRate" />
 </LinearLayout>

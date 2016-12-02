@@ -68,8 +68,9 @@ public class EvaluationActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intentServ = new Intent(EvaluationActivity.this,RateActivity.class);
                 intentServ.putExtra("userName",userName);
+                intentServ.putExtra("nomService",cotation.get(position).getNomService());
+                intentServ.putExtra("userACoter",cotation.get(position).getNomUtilisateurACoter());
 
-                intentServ.putExtra("service",adapter.getItem(position));
 
                 startActivity(intentServ);
             }
