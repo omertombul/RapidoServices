@@ -213,12 +213,15 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                                     System.out.println(r.recupererService().getVille());
                                     Float a = r.recupererService().getTauxHorraire();
                                     String taux = a.toString();
+
                                     intent.putExtra("nomService", r.getNomService());
                                     intent.putExtra("villeService",r.recupererService().getVille());
                                     intent.putExtra("taux",taux);
                                     intent.putExtra("description",r.recupererService().getDescription());
                                     intent.putExtra("userNameService",r.getUtilisateur().identifiant.nomUtilisateur);
                                     intent.putExtra("userName",userName);
+                                    System.out.println(r.recupererService().evaluationService.coteService);
+                                    intent.putExtra("rating",r.recupererService().evaluationService.coteService);
                                     startActivity(intent);
 
 

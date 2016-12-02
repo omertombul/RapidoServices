@@ -52,6 +52,8 @@ public class ServiceRechercherAvtivity extends Activity {
         String villeS = intent.getStringExtra("villeService");
         String tauxH = intent.getStringExtra("taux");
         String descrip = intent.getStringExtra("description");
+        Float evalFloat = intent.getFloatExtra("rating",0.0f);
+        //float evalFloat = Float.valueOf(evalString);
         final String userNameService = intent.getStringExtra("userNameService");
         final String userName = intent.getStringExtra("userName");
 
@@ -70,7 +72,8 @@ public class ServiceRechercherAvtivity extends Activity {
 
         accepter = (Button)findViewById(R.id.buttonRateTrouver);
         ratingStars = (RatingBar)findViewById(R.id.ratingBarTrouver);
-        eval = new EvaluationService();
+        ratingStars.setRating(evalFloat);
+
         cancel = (Button) findViewById(R.id.buttonCancelTrouver);
 
 
@@ -88,8 +91,8 @@ public class ServiceRechercherAvtivity extends Activity {
                         Utilisateur u;
 
                         try {
-                            u = o.recupererUtilisateur(userName);
-                            orc.faireUneEvaluation(userNameService, userName, nomS, ratingStars.getRating());
+                            u = o.recupererUtilisateur(userNameService);
+                            //orc.faireUneEvaluation(userNameService, userName, nomS, ratingStars.getRating());
                             noTel = (TextView) findViewById(R.id.noTel);
                             courriel = (TextView) findViewById(R.id.courrier);
                             RechercheServices rService = new RechercheServices(u,nomS);
