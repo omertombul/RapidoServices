@@ -8,8 +8,12 @@ public class RechercheACoter {
     String nomUtilisateurACoter;
     String nomService;
 
-    public RechercheACoter(String nomUtilisateurACoter, String nomServiceA){
+    public RechercheACoter(String nomUtilisateurACoter, String nomService){
         this.nomUtilisateurACoter = nomUtilisateurACoter;
         this.nomService = nomService;
+    }
+
+    public String toString(){
+        return " " + nomUtilisateurACoter +" " +nomService;
     }
 }
