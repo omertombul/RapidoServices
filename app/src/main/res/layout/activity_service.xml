@@ -32,13 +32,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinnerServiceAjout"
-        android:layout_below="@+id/nomService"
-        android:layout_alignParentStart="true" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,13 +42,6 @@
         android:layout_alignBottom="@+id/textViewServiceEmail"
         android:layout_alignParentEnd="true" />
 
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinnerVilleAjoutService"
-        android:layout_below="@+id/textViewVille"
-        android:layout_alignParentStart="true" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,35 +50,6 @@
         android:id="@+id/editTextServiceNoTel"
         android:layout_below="@+id/editTextTauxHorraire"
         android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewServiceEmail"
-        android:textSize="16sp"
-        android:text="E-mail : "
-        android:layout_below="@+id/spinnerServiceAjout"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="19dp" />
-
-    <TextView
-        android:text="Ville :"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewVille"
-        android:textSize="16sp"
-        android:layout_marginTop="21dp"
-        android:layout_below="@+id/editTextServiceEmail"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="Taux Horraire :"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewTauxHorraire"
-        android:textSize="16sp"
-        android:layout_below="@+id/spinnerVilleAjoutService"
-        android:layout_alignParentStart="true" />
 
     <TextView
         android:text=" No.Telephone :"
@@ -121,6 +78,52 @@
         android:layout_marginTop="37dp"
         android:layout_below="@+id/editTextServiceNoTel"
         android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerVilleAjoutService"
+        android:layout_alignTop="@+id/textViewVille"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="41dp" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerServiceAjout"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/spinnerVilleAjoutService"
+        android:layout_marginStart="61dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewServiceEmail"
+        android:textSize="16sp"
+        android:text="E-mail : "
+        android:layout_marginTop="19dp"
+        android:layout_below="@+id/spinnerServiceAjout"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Ville :"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewVille"
+        android:textSize="16sp"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/editTextServiceEmail"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Taux Horraire :"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewTauxHorraire"
+        android:textSize="16sp"
+        android:layout_below="@+id/spinnerVilleAjoutService"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="13dp" />
 
 
 </RelativeLayout>

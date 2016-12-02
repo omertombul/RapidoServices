@@ -121,6 +121,7 @@ public class ServiceRechercherAvtivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent profilActivity = new Intent(ServiceRechercherAvtivity.this, ProfilActivity.class);
+                profilActivity.putExtra("userName",userName);
                 startActivity(profilActivity);
             }
         });

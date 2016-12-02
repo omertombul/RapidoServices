@@ -10,18 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="inm5001.rapidoservices.interfaceGraphique.InscriptionActivity">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:text=""
-        android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_alignBaseline="@+id/textViewPasswordLogin"
-        android:layout_alignBottom="@+id/textViewPasswordLogin"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText" />
-
     <Button
         android:text="Se connecter"
         android:layout_width="wrap_content"
@@ -34,31 +22,7 @@
         android:layout_marginStart="11dp" />
 
     <TextView
-        android:text="Password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="53dp"
-        android:id="@+id/textViewPasswordLogin"
-        android:layout_below="@+id/editText"
-        android:layout_alignEnd="@+id/textViewUserNameLogin"
-        android:textStyle="normal|bold|italic"
-        android:textAllCaps="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:text=""
-        android:ems="10"
-        android:layout_marginLeft="34dp"
-        android:id="@+id/editText"
-        android:layout_marginTop="93dp"
-        android:layout_marginStart="16dp"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/textViewUserNameLogin" />
-
-    <TextView
-        android:text="Username"
+        android:text="Nom Utilisateur"
         android:textStyle="bold|italic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,7 +45,7 @@
         android:layout_marginEnd="11dp" />
 
     <TextView
-        android:text="Connection"
+        android:text="Connexion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="33dp"
@@ -93,5 +57,39 @@
         android:textSize="24sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:text=""
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:layout_alignBaseline="@+id/textViewPasswordLogin"
+        android:layout_alignBottom="@+id/textViewPasswordLogin"
+        android:layout_alignStart="@+id/editText" />
+
+    <TextView
+        android:text="Mot de Passe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="53dp"
+        android:id="@+id/textViewPasswordLogin"
+        android:textStyle="normal|bold|italic"
+        android:textAllCaps="true"
+        android:layout_below="@+id/editText"
+        android:layout_toStartOf="@+id/editText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:text=""
+        android:ems="10"
+        android:layout_marginLeft="34dp"
+        android:id="@+id/editText"
+        android:layout_marginTop="29dp"
+        android:layout_below="@+id/textViewTitleLogin"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
