@@ -50,7 +50,7 @@ public class BdApiTest {
         bd = new BdApi();
         listeServices = new ArrayList<>();
         listeCompetences = new ArrayList<>();
-        nomUtilisateur = "Francis";
+        nomUtilisateur = "iduser1";
         motDePasse = "Allo!234";
         nom = "Francis";
         prenom = "Bernier";

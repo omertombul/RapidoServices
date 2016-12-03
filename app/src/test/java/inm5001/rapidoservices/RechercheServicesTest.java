@@ -60,7 +60,7 @@ public class RechercheServicesTest {
     public void setUp() throws MyException {
         listeServices = new ArrayList<>();
         listeCompetences = new ArrayList<>();
-        nomUtilisateur = "Francis";
+        nomUtilisateur = "iduser1";
         motDePasse = "Allo!234";
         nom = "Francis";
         prenom = "Bernier";
@@ -142,7 +142,7 @@ public class RechercheServicesTest {
     public void RechercheUtilisateurNomUtilisateur() throws MyException {
         RechercheServices pair1 = new RechercheServices(utilisateur , nomSservice);
 
-        assertEquals(pair1.getUtilisateur().identifiant.nomUtilisateur, "FRANCIS");
+        assertEquals(pair1.getUtilisateur().identifiant.nomUtilisateur, "IDUSER1");
     }
 
     @Test
@@ -157,6 +157,12 @@ public class RechercheServicesTest {
         RechercheServices pair1 = new RechercheServices(utilisateur , "Plombier");
         assertTrue(pair1.recupererService().getTauxHorraire() == tauxHorraire);
         assertEquals(pair1.recupererService().getNomSservice(), "Plombier");
+    }
+
+    @Test
+    public void compareTo() {
+        RechercheServices pair1 = new RechercheServices(utilisateur , "Plombier");
+        assertTrue(pair1.compareTo(pair1) == 0);
     }
 
     @Test
