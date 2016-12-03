@@ -10,6 +10,7 @@ import inm5001.rapidoservices.MyException;
 import inm5001.rapidoservices.service.EvaluationService;
 import inm5001.rapidoservices.service.TypeServices;
 
+import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_EVALUATIONUTILISATEUR_NULL;
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_IDENTIFIANT_NULL;
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.MESSAGE_PROFILE_NULL;
 import static org.junit.Assert.assertEquals;
@@ -56,6 +57,7 @@ public class UtilisateurTest {
     private float coteService;
     private int nombreDEvaluationService;
     private EvaluationService evaluationService;
+    private boolean estValide;
 
     @Before
     public void setUp() throws MyException {
@@ -98,6 +100,7 @@ public class UtilisateurTest {
         coteService = 3.5f;
         nombreDEvaluationService = 210;
         evaluationService = new EvaluationService(coteService, nombreDEvaluationService);
+        estValide = false;
     }
 
     @After
@@ -133,6 +136,7 @@ public class UtilisateurTest {
         coteService = 0;
         nombreDEvaluationService = 0;
         evaluationService = null;
+        estValide = false;
     }
 
     @Test
@@ -253,6 +257,16 @@ public class UtilisateurTest {
         assertTrue((utilisateur.listeCompetences).isEmpty());
     }
 //EVALUATIONUTILISATEUR
+    @Test
+    public void traiterEvaluationUtilisateurCoteUtilisateurNull() throws Exception {
+        try {
+            utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, null);
+        } catch (MyException e) {
+            estValider = e.getMessage().equals(MESSAGE_EVALUATIONUTILISATEUR_NULL);
+        }
+        assertTrue(estValider);
+    }
+
     @Test
     public void traiterEvaluationUtilisateurCoteUtilisateur() throws Exception {
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences, evaluationUtilisateur);

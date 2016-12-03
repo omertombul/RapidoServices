@@ -77,7 +77,7 @@ public class OrchestrateurTest {
         orchestrateur = new Orchestrateur();
         listeServices = new ArrayList<>();
         listeCompetences = new ArrayList<>();
-        nomUtilisateur = "Francis";
+        nomUtilisateur = "iduser";
         motDePasse = "Allo!234";
         nom = "Francis";
         prenom = "Bernier";
@@ -112,11 +112,11 @@ public class OrchestrateurTest {
         description = "Repare les tuyeaux";
         tauxHorraire = 14.50f;
         prixFixe = 50.00f;
-        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, ville, numeroTelephoneService,
+        service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponibleService, "villeA", numeroTelephoneService,
                 adresseCourrielService, description, evaluationService1);
-        service2 = new TypeServices(tauxHorraire, prixFixe, "Electricien", disponibleService, ville, numeroTelephoneService,
+        service2 = new TypeServices(tauxHorraire, prixFixe, "Electricien", disponibleService, "villeA", numeroTelephoneService,
                 adresseCourrielService, description, evaluationService2);
-        service3 = new TypeServices(tauxHorraire, prixFixe, "Mixer", disponibleService, ville, numeroTelephoneService,
+        service3 = new TypeServices(tauxHorraire, prixFixe, "Mixer", disponibleService, "villeA", numeroTelephoneService,
                 adresseCourrielService, description, evaluationService3);
     }
 
@@ -159,6 +159,30 @@ public class OrchestrateurTest {
         service = null;
         service2 = null;
         service3 = null;
+    }
+
+    @Test
+    public void creerUtilisateur1() throws MyException {
+        try {
+            orchestrateur.creerUtilisateur(utilisateur1);
+        } catch (Exception e) {
+            estValider = false;
+        }
+        assertTrue(estValider);
+        orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
+    }
+
+    @Test
+    public void creerUtilisateur1Existe() throws MyException {
+        estValider = false;
+        orchestrateur.creerUtilisateur(utilisateur1);
+        try {
+            orchestrateur.creerUtilisateur(utilisateur1);
+        } catch (Exception e) {
+            estValider = e.getMessage().equals(MESSAGE_NOMUTILISATEUR_PAS_UNIQUE);
+        }
+        assertTrue(estValider);
+        orchestrateur.supprimerCompte(utilisateur1.identifiant.nomUtilisateur);
     }
 
     @Test
@@ -213,7 +237,7 @@ public class OrchestrateurTest {
             estValider = false;
         }
         assertTrue(estValider);
-        assertEquals(utilisateur.identifiant.nomUtilisateur, "FRANCIS");
+        assertEquals(utilisateur.identifiant.nomUtilisateur, "IDUSER");
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
@@ -400,7 +424,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
         ArrayList<RechercheServices> listeResultatsRechercheServices = orchestrateur.rechercheDeServices(0, 0, "", "", 0, 0, 0);
-        assertTrue(listeResultatsRechercheServices.size() == 3);
+        assertTrue(listeResultatsRechercheServices.size() >= 3);
         orchestrateur.supprimerCompte(nomUtilisateur);
     }
 
@@ -410,9 +434,9 @@ public class OrchestrateurTest {
                 motDePasse, listeServices, listeCompetences);
         service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
                 adresseCourrielService, description);
-        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeA", "2234567890",
                 adresseCourrielService, description);
-        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeA", "3234567890",
                 adresseCourrielService, description);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
@@ -423,7 +447,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<RechercheServices> listeResultatsRechercheServices = orchestrateur.rechercheDeServices(2, 0, "", "", 0, 0, 0);
+        ArrayList<RechercheServices> listeResultatsRechercheServices = orchestrateur.rechercheDeServices(2, 0, "", "villeA", 0, 0, 0);
         assertTrue(listeResultatsRechercheServices.get(0).recupererService().getTauxHorraire() <= 2);
         assertTrue(listeResultatsRechercheServices.size() == 2);
         orchestrateur.supprimerCompte(nomUtilisateur);
@@ -435,9 +459,9 @@ public class OrchestrateurTest {
                 motDePasse, listeServices, listeCompetences);
         service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
                 adresseCourrielService, description);
-        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeA", "2234567890",
                 adresseCourrielService, description);
-        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeA", "3234567890",
                 adresseCourrielService, description);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
@@ -448,7 +472,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), true);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<RechercheServices> listeResultatsRechercheServices = orchestrateur.rechercheDeServices(0, 2, "", "", 0, 0, 0);
+        ArrayList<RechercheServices> listeResultatsRechercheServices = orchestrateur.rechercheDeServices(0, 2, "", "villeA", 0, 0, 0);
         assertTrue(listeResultatsRechercheServices.get(0).recupererService().getPrixFixe() <= 2);
         assertTrue(listeResultatsRechercheServices.size() == 2);
         orchestrateur.supprimerCompte(nomUtilisateur);
@@ -460,9 +484,9 @@ public class OrchestrateurTest {
                 motDePasse, listeServices, listeCompetences);
         service = new TypeServices(3, 1, "nomService1", disponibleService, "villeA", "1234567890",
                 adresseCourrielService, description);
-        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeB", "2234567890",
+        service2 = new TypeServices(1, 2, "nomService2", disponibleService, "villeA", "2234567890",
                 adresseCourrielService, description);
-        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeC", "3234567890",
+        service3 = new TypeServices(2, 3, "nomService3", disponibleService, "villeA", "3234567890",
                 adresseCourrielService, description);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service);
         orchestrateur.ajouterOffreDeService(nomUtilisateur, service2);
@@ -473,7 +497,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service2.getNomSservice(), false);
         orchestrateur.modifierDisponibiliteService(nomUtilisateur, service3.getNomSservice(), true);
 
-        ArrayList<RechercheServices> listeResultatsRechercheServices = orchestrateur.rechercheDeServices(0, 2, "", "", 0, 0, 0);
+        ArrayList<RechercheServices> listeResultatsRechercheServices = orchestrateur.rechercheDeServices(0, 2, "", "villeA", 0, 0, 0);
         assertTrue(listeResultatsRechercheServices.get(0).recupererService().getPrixFixe() == 1);
         assertTrue(listeResultatsRechercheServices.size() == 1);
         orchestrateur.supprimerCompte(nomUtilisateur);
@@ -612,7 +636,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteUsager(utilisateur2.identifiant.nomUtilisateur, true);
         orchestrateur.modifierDisponibiliteUsager(utilisateur3.identifiant.nomUtilisateur, true);
 
-        ArrayList<RechercheServices> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "", "", 3, 0, 0);
+        ArrayList<RechercheServices> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "", "villeA", 3, 0, 0);
         assertTrue(listeResultatsRecherche.size() == 1);
         assertTrue(listeResultatsRecherche.get(0).getUtilisateur().evaluationUtilisateur.coteUtilisateur == 4);
 
@@ -662,7 +686,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteUsager(utilisateur2.identifiant.nomUtilisateur, true);
         orchestrateur.modifierDisponibiliteUsager(utilisateur3.identifiant.nomUtilisateur, true);
 
-        ArrayList<RechercheServices> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "", "", 0, 1.5f, 0);
+        ArrayList<RechercheServices> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "", "villeA", 0, 1.5f, 0);
         assertTrue(listeResultatsRecherche.size() == 3);
         assertTrue(listeResultatsRecherche.get(0).getUtilisateur().evaluationUtilisateur.coteTypeServicesMoyenne == 1.5);
         assertTrue(listeResultatsRecherche.get(1).getUtilisateur().evaluationUtilisateur.coteTypeServicesMoyenne == 3);
@@ -709,7 +733,7 @@ public class OrchestrateurTest {
         orchestrateur.modifierDisponibiliteUsager(utilisateur2.identifiant.nomUtilisateur, true);
         orchestrateur.modifierDisponibiliteUsager(utilisateur3.identifiant.nomUtilisateur, true);
 
-        ArrayList<RechercheServices> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "", "", 0, 0, 3);
+        ArrayList<RechercheServices> listeResultatsRecherche = orchestrateur.rechercheDeServices(0, 0, "", "villeA", 0, 0, 3);
         assertTrue(listeResultatsRecherche.size() == 2);
         assertTrue(listeResultatsRecherche.get(0).getUtilisateur().listeServices.get(0).evaluationService.coteService == 3);
         assertTrue(listeResultatsRecherche.get(1).getUtilisateur().listeServices.get(0).evaluationService.coteService == 5);
