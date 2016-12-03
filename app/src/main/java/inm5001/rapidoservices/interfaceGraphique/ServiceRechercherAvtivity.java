@@ -37,7 +37,6 @@ public class ServiceRechercherAvtivity extends Activity {
     Button accepter = null;
     Button cancel = null;
     RatingBar ratingStars = null;
-    EvaluationService eval = null;
     ArrayList<String> resultat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +45,16 @@ public class ServiceRechercherAvtivity extends Activity {
         setContentView(R.layout.activity_servicerechercher);
 
 
-        //recuper objet recherche de l'activite RecherActivity
+        //recuper les champs recherche de l'activite RecherActivity
         Intent intent = getIntent();
         final String nomS = intent.getStringExtra("nomService");
         String villeS = intent.getStringExtra("villeService");
         String tauxH = intent.getStringExtra("taux");
         String descrip = intent.getStringExtra("description");
         Float evalFloat = intent.getFloatExtra("rating",0.0f);
-        //float evalFloat = Float.valueOf(evalString);
         final String userNameService = intent.getStringExtra("userNameService");
         final String userName = intent.getStringExtra("userName");
 
-        final Orchestrateur orc = new Orchestrateur();
 
         nomService = (TextView) findViewById(R.id.textViewAfficheNomTrouver);
         nomService.setText(nomS);
@@ -92,14 +89,15 @@ public class ServiceRechercherAvtivity extends Activity {
 
                         try {
                             u = o.recupererUtilisateur(userNameService);
-                            //orc.faireUneEvaluation(userNameService, userName, nomS, ratingStars.getRating());
+
                             noTel = (TextView) findViewById(R.id.noTel);
                             courriel = (TextView) findViewById(R.id.courrier);
                             RechercheServices rService = new RechercheServices(u,nomS);
                             resultat = o.accepterUnFournisseurDeService(rService, userName);
                             noTel.setText(resultat.get(0));
-                            courriel.setText(resultat.get(1));
 
+                            courriel.setText(resultat.get(1));
+                            accepter.setVisibility(View.GONE);
                             noTel.setVisibility(View.VISIBLE);
                             courriel.setVisibility(View.VISIBLE);
 

@@ -49,8 +49,9 @@ public class RateActivity extends Activity {
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }
-                        Intent evaluation = new Intent(RateActivity.this, EvaluationActivity.class);
-                        startActivity(evaluation);
+                        Intent profile = new Intent(RateActivity.this, ProfilActivity.class);
+                        profile.putExtra("userName",userName);
+                        startActivity(profile);
                     }
                 });
 

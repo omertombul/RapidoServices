@@ -134,7 +134,6 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
                             emailService.getText().toString(),description.getText().toString());
 
 
-                    System.out.println("sdaa a sadsa ads " + tH);
                     //System.out.println("username dans ajouter service "+userName);
                     connect(s);
 
@@ -154,7 +153,6 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
                         }
                     });
                 }
-
 
 
             }
@@ -181,8 +179,11 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+
                             dlgAlert.create().show();
-                        }
+
+                            }
+                        
                     });
 
 

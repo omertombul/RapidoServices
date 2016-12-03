@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
     <TextView
         android:text="Service Offert"
@@ -23,7 +24,8 @@
         android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textViewAfficheNomTrouver" />
+        android:id="@+id/textViewAfficheNomTrouver"
+        android:layout_weight="0.07" />
 
     <TextView
         android:text="Ville :"
@@ -35,7 +37,8 @@
         android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textViewAfficheVilleTrouver" />
+        android:id="@+id/textViewAfficheVilleTrouver"
+        android:layout_weight="0.09" />
 
     <TextView
         android:text="Taux horaire :"
@@ -47,7 +50,8 @@
         android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textViewAfficheTauxTrouver" />
+        android:id="@+id/textViewAfficheTauxTrouver"
+        android:layout_weight="0.10" />
 
     <TextView
         android:text="Description :"
@@ -59,52 +63,45 @@
         android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textViewAfficheDescriTrouver" />
+        android:id="@+id/textViewAfficheDescriTrouver"
+        android:layout_weight="0.07" />
 
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+        android:focusable="false"
+        android:isIndicator="true"
         android:numStars="5"
         android:id="@+id/ratingBarTrouver" />
 
     <Button
         android:text="Accepter"
-        android:layout_width="142dp"
+        android:layout_width="141dp"
         android:layout_height="wrap_content"
         android:id="@+id/buttonRateTrouver"
         android:textStyle="normal|bold|italic" />
 
+    <TextView
+        android:layout_width="226dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/noTel"
+        android:textSize="16sp"
+        android:layout_weight="0.13" />
+
+    <TextView
+        android:layout_width="224dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/courrier"
+        android:textSize="16sp"
+        android:layout_weight="0.10" />
+
     <Button
-        android:text="Cancel"
-        android:layout_width="189dp"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="-50dp"
+        android:text="Retour au menu usager"
+        android:layout_width="141dp"
         android:layout_height="wrap_content"
         android:id="@+id/buttonCancelTrouver"
         android:textStyle="normal|bold|italic" />
-
-    <TextView
-        android:text="Numéro de Téléphone :"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:id="@+id/textview3" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/noTel" />
-
-    <TextView
-        android:text="Courriel :"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:id="@+id/textView12" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/courrier" />
 
 </LinearLayout>

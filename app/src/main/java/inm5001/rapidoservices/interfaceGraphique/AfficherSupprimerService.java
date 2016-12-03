@@ -72,7 +72,7 @@ public class AfficherSupprimerService extends Activity {
                     rate = (RatingBar) findViewById(R.id.ratingBarServiceOffert);
                     dispo = (ToggleButton) findViewById(R.id.toggleDispoService);
                     String tauxH = "0.0";
-                    Float t = 0.0f;
+
 
                     for (int i = 0; i < user.listeServices.size(); i++)
                     {
@@ -88,21 +88,15 @@ public class AfficherSupprimerService extends Activity {
                             dispo.setChecked(user.listeServices.get(i).getDisponible());
                             mail.setText(user.listeServices.get(i).getCourriel());
                             telephone.setText(user.listeServices.get(i).getNoTelephone());
-                            rate.setRating(3.0f);
+                            rate.setRating(user.listeServices.get(i).evaluationService.coteService);
 
 
-                            //rate.setIsIndicator(true);
+
 
                         }
 
                     }
-                    //courriel = (TextView) findViewById(R.id.courrielProfil);
-                    //telephone = (TextView) findViewById(R.id.telProfil);
-                    //prenom = (TextView) findViewById(R.id.prenomProfil);
-                    //prenom.setText(user.profile.prenom);
-                    //courriel.setText(user.profile.adresseCourriel);
-                    //telephone.setText(user.profile.numeroTelephone);
-                    //toggle.setChecked(user.disponible);
+
                 } catch (Exception e) {
                     System.out.println("Dans le try catch du for ******");
                     System.out.println(e.getMessage());

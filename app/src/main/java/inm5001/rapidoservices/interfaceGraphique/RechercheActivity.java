@@ -157,27 +157,24 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                             //recuper la liste
                             listeDePaire = o.rechercheDeServices(tHorraire, prix, nomService, ville,0f,0f,0f);
 
-
-                            if (!listeDePaire.isEmpty()) {
+                                if (!listeDePaire.isEmpty()) {
                                 resultat.clear();
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        String affichage = "";
-                                        int i = 0;
-                                        for (RechercheServices p : listeDePaire) {
-                                            i++;
-                                            affichage = i + " - " + p.recupererService().getNomSservice()
-                                                    + "\nTaux Horraire : " + p.recupererService().getTauxHorraire() + " " + p.recupererService().getVille() ;
+                                    new Thread() {
+                                        @Override
+                                        public void run() {
 
-                                            resultat.add(affichage);
-                                            System.out.println(affichage);
-                                            System.out.println(resultat.isEmpty());
+                                            String affichage = "";
+                                            int i = 0;
+                                            for (RechercheServices p : listeDePaire) {
+                                                i++;
+                                                affichage = i + " - " + p.recupererService().getNomSservice()
+                                                        + "\nTaux Horraire : " + p.recupererService().getTauxHorraire() + " " + p.recupererService().getVille();
 
+                                                resultat.add(affichage);
 
+                                            }
                                         }
-                                    }
-                                });
+                                    }.start();
 
 
                             } else {
@@ -191,8 +188,8 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                                         dlgAlert.create().show();
                                     }
                                 });
-
-                                //resultat.add("******* Aucun Service pour Vos Criteres ******");
+                                    resultat.clear();
+                                    resultat.add("******* Aucun Service pour Vos Criteres ******");
                                 //System.out.println("Liste vide");
                             }
                             //Ajouter adapteur pour lui donne la liste de nom et services
@@ -203,11 +200,9 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                                 //onItemClick() callback method
                                 public void onItemClick(AdapterView<?> parent, View v, int position, long id){
 
-                                    lView.invalidateViews();
-                                    //Generate a Toast message
-                                    String toastMessage = "Selected : "+  resultat.get(position) ;
 
-                                    System.out.println(resultat.get(position));
+
+                                    lView.invalidateViews();
                                     Intent intent = new Intent(RechercheActivity.this, ServiceRechercherAvtivity.class);
                                     RechercheServices r = listeDePaire.get(position);
                                     System.out.println(r.recupererService().getVille());
@@ -220,13 +215,9 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                                     intent.putExtra("description",r.recupererService().getDescription());
                                     intent.putExtra("userNameService",r.getUtilisateur().identifiant.nomUtilisateur);
                                     intent.putExtra("userName",userName);
-                                    System.out.println(r.recupererService().evaluationService.coteService);
                                     intent.putExtra("rating",r.recupererService().evaluationService.coteService);
                                     startActivity(intent);
 
-
-                                    //Display user response as a Toast message
-                                   // Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -241,6 +232,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
 
             }
         });
+
 
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -268,7 +260,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
 
         }
         // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+        //Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
     }
 /**
  * rajouter automatiquement par un "implements AdapterView.OnItemSelectedListener"
