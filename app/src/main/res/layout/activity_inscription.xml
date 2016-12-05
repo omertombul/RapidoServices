@@ -26,11 +26,13 @@
         android:layout_alignBaseline="@+id/editText5"
         android:layout_alignBottom="@+id/editText5"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textStyle="normal|bold"
+        android:textSize="16sp" />
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="21dp"
+        android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:text=""
         android:ems="10"
@@ -38,7 +40,8 @@
         android:id="@+id/nom"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_weight="0.07" />
+        android:textSize="16sp"
+        android:layout_weight="0.13" />
 
     <TextView
         android:text="Prénom :"
@@ -48,7 +51,9 @@
         android:id="@+id/textView6"
         android:layout_below="@+id/editText5"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textStyle="normal|bold"
+        android:textSize="16sp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -61,7 +66,8 @@
         android:layout_alignBottom="@+id/prenoms"
         android:layout_alignLeft="@+id/editText5"
         android:layout_alignStart="@+id/editText5"
-        android:layout_weight="0.18" />
+        android:layout_weight="0.18"
+        android:textSize="16sp" />
 
     <TextView
         android:text="Courriel :"
@@ -71,7 +77,9 @@
         android:layout_alignBaseline="@+id/editText7"
         android:layout_alignBottom="@+id/editText7"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textSize="16sp"
+        android:textStyle="normal|bold" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -81,7 +89,8 @@
         android:layout_below="@+id/email"
         android:layout_alignRight="@+id/editText7"
         android:layout_alignEnd="@+id/editText7"
-        android:id="@+id/email" />
+        android:id="@+id/email"
+        android:textSize="16sp" />
 
     <TextView
         android:text="Nom Utilisateur :"
@@ -90,7 +99,9 @@
         android:id="@+id/textView9"
         android:layout_alignBaseline="@+id/editText10"
         android:layout_alignBottom="@+id/editText10"
-        android:layout_alignEnd="@+id/textView6" />
+        android:layout_alignEnd="@+id/textView6"
+        android:textSize="16sp"
+        android:textStyle="normal|bold" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -101,7 +112,8 @@
         android:layout_below="@+id/username"
         android:layout_alignStart="@+id/editText10"
         android:id="@+id/username"
-        android:layout_weight="0.21" />
+        android:layout_weight="0.21"
+        android:textSize="16sp" />
 
     <TextView
         android:text="Mot de pase :"
@@ -110,7 +122,9 @@
         android:id="@+id/textView8"
         android:layout_alignBaseline="@+id/editText11"
         android:layout_alignBottom="@+id/editText11"
-        android:layout_toStartOf="@+id/editText11" />
+        android:layout_toStartOf="@+id/editText11"
+        android:textStyle="normal|bold"
+        android:textSize="16sp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -121,7 +135,8 @@
         android:layout_alignRight="@+id/editText6"
         android:layout_alignEnd="@+id/editText6"
         android:id="@+id/password"
-        android:layout_weight="0.13" />
+        android:layout_weight="0.13"
+        android:textSize="16sp" />
 
     <TextView
         android:text="Téléphone :"
@@ -129,7 +144,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView10"
         android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textStyle="normal|bold"
+        android:textSize="16sp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -139,7 +156,8 @@
         android:id="@+id/noTelephone"
         android:layout_below="@+id/editText7"
         android:layout_alignLeft="@+id/editText7"
-        android:layout_alignStart="@+id/editText7" />
+        android:layout_alignStart="@+id/editText7"
+        android:textSize="16sp" />
 
     <Button
         android:text="S'enregistrer"

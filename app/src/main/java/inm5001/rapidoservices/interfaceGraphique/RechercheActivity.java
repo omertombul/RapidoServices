@@ -207,23 +207,24 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                                 //onItemClick() callback method
                                 public void onItemClick(AdapterView<?> parent, View v, int position, long id){
 
+                                    if(!resultat.get(position).equals("******* Aucun Service pour Vos Criteres ******")) {
+                                        adapter.notifyDataSetChanged();
+                                        lView.invalidateViews();
+                                        Intent intent = new Intent(RechercheActivity.this, ServiceRechercherAvtivity.class);
+                                        RechercheServices r = listeDePaire.get(position);
+                                        System.out.println(r.recupererService().getVille());
+                                        Float a = r.recupererService().getTauxHorraire();
+                                        String taux = a.toString();
 
-                                    adapter.notifyDataSetChanged();
-                                    lView.invalidateViews();
-                                    Intent intent = new Intent(RechercheActivity.this, ServiceRechercherAvtivity.class);
-                                    RechercheServices r = listeDePaire.get(position);
-                                    System.out.println(r.recupererService().getVille());
-                                    Float a = r.recupererService().getTauxHorraire();
-                                    String taux = a.toString();
-
-                                    intent.putExtra("nomService", r.getNomService());
-                                    intent.putExtra("villeService",r.recupererService().getVille());
-                                    intent.putExtra("taux",taux);
-                                    intent.putExtra("description",r.recupererService().getDescription());
-                                    intent.putExtra("userNameService",r.getUtilisateur().identifiant.nomUtilisateur);
-                                    intent.putExtra("userName",userName);
-                                    intent.putExtra("rating",r.recupererService().evaluationService.coteService);
-                                    startActivity(intent);
+                                        intent.putExtra("nomService", r.getNomService());
+                                        intent.putExtra("villeService", r.recupererService().getVille());
+                                        intent.putExtra("taux", taux);
+                                        intent.putExtra("description", r.recupererService().getDescription());
+                                        intent.putExtra("userNameService", r.getUtilisateur().identifiant.nomUtilisateur);
+                                        intent.putExtra("userName", userName);
+                                        intent.putExtra("rating", r.recupererService().evaluationService.coteService);
+                                        startActivity(intent);
+                                    }
 
                                 }
                             });

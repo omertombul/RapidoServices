@@ -149,12 +149,14 @@ public class ProfilActivity extends Activity {
         lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intentServ = new Intent(ProfilActivity.this,AfficherSupprimerService.class);
-                intentServ.putExtra("userName",userName);
+                if(!resultat.get(position).equals("Pas de Service")) {
+                    Intent intentServ = new Intent(ProfilActivity.this, AfficherSupprimerService.class);
+                    intentServ.putExtra("userName", userName);
 
-                intentServ.putExtra("service",adapter.getItem(position));
+                    intentServ.putExtra("service", adapter.getItem(position));
 
-                startActivity(intentServ);
+                    startActivity(intentServ);
+                }
             }
 
         });
