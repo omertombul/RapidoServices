@@ -3,6 +3,16 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:text="Évaluations"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:id="@+id/textView2"
+        android:textStyle="normal|bold|italic"
+        android:textAllCaps="true"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
     <ListView
         android:layout_width="match_parent"
         android:id ="@+id/ListViewRateClient"

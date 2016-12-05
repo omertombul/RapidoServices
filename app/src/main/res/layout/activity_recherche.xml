@@ -10,32 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="inm5001.rapidoservices.interfaceGraphique.RechercheActivity">
 
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinnerRechercheService"
-        android:layout_below="@+id/textViewServiceRecherche"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="Ville :"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewPasswordLogin"
-        android:textAllCaps="true"
-        android:textStyle="normal|bold|italic"
-        android:textAlignment="textStart"
-        android:textSize="17sp"
-        android:layout_below="@+id/spinnerRechercheService"
-        android:layout_alignStart="@+id/textViewServiceRecherche" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewPasswordLogin"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/spinnerRechercheVille" />
-
     <TextView
         android:text="Recherche de Service"
         android:layout_width="wrap_content"
@@ -48,7 +22,7 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="Services :"
+        android:text="Service :"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewServiceRecherche"
@@ -72,17 +46,6 @@
         android:layout_alignBottom="@+id/editTextPrixRecherche"
         android:layout_alignParentStart="true" />
 
-    <TextView
-        android:text="Type de trie :"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewTypeTrie"
-        android:textStyle="normal|bold|italic"
-        android:textAllCaps="true"
-        android:textSize="17sp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/editTextPrixRecherche" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -101,10 +64,9 @@
         android:layout_toEndOf="@+id/textViewTypeTrie" />
 
     <ListView
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:id ="@+id/ListViewRechercheResult"
-        android:layout_height="match_parent"
-        android:layout_marginRight="150dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/buttonRechercherRecherche"
         android:layout_alignParentStart="true" />
 
@@ -115,5 +77,43 @@
         android:id="@+id/buttonRechercherRecherche"
         android:layout_below="@+id/textViewTypeTrie"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Type de tri :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewTypeTrie"
+        android:textStyle="normal|bold|italic"
+        android:textAllCaps="true"
+        android:textSize="17sp"
+        android:layout_alignTop="@+id/spinnerTypeTrie"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerRechercheService"
+        android:layout_alignTop="@+id/textViewServiceRecherche"
+        android:layout_toEndOf="@+id/textViewServiceRecherche" />
+
+    <TextView
+        android:text="Ville :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewPasswordLogin"
+        android:textAllCaps="true"
+        android:textStyle="normal|bold|italic"
+        android:textAlignment="textStart"
+        android:textSize="17sp"
+        android:layout_below="@+id/spinnerRechercheService"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerRechercheVille"
+        android:layout_alignTop="@+id/textViewPasswordLogin"
+        android:layout_alignStart="@+id/spinnerRechercheService" />
 
 </RelativeLayout>

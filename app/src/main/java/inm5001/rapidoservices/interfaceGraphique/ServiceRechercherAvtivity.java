@@ -31,8 +31,8 @@ public class ServiceRechercherAvtivity extends Activity {
     TextView villeService = null;
     TextView tauxHorraire = null;
     TextView description = null;
-    TextView titreTrouver = null;
     TextView noTel = null;
+    TextView idFournisseur = null;
     TextView courriel = null;
     Button accepter = null;
     Button cancel = null;
@@ -64,8 +64,8 @@ public class ServiceRechercherAvtivity extends Activity {
         tauxHorraire.setText(tauxH);
         description = (TextView) findViewById(R.id.textViewAfficheDescriTrouver);
         description.setText(descrip);
-        titreTrouver = (TextView) findViewById(R.id.textViewTitleActiviteTrouver);
-        titreTrouver.setText(nomS);
+
+
 
         accepter = (Button)findViewById(R.id.buttonRateTrouver);
         ratingStars = (RatingBar)findViewById(R.id.ratingBarTrouver);
@@ -92,14 +92,14 @@ public class ServiceRechercherAvtivity extends Activity {
 
                             noTel = (TextView) findViewById(R.id.noTel);
                             courriel = (TextView) findViewById(R.id.courrier);
+                            idFournisseur = (TextView) findViewById(R.id.userServiceRechercer);
+
                             RechercheServices rService = new RechercheServices(u,nomS);
                             resultat = o.accepterUnFournisseurDeService(rService, userName);
-                            noTel.setText(resultat.get(0));
-
-                            courriel.setText(resultat.get(1));
+                            noTel.setText("Telephone : " + resultat.get(0));
+                            idFournisseur.setText("Fournisseur : "+ userNameService);
+                            courriel.setText("Courriel : " + resultat.get(1));
                             accepter.setVisibility(View.GONE);
-                            noTel.setVisibility(View.VISIBLE);
-                            courriel.setVisibility(View.VISIBLE);
 
                         }catch(SQLException e){
                             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();

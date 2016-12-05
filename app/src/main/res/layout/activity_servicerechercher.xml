@@ -25,7 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewAfficheNomTrouver"
-        android:layout_weight="0.07" />
+        android:layout_weight="0.07"
+        android:textSize="18sp" />
 
     <TextView
         android:text="Ville :"
@@ -38,7 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewAfficheVilleTrouver"
-        android:layout_weight="0.09" />
+        android:layout_weight="0.09"
+        android:textSize="18sp" />
 
     <TextView
         android:text="Taux horaire :"
@@ -51,7 +53,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewAfficheTauxTrouver"
-        android:layout_weight="0.10" />
+        android:layout_weight="0.10"
+        android:textSize="18sp" />
 
     <TextView
         android:text="Description :"
@@ -64,7 +67,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewAfficheDescriTrouver"
-        android:layout_weight="0.07" />
+        android:layout_weight="0.07"
+        android:textSize="16sp" />
 
     <RatingBar
         android:layout_width="wrap_content"
@@ -76,26 +80,33 @@
         android:numStars="5"
         android:id="@+id/ratingBarTrouver" />
 
+    <TextView
+        android:layout_width="226dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/noTel"
+        android:textSize="18sp"
+        android:layout_weight="0.13" />
+
+    <TextView
+        android:layout_width="331dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/userServiceRechercer"
+        android:textSize="18sp"
+        android:layout_weight="0.10" />
+
+    <TextView
+        android:layout_width="224dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/courrier"
+        android:textSize="18sp"
+        android:layout_weight="0.10" />
+
     <Button
         android:text="Accepter"
         android:layout_width="141dp"
         android:layout_height="wrap_content"
         android:id="@+id/buttonRateTrouver"
         android:textStyle="normal|bold|italic" />
-
-    <TextView
-        android:layout_width="226dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/noTel"
-        android:textSize="16sp"
-        android:layout_weight="0.13" />
-
-    <TextView
-        android:layout_width="224dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/courrier"
-        android:textSize="16sp"
-        android:layout_weight="0.10" />
 
     <Button
         android:text="Retour au menu usager"

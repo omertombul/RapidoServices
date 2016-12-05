@@ -58,6 +58,7 @@ public class LoginActivity extends Activity {
 		dlgAlert  = new AlertDialog.Builder(this);
 		dlgAlert.setPositiveButton("OK", null);
 		dlgAlert.setCancelable(true);
+		username.setSelection(0);
 
 
 		seConnecter.setOnClickListener(new View.OnClickListener(){

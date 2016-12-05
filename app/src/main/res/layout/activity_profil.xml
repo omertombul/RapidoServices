@@ -128,7 +128,7 @@
         android:layout_height="wrap_content" />
 
     <Button
-        android:text="Rate"
+        android:text="Evaluer"
         android:layout_width="129dp"
         android:layout_marginTop="-55dp"
         android:layout_marginLeft="260dp"

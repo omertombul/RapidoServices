@@ -45,34 +45,39 @@ public class EvaluationActivity extends Activity {
 
                 o = new Orchestrateur();
 
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //recuper la liste
+                            cotation = o.obtenirMesEvaluationsADonner(userName);
 
-                    //recuper la liste
-                    cotation = o.obtenirMesEvaluationsADonner(userName);
 
+                            if (!cotation.isEmpty()) {
+                                for (int i =0; i < cotation.size(); i++){
+                                    resultat.add(cotation.get(i).toString());
+                                }
 
-                    if (!cotation.isEmpty()) {
-                        for (int i =0; i < cotation.size(); i++){
-                            resultat.add(cotation.get(i).toString());
+                            } else {
+
+                                resultat.add("Aucun Évaluation ");
+                                System.out.println("Liste vide");
+                            }
+                            //Ajouter adapteur pour lui donne la liste de nom et services
+                            lView.setAdapter(adapter);
                         }
+                    });
 
-                    } else {
-
-                        resultat.add("Aucune Évaluation ");
-                        System.out.println("Liste vide");
-                    }
-                    //Ajouter adapteur pour lui donne la liste de nom et services
-                    lView.setAdapter(adapter);
 
                 lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intentServ = new Intent(EvaluationActivity.this,RateActivity.class);
-                intentServ.putExtra("userName",userName);
-                intentServ.putExtra("nomService",cotation.get(position).getNomService());
-                intentServ.putExtra("userACoter",cotation.get(position).getNomUtilisateurACoter());
-
-
-                startActivity(intentServ);
+                if(!resultat.get(position).equals("Aucun Évaluation ")) {
+                    Intent intentServ = new Intent(EvaluationActivity.this, RateActivity.class);
+                    intentServ.putExtra("userName", userName);
+                    intentServ.putExtra("nomService", cotation.get(position).getNomService());
+                    intentServ.putExtra("userACoter", cotation.get(position).getNomUtilisateurACoter());
+                    startActivity(intentServ);
+                }
             }
 
         });

@@ -5,11 +5,23 @@
     android:weightSum="1">
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:layout_weight="0.06"
+        android:textAlignment="center"
+        android:textStyle="normal|bold|italic"
+        android:textAllCaps="true"
+        android:text="Détail du Service Offert"
+        android:textSize="20sp" />
+
+    <TextView
         android:text="Nom :"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView" />
-
+        android:id="@+id/textView"
+        android:textSize="16sp"
+        android:textStyle="normal|bold" />
 
 
     <TextView
@@ -17,58 +29,70 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/nomServ"
-        android:layout_weight="0.11" />
+        android:layout_weight="0.11"
+        android:textSize="14sp" />
 
     <TextView
         android:text="Taux horaire :"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView13" />
+        android:id="@+id/textView13"
+        android:textStyle="normal|bold"
+        android:textSize="16sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/taux"
-        android:layout_weight="0.10" />
+        android:layout_weight="0.10"
+        android:textSize="16sp" />
 
     <TextView
-        android:text="Email :"
+        android:text="Courriel :"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView16" />
+        android:id="@+id/textView16"
+        android:textStyle="normal|bold"
+        android:textSize="16sp" />
 
     <TextView
         android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/mail"
-        android:layout_weight="0.11" />
+        android:layout_weight="0.11"
+        android:textSize="16sp" />
 
     <TextView
         android:text="Telephone :"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView18" />
+        android:id="@+id/textView18"
+        android:textStyle="normal|bold"
+        android:textSize="16sp" />
 
     <TextView
         android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/phone"
-        android:layout_weight="0.10" />
+        android:layout_weight="0.10"
+        android:textSize="16sp" />
 
     <TextView
-        android:text="Description"
+        android:text="Description :"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView20" />
+        android:id="@+id/textView20"
+        android:textStyle="normal|bold"
+        android:textSize="16sp" />
 
     <TextView
-        android:text=""
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:id="@+id/description"
-        android:layout_weight="0.15" />
+        android:layout_weight="0.41"
+        android:textSize="16sp" />
 
 
     <RatingBar
@@ -90,7 +114,7 @@
         />
 
     <Button
-        android:text="Supprimer"
+        android:text="Supprimer le Service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/supprimerService" />

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -42,8 +43,13 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recherche);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+
 
         rechercher = (Button) findViewById(R.id.buttonRechercherRecherche);
         tauxHorraire = (EditText) findViewById(R.id.editTextPrixRecherche);
@@ -54,7 +60,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
 
         resultat = new ArrayList<String>();
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,resultat);
-
+        adapter.notifyDataSetChanged();
         Intent intent = getIntent();
         final String userName = intent.getStringExtra("userName");
 
@@ -168,18 +174,18 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                                             for (RechercheServices p : listeDePaire) {
                                                 i++;
                                                 affichage = i + " - " + p.recupererService().getNomSservice()
-                                                        + "\nTaux Horraire : " + p.recupererService().getTauxHorraire() + " " + p.recupererService().getVille();
+                                                        + "\nTaux Horraire : " + p.recupererService().getTauxHorraire()+ " " + p.recupererService().getVille();
 
                                                 resultat.add(affichage);
 
                                             }
                                         }
-                                    }.start();
+                                    }.run();
 
 
                             } else {
 
-                                dlgAlert.setTitle("Erreur!");
+                                dlgAlert.setTitle("Oops!");
 
                                 dlgAlert.setMessage("******* Aucun Service pour Vos Criteres ******");
                                 runOnUiThread(new Runnable() {
@@ -193,6 +199,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                                 //System.out.println("Liste vide");
                             }
                             //Ajouter adapteur pour lui donne la liste de nom et services
+                            adapter.notifyDataSetChanged();
                             lView.setAdapter(adapter);
 
                             //Set an Item Click Listener for ListView items
@@ -201,7 +208,7 @@ public class RechercheActivity extends AppCompatActivity implements AdapterView.
                                 public void onItemClick(AdapterView<?> parent, View v, int position, long id){
 
 
-
+                                    adapter.notifyDataSetChanged();
                                     lView.invalidateViews();
                                     Intent intent = new Intent(RechercheActivity.this, ServiceRechercherAvtivity.class);
                                     RechercheServices r = listeDePaire.get(position);

@@ -183,7 +183,7 @@ public class AjouterServiceActivity extends Activity implements  AdapterView.OnI
                             dlgAlert.create().show();
 
                             }
-                        
+
                     });
 
 
