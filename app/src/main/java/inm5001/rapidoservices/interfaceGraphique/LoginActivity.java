@@ -1,21 +1,23 @@
-package inm5001.rapidoservices;
+package inm5001.rapidoservices.interfaceGraphique;
 
 		import android.app.Activity;
 		import android.app.AlertDialog;
 		import android.app.ProgressDialog;
 		import android.os.Bundle;
-        import android.os.Looper;
-        import android.os.StrictMode;
-		import android.util.Log;
+		import android.os.StrictMode;
 		import android.view.View;
 		import android.content.Intent;
 		import android.widget.Button;
 		import android.widget.EditText;
 
+		import inm5001.rapidoservices.MyException;
+		import inm5001.rapidoservices.Orchestrateur;
+		import inm5001.rapidoservices.R;
 		import inm5001.rapidoservices.utilisateur.Utilisateur;
 
 /**
  * Created by joy-reybabagbeto on 16-10-24.
+ * and Omer Tombul
  */
 
 public class LoginActivity extends Activity {
@@ -42,7 +44,11 @@ public class LoginActivity extends Activity {
 
 		//Creation des objets
 		o = new Orchestrateur();
-		u = new Utilisateur();
+		try {
+			u = new Utilisateur();
+		} catch (MyException e) {
+			System.out.println(e.getMessage());
+		}
 
 		//Permission de connection
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -52,20 +58,14 @@ public class LoginActivity extends Activity {
 		dlgAlert  = new AlertDialog.Builder(this);
 		dlgAlert.setPositiveButton("OK", null);
 		dlgAlert.setCancelable(true);
+		username.setSelection(0);
 
 
 		seConnecter.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v){
-
-				Intent profilactivite = new Intent(LoginActivity.this, ProfilActivity.class);
-
-				// On rajoute un extra
-				//secondeActivite.putExtra(AGE, 31);
-
-				// Puis on lance l'intent !
-				startActivity(profilactivite);
-            }
+				connect();
+		    }
 
         });
 
@@ -75,10 +75,6 @@ public class LoginActivity extends Activity {
 				// Le premier paramètre est le nom de l'activité actuelle
 				// Le second est le nom de l'activité de destination
 				Intent secondeActivite = new Intent(LoginActivity.this, InscriptionActivity.class);
-
-				// On rajoute un extra
-				//secondeActivite.putExtra(AGE, 31);
-
 				// Puis on lance l'intent !
 				startActivity(secondeActivite);
 			}
@@ -90,7 +86,6 @@ public class LoginActivity extends Activity {
 	//Methode de connection de l'utilisateur et validation des credentials
 	private void connect() {
 
-		//mProgressDialog = ProgressDialog.show(this, "Attendez svp","Tentative de Connection", true);
 
         new Thread() {
 			@Override
@@ -103,23 +98,20 @@ public class LoginActivity extends Activity {
 					u = o.validationLogin(username.getText().toString(),password.getText().toString());
 					System.out.println(" Nom : " + u.profile.nom);
 
-                    dlgAlert.setTitle("Welcome to RapidoServices");
-                    dlgAlert.setMessage("Connection accepter!");
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            dlgAlert.create().show();
-                        }
-                    });
+//                    dlgAlert.setTitle("Welcome to RapidoServices");
+//                    dlgAlert.setMessage("Connection accepter!");
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            dlgAlert.create().show();
+//                        }
+//                    });
+					Intent profilactivite = new Intent(LoginActivity.this, ProfilActivity.class);
+                    profilactivite.putExtra("userName",username.getText().toString());
+                    profilactivite.putExtra("password",password.getText().toString());
+					startActivity(profilactivite);
 
-//					runOnUiThread(new Runnable() {
-//						@Override
-//						public void run() {
-//							mProgressDialog.dismiss();
-//						}
-//
-//					});
-				} catch (final Exception ex) {
+		} catch (final Exception ex) {
 
 					System.out.println(ex.getMessage());
 
@@ -131,16 +123,7 @@ public class LoginActivity extends Activity {
                                 dlgAlert.create().show();
                             }
                         });
-
-
-
-//                    runOnUiThread(new Runnable() {
-//						@Override
-//						public void run() {
-//							mProgressDialog.dismiss();
-//						}
-//					});
-				}
+                }
 			}
 		}.start();
 

@@ -1,11 +1,16 @@
 package inm5001.rapidoservices;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import inm5001.rapidoservices.baseDonnees.BdApi;
+import inm5001.rapidoservices.recherche.RechercheACoter;
+import inm5001.rapidoservices.recherche.RechercheServices;
+import inm5001.rapidoservices.service.EvaluationService;
 import inm5001.rapidoservices.service.TypeServices;
+import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 import inm5001.rapidoservices.utilisateur.Profile;
 import inm5001.rapidoservices.utilisateur.Identifiant;
@@ -28,9 +33,7 @@ public class Orchestrateur {
     private ArrayList<String> listeCompetences;
     private String competence;
     private String disponibleUtilisateur;
-    //private ArrayList<Evaluation> listeEvaluations;
-    //private ArrayList<Evaluation> lisetEvaluationServicesGlobal;
-    //private Evaluation evaluation;
+    private EvaluationUtilisateur evaluationUtilisateur;
     //private Geolocalisation geolocalisation;
 //attributs Identifiant
     private String nomUtilisateur;
@@ -51,6 +54,7 @@ public class Orchestrateur {
     private String description;
     private float tauxHorraire;
     private float prixFixe;
+    private EvaluationService evaluationService;
 //attributs BdApi
     private static BdApi bd = new BdApi();
 
@@ -64,7 +68,8 @@ public class Orchestrateur {
     }
 
     public void creerUtilisateur(String nom, String prenom, String numeroTelephoneProfile, String adresseCourrielProfile,
-                                                 String nomUtilisateur, String motDePasse, ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
+                                 String nomUtilisateur, String motDePasse, ArrayList<TypeServices> listeServices,
+                                 ArrayList<String> listeCompetences) throws MyException {
         profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
         identifiant = new Identifiant(nomUtilisateur, motDePasse);
         utilisateur = new Utilisateur(identifiant, profile, listeServices, listeCompetences);
@@ -99,9 +104,15 @@ public class Orchestrateur {
         bd.deleteUser(nomUtilisateur);
     }
 
-    public void ajouterOffreDeService(String nomUtilisateur, TypeServices service) throws SQLException {
-        bd.addServiceUser(nomUtilisateur, service);
-        bd.addCompetenceUser(nomUtilisateur, service);
+    public void ajouterOffreDeService(String nomUtilisateur, TypeServices service) throws MyException {
+        try {
+            bd.addServiceUser(nomUtilisateur, service);
+            bd.addCompetenceUser(nomUtilisateur, service);
+        } catch (Exception ex) {
+            MyException e = new MyException(MESSAGE_SERVICE_EXISTANT);
+            throw e;
+        }
+
     }
 
     public void retirerOffreDeService(String nomUtilisateur, TypeServices service) throws MyException {
@@ -109,7 +120,7 @@ public class Orchestrateur {
         bd.deleteCompetence(nomUtilisateur, service);
     }
 
-    public void modifierDisponibiliteUsager(String nomUtilisateur, boolean disponible) throws MyException, SQLException {
+    public void modifierDisponibiliteUsager(String nomUtilisateur, boolean disponible) throws SQLException {
         if (disponible) {
             bd.updateUserDisponibilite(nomUtilisateur, "1");
         } else {
@@ -117,68 +128,81 @@ public class Orchestrateur {
         }
     }
 
-    public void modifierDisponibiliteService(String nomUtilisateur, String nomService, boolean disponible) throws MyException, SQLException {
+    public void modifierDisponibiliteService(String nomUtilisateur, String nomService, boolean disponible) throws SQLException {
         if (disponible) {
             bd.updateServiceDisponibilite(nomUtilisateur, nomService, "1");
         } else {
             bd.updateServiceDisponibilite(nomUtilisateur, nomService, "0");
         }
     }
-/*
-    public ArrayList<PaireNomUtilisateurEtTypeService> rechercheDeServices(float tauxHorraire, float prixFixe, String nomSservice,
-                                                            boolean disponible, String ville, byte cote, String noTelephone,
-                                                            String courriel, String description) throws MyException, SQLException {
-        TypeServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, disponible, ville, cote, noTelephone,
-                                                        courriel, description);
-        ArrayList<PaireNomUtilisateurEtTypeService> listePaires = bd.searchForServices(service);
+
+    public ArrayList<RechercheServices> rechercheDeServices(float tauxHorraire, float prixFixe, String nomSservice, String ville,
+                                                            float coteUtilisateur, float coteServicesMoyenne, float coteService) throws MyException, SQLException {
+        TypeServices service = new TypeServices(tauxHorraire, prixFixe, nomSservice, ville);
+        ArrayList<RechercheServices> listePaires = bd.servicesSearch(service, coteUtilisateur, coteServicesMoyenne, coteService);
         return listePaires;
     }
-*/
-    public ArrayList<PaireNomUtilisateurEtTypeService> trierResultatRecherche(ArrayList<PaireNomUtilisateurEtTypeService> listeServices, String trierPar) throws MyException {
-        if (trierPar == "tauxHorraire") {
-            Collections.sort(listeServices, new TypeServices.TrierParTauxHorraire());
-        } else if (trierPar == "prixFixe") {
-            Collections.sort(listeServices, new TypeServices.TrierParPrixFixe());
-        } else if (trierPar == "nomService") {
-            Collections.sort(listeServices, new TypeServices.TrierParNomService());
-        } else if (trierPar == "ville") {
-            Collections.sort(listeServices, new TypeServices.TrierParVille());
+
+    public ArrayList<RechercheServices> trierResultatRecherche(ArrayList<RechercheServices> listeResultatRechercheServices, String valeurDeTri) throws MyException {
+        if (listeResultatRechercheServices.size() > 1) {
+            listeResultatRechercheServices = listeResultatRechercheServices.get(0).trierListeRecherche(listeResultatRechercheServices, valeurDeTri);
+            return listeResultatRechercheServices;
         } else {
-            MyException e = new MyException(MESSAGE_MODE_TRI_INTROUVABLE);
-            throw e;
+            return listeResultatRechercheServices;
+        }
+    }
+
+    public ArrayList<String> accepterUnFournisseurDeService(RechercheServices rechercheServices, String nomUtilisateurClient) throws SQLException {
+        ArrayList<String> listeInformationsDeContact = new ArrayList<>();
+        listeInformationsDeContact = obtenirInformationsDeContact(rechercheServices);
+        creationDeLignesCoteService(rechercheServices, nomUtilisateurClient);
+        modifierDisponibiliteUsager(rechercheServices.getUtilisateur().identifiant.nomUtilisateur, false);
+        return listeInformationsDeContact;
+    }
+
+    public ArrayList<RechercheACoter> obtenirMesEvaluationsADonner(String nomUtilisateur) {
+        return bd.getRechercheACoter(nomUtilisateur);
+    }
+
+    public void faireUneEvaluation(String nomUtilisateurCoter, String nomUtilisateurCoteur, String nomSservice, float coteService) throws MyException, SQLException {
+        evaluationService = new EvaluationService(0, 0);
+        evaluationService.validationCoteService(coteService);
+        bd.gradeService(nomUtilisateurCoter, nomUtilisateurCoteur, nomSservice, coteService);
+    }
+//premier niveau d'abstraction
+    private ArrayList<String> obtenirInformationsDeContact(RechercheServices rechercheServices) throws SQLException {
+        ArrayList<String> listeInformationsDeContact = new ArrayList<>();
+        listeInformationsDeContact.add(determinerNumeroTelephone(rechercheServices));
+        listeInformationsDeContact.add(determinerAdresseCourriel(rechercheServices));
+
+        return listeInformationsDeContact;
+    }
+
+    private void creationDeLignesCoteService(RechercheServices rechercheServices, String nomUtilisateurCoteur) throws SQLException {
+        bd.addIntoCoteService(rechercheServices.getUtilisateur().identifiant.nomUtilisateur, nomUtilisateurCoteur,
+                rechercheServices.recupererService().getNomSservice());
+        bd.addIntoCoteService(nomUtilisateurCoteur, rechercheServices.getUtilisateur().identifiant.nomUtilisateur, "Client");
+    }
+//deuxième niveau d'abstraction
+    private String determinerNumeroTelephone(RechercheServices rechercheServices) {
+        String numeroTelephone;
+        if (rechercheServices.recupererService().getNoTelephone() != "") {
+            numeroTelephone = rechercheServices.recupererService().getNoTelephone();
+        } else {
+            numeroTelephone = rechercheServices.getUtilisateur().profile.numeroTelephone;
         }
 
-        return listeServices;
-    }
-    /*
-    public void modifierMotDePasse(String nomUtilisateur, String motDePasse) throws MyException {
-        utilisateur = bd.getUser(nomUtilisateur);
-        utilisateur.identifiant.validationMotDePasse(motDePasse);
-        bd.setPassword(nomUtilisateur, motDePasse);
+        return numeroTelephone;
     }
 
-    public void remplacerNomProfile(String nomUtilisateur, String nom) throws MyException throws MyException {
-        profile = bd.getUser(nomUtilisateur).profile;
-        profile = new Profile (nom, profile.prenom, profile.numeroTelephone, profile.adresseCourriel);
-        bd.replaceProfile(nomUtilisateur, profile);
-    }
+    private String determinerAdresseCourriel(RechercheServices rechercheServices) {
+        String adresseCourriel;
+        if (rechercheServices.recupererService().getCourriel() != "") {
+            adresseCourriel = rechercheServices.recupererService().getCourriel();
+        } else {
+            adresseCourriel = rechercheServices.getUtilisateur().profile.adresseCourriel;
+        }
 
-    public void remplacerPrenomProfile(String nomUtilisateur, String prenom) throws MyException throws MyException {
-        profile = bd.getUser(nomUtilisateur).profile;
-        profile = new Profile (profile.nom, prenom, profile.numeroTelephone, profile.adresseCourriel);
-        bd.replaceProfile(nomUtilisateur, profile);
+        return adresseCourriel;
     }
-
-    public void remplacerNumeroTelephoneProfile(String nomUtilisateur, String numeroTelephone) throws MyException {
-        profile = bd.getUser(nomUtilisateur).profile;
-        profile = new Profile (profile.nom, profile.prenom, numeroTelephone, profile.adresseCourriel);
-        bd.replaceProfile(nomUtilisateur, profile);
-    }
-
-    public void remplacerAdresseCourrielProfile(String nomUtilisateur, String adresseCourriel) throws MyException {
-        profile = bd.getUser(nomUtilisateur).profile;
-        profile = new Profile (profile.nom, profile.prenom, profile.numeroTelephone, adresseCourriel);
-        replaceProfile(nomUtilisateur, profile);
-    }
-    */
 }

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:text="Service Offert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewTitleActiviteTrouver"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        android:textAllCaps="true" />
+
+    <TextView
+        android:text="Nom du service :"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewNomTrouver" />
+
+    <TextView
+        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewAfficheNomTrouver"
+        android:layout_weight="0.07"
+        android:textSize="18sp" />
+
+    <TextView
+        android:text="Ville :"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewVilleTrouver" />
+
+    <TextView
+        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewAfficheVilleTrouver"
+        android:layout_weight="0.09"
+        android:textSize="18sp" />
+
+    <TextView
+        android:text="Taux horaire :"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewTauxTrouver" />
+
+    <TextView
+        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewAfficheTauxTrouver"
+        android:layout_weight="0.10"
+        android:textSize="18sp" />
+
+    <TextView
+        android:text="Description :"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewDescriTrouver" />
+
+    <TextView
+        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewAfficheDescriTrouver"
+        android:layout_weight="0.07"
+        android:textSize="16sp" />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+        android:focusable="false"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:id="@+id/ratingBarTrouver" />
+
+    <TextView
+        android:layout_width="226dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/noTel"
+        android:textSize="18sp"
+        android:layout_weight="0.13" />
+
+    <TextView
+        android:layout_width="331dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/userServiceRechercer"
+        android:textSize="18sp"
+        android:layout_weight="0.10" />
+
+    <TextView
+        android:layout_width="224dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/courrier"
+        android:textSize="18sp"
+        android:layout_weight="0.10" />
+
+    <Button
+        android:text="Accepter"
+        android:layout_width="141dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonRateTrouver"
+        android:textStyle="normal|bold|italic" />
+
+    <Button
+        android:text="Retour au menu usager"
+        android:layout_width="141dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonCancelTrouver"
+        android:textStyle="normal|bold|italic" />
+
+</LinearLayout>

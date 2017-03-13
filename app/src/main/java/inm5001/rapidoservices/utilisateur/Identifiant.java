@@ -3,7 +3,6 @@ package inm5001.rapidoservices.utilisateur;
 import inm5001.rapidoservices.MyException;
 
 import static inm5001.rapidoservices.utilisateur.ConstanteIdentifiant.*;
-import inm5001.rapidoservices.Orchestrateur;
 
 /**
  * Created by Francis Bernier on 2016-10-10.
@@ -24,7 +23,6 @@ public class Identifiant {
         validerNomUtilisateurSansEspace(nomUtilisateur);
         validerNomUtilisateurEntreHuitEtTroisCaracteres(nomUtilisateur);
         nomUtilisateur = convertirEnMajuscule(nomUtilisateur);
-        //validerNomUtilisateurEstUnique(nomUtilisateur);
         affecterValeurNomUtilisateur(nomUtilisateur);
     }
 
@@ -57,16 +55,7 @@ public class Identifiant {
             throw e;
         }
     }
-/*
-    private void validerNomUtilisateurEstUnique(String nomUtilisateur) throws MyException {
-        Orchestrateur orchestrateur = new Orchestrateur();
 
-        if (orchestrateur.nomUtilisateurExisteDansBd(nomUtilisateur)) {
-            MyException e = new MyException(MESSAGE_NOMUTILISATEUR_PAS_UNIQUE);
-            throw e;
-        }
-    }
-*/
     private void affecterValeurNomUtilisateur(String nomUtilisateur) {
         this.nomUtilisateur = nomUtilisateur;
     }

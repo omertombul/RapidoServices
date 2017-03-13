@@ -3,7 +3,7 @@ package inm5001.rapidoservices.utilisateur;
 import java.util.ArrayList;
 
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.service.AbstraiteServices;
+import inm5001.rapidoservices.service.TypeServices;
 
 import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.*;
 
@@ -14,35 +14,29 @@ import static inm5001.rapidoservices.utilisateur.ConstanteUtilisateur.*;
 public class Utilisateur {
     public Identifiant identifiant;
     public Profile profile;
-    public ArrayList<AbstraiteServices> listeServices = new ArrayList<>();
+    public ArrayList<TypeServices> listeServices = new ArrayList<>();
     public ArrayList<String> listeCompetences = new ArrayList<>();
     public boolean disponible = false;
-    //public ArrayList<Evaluation> listeEvaluations;
-    //public ArrayList<Evaluation> lisetEvaluationServicesGlobal;
-    //public Geolocalisation geolocalisation;
+    public EvaluationUtilisateur evaluationUtilisateur = new EvaluationUtilisateur(0, 0, 0, 0);
 
-    /*
-    public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<Service> listeServices, ArrayList<String> listeCompetences, boolean disponible, ArrayList<Evaluation> listeEvaluations, ArrayList<Evaluation> lisetEvaluationServicesGlobal, Geolocalisation geolocalisation) {
-        this.identifiant = identifiant;
-        this.profile = profile;
-        this.listeServices = listeServices;
-        this.listeCompetences = listeCompetences;
-        this.disponible = disponible;
-        this.listeEvaluations = listeEvaluations;
-        this.lisetEvaluationsServicesGlobal = lisetEvaluationServicesGlobal;
-        this.geolocalisation = geolocalisation;
-    }
-    */
-
-    public Utilisateur(){
-
+    public Utilisateur() throws MyException {
     }
 
-    public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<AbstraiteServices> listeServices, ArrayList<String> listeCompetences) throws MyException {
+    public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<TypeServices> listeServices,
+                       ArrayList<String> listeCompetences) throws MyException {
         traiterIdentifiant(identifiant);
         traiterProfile(profile);
         traiterListeServices(listeServices);
         traiterListeCompetences(listeCompetences);
+    }
+
+    public Utilisateur(Identifiant identifiant, Profile profile, ArrayList<TypeServices> listeServices,
+                       ArrayList<String> listeCompetences, EvaluationUtilisateur evaluationUtilisateur) throws MyException {
+        traiterIdentifiant(identifiant);
+        traiterProfile(profile);
+        traiterListeServices(listeServices);
+        traiterListeCompetences(listeCompetences);
+        traiterEvaluationUtilisateur(evaluationUtilisateur);
     }
 //premier niveau d'abstraction
     private void traiterIdentifiant(Identifiant identifiant) throws MyException {
@@ -55,7 +49,7 @@ public class Utilisateur {
         affecterValeurProfile(profile);
     }
 
-    private void traiterListeServices(ArrayList<AbstraiteServices> listeServices) {
+    private void traiterListeServices(ArrayList<TypeServices> listeServices) {
         if (listeServices != null) {
             affecterValeurListeService(listeServices);
         }
@@ -66,11 +60,15 @@ public class Utilisateur {
             affecterValeurListeCompetences(listeCompetences);
         }
     }
+
+    private void traiterEvaluationUtilisateur(EvaluationUtilisateur evaluationUtilisateur) throws MyException {
+        validerEvaluationUtilisateurPasNull(evaluationUtilisateur);
+        affecterValeurEvaluationUtilisateur(evaluationUtilisateur);
+    }
 //deuxième niveau d'abstraction
     private void validerIdentifiantPasNull(Identifiant identifiant) throws MyException {
         if (identifiant == null) {
-            MyException e = new MyException(MESSAGE_IDENTIFIANT_NULL);
-            throw e;
+            throw new MyException(MESSAGE_IDENTIFIANT_NULL);
         }
     }
 
@@ -80,8 +78,7 @@ public class Utilisateur {
 
     private void validerProfilePasNull(Profile profile) throws MyException {
         if (profile == null) {
-            MyException e = new MyException(MESSAGE_PROFILE_NULL);
-            throw e;
+            throw new MyException(MESSAGE_PROFILE_NULL);
         }
     }
 
@@ -89,12 +86,21 @@ public class Utilisateur {
         this.profile = profile;
     }
 
-    private void affecterValeurListeService(ArrayList<AbstraiteServices> listeServices) {
+    private void affecterValeurListeService(ArrayList<TypeServices> listeServices) {
         this.listeServices = listeServices;
     }
 
     private void affecterValeurListeCompetences(ArrayList<String> listeCompetences) {
         this.listeCompetences = listeCompetences;
     }
-//MÉTHODES PUBLIC
+
+    private void validerEvaluationUtilisateurPasNull(EvaluationUtilisateur evaluationUtilisateur) throws MyException {
+        if (evaluationUtilisateur == null) {
+            throw new MyException(MESSAGE_EVALUATIONUTILISATEUR_NULL);
+        }
+    }
+
+    private void affecterValeurEvaluationUtilisateur(EvaluationUtilisateur evaluationUtilisateur) {
+        this.evaluationUtilisateur = evaluationUtilisateur;
+    }
 }

@@ -8,7 +8,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import inm5001.rapidoservices.MyException;
-import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.service.TypeServices;
 import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.utilisateur.Profile;
@@ -27,16 +26,9 @@ public class BdApiTest {
     //attributs Utilisateur
     private Identifiant identifiant;
     private Profile profile;
-    private ArrayList<AbstraiteServices> listeServices;
-    private AbstraiteServices service;
+    private ArrayList<TypeServices> listeServices;
     private ArrayList<String> listeCompetences;
-    private String competence;
-    private boolean disponibleUtilisateur;
-    //private ArrayList<Evaluation> listeEvaluations;
-    //private ArrayList<Evaluation> lisetEvaluationServicesGlobal;
-    //private Evaluation evaluation;
-    //private Geolocalisation geolocalisation;
-//attributs Identifiant
+    //attributs Identifiant
     private String nomUtilisateur;
     private String motDePasse;
     //attributs Profile
@@ -44,16 +36,12 @@ public class BdApiTest {
     private String prenom;
     private String numeroTelephoneProfile;
     private String adresseCourrielProfile;
-    private Boolean estValider;
     //attributs AbstraiteServices
     private boolean disponibleService;
     private String ville;
-    private byte cote;
     private String numeroTelephoneService;
-    private String adresseCourrielService;
     private String description;
     //attribut Plomberie
-    private String nomSservice;
     private float tauxHorraire;
     private float prixFixe;
 
@@ -61,16 +49,8 @@ public class BdApiTest {
     public void setUp() throws MyException {
         bd = new BdApi();
         listeServices = new ArrayList<>();
-        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, cote,
-                numeroTelephoneService, "service1@gmail.com", description));
-        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, cote,
-                numeroTelephoneService, "service2@gmail.com", description));
-        service = null;
         listeCompetences = new ArrayList<>();
-        listeCompetences.add("Plombier");
-        listeCompetences.add("Électricien");
-        competence = null;
-        nomUtilisateur = "Francis";
+        nomUtilisateur = "iduser1";
         motDePasse = "Allo!234";
         nom = "Francis";
         prenom = "Bernier";
@@ -79,16 +59,18 @@ public class BdApiTest {
         identifiant = new Identifiant(nomUtilisateur, motDePasse);
         profile = new Profile(nom, prenom, numeroTelephoneProfile, adresseCourrielProfile);
         utilisateur = null;
-        estValider = false;
-        disponibleUtilisateur = false;
         disponibleService = false;
         ville = "Montreal";
-        cote = 2;
-        numeroTelephoneService ="514-444-4444";
-        adresseCourrielService = "plomberie@plomberi.com";
+        numeroTelephoneService ="5144444444";
         description = "Repare les tuyeaux";
         tauxHorraire = 14.50f;
         prixFixe = 50.00f;
+        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, numeroTelephoneService,
+                "service1@gmail.com", description));
+        listeServices.add(new TypeServices(tauxHorraire, prixFixe, nomUtilisateur, disponibleService, ville, numeroTelephoneService,
+                "service2@gmail.com", description));
+        listeCompetences.add("Plombier");
+        listeCompetences.add("Electricien");
     }
 
     @After
@@ -97,22 +79,16 @@ public class BdApiTest {
         identifiant = null;
         profile = null;
         listeServices = null;
-        service = null;
         listeCompetences = null;
-        competence = null;
         nom = null;
         prenom = null;
         numeroTelephoneProfile = null;
         adresseCourrielProfile = null;
         utilisateur = null;
         motDePasse = null;
-        estValider = null;
-        disponibleUtilisateur = false;
         disponibleService = false;
         ville = null;
-        cote = 0;
         numeroTelephoneService = null;
-        adresseCourrielService = null;
         description = null;
         tauxHorraire = 0;
         prixFixe = 0;

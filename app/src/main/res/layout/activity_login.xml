@@ -8,65 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="inm5001.rapidoservices.InscriptionActivity">
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:text=""
-        android:ems="10"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3"
-        android:layout_marginLeft="34dp"
-        android:layout_marginStart="34dp"
-        android:id="@+id/editText" />
-
-    <TextView
-        android:text="Username"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:layout_alignBaseline="@+id/editText"
-        android:layout_alignBottom="@+id/editText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="11dp"
-        android:layout_marginStart="11dp" />
-
-    <TextView
-        android:text="Password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:id="@+id/textView"
-        android:layout_below="@+id/editText"
-        android:layout_toLeftOf="@+id/editText"
-        android:layout_toStartOf="@+id/editText" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:text=""
-        android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_alignBaseline="@+id/textView"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText" />
-
-    <Button
-        android:text="S'inscrire"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/sInscrire"
-        android:layout_alignBaseline="@+id/seConnecter"
-        android:layout_alignBottom="@+id/seConnecter"
-        android:layout_alignEnd="@+id/editText2"
-        android:layout_marginEnd="17dp" />
+    tools:context="inm5001.rapidoservices.interfaceGraphique.InscriptionActivity">
 
     <Button
         android:text="Se connecter"
@@ -76,7 +18,78 @@
         android:id="@+id/seConnecter"
         android:layout_marginLeft="10dp"
         android:layout_below="@+id/editText2"
-        android:layout_alignStart="@+id/textView"
+        android:layout_alignStart="@+id/textViewPasswordLogin"
         android:layout_marginStart="11dp" />
+
+    <TextView
+        android:text="Nom Utilisateur"
+        android:textStyle="bold|italic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewUserNameLogin"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="12dp"
+        android:layout_alignBaseline="@+id/editText"
+        android:layout_alignBottom="@+id/editText"
+        android:layout_alignParentStart="true"
+        android:textAllCaps="true" />
+
+    <Button
+        android:text="S'inscrire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sInscrire"
+        android:layout_alignBaseline="@+id/seConnecter"
+        android:layout_alignBottom="@+id/seConnecter"
+        android:layout_alignEnd="@+id/editText2"
+        android:layout_marginEnd="11dp" />
+
+    <TextView
+        android:text="Connexion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:id="@+id/textViewTitleLogin"
+        android:textAllCaps="true"
+        android:textStyle="normal|bold|italic"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:text=""
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:layout_alignBaseline="@+id/textViewPasswordLogin"
+        android:layout_alignBottom="@+id/textViewPasswordLogin"
+        android:layout_alignStart="@+id/editText" />
+
+    <TextView
+        android:text="Mot de Passe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="53dp"
+        android:id="@+id/textViewPasswordLogin"
+        android:textStyle="normal|bold|italic"
+        android:textAllCaps="true"
+        android:layout_below="@+id/editText"
+        android:layout_toStartOf="@+id/editText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:text=""
+        android:ems="10"
+        android:layout_marginLeft="34dp"
+        android:id="@+id/editText"
+        android:layout_marginTop="29dp"
+        android:layout_below="@+id/textViewTitleLogin"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

@@ -1,50 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:text="Nom service"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView12" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editText4" />
-
-    <TextView
-        android:text="Compétences"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView13" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editText8" />
-
-    <TextView
-        android:text="Prix"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView15" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editText9" />
 
     <Button
         android:text="Ajouter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button2" />
-</LinearLayout>
+        android:id="@+id/buttonAjouter"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/editTextServiceEmail"
+        android:layout_alignBaseline="@+id/textViewServiceEmail"
+        android:layout_alignBottom="@+id/textViewServiceEmail"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/editTextServiceNoTel"
+        android:layout_below="@+id/editTextTauxHorraire"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editTextDescription"
+        android:layout_alignTop="@+id/textViewDescription"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Description : "
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewDescription"
+        android:textSize="16sp"
+        android:layout_marginTop="37dp"
+        android:layout_below="@+id/editTextServiceNoTel"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerVilleAjoutService"
+        android:layout_alignTop="@+id/textViewVille"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="41dp" />
+
+    <TextView
+        android:text="Taux Horraire :"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewTauxHorraire"
+        android:textSize="16sp"
+        android:layout_below="@+id/spinnerVilleAjoutService"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="13dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewServiceEmail"
+        android:textSize="16sp"
+        android:text="Courriel : "
+        android:layout_marginTop="19dp"
+        android:layout_below="@+id/spinnerServiceAjout"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Telephone :"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewServPhone"
+        android:textSize="16sp"
+        android:layout_above="@+id/textViewDescription"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Nom du Service :"
+        android:layout_height="wrap_content"
+        android:id="@+id/nomService"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextTauxHorraire"
+        android:text="0"
+        android:layout_alignBaseline="@+id/textViewTauxHorraire"
+        android:layout_alignBottom="@+id/textViewTauxHorraire"
+        android:layout_alignParentEnd="true" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="135dp"
+        android:id="@+id/spinnerServiceAjout"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Ville :"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewVille"
+        android:textSize="16sp"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/editTextServiceEmail"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>

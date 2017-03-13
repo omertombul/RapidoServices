@@ -55,7 +55,7 @@ public class BdConnection {
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
         }
-        System.out.println("Made Connection");
+        //System.out.println("Made Connection");
         return conn;
     }
 
@@ -100,6 +100,6 @@ public class BdConnection {
         } catch (SQLException ex) {
             System.out.println(ex + "Error Closing Connection");
         }
-        System.out.println("Connection closed");
+        //System.out.println("Connection closed");
     }
 }

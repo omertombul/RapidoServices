@@ -2,10 +2,14 @@ package inm5001.rapidoservices.baseDonnees;
 
 import java.sql.ResultSet;
 
+import inm5001.rapidoservices.MyException;
+import inm5001.rapidoservices.recherche.RechercheACoter;
+import inm5001.rapidoservices.recherche.RechercheServices;
+import inm5001.rapidoservices.service.EvaluationService;
+import inm5001.rapidoservices.utilisateur.EvaluationUtilisateur;
 import inm5001.rapidoservices.utilisateur.Utilisateur;
 import inm5001.rapidoservices.utilisateur.Identifiant;
 import inm5001.rapidoservices.utilisateur.Profile;
-import inm5001.rapidoservices.service.AbstraiteServices;
 import inm5001.rapidoservices.service.TypeServices;
 
 import java.sql.SQLException;
@@ -28,9 +32,8 @@ public class BdApi {
         DB.closeConnection();
     }
 
-    public Utilisateur getUser(String nomUtilisateur) {
-        Utilisateur U = new Utilisateur();//null;
-        System.out.println("Debut construction String SQL: get User");
+    public Utilisateur getUser(String nomUtilisateur) throws MyException {
+        Utilisateur U = new Utilisateur();
 
         String SQL = SQLgetUser(nomUtilisateur);
         BdConnection DB = new BdConnection(SQL);
@@ -74,7 +77,8 @@ public class BdApi {
         DB.closeConnection();
     }
 
-    public void updateUserDisponibilite(String nomUtilisateur, String disponibilite) throws SQLException {
+    public void updateUserDisponibilite(String nomUtilisateur, String disponibilite)
+            throws SQLException {
         String SQL = SQLchangeUserDisponibilite(nomUtilisateur, disponibilite);
         BdConnection DB = new BdConnection(SQL);
         DB.insertToDB();
@@ -103,11 +107,47 @@ public class BdApi {
         DB.closeConnection();
     }
 
+    public ArrayList<RechercheServices> servicesSearch(TypeServices s, float coteUtilisateur,
+                float coteServicesMoyenne, float coteService){
+        ArrayList<RechercheServices> UserAndServicesArray;
+        String SQL = SQLservicesSearch(s, coteUtilisateur, coteServicesMoyenne, coteService);
+        BdConnection DB = new BdConnection(SQL);
+        ResultSet RSservices = DB.readFromDataBase();
+        UserAndServicesArray = updateUserAndSerivcesArrayWithRS(RSservices);
+        DB.closeConnection();
+        return UserAndServicesArray;
+    }
+
+    public void addIntoCoteService(String gradedUserId, String gradingUserId, String nomService) throws SQLException{
+        String SQL = SQLaddIntoCoteService(gradedUserId, gradingUserId, nomService);
+        BdConnection DB = new BdConnection(SQL);
+        DB.insertToDB();
+        DB.closeConnection();
+    }
+
+    public void gradeService(String gradedUserId, String gradingUserId, String nomService,
+                             float grade) throws SQLException{
+        String SQL = SQLgradeService(gradedUserId, gradingUserId, nomService, grade);
+        BdConnection DB = new BdConnection(SQL);
+        DB.insertToDB();
+        DB.closeConnection();
+    }
+
+    public ArrayList<RechercheACoter> getRechercheACoter(String nomUtilisateur){
+        ArrayList<RechercheACoter> aCoterArray = new ArrayList<>();
+
+        String SQL = SQLgetACoter(nomUtilisateur);
+        BdConnection DB = new BdConnection(SQL);
+        ResultSet RSaCoter = DB.readFromDataBase();
+        aCoterArray = updateACoterWithRS(RSaCoter);
+        DB.closeConnection();
+        return aCoterArray;
+    }
+
     //*************************************************************************
     // level 2 abstraction
     private String SQLaddUser(Utilisateur U) {
         byte diponibilite = (byte) (U.disponible?1:0);
-
         String SQL;
         String SQL_DEBUT = "INSERT INTO utilisateur VALUES('";
         String SQL_SEPARATEUR = "' ,'";
@@ -119,7 +159,10 @@ public class BdApi {
         SQL += U.profile.prenom + SQL_SEPARATEUR;
         SQL += U.profile.adresseCourriel + SQL_SEPARATEUR;
         SQL += diponibilite + SQL_SEPARATEUR;  // dispo
-        SQL += "1" + SQL_SEPARATEUR;  // eval
+        SQL += U.evaluationUtilisateur.coteUtilisateur + SQL_SEPARATEUR;  // coteClient
+        SQL += U.evaluationUtilisateur.nombreDEvaluationUtilisateur + SQL_SEPARATEUR;  // nbCoteClient
+        SQL += U.evaluationUtilisateur.coteTypeServicesMoyenne + SQL_SEPARATEUR;  // coteFournisseur
+        SQL += U.evaluationUtilisateur.nombreDEvaluationTypeServicesMoyenne + SQL_SEPARATEUR;  // nbCoteFournisseur
         SQL += "1" + SQL_SEPARATEUR;         // geo coordonnees
         SQL += U.profile.numeroTelephone + SQL_FIN;
 //System.out.println("    String SQL addUser: " + SQL); // shows SQL String
@@ -128,7 +171,11 @@ public class BdApi {
 
     private String SQLgetUser(String nomUtilisateur) {
         String SQL;
-        String SQL_DEBUT = "SELECT * FROM utilisateur WHERE idUsager = '";
+        //String SQL_DEBUT = "SELECT * FROM utilisateur WHERE idUsager = '"; // need test before del
+        String SQL_DEBUT = "SELECT idUsager, motDePasse, nom, prenom, courriel, disponibilite, " +
+                "ifnull(coteClient, 0) as coteClient, nbCoteClient, ifnull(coteFournisseur, 0) " +
+                "as coteFournisseur, nbCoteFournisseur, coordonnees, noTelephone " +
+                "FROM utilisateur WHERE idUsager = '"; // 'ifnull' handles NULL as 0 from DB table
         String SQL_FIN = "';";
         SQL = SQL_DEBUT + nomUtilisateur + SQL_FIN;
 //System.out.println("    String SQL getUser: " + SQL); // shows SQL String
@@ -139,9 +186,8 @@ public class BdApi {
         String SQL;
         String SQL_DEBUT = "SELECT * FROM servicesDUsager WHERE idUsager = '";
         String SQL_FIN = "';";
-//SQL = SQL_DEBUT + "Francis" + SQL_FIN; //U.identifiant.nomUtilisateur + SQL_FIN; // shows SQL String
         SQL = SQL_DEBUT + U.identifiant.nomUtilisateur + SQL_FIN;
-        System.out.println("    String SQL getServiceUtilisateur: " + SQL);
+//System.out.println("    String SQL getService: " + SQL); // shows SQL String
         return SQL;
     }
 
@@ -163,7 +209,7 @@ public class BdApi {
     }
 
     private String SQLaddServiceUser(String nomUtilisateur, TypeServices S) {
-        byte diponibilite = (byte) (S.isDisponible()?1:0);
+        byte diponibilite = (byte) (S.getDisponible()?1:0);
 
         String SQL;
         String SQL_DEBUT = "INSERT INTO servicesDUsager VALUES('";
@@ -181,9 +227,10 @@ public class BdApi {
         SQL += S.getVille() + SQL_SEPARATEUR;
         SQL += S.getNoTelephone() + SQL_SEPARATEUR;
         SQL += S.getCourriel() + SQL_SEPARATEUR;
-        SQL += S.getCote() + SQL_SEPARATEUR;
+        SQL += S.getEvaluationService().coteService + SQL_SEPARATEUR;
+        SQL += S.getEvaluationService().nombreDEvaluationService + SQL_SEPARATEUR;
         SQL += S.getDescription() + SQL_FIN;
-// System.out.println("    String SQL addService Usager: " + SQL); // shows SQL String
+//System.out.println("    String SQL addService Usager: " + SQL); // shows SQL String
         return SQL;
     }
 
@@ -240,6 +287,95 @@ public class BdApi {
         return SQL;
     }
 
+    private String SQLservicesSearch(TypeServices s, float coteUtilisateur,
+                                     float coteSerivcesMoyenne, float coteService){
+        String SQL;
+        String SQL_NOM_SERVICE = " and nomService = '" + s.getNomSservice() + "'";
+        String SQL_PRIX_FIXE = " and prixFixe <= " + s.getPrixFixe();
+        String SQL_PRIX_HORRAIRE = " and prixHorraire <= " + s.getTauxHorraire();
+        String SQL_VILLE = " and ville = '" + s.getVille() + "'";
+        String SQL_COTE_UTILISATEUR = " and coteClient >= " + coteUtilisateur;
+        String SQL_COTE_SERVICE_MOYENNE = " and coteFournisseur >= " + coteSerivcesMoyenne;
+        String SQL_COTE_SERVICE = " and cote >= " + coteService;
+        String SQL_FIN = ";";
+
+        // criteres de recherche possibles: nomService, disponibilite, prixFixe, prixHorraire, ville
+        String SQL_DEBUT = "SELECT * FROM utilisateur u, servicesDUsager s " +
+                "WHERE u.idUsager = s.idUsager and u.disponibilite = 1 and s.disponibilite = 1";
+        if(s.getNomSservice().equals("")) {
+            SQL_NOM_SERVICE = "";
+        }
+        if(s.getPrixFixe() == 0) {
+            SQL_PRIX_FIXE = "";
+        }
+        if(s.getTauxHorraire() == 0) {
+            SQL_PRIX_HORRAIRE = "";
+        }
+        if(s.getVille().equals("")) {
+            SQL_VILLE = "";
+        }
+
+        SQL = SQL_DEBUT + SQL_NOM_SERVICE + SQL_PRIX_FIXE + SQL_PRIX_HORRAIRE +
+                SQL_VILLE + SQL_COTE_UTILISATEUR + SQL_COTE_SERVICE_MOYENNE + SQL_COTE_SERVICE +
+                SQL_FIN;
+System.out.println("    String SQL servicesSearch: " + SQL); // shows SQL String
+        return SQL;
+    }
+
+    private String SQLaddIntoCoteService(String gradedUserId, String gradingUserId,
+                                         String nomService){
+        String SQL;
+        String SQL_DEBUT = "INSERT INTO cotesServices VALUES('";
+        String SQL_SEPARATEUR = "' ,'";
+        String SQL_GRADE = "NULL";
+        String SQL_FIN_INSERT = ") ";
+        String SQL_ON_DUPLICATE = "ON DUPLICATE KEY UPDATE gradedUserId=values(gradedUserId), " +
+                "gradingUserId=values(gradingUserId), nomService=values(nomService), " +
+                "cote=values(cote);";
+
+        SQL = SQL_DEBUT;
+        SQL += gradedUserId + SQL_SEPARATEUR;
+        SQL += gradingUserId + SQL_SEPARATEUR;
+        SQL += nomService + "', ";
+        SQL += SQL_GRADE + SQL_FIN_INSERT;
+        SQL += SQL_ON_DUPLICATE;
+//System.out.println(" **addIntoCoteService** SQL is: " + SQL); // shows SQL String
+        return SQL;
+    }
+
+    private String SQLgradeService(String gradedUserId, String gradingUserId, String nomService,
+                                   float grade){
+// UPDATE cotesServices SET cote = '32' where gradedUserId = 'Bill' and gradingUserId = 'Mat' and nomService = 'Menuisier';
+        String SQL;
+        String SQL_DEBUT = "UPDATE cotesServices SET cote = '";
+        String SQL_WHERE = "' where gradedUserId = '";
+        String SQL_AND1 = "' and gradingUserId = '";
+        String SQL_AND2 = "' and nomService = '";
+        String SQL_FIN = "';";
+        SQL = SQL_DEBUT;
+        SQL += grade;
+        SQL += SQL_WHERE;
+        SQL += gradedUserId;
+        SQL += SQL_AND1;
+        SQL += gradingUserId;
+        SQL += SQL_AND2;
+        SQL += nomService;
+        SQL += SQL_FIN;
+//System.out.println(" **addIntoCoteService** SQL is: " + SQL); // shows SQL String
+        return SQL;
+    }
+
+    private String SQLgetACoter(String nomUtilisateur){
+        String SQL;
+        String SQL_DEBUT = "SELECT * FROM cotesServices WHERE gradingUserId = '";
+        String SQL_AND = "' and cote is null";
+        String SQL_FIN = ";";
+
+        SQL = SQL_DEBUT + nomUtilisateur + SQL_AND + SQL_FIN;
+//System.out.println("    String SQL getACoter: " + SQL); // shows SQL String
+        return SQL;
+    }
+
     //*************************************************************************
     // level 3 abstraction
     private Utilisateur updateUtilisateurWithRSutilisateurData(
@@ -248,14 +384,18 @@ public class BdApi {
         try {
             RSutilisateur.beforeFirst();
             while (RSutilisateur.next()) {
+                EvaluationUtilisateur E = new EvaluationUtilisateur(
+                        RSutilisateur.getFloat("coteClient"), RSutilisateur.getInt("nbCoteClient"),
+                        RSutilisateur.getFloat("coteFournisseur"),
+                        RSutilisateur.getInt("nbCoteFournisseur"));
                 Identifiant I = new Identifiant(RSutilisateur.getString("idUsager"),
                         RSutilisateur.getString("motDePasse"));
                 Profile P = new Profile(RSutilisateur.getString("nom"),
                         RSutilisateur.getString("prenom"), RSutilisateur.getString("noTelephone"),
                         RSutilisateur.getString("courriel"));
-                ArrayList<AbstraiteServices> listServices = new ArrayList<>();
+                ArrayList<TypeServices> listServices = new ArrayList<>();
                 ArrayList<String> listeCompetences = new ArrayList<>();
-                U = new Utilisateur(I,P,listServices,listeCompetences);
+                U = new Utilisateur(I, P, listServices, listeCompetences, E);
                 U.disponible = RSutilisateur.getByte("disponibilite") != 0;
             }
         } catch (Exception ex) {
@@ -269,11 +409,15 @@ public class BdApi {
         try {
             RSservices.beforeFirst();
             while (RSservices.next()) {
-                AbstraiteServices S = new TypeServices(RSservices.getFloat("prixHorraire"),
+//System.out.println("la cote retourne par le serveur est:" + RSservices.getFloat("cote") + ".");
+                EvaluationService E = new EvaluationService(RSservices.getFloat("cote"),
+                        RSservices.getInt("nbCote"));
+//System.out.println(E.coteService);
+                TypeServices S = new TypeServices(RSservices.getFloat("prixHorraire"),
                         RSservices.getFloat("prixFixe"), RSservices.getString("nomService"),
                         RSservices.getByte("disponibilite") != 0, RSservices.getString("ville"),
-                        RSservices.getByte ("cote"), RSservices.getString("noTelephone"),
-                        RSservices.getString("courriel"), RSservices.getString("description"));
+                        RSservices.getString("noTelephone"), RSservices.getString("courriel"),
+                        RSservices.getString("description"), E);
                 U.listeServices.add(S);
             }
         } catch (Exception ex) {
@@ -294,5 +438,38 @@ public class BdApi {
             System.out.println(ex + "Error Adding competencesList to user");
         }
         return U;
+    }
+
+    private ArrayList<RechercheServices> updateUserAndSerivcesArrayWithRS(
+            ResultSet RSservices){
+        ArrayList<RechercheServices> userAndServicesArray = new ArrayList<>();
+
+        try {
+            RSservices.beforeFirst();
+            while (RSservices.next()) {
+                RechercheServices P = new RechercheServices(getUser(RSservices.getString("idUsager")),
+                        RSservices.getString("nomService"));
+                userAndServicesArray.add(P);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex + "Error updating serviceSearchArray with RSservices");
+        }
+        return userAndServicesArray;
+    }
+
+    private ArrayList<RechercheACoter> updateACoterWithRS(ResultSet RSaCoter){
+        ArrayList<RechercheACoter> aCoterArray = new ArrayList<RechercheACoter>();
+
+        try {
+            RSaCoter.beforeFirst();
+            while (RSaCoter.next()) {
+                RechercheACoter R = new RechercheACoter(RSaCoter.getString("gradedUserId"),
+                        RSaCoter.getString("nomService"));
+                aCoterArray.add(R);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex + "Error updating aCoterSearchArray with RSaCoter");
+        }
+        return aCoterArray;
     }
 }
